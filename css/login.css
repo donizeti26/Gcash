@@ -1,0 +1,48 @@
+*,
+body {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #263940;
+  display: flex;
+  height: 100vh;
+}
+
+#buttonLogin {
+  background-color: #01A662;
+  padding: 16px 64px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+#mainContent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputLogin {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  width: 335px;
+}
