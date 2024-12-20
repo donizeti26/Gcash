@@ -1,14 +1,16 @@
-*,
-body {
+* {
   margin: 0;
   border: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: #263940;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 100vh;
+  background-color: #263940;
 }
 
 #buttonLogin {
@@ -27,7 +29,28 @@ body {
   align-items: center;
 }
 
-#loginForm {
+#userImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  user-select: none
+}
+
+#nameUser {
+  width: auto;
+  font-family: "Heebo", serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #FFFFFF;
+}
+
+legend {
+  display: none;
+}
+
+#loginField {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,11 +61,77 @@ body {
 .label {
   display: flex;
   flex-direction: column;
+  font-family: "Heebo", serif;
+  font-weight: 300;
+  font-style: normal;
+  color: #374953;
 }
 
 .inputLogin {
   border: none;
   border-radius: 15px;
   padding: 20px;
-  width: 335px;
+  max-width: 400px;
+  background-color: #374953;
+  color: #89959b;
+
+}
+
+.label:focus-within {
+  color: #FFFFFF;
+}
+
+.label:hover {
+  color: #FFFFFF;
+}
+
+.inputLogin:hover {
+  background-color: #FFFFFF;
+
+}
+
+
+.inputLogin:focus-within {
+  background-color: #FFFFFF;
+  outline: 0;
+
+}
+
+#buttonLogin:hover {
+  background-color: #04693f;
+  color: #afafaf;
+}
+
+#blank-profile {
+  max-width: 150px;
+  border-radius: 100%;
+  margin: 20px;
+}
+
+::selection {
+  background-color: #263940;
+  color: #FFFFFF
+}
+
+
+@media screen and (min-width: 700px) {
+  #mainContent {
+    flex-direction: row;
+  }
+
+  body {
+    background: linear-gradient(0deg, rgba(55, 73, 83, 1) 0%, rgba(38, 57, 64, 1) 35%, rgba(1, 166, 98, 1) 100%);
+  }
+
+  .label {
+    color: #FFFFFF;
+  }
+
+  .inputLogin {
+    background-color: #FFFFFF;
+  }
+
+  #userImg {
+    margin-right: 20px;
+  }
 }
