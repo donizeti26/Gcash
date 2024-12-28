@@ -46,6 +46,38 @@ body {
   color: #FFFFFF;
 }
 
+.border-on {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.border-on::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  /* Largura da borda */
+  height: 3px;
+  /* Espessura da borda */
+  background-color: #FFFFFF;
+  /* Cor da borda */
+  border-radius: 3px;
+  /* Cantos arredondados */
+}
+
+#options-user {
+  display: flex;
+  font-family: "Heebo", serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #FFFFFF;
+  justify-content: space-between;
+  width: 100%;
+}
+
 legend {
   display: none;
 }
@@ -134,4 +166,6 @@ legend {
   #userImg {
     margin-right: 20px;
   }
+
+
 }
