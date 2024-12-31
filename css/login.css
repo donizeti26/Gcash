@@ -46,6 +46,17 @@ body {
   color: #FFFFFF;
 }
 
+#formcreate {
+  display: none;
+}
+
+#container-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .border-on {
   position: relative;
   display: inline-block;
@@ -68,6 +79,22 @@ body {
   /* Cantos arredondados */
 }
 
+.tablinks {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: "Heebo", serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #FFFFFF;
+  justify-content: space-between;
+}
+
+.tablinks:hover {
+  color: #e2e2e2;
+}
+
 #options-user {
   display: flex;
   font-family: "Heebo", serif;
@@ -84,10 +111,15 @@ legend {
 
 #loginField {
   display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#formlogin {
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
 }
 
 .label {

@@ -25,23 +25,53 @@
 
 
     <section id="container-form">
-      <form action="">
+      <section id="options-user">
+
+        <div id="create"><button class="tablinks createuser" onclick="openCity(0)">Criar Usuário</button></div>
+        <div id="login" class=""><button class="tablinks log-in border-on" onclick="openCity(1)">Fazer Login</button>
+        </div>
+
+
+
+      </section>
+      <form id="formcreate" action="">
         <fieldset id="loginField">
           <legend>Login</legend>
-          <section id="options-user">
-            <div class="border-on">Criar Usuário
-            </div>
-            <div>Fazer Login</div>
-          </section>
+          <label class="label" for="username">Nome de Usuário</label>
+          <input class="inputLogin" type="text" id="username" name="username" required>
+          </label>
           <label class="label" for="email">EMAIL
             <input class="inputLogin" type="email" name="email" id="email" required>
           </label>
           <label class="label" for="password">PASSWORD
             <input class="inputLogin" type="password" name="password" id="password" required>
           </label>
-          <input id="buttonLogin" type="submit" value="Entrar">
+          <label for="">
+            <input type="file" name="file" accept="image/*">
+          </label>
+          <label for="">
+            <input id="buttonLogin" type="submit" value="Criar Usuário">
+
+          </label>
         </fieldset>
+
+
+
       </form>
+      <form id="formlogin" action="">
+        <fieldset id="loginField ">
+          <legend>Login</legend>
+          <label class="label" for="email">EMAIL
+            <input class="inputLogin" type="email" name="email" id="email" required>
+          </label>
+          <label class="label" for="password">PASSWORD
+            <input class="inputLogin" type="password" name="password" id="password" required>
+          </label>
+        </fieldset>
+        <input id="buttonLogin" type="submit" value="Entrar">
+      </form>
+
+
     </section>
   </div>
 </body>
