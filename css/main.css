@@ -8,3 +8,9 @@ html {
   font-size: 16px;
   /* Padrão, mas pode ser ajustado */
 }
+
+#other_body {
+
+  scrollbar-width: thin;
+  scrollbar-color: rgb(185, 185, 185) transparent;
+}

@@ -13,11 +13,14 @@ body {
 
 }
 
+
+
+
 #pay,
 #no_pay,
 #total_month {
   font-weight: 800;
-  font-style: bold;
+  font-style: normal;
   color: #FFFFFF;
 }
 
@@ -31,6 +34,7 @@ body {
   height: 40%;
   width: 100%;
   border-radius: 0rem 0rem 2rem 2rem;
+  flex-shrink: 0;
 }
 
 #atual_month {
@@ -44,9 +48,7 @@ body {
   font-size: 2rem;
 }
 
-#month,
-#group_pay span:first-child,
-#group_pay span:nth-child(2) {
+#group_pay span {
   display: flex;
   flex-direction: column;
 }
@@ -59,19 +61,58 @@ body {
 }
 
 #other_body {
+  flex-grow: 1;
+  overflow-y: auto;
   margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+}
+
+#circle {
+
+  background: rgb(190, 0, 0);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+#buttonCreate .add {
+  transition: transform 0.4s ease;
+}
+
+#buttonCreate .add:hover {
+  transform: rotate(45deg);
+
+}
+
+#buttonCreate:hover {
+  background-color: #00c774;
+}
+
+#group_cards {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
 }
 
-#circle {
+.arrow_month {
+  color: #acacac;
+  font-size: 2rem;
+}
 
-  background: lightblue;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
+.arrow_month:hover {
+  color: #FFFFFF;
+}
+
+.button_month {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }
 
 .card_pay {
@@ -112,15 +153,15 @@ body {
 }
 
 .credit_card {
-  color: #000000;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: lightblue;
+  background: rgb(167, 16, 255);
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .item_status {
@@ -141,8 +182,69 @@ body {
   position: absolute;
   bottom: 30px;
   right: 30px;
+  cursor: pointer;
 }
 
 .add {
   font-size: 35px;
+}
+
+#logo {
+  display: none;
+}
+
+@media screen and (min-width: 1060px) {
+  body {
+    background-color: #263940;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #logo {
+    display: flex;
+    position: absolute;
+    top: 3rem;
+    width: 20rem;
+  }
+
+  #group_cards {
+    gap: 2rem;
+  }
+
+  #resume_month {
+    height: 100%;
+    width: 30%;
+    border-radius: unset;
+    justify-content: center;
+  }
+
+  #group_pay,
+  #month {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  #other_body {
+    margin: 0 1.5rem 0rem 0rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: #374953;
+    width: 70%;
+    height: 80%;
+  }
+
+  .card_pay {
+    padding: 2rem 2.5rem;
+
+  }
+
+  .item_pay {
+    justify-content: space-between;
+  }
+
+  #buttonCreate {
+    bottom: 90px;
+    right: 50px;
+  }
 }
