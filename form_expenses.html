@@ -1,0 +1,49 @@
+<div id="new_expense">
+  <form id="form_card" action="">
+    <div id="head_card">
+      <div>
+
+        <label for="data">Data de vencimento</label>
+        <input class="input_style" type="date" id="data" name="data">
+      </div>
+
+      <div>
+        <span><button id="button_close_card" onclick="fecharModal()">Cancelar</button></span>
+      </div>
+
+    </div>
+    <div>
+      <label for="data">Descrição</label>
+      <input id="input_description" class="input_style" type="text" id="text_expense" name="text_expense">
+    </div>
+    <div>
+      <label for="data">Categoria</label>
+      <select name="select" class="input_style">
+        <option value="valor1" disabled selected>Nenuma</option>
+        <option value="valor1">Cartão</option>
+        <option value="valor2">Despesas da Casa</option>
+        <option value="valor3">Alimentação</option>
+      </select>
+    </div>
+    <div>
+      <p>Repetir mensalmente?</p>
+      <label for="vehicle3">Sim</label>
+      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+      <label for="vehicle3">Não</label>
+      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+
+    </div>
+    <div> <label for="select">Número de Parcelas:</label>
+      <select name="select" disabled>
+        <option value="valor1" selected>1x</option>
+        <option value="valor2">2x</option>
+        <option value="valor3">3x</option>
+      </select>
+    </div>
+    <div id="div_button_expense">
+      <input id="button_expense" type="" value="Salvar">
+
+    </div>
+
+  </form>
+</div>

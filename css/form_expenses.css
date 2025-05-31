@@ -1,0 +1,86 @@
+#new_expense {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000e0;
+  padding: 2rem;
+  text-decoration-color: black;
+  color: black;
+}
+
+#button_expense {
+  text-align: center;
+  cursor: pointer;
+  width: 13rem;
+}
+
+#button_expense:hover {
+
+  background-color: #00c774;
+}
+
+#div_button_expense {
+  display: flex;
+  justify-content: center;
+}
+
+#form_card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  padding: 2rem;
+  gap: 1rem;
+  border-radius: 1rem;
+  /* https://smoothshadows.com/#djEsMSw4LDAuMDYsNDIsOCwtNywjMDMwNzEyLCNmM2Y0ZjYsI2ZmZmZmZiwy */
+  box-shadow: -0px 0px 1px rgba(3, 7, 18, 0.01),
+    -0px 1px 3px rgba(3, 7, 18, 0.01),
+    -1px 1px 6px rgba(3, 7, 18, 0.02),
+    -2px 2px 11px rgba(3, 7, 18, 0.03),
+    -3px 3px 16px rgba(3, 7, 18, 0.04),
+    -4px 5px 24px rgba(3, 7, 18, 0.04),
+    -5px 6px 32px rgba(3, 7, 18, 0.05),
+    -7px 8px 42px rgba(3, 7, 18, 0.06);
+
+}
+
+#head_card {
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+}
+
+.input_style {
+  background-color: #d0d0d0;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+}
+
+.input_style:focus {
+  background-color: #8a8a8a;
+}
+
+#input_description {
+  width: 100%;
+}
+
+#button_close_card {
+  padding: 1rem;
+  background-color: rgb(255, 6, 6);
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+#button_close_card:hover {
+  background-color: rgb(255, 75, 75);
+}
+
+@media screen and (min-width: 1060px) {
+  #form_card {
+    width: 50%;
+  }
+}

@@ -14,3 +14,17 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgb(185, 185, 185) transparent;
 }
+
+#buttonLogin,
+#button_expense {
+  background-color: #04693f;
+  padding: 16px 64px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+#buttonLogin:hover {
+  background-color: #01A662;
+  color: #afafaf;
+}

@@ -7,13 +7,6 @@ body {
   background-color: #263940;
 }
 
-#buttonLogin {
-  background-color: #01A662;
-  padding: 16px 64px;
-  border-radius: 15px;
-  text-decoration: none;
-  color: #FFFFFF;
-}
 
 #mainContent {
   width: 100%;
@@ -155,10 +148,7 @@ legend {
 
 }
 
-#buttonLogin:hover {
-  background-color: #04693f;
-  color: #afafaf;
-}
+
 
 #blank-profile {
   max-width: 150px;
@@ -171,6 +161,9 @@ legend {
   color: #FFFFFF
 }
 
+#modalContainer {
+  position: absolute;
+}
 
 @media screen and (min-width: 700px) {
   #mainContent {

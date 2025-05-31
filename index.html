@@ -11,8 +11,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/form_expenses.css">
 
-  <title>Document</title>
+
+  <title>Gcash</title>
 </head>
 
 <body>
@@ -31,7 +33,7 @@
         </span></button>
 
     </span>
-    <span id="month">Total do mes <span id="total_month">R$3452,00</span></span>
+    <span id="month">Total do mes : R$ <span id="total_month">3452,00</span></span>
     <span>
       <p></p>
     </span>
@@ -268,15 +270,20 @@
       </div>
     </div>
   </section>
-  <button id="buttonCreate"><span class="material-symbols-outlined add">
-      add
-    </span></button>
-  <section id="month">
 
-  </section>
-  <section id="replacement">
-
-  </section>
+  <div id="button_option">
+    <div id="opcoes">
+      <ul>
+        <li id="despesas" onclick="openModal('form_expenses.html')">Criar nova DESPESA</li>
+        <li id="categoria">Criar nova CATEGORIA</li>
+      </ul>
+    </div>
+    <button class="buttonCreate buttonHover"><span class="material-symbols-outlined add_up">
+        add
+      </span></button>
+  </div>
+  <div id="modalContainer"></div>
 </body>
+<script src="/script/index.js"></script>
 
 </html>

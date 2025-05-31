@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets/favicon_logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="css/form_expenses.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap" rel="stylesheet">
+
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="new_expense">
+
+    <form id="form_card" action="">
+      <div id="head_card">
+        <div>
+
+          <label for="data">Data de vencimento</label>
+          <input type="date" id="data" name="data">
+        </div>
+        <div>
+          <span><button onclick="fecharModal()">Cancelar</button></span>
+        </div>
+      </div>
+      <div>
+        <label for="data">Descrição</label>
+        <input type="text" id="text_expense" name="text_expense">
+      </div>
+      <div>
+        <label for="data">Categoria</label>
+        <input type="text" id="text_expense" name="text_expense">
+      </div>
+      <div>
+        <p>Repetir mensalmente?</p>
+        <label for="vehicle3">Sim</label>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <label for="vehicle3">Não</label>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+
+      </div>
+      <div> <label for="select">Número de Parcelas:</label>
+        <select name="select" disabled>
+          <option value="valor1" selected>1x</option>
+          <option value="valor2">2x</option>
+          <option value="valor3">3x</option>
+        </select>
+      </div>
+
+      <input id="button_expense" type="" value="Salvar">
+
+    </form>
+
+  </div>
+
+  <div id="new_expense">
+    <form id="form_card" action="">
+      <div id="head_card">
+
+        <div>
+          <label for="data">Nome</label>
+          <input class="input_style" type="text" id="text_expense" name="text_expense">
+        </div>
+
+        <div>
+          <span><button id="button_close_card" onclick="fecharModal()">Cancelar</button></span>
+        </div>
+
+      </div>
+      <div>
+        <label for="data">Icone</label>
+        <select name="select" class="input_style">
+          <option value="valor1" disabled selected>Nenuma</option>
+          <option value="valor1">Cartão</option>
+          <option value="valor2">Despesas da Casa</option>
+          <option value="valor3">Alimentação</option>
+        </select>
+      </div>
+      <div>
+        <div id="div_button_expense">
+          <input id="button_expense" type="" value="Salvar">
+
+        </div>
+
+    </form>
+  </div>
+</body>
+
+</html>
