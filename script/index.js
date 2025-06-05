@@ -17,8 +17,6 @@ document.querySelector(".buttonCreate").addEventListener("click", function () {
   }
 })
 
-
-
 function openModal(arquivo) {
   fetch(arquivo)
     .then(resposta => resposta.text())
@@ -26,6 +24,8 @@ function openModal(arquivo) {
       document.getElementById('modalContainer').innerHTML = html;
     })
 }
+const modalContainer = document.getElementById("modalContainer")
+window.onclick = function (e) { if (e.target === modalContainer) { fecharModal() } }
 
 function fecharModal() {
   document.getElementById('modalContainer').innerHTML = ''

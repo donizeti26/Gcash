@@ -55,6 +55,25 @@
 
 }
 
+#button_categorie {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  background-color: #01A662;
+  border-radius: 1rem;
+  width: 30%;
+  color: white;
+}
+
+#button_categorie:hover {
+  background-color: #00c774;
+}
+
+#div_button_categorie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (min-width: 1060px) {
   #category_body {
     width: 50%;
