@@ -2,7 +2,6 @@
   <form id="form_card" action="">
     <div id="head_card">
       <div>
-
         <label for="data">Data de vencimento</label>
         <input class="input_style" type="date" id="data" name="data">
       </div>
@@ -14,7 +13,8 @@
     </div>
     <div>
       <label for="data">Descrição</label>
-      <input id="input_description" class="input_style" type="text" id="text_expense" name="text_expense">
+      <input id="input_description" class="input_style" type="text" id="text_expense" name="text_expense"
+        maxlength="50">
     </div>
     <div>
       <label for="data">Categoria</label>
@@ -25,13 +25,17 @@
         <option value="valor3">Alimentação</option>
       </select>
     </div>
-    <div>
+    <div id="question_repet">
       <p>Repetir mensalmente?</p>
-      <label for="vehicle3">Sim</label>
-      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-      <label for="vehicle3">Não</label>
-      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+      <div>
+        <input type="radio" id="radio_response_yes" name="reponse_radio" value="yes">
+        <label for="radio_reponse_yes">Sim</label>
+      </div>
+      <div>
 
+        <input type="radio" id="radio_response_no" name="reponse_radio" value="no">
+        <label for="radio_reponse_no">Não</label>
+      </div>
     </div>
     <div> <label for="select">Número de Parcelas:</label>
       <select name="select" disabled>
@@ -41,7 +45,7 @@
       </select>
     </div>
     <div id="div_button_expense">
-      <input id="button_expense" type="" value="Salvar">
+      <input id="button_expense" type="button" value="Salvar">
 
     </div>
 

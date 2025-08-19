@@ -10,6 +10,12 @@
   color: black;
 }
 
+#question_repet {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+}
+
 #button_expense {
   text-align: center;
   cursor: pointer;

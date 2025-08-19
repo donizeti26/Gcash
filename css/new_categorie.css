@@ -1,0 +1,27 @@
+#edit_category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000e0;
+  padding: 2rem;
+  text-decoration-color: black;
+  color: black;
+}
+
+#close_new_categorie {
+  display: flex;
+  justify-content: end;
+  padding-bottom: 1rem;
+}
+
+#form_new_categorie {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 2rem;
+  background-color: #ffff;
+  border-radius: 1rem;
+}
