@@ -1,11 +1,8 @@
 #category {
-  width: 100vw;
-  height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #09372354;
-  backdrop-filter: blur(6px);
 }
 
 #category_body {

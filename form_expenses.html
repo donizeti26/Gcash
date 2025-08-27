@@ -1,5 +1,5 @@
-<div id="new_expense">
-  <form id="form_card" action="">
+<div id="new_modal_js">
+  <div id="form_card">
     <div id="head_card">
       <div>
         <label for="data">Data de vencimento</label>
@@ -44,10 +44,22 @@
         <option value="valor3">3x</option>
       </select>
     </div>
+    <div id="question_status">
+      <p>Status da nova Ação?</p>
+      <div>
+        <input type="radio" id="radio_response_paid" name="reponse_radio" value="paid">
+        <label for="radio_reponse_paid">Pago</label>
+      </div>
+      <div>
+
+        <input type="radio" id="radio_response_owing" name="reponse_radio" value="owing">
+        <label for="radio_reponse_owing">Devendo</label>
+      </div>
+    </div>
     <div id="div_button_expense">
       <input id="button_expense" type="button" value="Salvar">
 
     </div>
 
-  </form>
+  </div>
 </div>

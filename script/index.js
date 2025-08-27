@@ -28,5 +28,23 @@ const modalContainer = document.getElementById("modalContainer")
 window.onclick = function (e) { if (e.target === modalContainer) { fecharModal() } }
 
 function fecharModal() {
-  document.getElementById('modalContainer').innerHTML = ''
+  document.getElementById('modalContainer').innerHTML = ""
 }
+
+//fechar novas abas quando precionar ESC
+window.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    fecharModal()
+  }
+})
+
+
+//fechar ao clicar fora
+modalContainer.addEventListener('click', function (e) {
+  const new_modal_js = document.getElementById('new_modal_js');
+
+  if (e.target === new_modal_js) {
+    fecharModal();
+  }
+});
+
