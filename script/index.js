@@ -22,10 +22,35 @@ function openModal(arquivo) {
     .then(resposta => resposta.text())
     .then(html => {
       document.getElementById('modalContainer').innerHTML = html;
+
+      // agora o HTML já está dentro do modalContainer
+      const question_repet = document.getElementById("question_repet");
+      var valueEvent
+      if (question_repet) {
+        const radios = question_repet.querySelectorAll('input[name="reponse_radio"]');
+
+        radios.forEach(radio => {
+          radio.addEventListener("change", (e) => {
+            valueEvent = parseInt(e.target.value);
+            console.log("Usuário escolheu:", (typeof e.target.value), valueEvent);
+            onofOption()
+
+          });
+        });
+
+        function onofOption() {
+          installments = document.getElementById("installments");
+          if (valueEvent === 0) {
+            installments.disabled = true
+          } else if (valueEvent === 1) {
+            installments.disabled = false
+          }
+        }
+      }
     })
 }
-const modalContainer = document.getElementById("modalContainer")
-window.onclick = function (e) { if (e.target === modalContainer) { fecharModal() } }
+const modalContainer = document.getElementById("modalContainer");
+window.onclick = function (e) { if (e.target === modalContainer) { fecharModal() } };
 
 function fecharModal() {
   document.getElementById('modalContainer').innerHTML = ""
@@ -34,7 +59,7 @@ function fecharModal() {
 //fechar novas abas quando precionar ESC
 window.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
-    fecharModal()
+    fecharModal();
   }
 })
 
@@ -47,4 +72,12 @@ modalContainer.addEventListener('click', function (e) {
     fecharModal();
   }
 });
+
+/*-------COM O ONLCLICK-----------
+function verificaRadio() {
+  const question_repet = document.getElementById("question_repet");
+  const selectedInput = question_repet.querySelector('input[name="reponse_radio"]:checked');
+  console.log(selectedInput.value)
+
+}*/
 

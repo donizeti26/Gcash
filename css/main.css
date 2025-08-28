@@ -9,6 +9,35 @@ html {
   /* Padrão, mas pode ser ajustado */
 }
 
+.button_back_card {
+  padding: 1rem;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  border-radius: 0.4rem;
+}
+
+.button_close_card {
+  padding: 1rem;
+  background-color: rgb(255, 6, 6);
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.button_close_card:hover {
+  background-color: rgb(255, 75, 75);
+}
+
+.input_style {
+  background-color: #8a8a8a;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+}
+
+.input_style:focus {
+  background-color: #d0d0d0;
+}
+
 #other_body {
 
   scrollbar-width: thin;

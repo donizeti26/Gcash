@@ -10,6 +10,12 @@
   color: black;
 }
 
+#group_button_categorie {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 #close_new_categorie {
   display: flex;
   justify-content: end;
