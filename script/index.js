@@ -74,23 +74,30 @@ modalContainer.addEventListener('click', function (e) {
 
   if (e.target === new_modal_js) {
     fecharModal();
+    console.log("FUNCIONANDO")
+
+
   }
 });
 
-/*
-----------PAGINA INCIAL VOLTAR----------
+/*------------FECHAR AO CLICAR FORA INICIAL----------------*/
+const main_content = document.getElementById("main_content")
+var allButton = document.querySelector(".buttonCreate");
+var opcoes = document.getElementById("opcoes")
+var button = document.querySelector(".add_up")
 
-body = document.getElementsByTagName("body")
 
-body.addEventListener('click', function (e) {
-  const button_option = document.getElementById('button_option');
-  if (e.target === button_option) {
-    fecharModal();
+main_content.addEventListener('click', function (e) {
+  /*-o closest verifica todos os filhos da tag*/
+  if (!e.target.closest('#button_modais')) {
+    console.log("FUNCIONANDO no button")
+    opcoes.classList.remove("open")
+    button.classList.remove('rotate_x')
+    allButton.classList.remove('remove_or_error')
+    allButton.classList.add('buttonHover')
   }
 });
 
-
-*/
 /*-------------MENU ICONS--------------*/
 const bank_icons = [
   { icon: "shopping_cart", text: "Compras" },
