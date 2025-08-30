@@ -9,6 +9,10 @@ html {
   /* Padrão, mas pode ser ajustado */
 }
 
+footer {
+  display: none;
+}
+
 .button_back_card {
   padding: 1rem;
   background-color: rgb(32, 32, 32);
