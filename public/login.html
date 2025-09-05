@@ -40,20 +40,23 @@
         <fieldset id="loginField">
           <legend>Login</legend>
           <label class="label" for="username">NOME USER</label>
-          <input class="inputLogin" type="text" id="username" name="username" required>
+          <input class="inputLogin" type="text" id="username" name="username" autocomplete="username" required>
           </label>
-          <label class="label" for="email">EMAIL
-            <input class="inputLogin" type="email" name="email" id="email" required>
+          <label class="label" for="email_create">EMAIL
+            <input class="inputLogin" type="email" name="email_create" id="email_create" autocomplete="username"
+              required>
           </label>
-          <label class="label" for="password">PASSWORD
-            <input class="inputLogin" type="password" name="password" id="password" required>
+          <label class="label" for="password_create">PASSWORD
+            <input class="inputLogin" type="password" name="password_create" id="password_create"
+              autocomplete="new-password" required>
           </label>
+          <!--
           <label class="label" for="file">FOTO DE PERFIL
             <input type="file" name="file" accept="image/*">
           </label>
-          <label for="">
-            <input id="buttonLogin" type="submit" value="Criar Usuário">
-
+          -->
+          <label for="buttonLogin_create">
+            <input id="buttonLogin_create" type="submit" value="Criar Usuário">
           </label>
         </fieldset>
 
@@ -63,20 +66,23 @@
       <form id="formlogin" action="">
         <fieldset id="loginField ">
           <legend>Login</legend>
-          <label class="label" for="email">EMAIL
-            <input class="inputLogin" type="email" name="email" id="email" required>
+          <label class="label" for="email_login">EMAIL
+            <input class="inputLogin" type="email" name="email_login" id="email_login" autocomplete="username" required>
           </label>
-          <label class="label" for="password">PASSWORD
-            <input class="inputLogin" type="password" name="password" id="password" required>
+          <label class="label" for="password_login">PASSWORD
+            <input class="inputLogin" type="password" name="password_login" id="password_login"
+              autocomplete="current-password" required>
           </label>
         </fieldset>
         <input id="buttonLogin" type="submit" value="Entrar">
       </form>
 
+      <div id="mensagem"></div>
 
     </section>
   </div>
 </body>
 <script src="/script/login.js"></script>
+
 
 </html>

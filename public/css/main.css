@@ -55,15 +55,21 @@ footer {
 }
 
 #buttonLogin,
+#buttonLogin_create,
 #button_expense {
-  background-color: #04693f;
+  background-color: #3498db;
   padding: 16px 64px;
   border-radius: 15px;
   text-decoration: none;
-  color: #FFFFFF;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
 }
 
-#buttonLogin:hover {
-  background-color: #01A662;
-  color: #afafaf;
+
+
+#buttonLogin:hover,
+#buttonLogin_create:hover {
+  background-color: #2880b9;
+  color: #ffffff;
 }

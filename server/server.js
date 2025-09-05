@@ -54,3 +54,17 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
+//ROTA PARA CADASTRA USUÁRIO
+app.post("/usuarios", async (req, res) => {
+  const { username, email, password } = req.body;
+  try {
+    const result = await pool.query(
+      "INSERT INTO LOGIN_CUSTOMER(USERNAME, EMAIL, PASSWORD) VALUES ($1, $2, $3) RETURNING *",
+      [username, email, password]
+    );
+    res.json(result.rows[0]);// retorna o usuário cadastrado 
+  } catch (err) {
+    console.error("Erro ao cadastrar: ", err);
+    res.status(500).json({ error: "Ero ao cadastrar usuário" })
+  }
+});
