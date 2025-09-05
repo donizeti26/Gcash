@@ -34,8 +34,7 @@ document.getElementById("formcreate").addEventListener("submit", async (e) => {
       body: JSON.stringify({ username, email, password })
     });
     const data = await response.json()
-    document.getElementById("mensagem").classList.add("mensagem_style")
-    document.getElementById("mensagem").innerHTML = "Usuário cadastrado com sucesso: " + data.username;
+    window.alert("Usuário " + data.username + " cadastrado com sucesso!");
   } catch (err) {
     document.getElementById("mensagem").innerHTML = "Erro ao cadastrar. ";
   }

@@ -172,7 +172,8 @@ legend {
   }
 
   body {
-    background: linear-gradient(0deg, rgba(55, 73, 83, 1) 0%, rgba(38, 57, 64, 1) 35%, rgba(1, 166, 98, 1) 100%);
+    background-color: rgb(38, 57, 64);
+    ;
   }
 
   .label {
@@ -188,12 +189,4 @@ legend {
   }
 
 
-}
-
-.mensagem_style {
-  padding: 1rem;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  font-family: "Heebo", serif;
-  font-weight: 500;
 }
