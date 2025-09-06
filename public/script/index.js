@@ -98,6 +98,41 @@ main_content.addEventListener('click', function (e) {
   }
 });
 
+
+/*--------------*/
+const month = [
+  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
+const GO = document.getElementById("GO");
+const BACK = document.getElementById("BACK");
+const months = document.getElementById("month");
+
+let cont = 0; // começa em Janeiro
+
+// Atualiza a tela
+function showMonth() {
+  months.innerHTML = " <h2> " + month[cont] + "</h2>";
+  console.log(month[cont]);
+
+}
+
+// Avançar (GO)
+GO.addEventListener('click', () => {
+  cont = (cont + 1) % 12; // avança e volta para 0 quando passa de 11
+  showMonth();
+});
+
+// Voltar (Back)
+BACK.addEventListener('click', () => {
+  cont = (cont - 1 + 12) % 12; // se for -1, vira 11 (Dezembro)
+  showMonth();
+});
+
+// Mostra o primeiro mês ao carregar
+showMonth();
+
 /*-------------MENU ICONS--------------*/
 const bank_icons = [
   { icon: "shopping_cart", text: "Compras" },
