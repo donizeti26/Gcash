@@ -185,16 +185,23 @@ function test_display() {
 
 
 function criate_icons() {
-  form_new_categorie = document.getElementById('form_new_categorie');
-
+  const form_new_categorie = document.getElementById('form_new_categorie');
+  const button_submit = document.getElementById('div_button_expense')
+  const hiddenInput = document.getElementById('selected_icon')
   const display_icon_on = document.createElement('div');
+
   display_icon_on.id = 'display_icon_on'
-  form_new_categorie.appendChild(display_icon_on);
+  form_new_categorie.insertBefore(display_icon_on, div_button_expense);
 
   bank_icons.forEach(function (item, index) {
     const new_button = document.createElement('button');
     const new_icons = document.createElement('span');
 
+
+
+    new_button.type = "button"; // evita submit indesejado
+    new_button.setAttribute('onclick', 'test_display()')
+    new_button.dataset.icon = item.icon; // <-- aqui guardamos o nome do ícone
     new_button.className = "list_button_icons";
     new_icons.className = "material-symbols-outlined", "new_icon";
     new_icons.textContent = item.icon;
@@ -205,9 +212,20 @@ function criate_icons() {
 
     //  icons_list.appendChild(new_icons)
     display_icon_on.appendChild(new_button);
+    new_button.addEventListener("click", e => {
+      const selectedIcon = e.currentTarget.dataset.icon;
+      console.log("Ícone escolhido:", selectedIcon);
+      hiddenInput.value = selectedIcon
+      console.log(hiddenInput.value)
+      const add_reaction = document.getElementById('add_reaction')
+
+      add_reaction.innerHTML = selectedIcon
+    });
 
   })
 }
+
+
 /*-------COM O ONLCLICK-----------
 function verificaRadio() {
   const question_repet = document.getElementById("question_repet");

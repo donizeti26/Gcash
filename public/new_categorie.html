@@ -1,5 +1,5 @@
 <div id="edit_category">
-  <div id="form_new_categorie">
+  <form id="form_new_categorie">
     <div id="close_new_categorie">
       <span id="group_button_categorie">
         <button class="button_back_card" onclick="fecharModal(), openModal('form_categories.html')">Voltar</button>
@@ -20,13 +20,18 @@
 
     <!--ICON-->
     <div id="select_icon">
+      <input type="hidden" name="icon" id="selected_icon">
       <caption>Selecione o icone: </caption>
-      <button id="button_icons" onclick="test_display()">
+      <button id="button_icons" onclick="test_display()" type="button">
 
-        <span class="material-symbols-outlined">
+        <span id="add_reaction" class="material-symbols-outlined">
           add_reaction
         </span>
       </button>
-    </div>
 
-  </div>
+    </div>
+    <div id="div_button_expense">
+      <button id="button_expense" type="button">Salvar</button>
+  </form>
+
+</div>
