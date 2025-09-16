@@ -3,17 +3,26 @@
     <div id="head_card">
       <div>
         <label for="data">Data de vencimento</label>
-        <input class="input_style" type="date" id="data" name="data">
+        <input class="input_style" type="date" id="data" name="data" />
       </div>
 
       <div>
-        <span><button class="button_close_card" onclick="fecharModal()">Fechar</button></span>
+        <span
+          ><button class="button_close_card" onclick="fecharModal()">
+            Fechar
+          </button></span
+        >
       </div>
-
     </div>
     <div>
       <label for="input_description">Descrição</label>
-      <input id="input_description" class="input_style" type="text" name="text_expense" maxlength="50">
+      <input
+        id="input_description"
+        class="input_style"
+        type="text"
+        name="text_expense"
+        maxlength="50"
+      />
     </div>
     <div>
       <label for="option_category">Categoria</label>
@@ -27,18 +36,34 @@
     <div id="question_repet">
       <p>Repetir mensalmente?</p>
       <div>
-        <input class="group_radio" type="radio" id="radio_response_yes" name="reponse_radio" value=1>
+        <input
+          class="group_radio"
+          type="radio"
+          id="radio_response_yes"
+          name="reponse_radio"
+          value="1"
+        />
         <label for="radio_response_yes">Sim</label>
       </div>
       <div>
-
         <label for="radio_response_no">Não</label>
-        <input class="group_radio" type="radio" id="radio_response_no" name="reponse_radio" value=0>
+        <input
+          class="group_radio"
+          type="radio"
+          id="radio_response_no"
+          name="reponse_radio"
+          value="0"
+        />
       </div>
     </div>
     <div>
       <label for="installments">Número de Parcelas:</label>
-      <select id="installments" onclick=createElements() name="select" disabled>
+      <select
+        id="installments"
+        onclick="createElements()"
+        name="select"
+        disabled
+      >
         <option value="valor1" selected>1x</option>
         <option value="valor2">2x</option>
         <option value="valor3">3x</option>
@@ -47,19 +72,26 @@
     <div id="question_status">
       <p>Status da nova Ação?</p>
       <div>
-        <input type="radio" id="radio_response_paid" name="reponse_radio" value="paid">
+        <input
+          type="radio"
+          id="radio_response_paid"
+          name="reponse_radio"
+          value="paid"
+        />
         <label for="radio_response_paid">Pago</label>
       </div>
       <div>
-
-        <input type="radio" id="radio_response_owing" name="reponse_radio" value="owing">
+        <input
+          type="radio"
+          id="radio_response_owing"
+          name="reponse_radio"
+          value="owing"
+        />
         <label for="radio_response_owing">Devendo</label>
       </div>
     </div>
     <div id="div_button_expense">
-      <input id="button_expense" type="button" value="Salvar">
-
+      <input id="button_expense" type="button" value="Salvar" />
     </div>
-
   </div>
 </div>

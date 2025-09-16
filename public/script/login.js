@@ -1,23 +1,20 @@
-let createuser = document.querySelector('.createuser')
-let login = document.querySelector('.log-in')
-let formlogin = document.querySelector("#formlogin")
-let formcreate = document.querySelector("#formcreate")
-let image = document.querySelector("#userImg")
+let createuser = document.querySelector(".createuser");
+let login = document.querySelector(".log-in");
+let formlogin = document.querySelector("#formlogin");
+let formcreate = document.querySelector("#formcreate");
+let image = document.querySelector("#userImg");
 
 function openCity(opcao) {
-  const isCreateUser = opcao === 0
-  image.style.display = isCreateUser ? "none" : "flex"
+  const isCreateUser = opcao === 0;
+  image.style.display = isCreateUser ? "none" : "flex";
 
-  createuser.classList.toggle("border-on", isCreateUser)
-  login.classList.toggle("border-on", !isCreateUser)
-  console.log("criando usuario")
+  createuser.classList.toggle("border-on", isCreateUser);
+  login.classList.toggle("border-on", !isCreateUser);
+  console.log("criando usuario");
 
-
-  formlogin.style.display = isCreateUser ? "none" : "flex"
-  formcreate.style.display = isCreateUser ? "flex" : "none"
+  formlogin.style.display = isCreateUser ? "none" : "flex";
+  formcreate.style.display = isCreateUser ? "flex" : "none";
 }
-
-
 
 /*capturar valores digitados e mandar valores para o servidor.*/
 document.getElementById("formcreate").addEventListener("submit", async (e) => {
@@ -31,11 +28,16 @@ document.getElementById("formcreate").addEventListener("submit", async (e) => {
     const response = await fetch("/usuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password })
+      body: JSON.stringify({ username, email, password }),
     });
-    const data = await response.json()
+    const data = await response.json();
     window.alert("Usuário " + data.username + " cadastrado com sucesso!");
   } catch (err) {
     window.alert("Erro ao cadastrar. ");
   }
-})
+
+  password = null;
+});
+document
+  .getElementById("formlogin")
+  .addEventListener("submit", async (e) => {});

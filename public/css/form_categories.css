@@ -8,7 +8,7 @@
 #category_body {
   background-color: white;
   width: 80%;
-  height: 80%;
+  max-height: 80%;
   color: #000;
   padding: 2rem;
   border-radius: 1rem;
@@ -50,6 +50,10 @@
 .group_category:hover {
   background-color: #30303040;
 
+}
+
+#body_list_categories {
+  overflow: auto;
 }
 
 #button_categorie {

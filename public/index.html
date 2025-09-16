@@ -1,306 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="autor" content="Donizeti Silva" />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="shortcut icon"
+      href="/assets/favicon_logo.svg"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/form_expenses.css" />
+    <link rel="stylesheet" href="css/new_categorie.css" />
+    <link rel="stylesheet" href="css/form_categories.css" />
+    <title>Gcash</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="autor" content="Donizeti Silva">
-  <meta name="robots" content="index, follow">
-  <link rel="shortcut icon" href="/assets/favicon_logo.svg" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/form_expenses.css">
-  <link rel="stylesheet" href="css/new_categorie.css">
-  <link rel="stylesheet" href="css/form_categories.css">
+  <body>
+    <div id="main_content">
+      <article id="resume_month">
+        <img id="logo" src="./assets/logo.svg" alt="" />
 
+        <span id="atual_month">
+          <button id="GO" type="button" class="button_month">
+            <span class="material-symbols-outlined arrow_month">
+              arrow_back_ios
+            </span>
+          </button>
+          <h2 id="month"></h2>
+          <button id="BACK" type="button" class="button_month">
+            <span class="material-symbols-outlined arrow_month">
+              arrow_forward_ios
+            </span>
+          </button>
+        </span>
+        <span id="month_value"
+          >Total do mes : R$ <span id="total_month">3452,00</span></span
+        >
+        <span>
+          <p></p>
+        </span>
+        <div id="group_pay">
+          <span>Pago: <span id="pay">R$245,00</span></span>
+          <span>A pagar: <span id="no_pay">R$2445,00</span></span>
+        </div>
+      </article>
+      <main id="other_body">
+        <div id="group_cards">
+          <article class="card_pay">
+            <span class="item_data">
+              <p>15/05/2025</p>
+              <p>R$250,00</p>
+            </span>
+            <span class="item_pay">
+              <span class="item_class">
+                <span class="material-symbols-outlined credit_card">
+                  credit_card
+                </span>
+                <span class="item_type">
+                  <p>Cartão de Crédito</p>
+                  <p>Cartão</p>
+                </span>
+              </span>
+              <span class="item_status">
+                <span>
+                  <p>R$250,00</p>
+                </span>
+                <div id="circle"></div>
+              </span>
+            </span>
+          </article>
 
-  <title>Gcash</title>
-</head>
+          <article class="card_pay">
+            <span class="item_data">
+              <p>15/05/2025</p>
+              <p>R$250,00</p>
+            </span>
+            <span class="item_pay">
+              <span class="item_class">
+                <span class="material-symbols-outlined credit_card">
+                  credit_card
+                </span>
+                <span class="item_type">
+                  <p>Cartão de Crédito</p>
+                  <p>Cartão</p>
+                </span>
+              </span>
+              <span class="item_status">
+                <span>
+                  <p>R$250,00</p>
+                </span>
+                <div id="circle"></div>
+              </span>
+            </span>
+          </article>
+        </div>
+      </main>
 
-<body>
-  <div id="main_content">
-
-    <div id="resume_month">
-      <img id="logo" src="./assets/logo.svg" alt="">
-
-      <span id="atual_month">
-        <button id="GO" type="button" class="button_month">
-          <span class="material-symbols-outlined arrow_month">
-            arrow_back_ios
-          </span></button>
-        <h2 id="month"></h2>
-        <button id="BACK" type="button" class="button_month">
-          <span class="material-symbols-outlined arrow_month">
-            arrow_forward_ios
-          </span></button>
-
-      </span>
-      <span id="month_value">Total do mes : R$ <span id="total_month">3452,00</span></span>
-      <span>
-        <p></p>
-      </span>
-      <div id="group_pay">
-        <span>Pago: <span id="pay">R$245,00</span></span>
-        <span>A pagar: <span id="no_pay">R$2445,00</span></span>
+      <div id="button_option">
+        <div id="opcoes">
+          <ul>
+            <li id="despesas" onclick="openModal('form_expenses.html') ">
+              Criar nova DESPESA
+            </li>
+            <li id="categoria" onclick="openModal('form_categories.html');">
+              Editar CATEGORIAS
+            </li>
+          </ul>
+        </div>
+        <button class="buttonCreate buttonHover" id="button_modais">
+          <span class="material-symbols-outlined add_up"> add </span>
+        </button>
       </div>
 
-
-
-    </div>
-    <section id="other_body">
-      <div id="group_cards">
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
-        <div class="card_pay">
-          <span class="item_data">
-            <p>15/05/2025</p>
-            <p>R$250,00</p>
-          </span>
-          <span class="item_pay">
-            <span class="item_class">
-              <span class="material-symbols-outlined credit_card">
-                credit_card
-              </span>
-              <span class="item_type">
-                <p>Cartão de Crédito</p>
-                <p>Cartão</p>
-              </span>
-
-            </span>
-            <span class="item_status">
-              <span>
-                <p>R$250,00</p>
-              </span>
-              <div id="circle">
-              </div>
-            </span>
-
-          </span>
-
-        </div>
+      <div id="modalContainer">
+        <!-- INSERIDO PELO JS-->
       </div>
-    </section>
-
-    <div id="button_option">
-      <div id="opcoes">
-        <ul>
-          <li id="despesas" onclick="openModal('form_expenses.html') ">Criar nova DESPESA</li>
-          <li id="categoria" onclick="openModal('form_categories.html')">Editar CATEGORIAS</li>
-        </ul>
-      </div>
-      <button class="buttonCreate buttonHover" id="button_modais"><span class="material-symbols-outlined add_up">
-          add
-        </span></button>
     </div>
-
-    <div id="modalContainer">
-      <!-- INSERIDO PELO JS-->
-    </div>
-  </div>
-  <footer>
-    <!-- Informações do rodapé -->
-    <p>&copy; 2025 Minha Empresa. Todos os direitos reservados.</p>
-    <p><a href="/contato">Contacte-nos</a></p>
-  </footer>
-</body>
-<script src="/script/public.js"></script>
-<script src="/script/index.js"></script>
-
-
+    <footer>
+      <!-- Informações do rodapé -->
+      <p>&copy; 2025 Minha Empresa. Todos os direitos reservados.</p>
+      <p><a href="/contato">Contacte-nos</a></p>
+    </footer>
+  </body>
+  <script src="/script/public.js"></script>
+  <script src="/script/index.js"></script>
 </html>

@@ -36,7 +36,7 @@
 
 
       </section>
-      <form id="formcreate" action="">
+      <form id="formcreate" action="" method="post">
         <fieldset id="loginField">
           <legend>Login</legend>
           <label class="label" for="username">NOME USER</label>
@@ -44,17 +44,12 @@
           </label>
           <label class="label" for="email_create">EMAIL
             <input class="inputLogin" type="email" name="email_create" id="email_create" autocomplete="username"
-              required>
+              required pattern=".*\.com" title="somente emails .com">
           </label>
           <label class="label" for="password_create">PASSWORD
             <input class="inputLogin" type="password" name="password_create" id="password_create"
               autocomplete="new-password" required>
           </label>
-          <!--
-          <label class="label" for="file">FOTO DE PERFIL
-            <input type="file" name="file" accept="image/*">
-          </label>
-          -->
           <label for="buttonLogin_create">
             <input id="buttonLogin_create" type="submit" value="Criar Usuário">
           </label>
@@ -63,7 +58,7 @@
 
 
       </form>
-      <form id="formlogin" action="">
+      <form id="formlogin" action="" method="post">
         <fieldset id="loginField ">
           <legend>Login</legend>
           <label class="label" for="email_login">EMAIL
