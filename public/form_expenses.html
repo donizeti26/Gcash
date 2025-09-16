@@ -35,7 +35,8 @@
     </div>
     <div id="question_repet">
       <p>Repetir mensalmente?</p>
-      <div>
+      <div class="installments_option">
+        <label for="radio_response_yes" class="label_radio">Sim</label>
         <input
           class="group_radio"
           type="radio"
@@ -43,10 +44,9 @@
           name="reponse_radio"
           value="1"
         />
-        <label for="radio_response_yes">Sim</label>
       </div>
-      <div>
-        <label for="radio_response_no">Não</label>
+      <div class="installments_option">
+        <label for="radio_response_no" class="label_radio">Não</label>
         <input
           class="group_radio"
           type="radio"
@@ -58,16 +58,7 @@
     </div>
     <div>
       <label for="installments">Número de Parcelas:</label>
-      <select
-        id="installments"
-        onclick="createElements()"
-        name="select"
-        disabled
-      >
-        <option value="valor1" selected>1x</option>
-        <option value="valor2">2x</option>
-        <option value="valor3">3x</option>
-      </select>
+      <select id="installments" name="select" disabled></select>
     </div>
     <div id="question_status">
       <p>Status da nova Ação?</p>
@@ -75,7 +66,7 @@
         <input
           type="radio"
           id="radio_response_paid"
-          name="reponse_radio"
+          name="reponse_paid"
           value="paid"
         />
         <label for="radio_response_paid">Pago</label>
@@ -84,7 +75,7 @@
         <input
           type="radio"
           id="radio_response_owing"
-          name="reponse_radio"
+          name="reponse_paid"
           value="owing"
         />
         <label for="radio_response_owing">Devendo</label>

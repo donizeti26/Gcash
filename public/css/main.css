@@ -23,7 +23,6 @@ footer {
 
 .button_back_card:hover {
   background-color: #363636;
-
 }
 
 .button_close_card {
@@ -39,17 +38,16 @@ footer {
 }
 
 .input_style {
-  background-color: #8a8a8a;
+  background-color: #d0d0d0;
   padding: 0.5rem;
   border-radius: 0.4rem;
 }
 
 .input_style:focus {
-  background-color: #d0d0d0;
+  background-color: #ececec;
 }
 
 #other_body {
-
   scrollbar-width: thin;
   scrollbar-color: rgb(185, 185, 185) transparent;
 }
@@ -65,8 +63,6 @@ footer {
   color: #ffffff;
   cursor: pointer;
 }
-
-
 
 #buttonLogin:hover,
 #buttonLogin_create:hover {

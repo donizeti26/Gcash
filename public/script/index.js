@@ -22,6 +22,65 @@ function openModal(arquivo) {
     .then((html) => {
       document.getElementById("modalContainer").innerHTML = html;
 
+      const inputData = document.getElementById("data");
+
+      inputData.addEventListener(
+        "click",
+        () => {
+          inputData.value = "";
+
+          const today = new Date();
+          const day = String(today.getDate()).padStart(2, "0");
+          const month = String(today.getMonth() + 1).padStart(2, "0");
+          const year = today.getFullYear();
+
+          const dateFormated = `${year}-${month}-${day}`;
+          inputData.value = dateFormated;
+        },
+        {
+          once: true,
+        }
+      );
+
+      // agora o HTML já está dentro do modalContainer
+      const question_repet = document.getElementById("question_repet");
+      var valueEvent;
+      if (question_repet) {
+        const radios = question_repet.querySelectorAll(
+          'input[name="reponse_radio"]'
+        );
+
+        radios.forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            valueEvent = parseInt(e.target.value);
+            console.log("Usuário escolheu:", typeof e.target.value, valueEvent);
+            onofOption();
+          });
+        });
+
+        installments = document.getElementById("installments");
+
+        function createInstallments() {
+          installments.innerHTML = "";
+          for (var i = 1; i <= 12; i++) {
+            console.log(i);
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = "Em " + i + "x";
+
+            installments.appendChild(option);
+          }
+        }
+        function onofOption() {
+          if (valueEvent === 0) {
+            installments.disabled = true;
+          } else if (valueEvent === 1) {
+            installments.disabled = false;
+            createInstallments();
+          }
+        }
+      }
+
       loadCategories();
       /*capturar valores digitados e mandar valores para o servidor.*/
 
@@ -80,7 +139,7 @@ function openModal(arquivo) {
             list.appendChild(item);
           });
         } catch (err) {
-          console.error("Erro ao carregar categoRias ", err);
+          console.error("Erro ao carregar categorias ", err);
         }
       }
       document
@@ -89,36 +148,6 @@ function openModal(arquivo) {
           fecharModal();
           openModal("form_categories.html");
         });
-
-      // agora o HTML já está dentro do modalContainer
-      const question_repet = document.getElementById("question_repet");
-      var valueEvent;
-      if (question_repet) {
-        const radios = question_repet.querySelectorAll(
-          'input[name="reponse_radio"]'
-        );
-
-        radios.forEach((radio) => {
-          radio.addEventListener("change", (e) => {
-            valueEvent = parseInt(e.target.value);
-            console.log("Usuário escolheu:", typeof e.target.value, valueEvent);
-            onofOption();
-          });
-        });
-
-        installments = document.getElementById("installments");
-        function createElements() {
-          var option = document.createElement("option");
-          installments.appendChild(option);
-        }
-        function onofOption() {
-          if (valueEvent === 0) {
-            installments.disabled = true;
-          } else if (valueEvent === 1) {
-            installments.disabled = false;
-          }
-        }
-      }
     });
 }
 

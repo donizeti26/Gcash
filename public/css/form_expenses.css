@@ -9,9 +9,11 @@
   cursor: pointer;
   width: 13rem;
 }
-
+.installments_option {
+  user-select: none;
+  cursor: pointer;
+}
 #button_expense:hover {
-
   background-color: #00c774;
 }
 
@@ -32,14 +34,10 @@
   border-radius: 1rem;
   /* https://smoothshadows.com/#djEsMSw4LDAuMDYsNDIsOCwtNywjMDMwNzEyLCNmM2Y0ZjYsI2ZmZmZmZiwy */
   box-shadow: -0px 0px 1px rgba(3, 7, 18, 0.01),
-    -0px 1px 3px rgba(3, 7, 18, 0.01),
-    -1px 1px 6px rgba(3, 7, 18, 0.02),
-    -2px 2px 11px rgba(3, 7, 18, 0.03),
-    -3px 3px 16px rgba(3, 7, 18, 0.04),
-    -4px 5px 24px rgba(3, 7, 18, 0.04),
-    -5px 6px 32px rgba(3, 7, 18, 0.05),
+    -0px 1px 3px rgba(3, 7, 18, 0.01), -1px 1px 6px rgba(3, 7, 18, 0.02),
+    -2px 2px 11px rgba(3, 7, 18, 0.03), -3px 3px 16px rgba(3, 7, 18, 0.04),
+    -4px 5px 24px rgba(3, 7, 18, 0.04), -5px 6px 32px rgba(3, 7, 18, 0.05),
     -7px 8px 42px rgba(3, 7, 18, 0.06);
-
 }
 
 #head_card {
@@ -48,15 +46,16 @@
   display: flex;
 }
 
-
-
 #input_description {
-  width: 100%;
+  width: 80%;
 }
-
 
 @media screen and (min-width: 1060px) {
   #form_card {
     width: 50%;
   }
+}
+.label_radio,
+.group_radio {
+  cursor: pointer;
 }
