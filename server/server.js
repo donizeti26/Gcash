@@ -8,7 +8,7 @@ const path = require('path')
 
 const app = express();
 const port = 3000;
-
+const bcrypt = require('bcrypt')
 
 // middlewares
 app.use(cors());
@@ -57,14 +57,45 @@ app.get('/test-db', async (req, res) => {
 //ROTA PARA CADASTRA USUÁRIO
 app.post("/usuarios", async (req, res) => {
   const { username, email, password } = req.body;
+  const hash = await bcrypt.hash(password, 10)
+
   try {
     const result = await pool.query(
       "INSERT INTO LOGIN_CUSTOMER(USERNAME, EMAIL, PASSWORD) VALUES ($1, $2, $3) RETURNING *",
-      [username, email, password]
+      [username, email, hash]
     );
     res.json(result.rows[0]);// retorna o usuário cadastrado 
   } catch (err) {
     console.error("Erro ao cadastrar: ", err);
-    res.status(500).json({ error: "Ero ao cadastrar usuário" })
+    res.status(500).json({ error: "Erro ao cadastrar usuário" })
   }
 });
+
+//ROTA PARA CADASTRAR CATEGORIA
+app.post("/categories", async (req, res) => {
+  const { name_c, color_selector, icon_selected } = req.body;
+  try {
+    const result = await pool.query(
+      "INSERT INTO CATEGORIES(NAME_C, COLOR, ICON) VALUES($1, $2, $3) RETURNING*",
+      [name_c, color_selector, icon_selected]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Erro ao cadastrar: ", err);
+    res.status(500).json({ error: "Erro ao cadastrar usuário" })
+  }
+})
+
+
+
+//ROTA PARA LISTAS TODAS AS CATEGORIAS
+
+app.get("/categories", async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM CATEGORIES ORDER BY "id_categorie" ASC');
+    res.json(result.rows)
+  } catch (err) {
+    console.log("Erro ao buscar categorias", err);
+    res.status(500).json({ error: "Erro ao buscar categorias" });
+  }
+})

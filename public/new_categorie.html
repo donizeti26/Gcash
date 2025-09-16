@@ -2,20 +2,22 @@
   <form id="form_new_categorie">
     <div id="close_new_categorie">
       <span id="group_button_categorie">
-        <button class="button_back_card" onclick="fecharModal(), openModal('form_categories.html')">Voltar</button>
-        <button class="button_close_card" onclick="fecharModal()">Fechar</button>
+
+        <button class="button_back_card" type="button">Voltar</button>
+        <button class="button_close_card" type="button" onclick="fecharModal()">Fechar</button>
       </span>
     </div>
+
+    <!-- NOME -->
     <div>
       <label for="name_categorie">Nome: </label>
-      <input id="name_categorie" tabindex="1" class="input_style" type="text" maxlength="10" id="name_categorie"
-        name="name_categorie">
+      <input id="name_categorie" tabindex="1" class="input_style" type="text" maxlength="10" name="name_categorie">
     </div>
 
     <!--COR-->
     <div>
       <label for="color_selector">Selecione a cor: </label>
-      <input id="color_selector" type="color" tabindex="2" id="color_selector" name="color_selector" value="#459426">
+      <input id="color_selector" type="color" tabindex="2" " name=" color_selector" value="#459426">
     </div>
 
     <!--ICON-->
@@ -30,8 +32,10 @@
       </button>
 
     </div>
+    <!-- BOTÃO SALVAR -->
     <div id="div_button_expense">
-      <button id="button_expense" type="button">Salvar</button>
+      <button id="button_expense" type="submit">Salvar</button>
+    </div>
   </form>
 
 </div>

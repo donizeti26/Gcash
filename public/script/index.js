@@ -17,11 +17,41 @@ document.querySelector(".buttonCreate").addEventListener("click", function () {
   }
 })
 
+
+
 function openModal(arquivo) {
   fetch(arquivo)
     .then(resposta => resposta.text())
     .then(html => {
       document.getElementById('modalContainer').innerHTML = html;
+      /*capturar valores digitados e mandar valores para o servidor.*/
+      document.getElementById("form_new_categorie").addEventListener("submit", async (e) => {
+        e.preventDefault()/*inpede o envio padrão do formulário */
+
+        const name_c = document.getElementById("name_categorie").value
+        const color_selector = document.getElementById("color_selector").value
+        const icon_selected = document.getElementById("selected_icon").value
+
+        try {
+          const response = await fetch("/categories", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name_c, color_selector, icon_selected })
+          });
+          const data = await response.json()
+          console.log("📦 Resposta do servidor:", data); // <-- aqui você vê o que voltou
+          window.alert("Categoria " + data.name_c + " cadatrada com sucesso!")
+        } catch (err) {
+          console.error("❌ Erro no cadastro:", err);
+          window.alert("Erro no cadatrado")
+
+        }
+      })
+
+      document.querySelector('.button_back_card').addEventListener("click", () => {
+        fecharModal();
+        openModal('form_categories.html')
+      })
 
 
       // agora o HTML já está dentro do modalContainer
@@ -38,6 +68,7 @@ function openModal(arquivo) {
 
           });
         });
+
         installments = document.getElementById("installments");
         function createElements() {
           var option = document.createElement("option")
@@ -51,8 +82,11 @@ function openModal(arquivo) {
           }
         }
       }
-    })
+    });
 }
+
+
+
 const modalContainer = document.getElementById("modalContainer");
 window.onclick = function (e) { if (e.target === modalContainer) { fecharModal() } };
 

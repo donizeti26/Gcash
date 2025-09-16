@@ -36,6 +36,6 @@ document.getElementById("formcreate").addEventListener("submit", async (e) => {
     const data = await response.json()
     window.alert("Usuário " + data.username + " cadastrado com sucesso!");
   } catch (err) {
-    document.getElementById("mensagem").innerHTML = "Erro ao cadastrar. ";
+    window.alert("Erro ao cadastrar. ");
   }
 })
