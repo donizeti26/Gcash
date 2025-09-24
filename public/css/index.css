@@ -1,7 +1,6 @@
 #replacement {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
 }
-
 
 #main_content {
   display: flex;
@@ -10,8 +9,7 @@
   width: 100vw;
   font-family: "Heebo", serif;
   color: white;
-  background-color: #D9D9D9;
-
+  background-color: #d9d9d9;
 }
 
 button,
@@ -19,13 +17,12 @@ button,
   user-select: none;
 }
 
-
 #pay,
 #no_pay,
 #total_month {
   font-weight: 800;
   font-style: normal;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 #resume_month {
@@ -61,7 +58,6 @@ button,
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-
 }
 
 #other_body {
@@ -71,11 +67,9 @@ button,
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
 }
 
 #circle {
-
   background: rgb(190, 0, 0);
   border-radius: 50%;
   width: 10px;
@@ -83,17 +77,14 @@ button,
 }
 
 .buttonCreate .add_up {
-
   transition: transform 0.4s ease;
 }
 
 .rotate_x {
   transform: rotate(45deg);
-
 }
 
 .buttonHover:hover {
-
   background-color: #00c774;
 }
 
@@ -110,11 +101,10 @@ button,
 }
 
 .arrow_month:hover {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .button_month {
-
   background: none;
   border: none;
   outline: none;
@@ -125,7 +115,7 @@ button,
 .card_pay {
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 1rem;
   padding: 1rem 0.5rem;
   gap: 1rem;
@@ -144,8 +134,6 @@ button,
 .item_pay {
   display: flex;
   justify-content: space-around;
-
-
 }
 
 .item_class {
@@ -159,7 +147,8 @@ button,
   font-weight: 800;
 }
 
-.credit_card {
+.teste_color_01,
+.teste_color_02 {
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -176,16 +165,14 @@ button,
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-
 }
 
 .buttonCreate {
-
-  background-color: #01A662;
+  background-color: #01a662;
   padding: 20px 20px;
   border-radius: 15px;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
   display: block;
   cursor: pointer;
 }
@@ -195,7 +182,6 @@ button,
 }
 
 #button_option {
-
   position: absolute;
   bottom: 30px;
   right: 30px;
@@ -216,7 +202,6 @@ button,
 
 .open {
   display: block;
-
 }
 
 #opcoes.open {
@@ -245,7 +230,6 @@ button,
 #despesas {
   background-color: #ff4000;
   user-select: none;
-
 }
 
 #categoria {
@@ -253,8 +237,7 @@ button,
 }
 
 #categoria:hover {
-  background-color: #448AFF;
-
+  background-color: #448aff;
 }
 
 #despesas:hover {
@@ -269,7 +252,6 @@ button,
 #modalContainer {
   position: absolute;
 }
-
 
 #logo {
   display: none;
@@ -287,7 +269,6 @@ button,
   backdrop-filter: blur(4px);
 }
 
-
 /*----------------*/
 @media screen and (min-width: 1060px) {
   #main_content {
@@ -296,7 +277,6 @@ button,
     flex-direction: row;
     align-items: center;
   }
-
 
   #logo {
     display: flex;
@@ -331,12 +311,8 @@ button,
     height: 80%;
   }
 
-
-
-
   .card_pay {
     padding: 2rem 2.5rem;
-
   }
 
   .item_pay {
@@ -344,7 +320,6 @@ button,
   }
 
   .buttonCreate {
-
     bottom: 90px;
     right: 50px;
   }
