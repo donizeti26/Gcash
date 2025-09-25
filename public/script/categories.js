@@ -47,7 +47,7 @@ export async function loadCategories() {
             <div class="item_category">
               <span class="material-symbols-outlined">
                  ${cat.icon}
-              </span> ${cat.name_c}
+              </span> ${cat.name}
             </div>
             <span class="menu  material-symbols-outlined">
               menu
@@ -61,15 +61,4 @@ export async function loadCategories() {
   } catch (err) {
     console.error("Erro ao carregar categorias ", err);
   }
-}
-
-export function initBackButton() {
-  const button_back_card = document.querySelector(".button_back_card");
-  if (!button_back_card) {
-    console.log("boitao nao existe");
-  }
-  button_back_card.addEventListener("click", () => {
-    fecharModal();
-    openModal("form_categories.html");
-  });
 }

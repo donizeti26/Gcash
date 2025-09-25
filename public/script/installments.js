@@ -38,5 +38,16 @@ export function initExpensesForm() {
         createInstallments();
       }
     }
+
+
   }
 }
+   export async function initCategoryForm() {
+      try{
+        const response = await fetch("/categorieslist");
+        const categories = await response.json()
+
+      }
+    } catch (err) {
+    console.error("Erro ao carregar categorias ", err);
+  }

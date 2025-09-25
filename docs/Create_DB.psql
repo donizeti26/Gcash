@@ -1,0 +1,66 @@
+
+//Criando banco de dados
+CREATE DATABASE DB_GCASH;
+
+//Definindo Enum das tabelas
+CREATE TYPE user_status AS ENUM('enable','disabled');
+CREATE TYPE category_type AS ENUM('iconme','expense');
+CREATE TYPE transaction_status AS ENUM('peding','paid','canceled');
+CREATE TYPE installment_status AS ENUM('peding','paid','overdue');
+
+//Criando tabela de Usuários
+CREATE TABLE users(
+	user_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	password_hash VARCHAR(42) NOT NULL,
+	status user_status NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT NOW(),
+	update_at TIMESTAMPTZ DEFAULT NOW()
+);
+//Criando tabela de categorias
+CREATE TABLE categories(
+	category_id SERIAL PRIMARY KEY,
+	user_id INT REFERENCES users(user_id),
+	name VARCHAR(30) NOT NULL,
+	type category_type NOT NULL,
+	color VARCHAR(20) NOT NULL,
+	icon VARCHAR(20) NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT NOW(),
+	update_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+//Criando tabela de metodos de pagamento
+CREATE TABLE payment_methods(
+	payment_method_id SERIAL PRIMARY KEY,
+	name VARCHAR(30) NOT NULL
+);
+
+//Criando tabela de Transações
+CREATE TABLE transactions(
+	transaction_id SERIAL PRIMARY KEY,
+	user_id INT REFERENCES users(user_id),
+	category_id INT REFERENCES categories(category_id),
+	payment_method_id INT REFERENCES payment_methods(payment_method_id),
+	amount NUMERIC(10,2) NOT NULL,
+	description TEXT NOT NULL,
+	status transaction_status NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT NOW(),
+	update_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+//Criando tabela de parcelas
+CREATE TABLE installments(
+	installment_id SERIAL PRIMARY KEY,
+	transaction_id INT REFERENCES transactions(transaction_id),
+	current_installment NUMERIC(10,2) NOT NULL,
+	due_date TIMESTAMPTZ NOT NULL,
+	paid_date TIMESTAMPTZ,
+	installment_value NUMERIC(10,2),
+	status installment_status NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT NOW(),
+	update_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+

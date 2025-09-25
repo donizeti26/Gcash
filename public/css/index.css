@@ -117,7 +117,7 @@ button,
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 1rem;
-  padding: 1rem 0.5rem;
+  padding: 1rem 1rem;
   gap: 1rem;
 }
 
@@ -231,7 +231,10 @@ button,
   background-color: #ff4000;
   user-select: none;
 }
-
+#receita {
+  background-color: #00c030;
+  user-select: none;
+}
 #categoria {
   background-color: #005eff;
 }

@@ -2,7 +2,7 @@
   <div id="form_card">
     <div id="head_card">
       <div>
-        <label for="data">Data de vencimento</label>
+        <label for="data">Data do recebido</label>
         <input class="input_style" type="date" id="data" name="data" />
       </div>
 
@@ -27,16 +27,6 @@
         <option value="valor1">Cartão</option>
         <option value="valor2">Despesas da Casa</option>
         <option value="valor3">Alimentação</option>
-      </select>
-    </div>
-    <div>
-      <label for="option_category">Metodo de Pagamento</label>
-      <select id="option_category" name="select" class="input_style">
-        <option value="valor1" disabled selected></option>
-        <option value="valor1">Cartão de Crédito</option>
-        <option value="valor2">Cartão de Débito</option>
-        <option value="valor3">Dinheiro</option>
-        <option value="valor3">VR</option>
       </select>
     </div>
     <div id="question_repet">
@@ -67,27 +57,6 @@
       <select id="installments" name="select" disabled>
         <option value="1">Em 1x</option>
       </select>
-    </div>
-    <div id="question_status">
-      <p>Status da nova Ação?</p>
-      <div>
-        <input
-          type="radio"
-          id="radio_response_paid"
-          name="reponse_paid"
-          value="paid"
-        />
-        <label for="radio_response_paid">Pago</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id="radio_response_owing"
-          name="reponse_paid"
-          value="owing"
-        />
-        <label for="radio_response_owing">Devendo</label>
-      </div>
     </div>
     <div id="div_button_expense">
       <input id="button_expense" type="button" value="Salvar" />

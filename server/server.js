@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // conexão com o PostgreSQL
 const pool = new Pool({
-  user: "admin",
+  user: "postgres",
   host: "localhost",
   database: "DB_Gcash",
   password: "1995",
@@ -56,7 +56,7 @@ app.post("/usuarios", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "INSERT INTO LOGIN_CUSTOMER(USERNAME, EMAIL, PASSWORD) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users(name, email, password_hash, status) VALUES ($1, $2, $3) RETURNING *",
       [username, email, hash]
     );
     res.json(result.rows[0]); // retorna o usuário cadastrado
@@ -71,7 +71,7 @@ app.post("/categories", async (req, res) => {
   const { name_c, color_selector, icon_selected } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO CATEGORIES(NAME_C, COLOR, ICON) VALUES($1, $2, $3) RETURNING*",
+      "INSERT INTO CATEGORIES(NAME, COLOR, ICON) VALUES($1, $2, $3) RETURNING*",
       [name_c, color_selector, icon_selected]
     );
     res.json(result.rows[0]);
@@ -85,12 +85,22 @@ app.post("/categories", async (req, res) => {
 
 app.get("/categories", async (req, res) => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM CATEGORIES ORDER BY "id_categorie" ASC'
-    );
+    const result = await pool.query("SELECT * FROM categories");
     res.json(result.rows);
   } catch (err) {
-    console.log("Erro ao buscar categorias", err);
-    res.status(500).json({ error: "Erro ao buscar categorias" });
+    console.log("Erro ao buscar catesgorias", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//ROTA PARA LISTAS  CATEGORIAS EM DESPEAS
+
+app.get("/categorieslist", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM categories");
+    res.json(result.rows);
+  } catch (err) {
+    console.log("Erro ao buscar catesgorias", err.message);
+    res.status(500).json({ error: err.message });
   }
 });

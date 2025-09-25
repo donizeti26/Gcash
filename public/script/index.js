@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         () => ({})
       );
       installmentsMod.initExpensesForm?.();
+      installmentsMod.initCategoryForm?.();
     });
   }
 });
@@ -45,9 +46,29 @@ if (btnCategoria) {
       btnNewCategorie.addEventListener("click", async () => {
         await openModal("new_categorie.html");
         //CARREGANDO MODULO DE CATEGORIAS E ICONES SÓ QUANDO PRECISAR
-        categoriesMod.initBackButton?.();
         categoriesMod.loadCategories?.();
+
+        document.addEventListener("click", async (e) => {
+          const backBtn = e.target.closest(".button_back_card");
+          if (backBtn) {
+            fecharModal();
+            await openModal("form_categories.html");
+            categoriesMod.loadCategories?.();
+          }
+        });
       });
     }
+  });
+}
+
+//BOTAO RECEITAS
+const btnReceita = document.getElementById("receita");
+if (btnReceita) {
+  btnReceita.addEventListener("click", async () => {
+    await openModal("form_revenue.html");
+    setupCalendar();
+
+    const revenueMod = await import("./installments.js").catch(() => ({}));
+    revenueMod.initExpensesForm?.();
   });
 }
