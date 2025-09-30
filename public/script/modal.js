@@ -1,3 +1,4 @@
+import { stopmenuindex } from "./ui.js";
 export async function openModal(arquivo) {
   const res = await fetch(arquivo);
 
@@ -33,18 +34,12 @@ export async function openModal(arquivo) {
 }
 
 export function fecharModal() {
-  const modalContainer = document.getElementById("modalContainer");
+  stopmenuindex();
   document.getElementById("modalContainer").innerHTML = "";
 }
 export function setupModalGlobalListeners() {
   const modalContainer = document.getElementById("modalContainer");
   if (!modalContainer) return;
-
-  window.onclick = function (e) {
-    if (e.target === modalContainer) {
-      fecharModal();
-    }
-  };
 
   // ESC
   window.addEventListener("keydown", function (e) {
@@ -54,9 +49,15 @@ export function setupModalGlobalListeners() {
   });
 
   //fechar ao clicar fora
-  modalContainer.addEventListener("click", function (e) {
+  document.addEventListener("click", function (e) {
     const new_modal_js = document.getElementById("new_modal_js");
-    if (e.target === new_modal_js) {
+    const resume_month = document.getElementById("resume_month");
+    const other_body = document.getElementById("other_body");
+    if (
+      e.target === new_modal_js ||
+      e.target === resume_month ||
+      e.target === other_body
+    ) {
       fecharModal();
       console.log("FUNCIONANDO");
     }

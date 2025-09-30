@@ -34,13 +34,13 @@
         <img id="logo" src="./assets/logo.svg" alt="" />
 
         <span id="atual_month">
-          <button id="GO" type="button" class="button_month">
+          <button id="BACK" type="button" class="button_month">
             <span class="material-symbols-outlined arrow_month">
               arrow_back_ios
             </span>
           </button>
           <h2 id="month"></h2>
-          <button id="BACK" type="button" class="button_month">
+          <button id="GO" type="button" class="button_month">
             <span class="material-symbols-outlined arrow_month">
               arrow_forward_ios
             </span>
@@ -62,7 +62,7 @@
           <article class="card_pay">
             <span class="item_data">
               <p>15/05/2025</p>
-              <p>Editar</p>
+              <a class="editar">Editar</a>
             </span>
             <span class="item_pay">
               <span class="item_class">
@@ -88,7 +88,7 @@
           <article class="card_pay">
             <span class="item_data">
               <p>10/05/2025</p>
-              <p>Editar</p>
+              <a class="editar">Editar</a>
             </span>
             <span class="item_pay">
               <span class="item_class">
@@ -115,7 +115,7 @@
       </main>
 
       <div id="button_option">
-        <div id="opcoes">
+        <div class="displaynone" id="opcoes">
           <ul>
             <li id="receita">Criar nova RECEITA</li>
             <li id="despesas">Criar nova DESPESA</li>

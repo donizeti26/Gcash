@@ -1,6 +1,4 @@
 
-//Criando banco de dados
-CREATE DATABASE DB_GCASH;
 
 //Definindo Enum das tabelas
 CREATE TYPE user_status AS ENUM('enable','disabled');
@@ -43,6 +41,7 @@ CREATE TABLE transactions(
 	user_id INT REFERENCES users(user_id),
 	category_id INT REFERENCES categories(category_id),
 	payment_method_id INT REFERENCES payment_methods(payment_method_id),
+	due_date TIMESTAMPTZ NOT NULL,
 	amount NUMERIC(10,2) NOT NULL,
 	description TEXT NOT NULL,
 	status transaction_status NOT NULL,
@@ -55,7 +54,6 @@ CREATE TABLE installments(
 	installment_id SERIAL PRIMARY KEY,
 	transaction_id INT REFERENCES transactions(transaction_id),
 	current_installment NUMERIC(10,2) NOT NULL,
-	due_date TIMESTAMPTZ NOT NULL,
 	paid_date TIMESTAMPTZ,
 	installment_value NUMERIC(10,2),
 	status installment_status NOT NULL,
@@ -63,4 +61,50 @@ CREATE TABLE installments(
 	update_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+=========================
+======SELECT IN TABLES =======
+=========================
+select * from payment_methods
+select * from categories
 
+
+
+
+=========================
+======DROP IN TABLES =======
+=========================
+DROP TABLE transactions;
+DROP TABLE installments;
+
+
+
+
+=========================
+======INSERT IN TABLES =======
+=========================
+INSERT INTO payment_methods(name);
+VALUES ('Cartão de Crédito'),
+		('Cartão de Débito'),
+		('Dinheiro'),
+		('VR');
+INSERT INTO categories(name, type, color, icon)
+VALUES ('Feira do Mês','expense', '#725ac8','shopping_cart' )
+
+
+
+=========================
+======DELETE IN TABLES =======
+=========================
+DELETE FROM categories
+WHERE user_id IS NULL
+
+
+
+
+
+
+=========================
+========DROP IN DB =========
+=========================
+
+DROP DATABASE DB_GCash;

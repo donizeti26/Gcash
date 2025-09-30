@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
-  database: "DB_Gcash",
+  database: "db_gcash",
   password: "1995",
   port: 5432,
 });
@@ -65,14 +65,17 @@ app.post("/usuarios", async (req, res) => {
     res.status(500).json({ error: "Erro ao cadastrar usuário" });
   }
 });
-
-//ROTA PARA CADASTRAR CATEGORIA
+/////////////////////////////////////////////////////
+/////ROTA PARA CADASTRAR CATEGORIA//////
+/////////////////////////////////////////////////////
 app.post("/categories", async (req, res) => {
-  const { name_c, color_selector, icon_selected } = req.body;
+  const { name_categorie, color_selector, icon_selected, category_selected } =
+    req.body;
+
   try {
     const result = await pool.query(
-      "INSERT INTO CATEGORIES(NAME, COLOR, ICON) VALUES($1, $2, $3) RETURNING*",
-      [name_c, color_selector, icon_selected]
+      "INSERT INTO categories(name, color, icon, type) VALUES($1, $2, $3, $4) RETURNING*",
+      [name_categorie, color_selector, icon_selected, category_selected]
     );
     res.json(result.rows[0]);
   } catch (err) {
@@ -81,7 +84,34 @@ app.post("/categories", async (req, res) => {
   }
 });
 
-//ROTA PARA LISTAS TODAS AS CATEGORIAS
+/////////////////////////////////////////////////////
+//////ROTA PARA CADASTRAR DESPESA////////
+////////////////////////////////////////////////////
+app.post("/transactions", async (req, res) => {
+  const {
+    category_id,
+    payment_method_id,
+    due_date,
+    amount,
+    description,
+    status,
+  } = req.body;
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO transactions (category_id, payment_method_id, due_date, amount, description, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [category_id, payment_method_id, due_date, amount, description, status]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.log("Erro ao cadastra: ", err);
+    res.status(500).json({ error: "Erro ao cadastrar usuário" });
+  }
+});
+
+//////////////////////////////////////////////////////////////////////
+//////ROTA PARA CONSULTAR TODAS AS CATEGORIAS////////
+/////////////////////////////////////////////////////////////////////
 
 app.get("/categories", async (req, res) => {
   try {
@@ -93,14 +123,28 @@ app.get("/categories", async (req, res) => {
   }
 });
 
-//ROTA PARA LISTAS  CATEGORIAS EM DESPEAS
-
-app.get("/categorieslist", async (req, res) => {
+///////////////////////////////////////////////////////////////////////////////
+//////ROTA PARA CONSULTAR METODOS DE PAGAMETNO ///////////
+//////////////////////////////////////////////////////////////////////////////
+app.get("/paymentmethods", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM categories");
+    const result = await pool.query("SELECT * FROM payment_methods");
     res.json(result.rows);
   } catch (err) {
-    console.log("Erro ao buscar catesgorias", err.message);
+    console.log("Erro ao buscar metodos de pagamento", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+///////////////////////////////////////////////////////////////////////////////
+////////////////ROTA PARA CONSULTAR TRANSAÇÕES///////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+app.get("/transactionsGet", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM transactions");
+    res.json(result.rows);
+  } catch (err) {
+    console.log("Erro ao buscar transações", err.message);
     res.status(500).json({ error: err.message });
   }
 });

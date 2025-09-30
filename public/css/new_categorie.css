@@ -13,13 +13,14 @@
 #group_button_categorie {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  gap: 10%;
 }
 
 #close_new_categorie {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding-bottom: 1rem;
+  align-items: center;
 }
 
 #form_new_categorie {
@@ -55,7 +56,6 @@
 
 #button_icons:hover {
   background-color: #5a5a5a;
-
 }
 
 .list_button_icons {
@@ -69,12 +69,9 @@
   cursor: pointer;
 }
 
-
 #new_icon {
-  font-variation-settings:
-    'wght' 300;
+  font-variation-settings: "wght" 300;
 }
-
 
 #display_icon_on {
   display: flex;
@@ -87,6 +84,11 @@
   padding: 1rem;
   border-radius: 0.5rem;
   gap: 1rem;
+}
+.edit_categorie {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4em;
 }
 
 #display_icon_on span:hover {

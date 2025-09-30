@@ -1,5 +1,3 @@
-import { fecharModal, openModal } from "./modal.js";
-
 export function initCategoryForm() {
   const formNewCategorie = document.getElementById("form_new_categorie");
 
@@ -7,19 +5,28 @@ export function initCategoryForm() {
     formNewCategorie.addEventListener("submit", async (e) => {
       e.preventDefault(); /*inpede o envio padrão do formulário */
 
-      const name_c = document.getElementById("name_categorie").value;
+      const name_categorie = document.getElementById("name_categorie").value;
       const color_selector = document.getElementById("color_selector").value;
       const icon_selected = document.getElementById("selected_icon").value;
+      const option_new_category = document.getElementById(
+        "option_new_category"
+      );
+      const category_selected = option_new_category.value;
 
       try {
         const response = await fetch("/categories", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name_c, color_selector, icon_selected }),
+          body: JSON.stringify({
+            name_categorie,
+            color_selector,
+            icon_selected,
+            category_selected,
+          }),
         });
         const data = await response.json();
         console.log("📦 Resposta do servidor:", data); // <-- aqui você vê o que voltou
-        window.alert("Categoria " + data.name_c + " cadastrada com sucesso!");
+        window.alert("Categoria " + data.name + " cadastrada com sucesso!");
       } catch (err) {
         console.error("❌ Erro no cadastro:", err);
         window.alert("Erro no cadatrado");
@@ -49,9 +56,13 @@ export async function loadCategories() {
                  ${cat.icon}
               </span> ${cat.name}
             </div>
-            <span class="menu  material-symbols-outlined">
-              menu
+          <div class="edit_categorie">
+
+            <span class="edit_document  material-symbols-outlined">
+              edit_document 
             </span>
+                          <p> Editar</p>
+            </div>
           </div>`;
 
       if (list) {

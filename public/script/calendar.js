@@ -18,14 +18,15 @@ const month = [
 const GO = document.getElementById("GO");
 const BACK = document.getElementById("BACK");
 const months = document.getElementById("month");
-let cont = 0; // começa em Janeiro
+let ContMonth = 0; // começa em Janeiro
 
 export function setupCalendar() {
-  const inputDataExpenses = document.getElementById("data");
+  const inputDataExpenses = document.getElementById("due_date");
   if (inputDataExpenses) {
     inputDataExpenses.addEventListener(
       "click",
       () => {
+        console.log("testamdp");
         inputDataExpenses.value = "";
 
         const today = new Date();
@@ -41,19 +42,26 @@ export function setupCalendar() {
       }
     );
   }
+
   // Atualiza mes na sidbar
   function showMonth() {
-    months.innerHTML = " <h2> " + month[cont] + "</h2>";
-    console.log(month[cont]);
+    months.innerHTML = " <h2> " + month[ContMonth] + "</h2>";
+    console.log(month[ContMonth]);
   }
   // Avançar (GO)
   GO.addEventListener("click", () => {
-    cont = (cont + 1) % 12; // avança e volta para 0 quando passa de 11
+    ContMonth = ContMonth + 1;
+    if (ContMonth >= 12) {
+      ContMonth = 0;
+    }
     showMonth();
   });
   // Voltar (Back)
   BACK.addEventListener("click", () => {
-    cont = (cont - 1 + 12) % 12; // se for -1, vira 11 (Dezembro)
+    ContMonth = ContMonth - 1;
+    if (ContMonth < 0) {
+      ContMonth = 11;
+    }
     showMonth();
   });
 

@@ -5,6 +5,7 @@
 }
 
 html {
+  user-select: none;
   font-size: 16px;
   /* Padrão, mas pode ser ajustado */
 }
@@ -54,7 +55,8 @@ footer {
 
 #buttonLogin,
 #buttonLogin_create,
-#button_expense {
+#buttonNewCategory,
+#button_transactions {
   background-color: #3498db;
   padding: 16px 64px;
   border-radius: 15px;

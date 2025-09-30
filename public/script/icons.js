@@ -1,5 +1,3 @@
-import { fecharModal, openModal } from "./modal.js";
-
 // icons.js - cria a lista de ícones dinamicamente
 
 export function test_display() {
@@ -79,6 +77,7 @@ export function criate_icons() {
       const selectedIcon = e.currentTarget.dataset.icon;
       console.log("Ícone escolhido:", selectedIcon);
       hiddenInput.value = selectedIcon;
+
       console.log(hiddenInput.value);
       const add_reaction = document.getElementById("add_reaction");
 

@@ -4,7 +4,7 @@
   flex-direction: row;
 }
 
-#button_expense {
+#button_transactions {
   text-align: center;
   cursor: pointer;
   width: 13rem;
@@ -13,7 +13,7 @@
   user-select: none;
   cursor: pointer;
 }
-#button_expense:hover {
+#button_transactions:hover {
   background-color: #00c774;
 }
 
@@ -42,6 +42,7 @@
 
 #head_card {
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   display: flex;
 }
@@ -49,7 +50,13 @@
 #input_description {
   width: 80%;
 }
+#installments {
+  background: #d0d0d0;
+}
 
+#description {
+  width: 70%;
+}
 @media screen and (min-width: 1060px) {
   #form_card {
     width: 50%;

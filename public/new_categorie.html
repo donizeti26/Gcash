@@ -1,6 +1,7 @@
 <div id="edit_category">
   <form id="form_new_categorie">
     <div id="close_new_categorie">
+      <h2>Criando nova catergoria</h2>
       <span id="group_button_categorie">
         <button class="button_back_card" type="button">Voltar</button>
         <button class="button_close_card" type="button">Fechar</button>
@@ -17,31 +18,31 @@
         type="text"
         maxlength="30"
         name="name_categorie"
+        required
       />
     </div>
     <div>
-      <label for="option_category">Tipo de Categoria</label>
-      <select id="option_category" name="select" class="input_style">
-        <option value="valor1" disabled selected></option>
-        <option value="valor1">Despesa</option>
-        <option value="valor2">Receita</option>
+      <label for="option_new_category">Tipo de Categoria</label>
+      <select
+        id="option_new_category"
+        name="select"
+        class="input_style"
+        required
+      >
+        <option value="" disabled selected></option>
+        <option value="expense">Despesa</option>
+        <option value="iconme">Receita</option>
       </select>
     </div>
     <!--COR-->
     <div>
       <label for="color_selector">Selecione a cor: </label>
-      <input
-        id="color_selector"
-        type="color"
-        tabindex="2"
-        name="color_selector"
-        value="#459426"
-      />
+      <input id="color_selector" type="color" name="color_selector" required />
     </div>
 
     <!--ICON-->
     <div id="select_icon">
-      <input type="hidden" name="icon" id="selected_icon" />
+      <input type="hidden" name="icon" id="selected_icon" required />
       <caption>
         Selecione o icone:
       </caption>
@@ -53,7 +54,7 @@
     </div>
     <!-- BOTÃO SALVAR -->
     <div id="div_button_expense">
-      <button id="button_expense" type="submit">Salvar</button>
+      <button id="buttonNewCategory" type="submit">Salvar</button>
     </div>
   </form>
 </div>

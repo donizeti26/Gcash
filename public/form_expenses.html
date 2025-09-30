@@ -1,44 +1,61 @@
 <div id="new_modal_js">
-  <div id="form_card">
+  <form id="form_card">
     <div id="head_card">
-      <div>
-        <label for="data">Data de vencimento</label>
-        <input class="input_style" type="date" id="data" name="data" />
-      </div>
-
+      <h2>Criando nova Despesa</h2>
       <div>
         <span><button class="button_close_card">Fechar</button></span>
       </div>
     </div>
+    <!--Categoria-->
     <div>
-      <label for="input_description">Descrição</label>
+      <label for="category_id">Categoria</label>
+      <select id="category_id" name="select" class="input_style" required>
+      </select>
+    </div>
+    <!--Metodo de Pagamento-->
+    <div>
+      <label for="payment_method_id">Metodo de Pagamento</label>
+      <select id="payment_method_id" name="select" class="input_style" required>
+        <option value="valor1" disabled selected>Selecionar</option>
+
+      </select>
+    </div>
+    <!--Data de vencimento-->
+    <div>
+      <label for="due_date">Data de vencimento</label>
       <input
-        id="input_description"
+        class="input_style"
+        type="date"
+        id="due_date"
+        name="due_date"
+        required
+      />
+    </div>
+    <!--Valor TOTAL:-->
+    <div>
+      <label for="amount" required>Valor TOTAL: </label>
+
+      <input
+        type="text"
+        id="amount"
+        class="input_style"
+        name="amount"
+        placeholder="R$ 0,00"
+        step="0.01"
+      />
+    </div>
+
+    <div>
+      <label for="description">Descrição: </label>
+      <input
+        id="description"
         class="input_style"
         type="text"
         name="text_expense"
-        maxlength="50"
+        placeholder="Exe.: Sorvete do final de semana..."
       />
     </div>
-    <div>
-      <label for="option_category">Categoria</label>
-      <select id="option_category" name="select" class="input_style">
-        <option value="valor1" disabled selected></option>
-        <option value="valor1">Cartão</option>
-        <option value="valor2">Despesas da Casa</option>
-        <option value="valor3">Alimentação</option>
-      </select>
-    </div>
-    <div>
-      <label for="option_category">Metodo de Pagamento</label>
-      <select id="option_category" name="select" class="input_style">
-        <option value="valor1" disabled selected></option>
-        <option value="valor1">Cartão de Crédito</option>
-        <option value="valor2">Cartão de Débito</option>
-        <option value="valor3">Dinheiro</option>
-        <option value="valor3">VR</option>
-      </select>
-    </div>
+
     <div id="question_repet">
       <p>Repetir mensalmente?</p>
       <div class="installments_option">
@@ -49,6 +66,7 @@
           id="radio_response_yes"
           name="reponse_radio"
           value="1"
+          required
         />
       </div>
       <div class="installments_option">
@@ -64,33 +82,43 @@
     </div>
     <div>
       <label for="installments">Número de Parcelas:</label>
-      <select id="installments" name="select" disabled>
+      <select id="installments" name="select" disabled required>
         <option value="1">Em 1x</option>
       </select>
     </div>
-    <div id="question_status">
+    <div id="status">
       <p>Status da nova Ação?</p>
-      <div>
+
         <input
           type="radio"
           id="radio_response_paid"
-          name="reponse_paid"
+          name="response_status"
           value="paid"
+          required
         />
         <label for="radio_response_paid">Pago</label>
-      </div>
-      <div>
+
+
         <input
           type="radio"
           id="radio_response_owing"
-          name="reponse_paid"
-          value="owing"
+          name="response_status"
+          value="peding"
         />
         <label for="radio_response_owing">Devendo</label>
-      </div>
-    </div>
+
+
+        <input
+          type="radio"
+          id="radio_response_overdue"
+          name="response_status"
+          value="overdue"
+        />
+        <label for="radio_response_overdue">Cancelada</label>
+
+
     <div id="div_button_expense">
-      <input id="button_expense" type="button" value="Salvar" />
+      <input id="button_transactions" type="submit" value="Salvar" />
     </div>
-  </div>
+  </form>
 </div>

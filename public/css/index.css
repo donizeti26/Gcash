@@ -37,7 +37,14 @@ button,
   border-radius: 0rem 0rem 2rem 2rem;
   flex-shrink: 0;
 }
+.editar {
+  cursor: pointer;
+  color: #000000;
+}
 
+.editar:hover {
+  font-weight: 700;
+}
 #atual_month {
   display: flex;
   justify-content: space-between;
@@ -110,15 +117,6 @@ button,
   outline: none;
   box-shadow: none;
   cursor: pointer;
-}
-
-.card_pay {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 1rem 1rem;
-  gap: 1rem;
 }
 
 .card_pay p {
@@ -203,6 +201,9 @@ button,
 .open {
   display: block;
 }
+.displaynone {
+  display: none;
+}
 
 #opcoes.open {
   opacity: 1;
@@ -271,7 +272,15 @@ button,
   background-color: rgb(0 0 0 / 20%);
   backdrop-filter: blur(4px);
 }
-
+.card_pay {
+  display: flex;
+  flex-direction: column;
+  background-color: #dbdfe1;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+  gap: 1rem;
+  padding: 2rem 2.5rem;
+}
 /*----------------*/
 @media screen and (min-width: 1060px) {
   #main_content {
@@ -314,10 +323,9 @@ button,
     height: 80%;
   }
 
-  .card_pay {
-    padding: 2rem 2.5rem;
+  .card_pay:hover {
+    background-color: #ffffff;
   }
-
   .item_pay {
     justify-content: space-between;
   }
