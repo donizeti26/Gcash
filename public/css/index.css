@@ -9,9 +9,11 @@
   width: 100vw;
   font-family: "Heebo", serif;
   color: white;
-  background-color: #d9d9d9;
+  background-color: #374953;
 }
-
+p {
+  font-size: 12px;
+}
 button,
 .material-symbols-outlined {
   user-select: none;
@@ -151,7 +153,6 @@ button,
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(167, 16, 255);
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
@@ -276,7 +277,7 @@ button,
   display: flex;
   flex-direction: column;
   background-color: #dbdfe1;
-  border-radius: 1rem;
+  border-radius: 2.5rem;
   padding: 1rem 1rem;
   gap: 1rem;
   padding: 2rem 2.5rem;
@@ -322,14 +323,19 @@ button,
     width: 70%;
     height: 80%;
   }
-
+  .card_pay {
+    border-radius: 1rem;
+  }
   .card_pay:hover {
     background-color: #ffffff;
   }
   .item_pay {
     justify-content: space-between;
   }
-
+  p,
+  a {
+    font-size: 16px;
+  }
   .buttonCreate {
     bottom: 90px;
     right: 50px;

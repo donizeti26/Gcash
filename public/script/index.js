@@ -115,7 +115,6 @@ async function LoadExpenses() {
       const item = document.createElement("article");
       item.classList.add("card_pay");
       item.innerHTML = `
-
             <span class="item_data">
               <p>${cat.due_date}</p>
               <a class="editar">Editar</a>
@@ -123,13 +122,14 @@ async function LoadExpenses() {
             <span class="item_pay">
               <span class="item_class">
                 <span class="material-symbols-outlined teste_color_02">
-                  credit_card
+                  ${cat.icon}
                 </span>
-                <span class="item_type">
-                  <p>Cartão de Crédito</p>
-                  <p>${cat.name}</p>
+                <span class="item_type" id="card_trasc_${cat.transaction_id}">
+                  <p>Categoria: ${cat.name}</p>
                   <p>Parcela: 2/4</p>
-                  <p>${cat.description}r</p>
+                  <p>Descrição: ${cat.description}r</p>
+                  <p>Status: ${cat.status}</p>
+                  <p>Forma de Pagamento: ${cat.pmethod}</p>
                 </span>
               </span>
               <span class="item_status">

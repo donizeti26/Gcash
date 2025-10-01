@@ -141,10 +141,43 @@ app.get("/paymentmethods", async (req, res) => {
 
 app.get("/transactionsGet", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM transactions");
+    const result =
+      await pool.query(`SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
+t.transaction_id  AS transaction_id ,
+c.name AS name,
+t.description AS description,
+t.amount as amount,
+c.icon as icon,
+t.status as status,
+p.name as pmethod
+from transactions AS t
+
+INNER JOIN categories
+AS c ON t.category_id = c.category_id
+INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id;`);
+    console.log(result.rows);
     res.json(result.rows);
   } catch (err) {
     console.log("Erro ao buscar transações", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+///////////////////////////////////////////////////////////////////////////////
+///////////////////ROTA PARA SOMAR TRANSAÇÕES//////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+app.get("/transactionsSum/:month", async (req, res) => {
+  try {
+    const { month } = req.params;
+
+    const result = await pool.query(
+      "SELECT SUM(amount) AS total_month FROM transactions WHERE EXTRACT(MONTH FROM due_date)=$1",
+      [month]
+    );
+
+    res.json({ total: Number(result.rows[0]?.total_month) || 0 });
+  } catch (err) {
+    console.log("Erro ao buscar a SOMA das transações", err.message);
     res.status(500).json({ error: err.message });
   }
 });

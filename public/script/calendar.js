@@ -1,3 +1,5 @@
+import { sumAmountMonth } from "./installments.js";
+
 /*==========================
         Controlador de meses
 ===========================*/
@@ -18,7 +20,10 @@ const month = [
 const GO = document.getElementById("GO");
 const BACK = document.getElementById("BACK");
 const months = document.getElementById("month");
-let ContMonth = 0; // começa em Janeiro
+
+const dataAtual = new Date();
+const mesAtual = dataAtual.getMonth();
+let ContMonth = mesAtual; // começa em Janeiro
 
 export function setupCalendar() {
   const inputDataExpenses = document.getElementById("due_date");
@@ -46,6 +51,8 @@ export function setupCalendar() {
   // Atualiza mes na sidbar
   function showMonth() {
     months.innerHTML = " <h2> " + month[ContMonth] + "</h2>";
+    sumAmountMonth(ContMonth);
+
     console.log(month[ContMonth]);
   }
   // Avançar (GO)
@@ -54,6 +61,7 @@ export function setupCalendar() {
     if (ContMonth >= 12) {
       ContMonth = 0;
     }
+    sumAmountMonth(ContMonth);
     showMonth();
   });
   // Voltar (Back)
@@ -62,6 +70,8 @@ export function setupCalendar() {
     if (ContMonth < 0) {
       ContMonth = 11;
     }
+    sumAmountMonth(ContMonth);
+
     showMonth();
   });
 

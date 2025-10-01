@@ -87,6 +87,8 @@ VALUES ('Cartão de Crédito'),
 		('Cartão de Débito'),
 		('Dinheiro'),
 		('VR');
+
+		
 INSERT INTO categories(name, type, color, icon)
 VALUES ('Feira do Mês','expense', '#725ac8','shopping_cart' )
 

@@ -147,3 +147,21 @@ export async function loadCategoryForm() {
     console.error("Erro ao carregar categorias", err);
   }
 }
+
+export async function sumAmountMonth(monthIndex) {
+  const month = monthIndex + 1;
+  try {
+    const response = await fetch(`/transactionsSum/${month}`);
+    const transactionsSum = await response.json();
+
+    const total_month = document.getElementById("total_month");
+
+    if (total_month) {
+      const total = Number(transactionsSum.total) || 0;
+      total_month.textContent = `R$ ${total.toFixed(2)}`;
+      console.log(`Total gastos no de ${monthIndex}: `, total);
+    }
+  } catch (err) {
+    console.error("Erro ao carregar total transacoes front", err);
+  }
+}
