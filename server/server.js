@@ -135,18 +135,68 @@ app.get("/paymentmethods", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+///////////////////////////////////////////////////////////////
+//////ROTA PARA CONSULTAR TOTAL MES PAGO////////
+//////////////////////////////////////////////////////////////
+app.get("/transactionsPaid/:month", async (req, res) => {
+  try {
+    const { month } = req.params;
+
+    const result = await pool.query(
+      `SELECT SUM(amount) AS totalpago
+FROM transactions
+WHERE status = 'paid' AND
+EXTRACT(MONTH FROM due_date) = $1`,
+      [month]
+    );
+
+    console.log(result.rows);
+
+    res.json({ total: Number(result.rows[0]?.totalpago) || 0 });
+  } catch (err) {
+    console.log("Erro ao buscar total do mês atual");
+    res.status(500).json({ error: err.message });
+  }
+});
+
+///////////////////////////////////////////////////////////////////////
+//////ROTA PARA CONSULTAR TOTAL MES NÃO PAGO////////
+////////////////////////////////////////////////////////////////////
+app.get("/transactionsPeding/:month", async (req, res) => {
+  try {
+    const { month } = req.params;
+
+    const result = await pool.query(
+      `SELECT SUM(amount) AS totaldevendo
+FROM transactions
+WHERE status = 'peding' AND
+EXTRACT(MONTH FROM due_date) = $1`,
+      [month]
+    );
+
+    console.log(result.rows);
+
+    res.json({ total: Number(result.rows[0]?.totaldevendo) || 0 });
+  } catch (err) {
+    console.log("Erro ao buscar total do mês atual");
+    res.status(500).json({ error: err.message });
+  }
+});
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////ROTA PARA CONSULTAR TRANSAÇÕES///////////////////
 //////////////////////////////////////////////////////////////////////////////
 
 app.get("/transactionsGet", async (req, res) => {
   try {
-    const result =
-      await pool.query(`SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
+    const result = await pool.query(`
+SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
 t.transaction_id  AS transaction_id ,
 c.name AS name,
 t.description AS description,
 t.amount as amount,
+c.color  as color,
 c.icon as icon,
 t.status as status,
 p.name as pmethod
@@ -154,8 +204,7 @@ from transactions AS t
 
 INNER JOIN categories
 AS c ON t.category_id = c.category_id
-INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id;`);
-    console.log(result.rows);
+INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id`);
     res.json(result.rows);
   } catch (err) {
     console.log("Erro ao buscar transações", err.message);
