@@ -48,8 +48,9 @@ app.get("/test-db", async (req, res) => {
     res.status(500).json({ error: "Erro ao conectar no banco" });
   }
 });
-
-//ROTA PARA CADASTRA USUÁRIO
+/////////////////////////////////////////////////////
+///////ROTA PARA CADASTRA USUÁRIO////////
+/////////////////////////////////////////////////////
 app.post("/usuarios", async (req, res) => {
   const { username, email, password } = req.body;
   const hash = await bcrypt.hash(password, 10);
