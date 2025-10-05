@@ -18,20 +18,23 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200"
     />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/form_expenses.css" />
     <link rel="stylesheet" href="css/new_categorie.css" />
     <link rel="stylesheet" href="css/form_categories.css" />
+    <link rel="stylesheet" href="css/edit_expenses.css" />
+    <link rel="stylesheet" href="css/card_transaction.css" />
+
     <title>Gcash</title>
   </head>
 
   <body>
     <div id="main_content">
       <article id="resume_month">
-        <img id="logo" src="./assets/logo.svg" alt="" />
+        <img id="logo" alt="" />
 
         <span id="atual_month">
           <button id="BACK" type="button" class="button_month">
@@ -47,71 +50,18 @@
           </button>
         </span>
         <span id="month_value"
-          >Total do mes : R$ <span id="total_month">3452,00</span></span
-        >
+          >Total do mes :<br />R$ <span id="total_month"></span
+        ></span>
         <span>
           <p></p>
         </span>
         <div id="group_pay">
-          <span>Pago: <span id="pay">R$245,00</span></span>
-          <span>A pagar: <span id="no_pay">R$2445,00</span></span>
+          <span>Pago: <span id="amount_paid"></span></span>
+          <span>A pagar: <span id="amount_peding"></span></span>
         </div>
       </article>
       <main id="other_body">
-        <div id="group_cards">
-          <article class="card_pay">
-            <span class="item_data">
-              <p>15/05/2025</p>
-              <a class="editar">Editar</a>
-            </span>
-            <span class="item_pay">
-              <span class="item_class">
-                <span class="material-symbols-outlined teste_color_02">
-                  credit_card
-                </span>
-                <span class="item_type">
-                  <p>Cartão de Crédito</p>
-                  <p>Cartão</p>
-                  <p>Parcela: 2/4</p>
-                  <p>Compra do Monitor</p>
-                </span>
-              </span>
-              <span class="item_status">
-                <span>
-                  <p>R$250,00</p>
-                </span>
-                <div id="circle"></div>
-              </span>
-            </span>
-          </article>
-
-          <article class="card_pay">
-            <span class="item_data">
-              <p>10/05/2025</p>
-              <a class="editar">Editar</a>
-            </span>
-            <span class="item_pay">
-              <span class="item_class">
-                <span class="material-symbols-outlined teste_color_02">
-                  fastfood
-                </span>
-                <span class="item_type">
-                  <p>Lanches e Doces</p>
-                  <p>Cartão de Débito</p>
-                  <p>A vista</p>
-
-                  <p>Açaí do Final de Semana</p>
-                </span>
-              </span>
-              <span class="item_status">
-                <span>
-                  <p>R$25,00</p>
-                </span>
-                <div id="circle"></div>
-              </span>
-            </span>
-          </article>
-        </div>
+        <div id="group_cards"></div>
       </main>
 
       <div id="button_option">

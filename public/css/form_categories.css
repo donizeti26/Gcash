@@ -28,7 +28,7 @@
   list-style: none;
 }
 
-.item_category {
+.icon_item_category {
   display: flex;
   gap: 0.3rem;
   align-items: center;
@@ -38,6 +38,8 @@
   display: flex;
   justify-content: space-between;
   background-color: #73737340;
+  transition: background-color 0.2s linear;
+
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -45,6 +47,7 @@
 
 .group_category:hover {
   background-color: #30303040;
+  transition: background-color 0.2s linear;
 }
 
 #body_list_categories {
@@ -55,12 +58,16 @@
   cursor: pointer;
   padding: 1rem 2rem;
   background-color: #01a662;
+  transition-duration: 1s;
+  transition-property: background-color;
   border-radius: 1rem;
   color: white;
 }
 
 #button_categorie:hover {
   background-color: #00c774;
+  transition-property: all;
+  transition-duration: 0.5s;
 }
 
 #div_button_categorie {

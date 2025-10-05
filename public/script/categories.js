@@ -51,7 +51,7 @@ export async function loadCategories() {
 
       item.innerHTML = `
           <div class="group_category">
-            <div class="item_category">
+            <div class="icon_item_category" id="item_category_${cat.category_id}">
               <span class="material-symbols-outlined">
                  ${cat.icon}
               </span> ${cat.name}
@@ -68,6 +68,10 @@ export async function loadCategories() {
       if (list) {
         list.appendChild(item);
       }
+
+      const item_category = item.querySelector(
+        `#item_category_${cat.category_id}`
+      );
     });
   } catch (err) {
     console.error("Erro ao carregar categorias ", err);

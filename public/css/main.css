@@ -2,6 +2,7 @@
   margin: 0;
   border: 0;
   box-sizing: border-box;
+  font-smooth: always;
 }
 
 html {
@@ -12,6 +13,9 @@ html {
 
 footer {
   display: none;
+}
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" -25, "opsz" 20;
 }
 
 .button_back_card {
@@ -32,10 +36,14 @@ footer {
   color: white;
   border-radius: 0.4rem;
   cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.5s;
 }
 
 .button_close_card:hover {
   background-color: #ff5757;
+  transition-property: backgroun-color;
+  transition-duration: 0.5s;
 }
 
 .input_style {
@@ -64,10 +72,19 @@ footer {
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.5s;
 }
 
 #buttonLogin:hover,
 #buttonLogin_create:hover {
   background-color: #2880b9;
+  transition-property: backgroun-color;
+  transition-duration: 0.5s;
   color: #ffffff;
+}
+.required_abbr {
+  text-decoration: none;
+  font-weight: 900;
+  color: red;
 }

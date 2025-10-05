@@ -8,9 +8,9 @@
   height: 100vh;
   width: 100vw;
   font-family: "Heebo", serif;
-  color: white;
   background-color: #374953;
 }
+
 p {
   font-size: 12px;
 }
@@ -34,19 +34,13 @@ button,
   align-items: center;
   flex-direction: column;
   background-color: #263940;
+  color: #ffffff;
   height: 40%;
   width: 100%;
   border-radius: 0rem 0rem 2rem 2rem;
   flex-shrink: 0;
 }
-.editar {
-  cursor: pointer;
-  color: #000000;
-}
 
-.editar:hover {
-  font-weight: 700;
-}
 #atual_month {
   display: flex;
   justify-content: space-between;
@@ -78,13 +72,6 @@ button,
   gap: 1rem;
 }
 
-#circle {
-  background: rgb(190, 0, 0);
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-}
-
 .buttonCreate .add_up {
   transition: transform 0.4s ease;
 }
@@ -94,7 +81,9 @@ button,
 }
 
 .buttonHover:hover {
-  background-color: #00c774;
+  background-color: #00ff95;
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
 #group_cards {
@@ -125,30 +114,7 @@ button,
   color: #000000;
 }
 
-.item_data {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-}
-
-.item_pay {
-  display: flex;
-  justify-content: space-around;
-}
-
-.item_class {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.item_type :first-child {
-  font-weight: 800;
-}
-
-.teste_color_01,
-.teste_color_02 {
+.card_transaction {
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -159,17 +125,12 @@ button,
   font-weight: 200;
 }
 
-.item_status {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .buttonCreate {
   background-color: #01a662;
+  transition-duration: 1s;
+  transition-property: background-color;
   padding: 20px 20px;
-  border-radius: 15px;
+  border-radius: 22px;
   text-decoration: none;
   color: #ffffff;
   display: block;
@@ -182,8 +143,8 @@ button,
 
 #button_option {
   position: absolute;
-  bottom: 30px;
-  right: 30px;
+  bottom: 10px;
+  right: 23px;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -204,12 +165,15 @@ button,
 }
 .displaynone {
   display: none;
+  transition: all 0.2s linear 0.5s;
+  opacity: 0;
 }
 
 #opcoes.open {
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
+  transition: all 0.5s linear 0.5s;
 }
 
 #opcoes ul {
@@ -259,7 +223,8 @@ button,
 }
 
 #logo {
-  display: none;
+  content: url(../assets/logo_mobile.svg);
+  width: 30%;
 }
 
 /*---------------------*/
@@ -273,14 +238,10 @@ button,
   background-color: rgb(0 0 0 / 20%);
   backdrop-filter: blur(4px);
 }
-.card_pay {
-  display: flex;
-  flex-direction: column;
-  background-color: #dbdfe1;
-  border-radius: 2.5rem;
-  padding: 1rem 1rem;
-  gap: 1rem;
-  padding: 2rem 2.5rem;
+#group_pay,
+#month {
+  font-size: 1.2rem;
+  text-align: center;
 }
 /*----------------*/
 @media screen and (min-width: 1060px) {
@@ -292,6 +253,7 @@ button,
   }
 
   #logo {
+    content: url(../assets/logo.svg);
     display: flex;
     position: absolute;
     top: 3rem;
@@ -299,7 +261,7 @@ button,
   }
 
   #group_cards {
-    gap: 2rem;
+    gap: 4rem;
   }
 
   #resume_month {
@@ -310,28 +272,29 @@ button,
   }
 
   #group_pay,
+  #month_value,
   #month {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     text-align: center;
   }
 
   #other_body {
     margin: 0 1.5rem 0rem 0rem;
     padding: 2rem;
-    border-radius: 2rem;
+    border-radius: 4rem;
     background-color: #374953;
-    width: 70%;
-    height: 80%;
+    height: 93%;
   }
-  .card_pay {
-    border-radius: 1rem;
-  }
-  .card_pay:hover {
-    background-color: #ffffff;
+
+  .card_transaction:hover {
+    transition: background-color 0.5s linear;
+    transform: scale(1.01); /* aumenta texto + ícone + caixa */
+    transition: transform 0.3s;
   }
   .item_pay {
     justify-content: space-between;
   }
+
   p,
   a {
     font-size: 16px;

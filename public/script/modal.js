@@ -55,8 +55,8 @@ export function setupModalGlobalListeners() {
     const other_body = document.getElementById("other_body");
     if (
       e.target === new_modal_js ||
-      e.target === resume_month ||
-      e.target === other_body
+      resume_month.contains(e.target) ||
+      other_body.contains(e.target)
     ) {
       fecharModal();
       console.log("FUNCIONANDO");

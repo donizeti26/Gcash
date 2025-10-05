@@ -97,6 +97,7 @@ if (btnReceita) {
     revenueMod.initExpensesForm?.();
   });
 }
+
 ////////////////////////////////////////////////////////////////////////////
 /////////////////////Carregar despesas na tela inicial.//////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -114,33 +115,63 @@ async function LoadExpenses() {
     transactions.forEach((cat) => {
       const item = document.createElement("article");
       item.classList.add("card_pay");
+
+      const convertAmount = Number(cat.amount).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+
       item.innerHTML = `
-            <span class="item_data">
-              <p>${cat.due_date}</p>
-              <a class="editar">Editar</a>
-            </span>
-            <span class="item_pay">
-              <span class="item_class">
-                <span class="material-symbols-outlined teste_color_02">
-                  ${cat.icon}
-                </span>
-                <span class="item_type" id="card_trasc_${cat.transaction_id}">
-                  <p>Categoria: ${cat.name}</p>
-                  <p>Parcela: 2/4</p>
-                  <p>Descrição: ${cat.description}r</p>
-                  <p>Status: ${cat.status}</p>
-                  <p>Forma de Pagamento: ${cat.pmethod}</p>
-                </span>
-              </span>
-              <span class="item_status">
-                <span>
-                  <p>R$${cat.amount}</p>
-                </span>
-                <div id="circle"></div>
-              </span>
-            </span>
+      <div class="title_date">
+        <strong class="title_categorie">${cat.name}</strong>
+        <p>${cat.due_date}</p>
+      </div>
+      <div class="div_icon_categorie">
+        <span
+          class="material-symbols-outlined icon_categorie"
+          id="icon_${cat.transaction_id}"
+        > ${cat.icon}
+        </span>
+      </div>
+
+      <div class="amount_circle">
+        <strong class="amount_transaction"
+          >${convertAmount}</strong
+        >
+        <div id="circle_${cat.transaction_id}" class="circle"></div>
+      </div>
+
+      <div class="card_text">
+        <div>
+          <p><strong>Parcela:</strong> 1/1</p>
+          <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
+          <p><strong>Status: </strong>${cat.status}</p>
+          <p> <strong>Descrição: </strong>${cat.description}
+          </p>
+        </div>
+      </div>
+      <div class="button_black_card">
+      
+
+        <button class="button_black">Editar Transação</button>
+      </div>
+
 `;
 
+      const iconSpan = item.querySelector(`#icon_${cat.transaction_id}`);
+      const circle = item.querySelector(`#circle_${cat.transaction_id}`);
+
+      if (iconSpan) {
+        ("");
+        iconSpan.style.backgroundColor = cat.color;
+      }
+      if (circle && cat.status === "paid") {
+        circle.classList.add("circle_paid");
+        console.log("Classe adicionada em:", circle.className);
+      } else if (circle && cat.status === "peding") {
+        circle.classList.add("circle_peding");
+        console.log("Classe adicionada em:", circle.className);
+      }
       if (group_cards) {
         group_cards.appendChild(item);
       }

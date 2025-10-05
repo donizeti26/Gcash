@@ -8,36 +8,21 @@
     </div>
     <!--Categoria-->
     <div>
-      <label for="category_id"
-        >Categoria
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr></label
-      >
-      <select
-        id="category_id"
-        name="select"
-        class="input_style"
-        required
-      ></select>
+      <label for="category_id">Categoria</label>
+      <select id="category_id" name="select" class="input_style" required>
+      </select>
     </div>
     <!--Metodo de Pagamento-->
     <div>
-      <label for="payment_method_id"
-        >Metodo de Pagamento
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr>
-      </label>
-      <select
-        id="payment_method_id"
-        name="select"
-        class="input_style"
-        required
-      ></select>
+      <label for="payment_method_id">Metodo de Pagamento</label>
+      <select id="payment_method_id" name="select" class="input_style" required>
+        <option value="valor1" disabled selected>Selecionar</option>
+
+      </select>
     </div>
     <!--Data de vencimento-->
     <div>
-      <label for="due_date"
-        >Data de vencimento:
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr></label
-      >
+      <label for="due_date">Data de vencimento</label>
       <input
         class="input_style"
         type="date"
@@ -48,10 +33,7 @@
     </div>
     <!--Valor TOTAL:-->
     <div>
-      <label for="amount"
-        >Valor TOTAL:
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr></label
-      >
+      <label for="amount" required>Valor TOTAL: </label>
 
       <input
         type="text"
@@ -60,7 +42,6 @@
         name="amount"
         placeholder="R$ 0,00"
         step="0.01"
-        required
       />
     </div>
 
@@ -76,10 +57,7 @@
     </div>
 
     <div id="question_repet">
-      <p>
-        Repetir mensalmente?:
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr>
-      </p>
+      <p>Repetir mensalmente?</p>
       <div class="installments_option">
         <label for="radio_response_yes" class="label_radio">Sim</label>
         <input
@@ -109,36 +87,36 @@
       </select>
     </div>
     <div id="status">
-      <p>
-        Status da nova Ação?:
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr>
-      </p>
+      <p>Status da nova Ação?</p>
 
-      <input
-        type="radio"
-        id="radio_response_paid"
-        name="response_status"
-        value="paid"
-        required
-      />
-      <label for="radio_response_paid">Pago</label>
+        <input
+          type="radio"
+          id="radio_response_paid"
+          name="response_status"
+          value="paid"
+          required
+        />
+        <label for="radio_response_paid">Pago</label>
 
-      <input
-        type="radio"
-        id="radio_response_owing"
-        name="response_status"
-        value="peding"
-      />
-      <label for="radio_response_owing">Devendo</label>
 
-      <input
-        type="radio"
-        id="radio_response_overdue"
-        name="response_status"
-        value="overdue"
-      />
-      <label for="radio_response_overdue">Cancelada</label>
-    </div>
+        <input
+          type="radio"
+          id="radio_response_owing"
+          name="response_status"
+          value="peding"
+        />
+        <label for="radio_response_owing">Devendo</label>
+
+
+        <input
+          type="radio"
+          id="radio_response_overdue"
+          name="response_status"
+          value="overdue"
+        />
+        <label for="radio_response_overdue">Cancelada</label>
+
+
     <div id="div_button_expense">
       <input id="button_transactions" type="submit" value="Salvar" />
     </div>

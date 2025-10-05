@@ -1,4 +1,8 @@
-import { sumAmountMonth } from "./installments.js";
+import {
+  sumAmountMonth,
+  sumAtualMonthPaid,
+  sumAtualMonthPeding,
+} from "./installments.js";
 
 /*==========================
         Controlador de meses
@@ -52,6 +56,8 @@ export function setupCalendar() {
   function showMonth() {
     months.innerHTML = " <h2> " + month[ContMonth] + "</h2>";
     sumAmountMonth(ContMonth);
+    sumAtualMonthPaid(ContMonth);
+    sumAtualMonthPeding(ContMonth);
 
     console.log(month[ContMonth]);
   }
@@ -62,6 +68,8 @@ export function setupCalendar() {
       ContMonth = 0;
     }
     sumAmountMonth(ContMonth);
+    sumAtualMonthPaid(ContMonth);
+    sumAtualMonthPeding(ContMonth);
     showMonth();
   });
   // Voltar (Back)
@@ -71,6 +79,8 @@ export function setupCalendar() {
       ContMonth = 11;
     }
     sumAmountMonth(ContMonth);
+    sumAtualMonthPaid(ContMonth);
+    sumAtualMonthPeding(ContMonth);
 
     showMonth();
   });

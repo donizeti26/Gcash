@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="/assets/favicon_logo.svg"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/assets/favicon_logo.svg" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/teste.css">
+    <link rel="stylesheet" href="css/teste.css" />
 
-  <link rel="stylesheet" href="css/form_expenses.css">
+    <title>Gcash</title>
+  </head>
 
+  <body>
+    <div class="card_transaction">
+      <div class="title_date">
+        <strong class="title_categorie">Feira do Mês<!--${cat.name}--></strong>
+        <p>25/09/2025<!--${cat.due_date}--></p>
+      </div>
+      <div class="div_icon_categorie">
+        <span
+          class="material-symbols-outlined icon_categorie"
+          id="icon_${cat.transaction_id}"
+        >
+          delete
+          <!--  ${cat.icon}-->
+        </span>
+      </div>
 
-  <title>Gcash</title>
-</head>
+      <div class="amount_circle">
+        <strong class="amount_transaction"
+          >R$154,00<!--R$${cat.amount}--></strong
+        >
+        <div class="circle_${cat.transaction_id} circle"></div>
+      </div>
 
-<body>
-  <div>
-    <div id="div_new_categorie">
-      <span>
-
-        <label for="name_categorie">Nome </label><input type="text" name="" id="name_categorie">
-      </span>
-      <span>
-        <label for="color_categorie">Cor </label><input type="color" name="" id="">
-
-      </span>
-
+      <div class="card_text">
+        <div>
+          <p><strong>Parcela:</strong> 1/1</p>
+          <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
+          <p><strong>Status: </strong>${cat.status}</p>
+          <p>
+            <strong>Descrição: </strong>Combinação de duas áreas complementares
+            do design: UX (User Experience), que se refere à experiência geral
+            do usuário com um
+            <!--${cat.description}-->
+          </p>
+        </div>
+      </div>
+      <div class="button_black_card">
+        <button class="button_black">Editar</button>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

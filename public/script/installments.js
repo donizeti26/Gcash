@@ -93,9 +93,9 @@ export async function initTransactionForm() {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////
-//////carregando dados de metodo de pagamento para form.////////
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+//////carregando dados de metodo de pagamento para form.///////////
+////////////////////////////////////////////////////////////////////////////////
 
 export async function loadPaymentMethods() {
   try {
@@ -105,7 +105,7 @@ export async function loadPaymentMethods() {
     const selectPayment = document.getElementById("payment_method_id");
 
     if (selectPayment) {
-      selectPayment.innerHTML = `<option value="valor1" disabled="" selected="">Selecionar</option>`;
+      selectPayment.innerHTML = `<option value="" disabled="" selected="">Selecionar</option>`;
     }
 
     paymentmethods.forEach((cat) => {
@@ -159,9 +159,49 @@ export async function sumAmountMonth(monthIndex) {
     if (total_month) {
       const total = Number(transactionsSum.total) || 0;
       total_month.textContent = `R$ ${total.toFixed(2)}`;
-      console.log(`Total gastos no de ${monthIndex}: `, total);
+      console.log(`Total gastos no mes de ${monthIndex}: `, total);
     }
   } catch (err) {
     console.error("Erro ao carregar total transacoes front", err);
+  }
+}
+
+export async function sumAtualMonthPaid(month) {
+  month = month + 1;
+  try {
+    const response = await fetch(`/transactionsPaid/${month}`);
+
+    const transactionsSumPaid = await response.json();
+    console.log("TUDO OK AQUI");
+
+    const amount_paid = document.getElementById("amount_paid");
+
+    if (amount_paid) {
+      const total = Number(transactionsSumPaid.total) || 0;
+      amount_paid.textContent = `R$: ${total.toFixed(2)}`;
+      console.log(`Total pago no mes ${month} foi de ${total}`);
+    }
+  } catch (err) {
+    console.error("Erro ao inserir soma total do mes atual", err);
+  }
+}
+
+export async function sumAtualMonthPeding(month) {
+  month = month + 1;
+  try {
+    const response = await fetch(`/transactionsPeding/${month}`);
+
+    const transactionsSumPeding = await response.json();
+    console.log("TUDO OK AQUI");
+
+    const amount_peding = document.getElementById("amount_peding");
+
+    if (amount_peding) {
+      const total = Number(transactionsSumPeding.total) || 0;
+      amount_peding.textContent = `R$: ${total.toFixed(2)}`;
+      console.log(`Total não pago no mes de ${month} foi de ${total}`);
+    }
+  } catch (err) {
+    console.error("Erro ao inserir soma total do mes atual", err);
   }
 }
