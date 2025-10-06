@@ -7,7 +7,6 @@ body {
   background-color: #263940;
 }
 
-
 #mainContent {
   width: 100%;
   display: flex;
@@ -22,7 +21,7 @@ body {
   justify-content: center;
   flex-direction: column;
   margin-bottom: 20px;
-  user-select: none
+  user-select: none;
 }
 
 #nameUser {
@@ -30,7 +29,7 @@ body {
   font-family: "Heebo", serif;
   font-weight: 500;
   font-style: normal;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 #formcreate {
@@ -52,7 +51,7 @@ body {
 }
 
 .border-on::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 20%;
   left: 50%;
@@ -61,7 +60,7 @@ body {
   /* Largura da borda */
   height: 3px;
   /* Espessura da borda */
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   /* Cor da borda */
   border-radius: 3px;
   /* Cantos arredondados */
@@ -75,7 +74,7 @@ body {
   font-family: "Heebo", serif;
   font-weight: 500;
   font-style: normal;
-  color: #FFFFFF;
+  color: #ffffff;
   justify-content: space-between;
 }
 
@@ -88,7 +87,7 @@ body {
   font-family: "Heebo", serif;
   font-weight: 500;
   font-style: normal;
-  color: #FFFFFF;
+  color: #ffffff;
   justify-content: space-between;
   width: 100%;
 }
@@ -126,30 +125,24 @@ legend {
   max-width: 400px;
   background-color: #89959b;
   color: #89959b;
-
 }
 
 .label:focus-within {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .label:hover {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .inputLogin:hover {
-  background-color: #FFFFFF;
-
+  background-color: #ffffff;
 }
-
 
 .inputLogin:focus-within {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   outline: 0;
-
 }
-
-
 
 #blank-profile {
   max-width: 150px;
@@ -159,13 +152,15 @@ legend {
 
 ::selection {
   background-color: #263940;
-  color: #FFFFFF
+  color: #ffffff;
 }
 
 #modalContainer {
   position: absolute;
 }
-
+/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////CSS PARA DESCKTOP ////////////////////////
+//////////////////////////////////////////////////////////////////////////*/
 @media screen and (min-width: 700px) {
   #mainContent {
     flex-direction: row;
@@ -173,20 +168,17 @@ legend {
 
   body {
     background-color: rgb(38, 57, 64);
-    ;
   }
 
   .label {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .inputLogin {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
   }
 
   #userImg {
     margin-right: 20px;
   }
-
-
 }

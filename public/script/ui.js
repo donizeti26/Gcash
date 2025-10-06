@@ -1,3 +1,4 @@
+/*
 export function setupUI() {
   var allButton = document.querySelector(".buttonCreate");
   var opcoes = document.getElementById("opcoes");
@@ -35,3 +36,4 @@ export function stopmenuindex() {
   allButton.classList.remove("remove_or_error");
   allButton.classList.add("buttonHover");
 }
+*/

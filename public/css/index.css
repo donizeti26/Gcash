@@ -7,7 +7,7 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  font-family: "Heebo", serif;
+
   background-color: #374953;
 }
 
@@ -35,7 +35,7 @@ button,
   flex-direction: column;
   background-color: #263940;
   color: #ffffff;
-  height: 40%;
+  height: 35%;
   width: 100%;
   border-radius: 0rem 0rem 2rem 2rem;
   flex-shrink: 0;
@@ -72,18 +72,8 @@ button,
   gap: 1rem;
 }
 
-.buttonCreate .add_up {
-  transition: transform 0.4s ease;
-}
-
 .rotate_x {
   transform: rotate(45deg);
-}
-
-.buttonHover:hover {
-  background-color: #00ff95;
-  transition-property: background-color;
-  transition-duration: 0.5s;
 }
 
 #group_cards {
@@ -125,34 +115,21 @@ button,
   font-weight: 200;
 }
 
-.buttonCreate {
-  background-color: #01a662;
-  transition-duration: 1s;
-  transition-property: background-color;
-  padding: 20px 20px;
-  border-radius: 22px;
-  text-decoration: none;
-  color: #ffffff;
-  display: block;
-  cursor: pointer;
-}
-
 .remove_or_error {
   background-color: red;
 }
 
 #button_option {
-  position: absolute;
   bottom: 10px;
   right: 23px;
   justify-content: center;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: center;
 }
 
 #opcoes {
-  padding: 1rem 0rem;
+  padding: 0rem;
   opacity: 0;
   transform: scale(0.98);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -178,11 +155,13 @@ button,
 
 #opcoes ul {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
-
+  align-items: center;
   list-style: none;
   justify-content: center;
+  padding: 0;
 }
 
 #opcoes ul li {
@@ -191,6 +170,11 @@ button,
   color: #ffffff;
   border-radius: 1rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 11rem;
 }
 
 #despesas {
@@ -243,7 +227,9 @@ button,
   font-size: 1.2rem;
   text-align: center;
 }
-/*----------------*/
+/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////CSS PARA DESCKTOP ////////////////////////
+//////////////////////////////////////////////////////////////////////////*/
 @media screen and (min-width: 1060px) {
   #main_content {
     background-color: #263940;
@@ -260,8 +246,11 @@ button,
     width: 20rem;
   }
 
+  #button_option {
+    width: 50%;
+  }
   #group_cards {
-    gap: 4rem;
+    gap: 2rem;
   }
 
   #resume_month {
@@ -277,13 +266,20 @@ button,
     font-size: 1.5rem;
     text-align: center;
   }
-
+  #opcoes ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    justify-content: center;
+  }
   #other_body {
     margin: 0 1.5rem 0rem 0rem;
     padding: 2rem;
     border-radius: 4rem;
-    background-color: #374953;
+    background-color: #37495399;
     height: 93%;
+    max-width: 50%;
   }
 
   .card_transaction:hover {
@@ -298,9 +294,5 @@ button,
   p,
   a {
     font-size: 16px;
-  }
-  .buttonCreate {
-    bottom: 90px;
-    right: 50px;
   }
 }

@@ -1,4 +1,6 @@
+/*
 import { stopmenuindex } from "./ui.js";
+*/
 export async function openModal(arquivo) {
   const res = await fetch(arquivo);
 
@@ -34,7 +36,6 @@ export async function openModal(arquivo) {
 }
 
 export function fecharModal() {
-  stopmenuindex();
   document.getElementById("modalContainer").innerHTML = "";
 }
 export function setupModalGlobalListeners() {

@@ -178,6 +178,7 @@ export async function sumAtualMonthPaid(month) {
 
     if (amount_paid) {
       const total = Number(transactionsSumPaid.total) || 0;
+
       amount_paid.textContent = `R$: ${total.toFixed(2)}`;
       console.log(`Total pago no mes ${month} foi de ${total}`);
     }

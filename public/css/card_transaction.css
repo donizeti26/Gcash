@@ -6,7 +6,7 @@
     "card_text card_text"
     " button_black_card button_black_card";
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.2fr 0.7fr 2fr 1fr;
+  grid-template-rows: 0.2fr 0.7fr 2fr 4rem;
 }
 .card_pay {
   width: 100%;
@@ -16,7 +16,7 @@
 .button_black {
   cursor: pointer;
   background-color: #dbdfe1;
-  font-weight: 300;
+  font-weight: 700;
   color: #374953;
   border: 1px solid #374953;
   transition: all;
@@ -105,7 +105,9 @@
 .card_text strong {
   color: #000;
 }
-
+/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////CSS PARA DESCKTOP ////////////////////////
+//////////////////////////////////////////////////////////////////////////*/
 @media screen and (min-width: 1060px) {
   .title_date strong {
     font-size: 1.5rem;
@@ -113,7 +115,7 @@
   .card_pay {
     width: 100%;
     background-color: rgb(219, 223, 225);
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 3rem;
   }
   .header_transaction {
@@ -163,7 +165,11 @@
   }
   .card_text div {
     width: 100%;
+    padding-top: 0;
     border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
   }
   .button_black_card {
     grid-area: button_black_card;
@@ -179,6 +185,7 @@
     justify-content: start;
     align-items: center;
   }
+
   .card_pay {
     display: grid;
     grid-template-areas:

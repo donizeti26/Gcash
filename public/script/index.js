@@ -1,9 +1,11 @@
 import { openModal, fecharModal, setupModalGlobalListeners } from "./modal.js";
-import { setupUI } from "./ui.js";
+/*import { setupUI } from "./ui.js";*/
 import { setupCalendar } from "./calendar.js";
 
 // INICIALIÇÕES GLOBAIS
+/*
 setupUI();
+*/
 setupCalendar();
 setupModalGlobalListeners();
 

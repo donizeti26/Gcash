@@ -36,7 +36,7 @@
   background-color: rgb(255, 255, 255);
   padding: 2rem;
   gap: 1rem;
-  border-radius: 1rem;
+  border-radius: 2rem;
   /* https://smoothshadows.com/#djEsMSw4LDAuMDYsNDIsOCwtNywjMDMwNzEyLCNmM2Y0ZjYsI2ZmZmZmZiwy */
   box-shadow: -0px 0px 1px rgba(3, 7, 18, 0.01),
     -0px 1px 3px rgba(3, 7, 18, 0.01), -1px 1px 6px rgba(3, 7, 18, 0.02),
@@ -62,6 +62,9 @@
 #description {
   width: 70%;
 }
+/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////CSS PARA DESCKTOP ////////////////////////
+//////////////////////////////////////////////////////////////////////////*/
 @media screen and (min-width: 1060px) {
   #form_card {
     width: 50%;
