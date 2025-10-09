@@ -231,3 +231,38 @@ app.get("/transactionsSum/:month", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+//////////////////////////////////////////////////////////////////////
+/////////////ROTA PARA  EDITAR TRANSAÇÕES///////////////
+/////////////////////////////////////////////////////////////////////
+
+app.get("/editartransacoes/:transaction_id", async (req, res) => {
+  try {
+    const { transaction_id } = req.params;
+    const result = await pool.query(
+      `
+SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
+t.transaction_id  AS transaction_id ,
+c.category_id AS category_id,
+t.description AS description,
+t.amount as amount,
+c.color  as color,
+c.icon as icon,
+t.status as status,
+p.payment_method_id as payment_method_id
+from transactions AS t
+
+INNER JOIN categories
+AS c ON t.category_id = c.category_id
+INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id where t.transaction_id = $1`,
+      [transaction_id]
+    );
+
+    console.log("ID recebido:", transaction_id); // 🧠 ADICIONE ISSO
+    console.log("Resultado da query:", result.rows); // 🧠 ADICIONE ISSO
+    res.json(result.rows);
+  } catch (err) {
+    console.log("Erro ao consultar para editar transacoes", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
