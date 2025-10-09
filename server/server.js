@@ -124,6 +124,26 @@ app.get("/categories", async (req, res) => {
   }
 });
 
+app.get("/categoriesRevenue", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM categories");
+    res.json(result.rows);
+  } catch (err) {
+    console.log("Erro ao buscar catesgorias", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+app.get("/categoriesExpense", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM categories WHERE  type='expense'"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.log("Erro ao buscar catesgorias", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
 ///////////////////////////////////////////////////////////////////////////////
 //////ROTA PARA CONSULTAR METODOS DE PAGAMETNO ///////////
 //////////////////////////////////////////////////////////////////////////////
