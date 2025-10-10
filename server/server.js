@@ -160,16 +160,16 @@ app.get("/paymentmethods", async (req, res) => {
 ///////////////////////////////////////////////////////////////
 //////ROTA PARA CONSULTAR TOTAL MES PAGO////////
 //////////////////////////////////////////////////////////////
-app.get("/transactionsPaid/:month", async (req, res) => {
+app.get("/transactionsPaid/:month/:year", async (req, res) => {
   try {
-    const { month } = req.params;
+    const { month, year } = req.params;
 
     const result = await pool.query(
       `SELECT SUM(amount) AS totalpago
 FROM transactions
 WHERE status = 'paid' AND
-EXTRACT(MONTH FROM due_date) = $1`,
-      [month]
+EXTRACT(MONTH FROM due_date) = $1  AND EXTRACT(YEAR FROM due_date) = $2`,
+      [month, year]
     );
 
     console.log(result.rows);
@@ -184,16 +184,16 @@ EXTRACT(MONTH FROM due_date) = $1`,
 ///////////////////////////////////////////////////////////////////////
 //////ROTA PARA CONSULTAR TOTAL MES NÃO PAGO////////
 ////////////////////////////////////////////////////////////////////
-app.get("/transactionsPeding/:month", async (req, res) => {
+app.get("/transactionsPeding/:month/:year", async (req, res) => {
   try {
-    const { month } = req.params;
+    const { month, year } = req.params;
 
     const result = await pool.query(
       `SELECT SUM(amount) AS totaldevendo
 FROM transactions
 WHERE status = 'peding' AND
-EXTRACT(MONTH FROM due_date) = $1`,
-      [month]
+EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2`,
+      [month, year]
     );
 
     console.log(result.rows);
@@ -201,6 +201,25 @@ EXTRACT(MONTH FROM due_date) = $1`,
     res.json({ total: Number(result.rows[0]?.totaldevendo) || 0 });
   } catch (err) {
     console.log("Erro ao buscar total do mês atual");
+    res.status(500).json({ error: err.message });
+  }
+});
+///////////////////////////////////////////////////////////////////////////////
+///////////////////ROTA PARA SOMAR TOTAL DO ME//////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+app.get("/transactionsSum/:month/:year", async (req, res) => {
+  try {
+    const { month, year } = req.params;
+
+    const result = await pool.query(
+      "SELECT SUM(amount) AS total_month FROM transactions WHERE EXTRACT(MONTH FROM due_date)=$1 AND EXTRACT(YEAR FROM due_date) = $2",
+      [month, year]
+    );
+
+    res.json({ total: Number(result.rows[0]?.total_month) || 0 });
+  } catch (err) {
+    console.log("Erro ao buscar a SOMA das transações", err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -220,7 +239,8 @@ t.amount as amount,
 c.color  as color,
 c.icon as icon,
 t.status as status,
-p.name as pmethod
+p.name as pmethod,
+c.type as type
 from transactions AS t
 
 INNER JOIN categories
@@ -229,25 +249,6 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id`);
     res.json(result.rows);
   } catch (err) {
     console.log("Erro ao buscar transações", err.message);
-    res.status(500).json({ error: err.message });
-  }
-});
-///////////////////////////////////////////////////////////////////////////////
-///////////////////ROTA PARA SOMAR TRANSAÇÕES//////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-app.get("/transactionsSum/:month", async (req, res) => {
-  try {
-    const { month } = req.params;
-
-    const result = await pool.query(
-      "SELECT SUM(amount) AS total_month FROM transactions WHERE EXTRACT(MONTH FROM due_date)=$1",
-      [month]
-    );
-
-    res.json({ total: Number(result.rows[0]?.total_month) || 0 });
-  } catch (err) {
-    console.log("Erro ao buscar a SOMA das transações", err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -285,4 +286,20 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id whe
     console.log("Erro ao consultar para editar transacoes", err.message);
     res.status(500).json({ error: err.message });
   }
+});
+/////////////////////////////////////////////////////////
+/////////ALTERANDO STATUS TRANSAÇÃO////////
+////////////////////////////////////////////////////////
+
+app.patch("/updateStatus/:id", async (req, res) => {
+  const { id } = req.params;
+  await pool.query(
+    `
+    UPDATE transactions
+SET status = 'paid'
+where transaction_id = $1
+`,
+    [id]
+  );
+  res.json({ success: true });
 });
