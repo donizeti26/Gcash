@@ -1,6 +1,12 @@
 import { openModal, fecharModal, setupModalGlobalListeners } from "./modal.js";
 /*import { setupUI } from "./ui.js";*/
 import { setupCalendar } from "./calendar.js";
+import { carregarDadosEditarTransacao } from "./edit_transactions.js";
+import {
+  loadCategoryForm,
+  loadPaymentMethods,
+  initExpensesForm,
+} from "./installments.js";
 
 // INICIALIÇÕES GLOBAIS
 /*
@@ -10,7 +16,7 @@ setupCalendar();
 setupModalGlobalListeners();
 
 /////////////////////////////////////////////////////
-////////////CADASTRAR DESPESAS//////////////
+////////////INICIAR FORM TRANSAÇÕES//////////////
 ////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
   // BOTAO PARA ABRIR DESPESAS (E INICIALIZAR INSTALLMENTS)
@@ -56,6 +62,9 @@ if (btnCategoria) {
   });
 }
 
+/////////////////////////////////////////////////////
+////////////INICIAR FORM CATEGORIAS//////////////
+////////////////////////////////////////////////////
 async function abrirCategorias() {
   await openModal("form_categories.html");
 
@@ -116,6 +125,7 @@ async function LoadExpenses() {
     }
     transactions.forEach((cat) => {
       const item = document.createElement("article");
+
       item.classList.add("card_pay");
 
       const convertAmount = Number(cat.amount).toLocaleString("pt-BR", {
@@ -152,14 +162,41 @@ async function LoadExpenses() {
           </p>
         </div>
       </div>
-      <div class="button_black_card">
+      <div data-id="${cat.transaction_id}"  class="group_button_transactions index_card">
       
 
-        <button class="button_black">Editar Transação</button>
+      <button class="button_remove">Remover</button>
+        <button class="button_edit edit_transaction">Editar</button>
       </div>
 
 `;
 
+      async function renderTransactionButton(id) {
+        const groupButton = item.querySelector(".group_button_transactions");
+        if (cat.type === "expense") {
+          console.log("FUCIONANDO MEU PATRÃO MESMO");
+          const buttonPay = document.createElement("button");
+          buttonPay.id = `transaction_${cat.transaction_id}`;
+          const status = await consultStatus(id);
+          if (status == "paid") {
+            buttonPay.classList.add(
+              "button_set_status",
+              "button_set_status_peding"
+            );
+            buttonPay.innerHTML = "Tornar pendente";
+          } else {
+            buttonPay.classList.add(
+              "button_set_status",
+              "button_set_status_paid"
+            );
+            buttonPay.innerHTML = "Pagar";
+          }
+          groupButton.appendChild(buttonPay);
+        } else {
+          console.log("FUCIONANDO MEU PATRÃO");
+        }
+      }
+      renderTransactionButton(cat.transaction_id);
       const iconSpan = item.querySelector(`#icon_${cat.transaction_id}`);
       const circle = item.querySelector(`#circle_${cat.transaction_id}`);
 
@@ -169,10 +206,8 @@ async function LoadExpenses() {
       }
       if (circle && cat.status === "paid") {
         circle.classList.add("circle_paid");
-        console.log("Classe adicionada em:", circle.className);
       } else if (circle && cat.status === "peding") {
         circle.classList.add("circle_peding");
-        console.log("Classe adicionada em:", circle.className);
       }
       if (group_cards) {
         group_cards.appendChild(item);
@@ -183,3 +218,100 @@ async function LoadExpenses() {
   }
 }
 LoadExpenses();
+
+/////////////////////////////////////////
+/////////EDITAR TRANSACOES///////////////////
+/////////////////////////////////////////
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".edit_transaction");
+  if (!button) return;
+  const indexCard = button.closest(".index_card");
+
+  const id = indexCard.dataset.id;
+  console.log("O botão clicado foi da transanção", id);
+
+  await openModal("edit_transactions.html");
+
+  try {
+    const response = await fetch(`/editartransacoes/${id}`);
+    const data = await response.json();
+    console.log("Dados da transacao", data);
+    await loadCategoryForm();
+    await loadPaymentMethods();
+    await initExpensesForm();
+    carregarDadosEditarTransacao(data[0]);
+  } catch (err) {
+    console.error("Erro ao buscar transacao", err);
+  }
+});
+////////////////////////////////////////////////////////
+/////////PAGAR TRANSACOES//////////////////////
+////////////////////////////////////////////////////////
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".button_remove");
+  if (!button) return;
+
+  const indexCard = button.closest(".index_card");
+  const id = indexCard.dataset.id;
+  console.log("O botão clicado foi da transanção AAAAS", id);
+});
+////////////////////////////////////////////////////////////////////
+/////////ALTERAR STATUS TRANSACOES//////////////////////
+/////////////////////////////////////////////////////////////////
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".button_set_status");
+
+  if (!button) return;
+
+  const indexCard = button.closest(".index_card");
+  const id = indexCard.dataset.id;
+
+  console.log("Mudando status da transação " + id);
+
+  await SetStatusInTransations(id);
+  await LoadExpenses();
+});
+
+///////////////////////////////////////////////////////////
+////////pedindo para o back mudar o status/////////
+//////////////////////////////////////////////////////////
+export async function SetStatusInTransations(id) {
+  const ConfirmStatus = confirm("Você quer realmente mudar o status?");
+
+  if (!ConfirmStatus) {
+    alert("Você cancelou a mudança de status.");
+    return;
+  }
+
+  try {
+    const status = await consultStatus(id);
+    const newStatus = status === "paid" ? "peding" : "paid";
+
+    const response = await fetch(`/updateStatus/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
+    if (!response.ok) throw new Error("Erro ao atualizar status");
+    await LoadExpenses();
+  } catch (err) {
+    console.error("Erro ao atualizar status da transação" + err);
+  }
+}
+
+export async function consultStatus(id) {
+  try {
+    const response = await fetch(`/consultStatus/${id}`);
+    const data = await response.json();
+    console.log("ESTATOS DA TRansação ", id, "é de ", data.status);
+    return data.status;
+  } catch (err) {
+    console.error("Error ao consulktar status: ", err.message);
+    return null;
+  }
+}

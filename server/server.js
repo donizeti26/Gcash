@@ -293,13 +293,40 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id whe
 
 app.patch("/updateStatus/:id", async (req, res) => {
   const { id } = req.params;
-  await pool.query(
-    `
-    UPDATE transactions
-SET status = 'paid'
-where transaction_id = $1
-`,
-    [id]
-  );
-  res.json({ success: true });
+  const { status } = req.body;
+
+  try {
+    await pool.query(
+      `
+      UPDATE transactions
+  SET status = $1
+  where transaction_id = $2
+  `,
+      [status, id]
+    );
+    res.json({ message: "Status atualizado", newStatus: status });
+  } catch (err) {
+    console.error("Erro ao atualizar status:", err);
+    res.status(500).json({ error: "Erro ao atualizar o status" });
+  }
+});
+/////////////////////////////////////////////////////////
+/////////CONSULTAR STATUS TRANSAÇÃO////////
+////////////////////////////////////////////////////////
+
+app.get("/consultStatus/:transaction_id", async (req, res) => {
+  try {
+    const { transaction_id } = req.params;
+    const result = await pool.query(
+      `
+      SELECT status FROM transactions  WHERE transaction_id = $1`,
+      [transaction_id]
+    );
+    console.log("ID da transação: ", transaction_id);
+    console.log("Resultado da Query: ", result.rows);
+    res.json(result.rows[0] || {});
+  } catch (err) {
+    console.log("Erro ao consultar status da transação: ".err.message);
+    res.status(500).json({ error: err.message });
+  }
 });

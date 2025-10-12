@@ -58,11 +58,6 @@ footer {
   background-color: #ececec;
 }
 
-#other_body {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(185, 185, 185) transparent;
-}
-
 #buttonLogin,
 #buttonLogin_create,
 #buttonNewCategory,

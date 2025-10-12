@@ -31,6 +31,7 @@ export function initExpensesForm() {
     function onofOption() {
       if (valueEvent === 0) {
         installments.disabled = true;
+        installments.value = 1;
       } else if (valueEvent === 1) {
         installments.disabled = false;
 
@@ -57,10 +58,10 @@ export async function initTransactionForm() {
       const due_date = document.getElementById("due_date").value;
       const amount = document.getElementById("amount").value;
       const description = document.getElementById("description").value;
-
       const status = document.querySelector(
         'input[name="response_status"]:checked'
       ).value;
+
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
       amountNumber = parseFloat(amountNumber);
       try {
@@ -125,7 +126,7 @@ export async function loadPaymentMethods() {
 
 export async function loadCategoryForm() {
   try {
-    const response = await fetch("/categories");
+    const response = await fetch("/categoriesExpense");
     const categories = await response.json();
 
     const select = document.getElementById("category_id");
@@ -148,17 +149,24 @@ export async function loadCategoryForm() {
   }
 }
 
-export async function sumAmountMonth(monthIndex) {
+//////////////////////////////////////////
+/////////////TOTAL DO MES///////////
+//////////////////////////////////////////
+export async function sumAmountMonth(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
-    const response = await fetch(`/transactionsSum/${month}`);
+    const response = await fetch(`/transactionsSum/${month}/${yearIndex}`);
     const transactionsSum = await response.json();
 
     const total_month = document.getElementById("total_month");
 
     if (total_month) {
       const total = Number(transactionsSum.total) || 0;
-      total_month.textContent = `R$ ${total.toFixed(2)}`;
+      const convertAmount = Number(total).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      total_month.textContent = `${convertAmount}`;
       console.log(`Total gastos no mes de ${monthIndex}: `, total);
     }
   } catch (err) {
@@ -166,10 +174,10 @@ export async function sumAmountMonth(monthIndex) {
   }
 }
 
-export async function sumAtualMonthPaid(month) {
+export async function sumAtualMonthPaid(month, yearIndex) {
   month = month + 1;
   try {
-    const response = await fetch(`/transactionsPaid/${month}`);
+    const response = await fetch(`/transactionsPaid/${month}/${yearIndex}`);
 
     const transactionsSumPaid = await response.json();
     console.log("TUDO OK AQUI");
@@ -178,8 +186,11 @@ export async function sumAtualMonthPaid(month) {
 
     if (amount_paid) {
       const total = Number(transactionsSumPaid.total) || 0;
-
-      amount_paid.textContent = `R$: ${total.toFixed(2)}`;
+      const convertAmount = Number(total).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      amount_paid.textContent = `${convertAmount}`;
       console.log(`Total pago no mes ${month} foi de ${total}`);
     }
   } catch (err) {
@@ -187,10 +198,10 @@ export async function sumAtualMonthPaid(month) {
   }
 }
 
-export async function sumAtualMonthPeding(month) {
+export async function sumAtualMonthPeding(month, yearIndex) {
   month = month + 1;
   try {
-    const response = await fetch(`/transactionsPeding/${month}`);
+    const response = await fetch(`/transactionsPeding/${month}/${yearIndex}`);
 
     const transactionsSumPeding = await response.json();
     console.log("TUDO OK AQUI");
@@ -199,7 +210,11 @@ export async function sumAtualMonthPeding(month) {
 
     if (amount_peding) {
       const total = Number(transactionsSumPeding.total) || 0;
-      amount_peding.textContent = `R$: ${total.toFixed(2)}`;
+      const convertAmount = Number(total).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      amount_peding.textContent = `${convertAmount}`;
       console.log(`Total não pago no mes de ${month} foi de ${total}`);
     }
   } catch (err) {

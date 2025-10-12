@@ -2,7 +2,7 @@
 
 //Definindo Enum das tabelas
 CREATE TYPE user_status AS ENUM('enable','disabled');
-CREATE TYPE category_type AS ENUM('iconme','expense');
+CREATE TYPE category_type AS ENUM('revenue','expense');
 CREATE TYPE transaction_status AS ENUM('peding','paid','canceled');
 CREATE TYPE installment_status AS ENUM('peding','paid','overdue');
 

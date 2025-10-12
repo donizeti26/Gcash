@@ -7,6 +7,7 @@ import {
 /*==========================
         Controlador de meses
 ===========================*/
+
 const month = [
   "Janeiro",
   "Fevereiro",
@@ -27,8 +28,9 @@ const months = document.getElementById("month");
 
 const dataAtual = new Date();
 const mesAtual = dataAtual.getMonth();
+const anoAtual = dataAtual.getFullYear();
 let ContMonth = mesAtual; // começa em Janeiro
-
+let ContYear = anoAtual;
 export function setupCalendar() {
   const inputDataExpenses = document.getElementById("due_date");
   if (inputDataExpenses) {
@@ -54,10 +56,11 @@ export function setupCalendar() {
 
   // Atualiza mes na sidbar
   function showMonth() {
-    months.innerHTML = " <h2> " + month[ContMonth] + "</h2>";
-    sumAmountMonth(ContMonth);
-    sumAtualMonthPaid(ContMonth);
-    sumAtualMonthPeding(ContMonth);
+    months.innerHTML =
+      " <h2> " + month[ContMonth] + "<br>" + ContYear + "</h2>";
+    sumAmountMonth(ContMonth, ContYear);
+    sumAtualMonthPaid(ContMonth, ContYear);
+    sumAtualMonthPeding(ContMonth, ContYear);
 
     console.log(month[ContMonth]);
   }
@@ -66,10 +69,12 @@ export function setupCalendar() {
     ContMonth = ContMonth + 1;
     if (ContMonth >= 12) {
       ContMonth = 0;
+      ContYear = ContYear + 1;
+      console.log(ContYear);
     }
-    sumAmountMonth(ContMonth);
-    sumAtualMonthPaid(ContMonth);
-    sumAtualMonthPeding(ContMonth);
+    sumAmountMonth(ContMonth, ContYear);
+    sumAtualMonthPaid(ContMonth, ContYear);
+    sumAtualMonthPeding(ContMonth, ContYear);
     showMonth();
   });
   // Voltar (Back)
@@ -77,10 +82,12 @@ export function setupCalendar() {
     ContMonth = ContMonth - 1;
     if (ContMonth < 0) {
       ContMonth = 11;
+      ContYear = ContYear - 1;
+      console.log(ContYear);
     }
-    sumAmountMonth(ContMonth);
-    sumAtualMonthPaid(ContMonth);
-    sumAtualMonthPeding(ContMonth);
+    sumAmountMonth(ContMonth, ContYear);
+    sumAtualMonthPaid(ContMonth, ContYear);
+    sumAtualMonthPeding(ContMonth, ContYear);
 
     showMonth();
   });

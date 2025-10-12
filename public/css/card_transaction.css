@@ -4,7 +4,7 @@
     "title_date title_date"
     "div_icon_categorie  amount_circle"
     "card_text card_text"
-    " button_black_card button_black_card";
+    "group_button_transactions group_button_transactions";
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 0.2fr 0.7fr 2fr 4rem;
 }
@@ -13,22 +13,74 @@
   background-color: rgb(219, 223, 225);
   border-radius: 3rem;
 }
-.button_black {
+.button_remove {
   cursor: pointer;
   background-color: #dbdfe1;
   font-weight: 700;
-  color: #374953;
-  border: 1px solid #374953;
+  color: #ff4000;
+  border: 1px solid #ff4000;
   transition: all;
   transition-duration: 0.2s;
   padding: 0.6rem 1.7rem;
   border-radius: 15px;
 }
-.button_black:hover {
+.button_remove:hover {
   color: #cecece;
+  background-color: #ff4000;
+  transition: all;
+  transition-duration: 0.2s;
+}
+.button_edit {
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: #448aff;
+  border: 1px solid #448aff;
+  transition: all;
+  transition-duration: 0.2s;
+  padding: 0.6rem 1.7rem;
+  border-radius: 15px;
+}
+.button_edit:hover {
+  color: #cecece;
+  background-color: #448aff;
+  transition: all;
+  transition-duration: 0.2s;
+}
+.button_set_status_paid {
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: #00c030;
+  border: 1px solid #00c030;
+  transition: all;
+  transition-duration: 0.2s;
+  padding: 0.6rem 1.7rem;
+  border-radius: 15px;
+}
+.button_set_status_peding {
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: #474747;
+  border: 1px solid #ccb334;
+  transition: all;
+  transition-duration: 0.2s;
+  padding: 0.6rem 1.7rem;
+  border-radius: 15px;
+}
+.button_set_status_paid:hover {
+  color: #cecece;
+  background-color: #00c030;
+  transition: all;
+  border: #ffd600;
 
-  background-color: #374953;
-
+  transition-duration: 0.2s;
+}
+.button_set_status_peding:hover {
+  color: #474747;
+  background-color: #ffd600;
   transition: all;
   transition-duration: 0.2s;
 }
@@ -49,10 +101,11 @@
 }
 .div_icon_categorie,
 .amount_circle,
-.button_black_card {
+.group_button_transactions {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 }
 .amount_circle {
   grid-area: amount_circle;
@@ -80,15 +133,15 @@
   justify-content: center;
   align-items: center;
   padding-top: 0.7rem;
-  padding-left: 13px;
+  padding-left: 19px;
 }
 .card_text div {
   width: 80%;
   border-top: 1px solid #85858552;
   padding-top: 1rem;
 }
-.button_black_card {
-  grid-area: button_black_card;
+.group_button_transactions {
+  grid-area: group_button_transactions;
 }
 .icon_categorie {
   background-color: blueviolet;
@@ -171,8 +224,8 @@
     flex-direction: column;
     gap: 0.3rem;
   }
-  .button_black_card {
-    grid-area: button_black_card;
+  .group_button_transactions {
+    grid-area: group_button_transactions;
     display: flex;
     justify-content: end;
     align-items: end;
@@ -190,8 +243,8 @@
     display: grid;
     grid-template-areas:
       "div_icon_categorie title_date amount_circle"
-      "div_icon_categorie card_text  button_black_card";
-    grid-template-columns: 4.5rem 4fr 2fr;
+      "div_icon_categorie card_text group_button_transactions";
+    grid-template-columns: 4.9rem 4fr 2fr;
     grid-template-rows: 4rem auto;
   }
 }

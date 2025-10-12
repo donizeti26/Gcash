@@ -5,9 +5,9 @@
 #main_content {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
 
+  height: 100%;
+  width: 100%;
   background-color: #374953;
 }
 
@@ -18,7 +18,13 @@ button,
 .material-symbols-outlined {
   user-select: none;
 }
-
+#aside_menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+}
 #pay,
 #no_pay,
 #total_month {
@@ -35,17 +41,18 @@ button,
   flex-direction: column;
   background-color: #263940;
   color: #ffffff;
-  height: 35%;
+  height: 100%;
   width: 100%;
   border-radius: 0rem 0rem 2rem 2rem;
   flex-shrink: 0;
 }
 
 #atual_month {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  padding: 2rem 0rem;
 }
 
 #atual_month p {
@@ -65,8 +72,7 @@ button,
 
 #other_body {
   flex-grow: 1;
-  overflow-y: auto;
-  margin: 1rem;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -77,10 +83,15 @@ button,
 }
 
 #group_cards {
+  justify-content: start;
+  padding-right: 2rem;
+  overflow-y: auto;
+  margin: 1rem;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   gap: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(185, 185, 185) transparent;
 }
 
 .arrow_month {
@@ -180,24 +191,39 @@ button,
 #despesas {
   background-color: #ff4000;
   user-select: none;
+  transition: all;
+  transition-duration: 0.5s;
 }
 #receita {
   background-color: #00c030;
   user-select: none;
+  transition: all;
+  transition-duration: 0.5s;
 }
 #categoria {
   background-color: #005eff;
+  transition: all;
+  transition-duration: 0.5s;
 }
 
 #categoria:hover {
-  background-color: #448aff;
+  background-color: #6ba1ff;
+  transition: all;
+  transition-duration: 0.5s;
 }
 
 #despesas:hover {
-  background-color: #f06030;
+  background-color: #ff6a6a;
   color: #ffffff;
+  transition: all;
+  transition-duration: 0.5s;
 }
 
+#receita:hover {
+  background-color: #58ff82;
+  transition: all;
+  transition-duration: 0.5s;
+}
 .add_up {
   font-size: 35px;
 }
@@ -207,11 +233,9 @@ button,
 }
 
 #logo {
-  content: url(../assets/logo_mobile.svg);
+  content: url(../assets/logo.svg);
   width: 30%;
 }
-
-/*---------------------*/
 
 #new_modal_js {
   display: flex;
@@ -224,26 +248,36 @@ button,
 }
 #group_pay,
 #month {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: center;
 }
 /*//////////////////////////////////////////////////////////////////////////
 //////////////////////////CSS PARA DESCKTOP ////////////////////////
 //////////////////////////////////////////////////////////////////////////*/
-@media screen and (min-width: 1060px) {
+@media screen and (min-width: 1200px) {
   #main_content {
     background-color: #263940;
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100vh;
+    width: 100vw;
   }
-
+  #group_pay {
+    display: flex;
+    justify-content: space-between;
+  }
+  #aside_menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 80%;
+  }
   #logo {
     content: url(../assets/logo.svg);
     display: flex;
-    position: absolute;
-    top: 3rem;
-    width: 20rem;
+    width: 16rem;
   }
 
   #button_option {
@@ -254,18 +288,22 @@ button,
   }
 
   #resume_month {
-    height: 100%;
+    justify-content: space-around;
+    height: 90%;
     width: 30%;
     border-radius: unset;
-    justify-content: center;
   }
 
   #group_pay,
-  #month_value,
-  #month {
-    font-size: 1.5rem;
+  #month_value {
+    font-size: 1.3rem;
     text-align: center;
   }
+  #month {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
   #opcoes ul {
     display: flex;
     flex-direction: column;
@@ -278,8 +316,8 @@ button,
     padding: 2rem;
     border-radius: 4rem;
     background-color: #37495399;
-    height: 93%;
-    max-width: 50%;
+    max-width: 66%;
+    height: 90%;
   }
 
   .card_transaction:hover {
