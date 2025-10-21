@@ -84,7 +84,7 @@ button,
 
 #group_cards {
   justify-content: start;
-  padding-right: 2rem;
+
   overflow-y: auto;
   margin: 1rem;
   display: flex;
@@ -303,7 +303,9 @@ button,
     font-size: 1.1rem;
     text-align: center;
   }
-
+  #group_cards {
+    padding-right: 2rem;
+  }
   #opcoes ul {
     display: flex;
     flex-direction: column;

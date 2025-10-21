@@ -6,7 +6,7 @@
     "card_text card_text"
     "group_button_transactions group_button_transactions";
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.2fr 0.7fr 2fr 4rem;
+  grid-template-rows: 0.2fr 0.7fr 2fr 8rem;
 }
 .card_pay {
   width: 100%;
@@ -105,7 +105,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 .amount_circle {
   grid-area: amount_circle;
@@ -141,7 +141,9 @@
   padding-top: 1rem;
 }
 .group_button_transactions {
+  align-content: center;
   grid-area: group_button_transactions;
+  flex-wrap: wrap-reverse;
 }
 .icon_categorie {
   background-color: blueviolet;
@@ -229,6 +231,7 @@
     display: flex;
     justify-content: end;
     align-items: end;
+    flex-wrap: nowrap;
   }
   .div_icon_categorie {
     grid-area: div_icon_categorie;
