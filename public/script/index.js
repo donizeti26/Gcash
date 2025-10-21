@@ -115,7 +115,7 @@ if (btnReceita) {
 
 async function LoadExpenses() {
   try {
-    const response = await fetch("/transactionsGet");
+    const response = await fetch("/api/transactions/transactionsGet");
     const transactions = await response.json();
 
     const group_cards = document.getElementById("group_cards");
@@ -177,7 +177,9 @@ async function LoadExpenses() {
           console.log("FUCIONANDO MEU PATRÃO MESMO");
           const buttonPay = document.createElement("button");
           buttonPay.id = `transaction_${cat.transaction_id}`;
-          const status = await consultStatus(id);
+          const status = await fetch(
+            `/api/transactions/transactions/${id}/status`
+          );
           if (status == "paid") {
             buttonPay.classList.add(
               "button_set_status",
@@ -234,13 +236,17 @@ document.addEventListener("click", async (e) => {
   await openModal("edit_transactions.html");
 
   try {
-    const response = await fetch(`/editartransacoes/${id}`);
+    const response = await fetch(`/api/transactions/transactions/${id}`);
+    if (!response.ok) {
+      console.error("Erro ao buscar transação:", response.status);
+      return;
+    }
     const data = await response.json();
     console.log("Dados da transacao", data);
     await loadCategoryForm();
     await loadPaymentMethods();
     await initExpensesForm();
-    carregarDadosEditarTransacao(data[0]);
+    carregarDadosEditarTransacao(transaction);
   } catch (err) {
     console.error("Erro ao buscar transacao", err);
   }
@@ -290,13 +296,16 @@ export async function SetStatusInTransations(id) {
     const status = await consultStatus(id);
     const newStatus = status === "paid" ? "peding" : "paid";
 
-    const response = await fetch(`/updateStatus/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: newStatus }),
-    });
+    const response = await fetch(
+      `/api/transactions/transactions/${id}/status`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      }
+    );
     if (!response.ok) throw new Error("Erro ao atualizar status");
     await LoadExpenses();
   } catch (err) {
@@ -306,7 +315,7 @@ export async function SetStatusInTransations(id) {
 
 export async function consultStatus(id) {
   try {
-    const response = await fetch(`/consultStatus/${id}`);
+    const response = await fetch(`/api/transactions/transactions/${id}/status`);
     const data = await response.json();
     console.log("ESTATOS DA TRansação ", id, "é de ", data.status);
     return data.status;

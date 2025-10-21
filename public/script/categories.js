@@ -37,7 +37,7 @@ export function initCategoryForm() {
 
 export async function loadCategories() {
   try {
-    const response = await fetch("/categories");
+    const response = await fetch("/api/categories/categories");
     const categories = await response.json();
 
     const list = document.getElementById("list_categories");

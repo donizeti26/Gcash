@@ -12,6 +12,7 @@ const {
 
 const router = express.Router();
 
+// Rotas de transações
 router.get("/transactionsGet", getTransactionsController);
 router.post("/transactions", createTransactionController);
 router.get("/transactions/:transaction_id", editTransactionsController);
