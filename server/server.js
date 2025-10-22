@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
+import express from "express";
+import cors from "cors";
+import path from "path";
 
-const userRoutes = require("./src/routes/userRoutes");
-const categoryRoutes = require("./src/routes/categoryRoutes");
-const paymentRoutes = require("./src/routes/paymentRoutes");
-const transactionRoutes = require("./src/routes/transactionRoutes");
+import userRoutes from "./src/routes/userRoutes";
+import categoryRoutes from "./src/routes/categoryRoutes";
+import paymentRoutes from "./src/routes/paymentRoutes";
+import transactionRoutes from "./src/routes/transactionRoutes";
 
 const app = express();
 const port = 3000;

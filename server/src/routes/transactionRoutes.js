@@ -1,5 +1,5 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getTransactionsController,
   createTransactionController,
   editTransactionsController,
@@ -8,7 +8,7 @@ const {
   sumTransactionController,
   pendingTransactionsController,
   paidTransactionsController,
-} = require("../controllers/transactionController");
+} from "../controllers/transactionController";
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.get("/transactions/sum/:month/:year", sumTransactionController);
 router.get("/transactions/pending/:month/:year", pendingTransactionsController);
 router.get("/transactions/paid/:month/:year", paidTransactionsController);
 
-module.exports = router;
+export default router;

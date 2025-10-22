@@ -1,4 +1,6 @@
-const {
+import db from "../config/db";
+
+import {
   getTransactions,
   editTransactions,
   updateStatus,
@@ -7,7 +9,7 @@ const {
   pendingTransactions,
   paidTransactions,
   registerTransactions,
-} = require("../models/TransacaoModel");
+} from "../models/TransacaoModel";
 
 async function getTransactionsController(req, res) {
   try {
@@ -108,7 +110,7 @@ async function paidTransactionsController(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
-module.exports = {
+export default {
   getTransactionsController,
   createTransactionController,
   editTransactionsController,
