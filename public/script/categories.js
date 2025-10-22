@@ -14,7 +14,7 @@ export function initCategoryForm() {
       const category_selected = option_new_category.value;
 
       try {
-        const response = await fetch("/categories", {
+        const response = await fetch("/api/categories/categories", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

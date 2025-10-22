@@ -162,11 +162,11 @@ async function LoadExpenses() {
           </p>
         </div>
       </div>
-      <div data-id="${cat.transaction_id}"  class="group_button_transactions index_card">
+      <div class="group_button_transactions index_card">
       
 
-      <button class="button_remove">Remover</button>
-        <button class="button_edit edit_transaction">Editar</button>
+      <button  data-id="${cat.transaction_id}"  class="button_remove">Remover</button>
+        <button data-id="${cat.transaction_id}"   class="button_edit edit_transaction">Editar</button>
       </div>
 
 `;
@@ -177,10 +177,13 @@ async function LoadExpenses() {
           console.log("FUCIONANDO MEU PATRÃO MESMO");
           const buttonPay = document.createElement("button");
           buttonPay.id = `transaction_${cat.transaction_id}`;
-          const status = await fetch(
+          buttonPay.dataset.id = cat.transaction_id;
+          console.log("ID da transação:", id);
+          const res = await fetch(
             `/api/transactions/transactions/${id}/status`
           );
-          if (status == "paid") {
+          const statusData = await res.json();
+          if (statusData == "paid") {
             buttonPay.classList.add(
               "button_set_status",
               "button_set_status_peding"
@@ -228,10 +231,9 @@ LoadExpenses();
 document.addEventListener("click", async (e) => {
   const button = e.target.closest(".edit_transaction");
   if (!button) return;
-  const indexCard = button.closest(".index_card");
 
-  const id = indexCard.dataset.id;
-  console.log("O botão clicado foi da transanção", id);
+  const id = button.dataset.id; // pegar direto do botão
+  console.log("O botão clicado foi da transação", id);
 
   await openModal("edit_transactions.html");
 
@@ -277,8 +279,7 @@ document.addEventListener("click", async (e) => {
 
   if (!button) return;
 
-  const indexCard = button.closest(".index_card");
-  const id = indexCard.dataset.id;
+  const id = button.dataset.id;
 
   console.log("Mudando status da transação " + id);
 
@@ -321,9 +322,10 @@ export async function SetStatusInTransations(id) {
 export async function consultStatus(id) {
   try {
     const response = await fetch(`/api/transactions/transactions/${id}/status`);
-    const data = await response.json();
-    console.log("ESTATOS DA TRansação ", id, "é de ", data.status);
-    return data.status;
+    const status = await response.json(); // status agora é diretamente a string "paid" ou "peding"
+
+    console.log("Status da transação", id, "é", status);
+    return status;
   } catch (err) {
     console.error("Error ao consulktar status: ", err.message);
     return null;

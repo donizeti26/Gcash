@@ -65,7 +65,7 @@ export async function initTransactionForm() {
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
       amountNumber = parseFloat(amountNumber);
       try {
-        const response = await fetch("/api/transactions/transactionsGet", {
+        const response = await fetch("/api/transactions/transactions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -179,6 +179,8 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
 export async function sumAtualMonthPaid(month, yearIndex) {
   month = month + 1;
   try {
+    console.log("Month no front:", month);
+    console.log("Year no front:", yearIndex);
     const response = await fetch(
       `/api/transactions/transactions/paid/${month}/${yearIndex}`
     );
