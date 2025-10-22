@@ -1,9 +1,9 @@
-const express = require("express");
-const {
-  getPaymentMethodsController,
-} = require("../controllers/paymentController");
+// src/routes/paymentRoutes.js
+import express from "express";
+import { getPaymentMethodsController } from "../controllers/paymentController.js";
+
 const router = express.Router();
 
 router.get("/paymentmethods", getPaymentMethodsController);
 
-module.exports = router;
+export default router;

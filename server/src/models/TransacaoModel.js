@@ -1,6 +1,6 @@
-const pool = require("../config/db");
+import pool from "../config/db.js";
 
-async function getTransactions() {
+export async function getTransactions() {
   const result = await pool.query(`
 SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
 t.transaction_id  AS transaction_id ,
@@ -19,7 +19,7 @@ AS c ON t.category_id = c.category_id
 INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id`);
   return result.rows;
 }
-async function registerTransactions({
+export async function registerTransactions({
   category_id,
   payment_method_id,
   due_date,
@@ -34,7 +34,7 @@ async function registerTransactions({
   return result.rows[0];
 }
 
-async function editTransactions({ transaction_id }) {
+export async function editTransactions({ transaction_id }) {
   const result = await pool.query(
     `
 SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
@@ -59,7 +59,7 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id whe
   return result.rows[0] || null;
 }
 
-async function updateStatus({ transaction_id, status }) {
+export async function updateStatus({ transaction_id, status }) {
   await pool.query(
     `
       UPDATE transactions
@@ -71,7 +71,7 @@ async function updateStatus({ transaction_id, status }) {
   return { message: "Status atualizado", newStatus: status };
 }
 
-async function consultStatus({ transaction_id }) {
+export async function consultStatus({ transaction_id }) {
   const result = await pool.query(
     `
       SELECT status FROM transactions  WHERE transaction_id = $1`,
@@ -82,7 +82,7 @@ async function consultStatus({ transaction_id }) {
   return result.rows[0]?.status || null;
 }
 
-async function sumTransactions({ month, year }) {
+export async function sumTransactions({ month, year }) {
   const result = await pool.query(
     "SELECT SUM(amount) AS total_month FROM transactions WHERE EXTRACT(MONTH FROM due_date)=$1 AND EXTRACT(YEAR FROM due_date) = $2",
     [month, year]
@@ -91,7 +91,7 @@ async function sumTransactions({ month, year }) {
   return { total: Number(result.rows[0]?.total) || 0 };
 }
 
-async function pendingTransactions({ month, year }) {
+export async function pendingTransactions({ month, year }) {
   const result = await pool.query(
     `SELECT SUM(amount) AS totaldevendo
 FROM transactions
@@ -105,7 +105,7 @@ EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2`,
   return { total: Number(result.rows[0]?.total) || 0 };
 }
 
-async function paidTransactions({ month, year }) {
+export async function paidTransactions({ month, year }) {
   const result = await pool.query(
     `SELECT SUM(amount) AS totalpago
 FROM transactions
@@ -118,14 +118,3 @@ EXTRACT(MONTH FROM due_date) = $1  AND EXTRACT(YEAR FROM due_date) = $2`,
 
   return { total: Number(result.rows[0]?.total) || 0 };
 }
-
-module.exports = {
-  getTransactions,
-  editTransactions,
-  updateStatus,
-  consultStatus,
-  sumTransactions,
-  pendingTransactions,
-  paidTransactions,
-  registerTransactions,
-};

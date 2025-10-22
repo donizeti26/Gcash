@@ -8,7 +8,7 @@ import {
   sumTransactionController,
   pendingTransactionsController,
   paidTransactionsController,
-} from "../controllers/transactionController";
+} from "../controllers/transactionController.js";
 
 const router = express.Router();
 

@@ -1,5 +1,3 @@
-import db from "../config/db";
-
 import {
   getTransactions,
   editTransactions,
@@ -9,9 +7,9 @@ import {
   pendingTransactions,
   paidTransactions,
   registerTransactions,
-} from "../models/TransacaoModel";
+} from "../models/TransacaoModel.js";
 
-async function getTransactionsController(req, res) {
+export async function getTransactionsController(req, res) {
   try {
     const data = await getTransactions();
     res.json(data);
@@ -21,7 +19,7 @@ async function getTransactionsController(req, res) {
   }
 }
 
-async function createTransactionController(req, res) {
+export async function createTransactionController(req, res) {
   try {
     const data = await registerTransactions(req.body);
     res.status(201).json(data);
@@ -55,7 +53,7 @@ export async function editTransactionsController(req, res) {
   }
 }
 
-async function updateStatusController(req, res) {
+export async function updateStatusController(req, res) {
   try {
     const { transaction_id } = req.params; // vem da URL
     const { status } = req.body; // vem do corpo
@@ -67,7 +65,7 @@ async function updateStatusController(req, res) {
   }
 }
 
-async function consultStatusController(req, res) {
+export async function consultStatusController(req, res) {
   try {
     const { transaction_id } = req.params;
     const data = await consultStatus(transaction_id);
@@ -78,7 +76,7 @@ async function consultStatusController(req, res) {
   }
 }
 
-async function sumTransactionController(req, res) {
+export async function sumTransactionController(req, res) {
   try {
     const { month, year } = req.params;
     const data = await sumTransactions(month, year);
@@ -89,7 +87,7 @@ async function sumTransactionController(req, res) {
   }
 }
 
-async function pendingTransactionsController(req, res) {
+export async function pendingTransactionsController(req, res) {
   try {
     const { month, year } = req.params;
     const data = await pendingTransactions(month, year);
@@ -100,7 +98,7 @@ async function pendingTransactionsController(req, res) {
   }
 }
 
-async function paidTransactionsController(req, res) {
+export async function paidTransactionsController(req, res) {
   try {
     const { month, year } = req.params;
     const data = await paidTransactions(month, year);
@@ -110,13 +108,3 @@ async function paidTransactionsController(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
-export default {
-  getTransactionsController,
-  createTransactionController,
-  editTransactionsController,
-  updateStatusController,
-  consultStatusController,
-  sumTransactionController,
-  pendingTransactionsController,
-  paidTransactionsController,
-};

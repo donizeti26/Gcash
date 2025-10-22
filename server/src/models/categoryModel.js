@@ -1,6 +1,6 @@
-const pool = require("../config/db");
+import pool from "../config/db.js";
 
-async function registerCatergory({
+export async function registerCatergory({
   name_categorie,
   color_selector,
   icon_selected,
@@ -13,26 +13,19 @@ async function registerCatergory({
   return result.rows[0];
 }
 
-async function getCategories() {
+export async function getCategories() {
   const result = await pool.query("SELECT * FROM categories");
   return result.rows;
 }
 
-async function getExpenseCategories() {
+export async function getExpenseCategories() {
   const result = await pool.query(
     "SELECT * FROM categories WHERE  type='expense'"
   );
   return result.rows;
 }
 
-async function getRevenueCategories() {
+export async function getRevenueCategories() {
   const result = await pool.query("SELECT * FROM categories");
   return result.rows;
 }
-
-module.exports = {
-  registerCatergory,
-  getCategories,
-  getExpenseCategories,
-  getRevenueCategories,
-};

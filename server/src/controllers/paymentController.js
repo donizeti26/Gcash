@@ -1,6 +1,6 @@
-const { getPaymentMethodsModel } = require("../models/paymentMethodModel");
+import getPaymentMethodsModel from "../models/paymentMethodModel";
 
-async function getPaymentMethodsController(req, res) {
+export async function getPaymentMethodsController(req, res) {
   try {
     const data = await getPaymentMethodsModel();
     res.status(200).json(data);
@@ -9,5 +9,3 @@ async function getPaymentMethodsController(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
-
-module.exports = { getPaymentMethodsController };

@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 
-import userRoutes from "./src/routes/userRoutes";
-import categoryRoutes from "./src/routes/categoryRoutes";
-import paymentRoutes from "./src/routes/paymentRoutes";
-import transactionRoutes from "./src/routes/transactionRoutes";
+import userRoutes from "./src/routes/userRoutes.js";
+import categoryRoutes from "./src/routes/categoryRoutes.js";
+import paymentRoutes from "./src/routes/paymentRoutes.js";
+import transactionRoutes from "./src/routes/transactionRoutes.js";
 
 const app = express();
 const port = 3000;

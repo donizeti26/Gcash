@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
   registerCatergoryController,
   getCategoriesController,
   getExpenseCategoriesController,
   getRevenueCategoriesController,
-} = require("../controllers/categoryController");
+} from "../controllers/categoryController";
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.get("/categories", getCategoriesController);
 router.get("/categoriesExpense", getExpenseCategoriesController);
 router.get("/categoriesRevenue", getRevenueCategoriesController);
 
-module.exports = router;
+export default router;

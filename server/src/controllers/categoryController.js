@@ -1,11 +1,11 @@
-const {
+import {
   registerCatergory,
   getCategories,
   getExpenseCategories,
   getRevenueCategories,
-} = require("../models/categoryModel");
+} from "../models/categoryModel.js";
 
-async function registerCatergoryController(req, res) {
+export async function registerCatergoryController(req, res) {
   const { name_categorie, color_selector, icon_selected, category_selected } =
     req.body;
   try {
@@ -22,7 +22,7 @@ async function registerCatergoryController(req, res) {
   }
 }
 
-async function getCategoriesController(req, res) {
+export async function getCategoriesController(req, res) {
   try {
     const categories = await getCategories();
     res.json(categories);
@@ -32,7 +32,7 @@ async function getCategoriesController(req, res) {
   }
 }
 
-async function getExpenseCategoriesController(req, res) {
+export async function getExpenseCategoriesController(req, res) {
   try {
     const categories = await getExpenseCategories();
     res.json(categories);
@@ -42,7 +42,7 @@ async function getExpenseCategoriesController(req, res) {
   }
 }
 
-async function getRevenueCategoriesController(req, res) {
+export async function getRevenueCategoriesController(req, res) {
   try {
     const categories = await getRevenueCategories();
     res.json(categories);
@@ -51,10 +51,3 @@ async function getRevenueCategoriesController(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
-
-module.exports = {
-  registerCatergoryController,
-  getCategoriesController,
-  getExpenseCategoriesController,
-  getRevenueCategoriesController,
-};
