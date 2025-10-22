@@ -33,6 +33,7 @@ async function registerTransactions({
   );
   return result.rows[0];
 }
+
 async function editTransactions({ transaction_id }) {
   const result = await pool.query(
     `
@@ -55,7 +56,7 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id whe
 
   console.log("ID recebido:", transaction_id); // 🧠 ADICIONE ISSO
   console.log("Resultado da query:", result.rows); // 🧠 ADICIONE ISSO
-  return result.rows;
+  return result.rows[0] || null;
 }
 
 async function updateStatus({ transaction_id, status }) {
@@ -78,7 +79,7 @@ async function consultStatus({ transaction_id }) {
   );
   console.log("ID da transação: ", transaction_id);
   console.log("Resultado da Query: ", result.rows);
-  return result.rows[0] || {};
+  return result.rows[0]?.status || null;
 }
 
 async function sumTransactions({ month, year }) {

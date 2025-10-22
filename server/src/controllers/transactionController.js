@@ -29,13 +29,26 @@ async function createTransactionController(req, res) {
   }
 }
 
-async function editTransactionsController(req, res) {
+export async function editTransactionsController(req, res) {
   try {
     const { transaction_id } = req.params;
-    const data = await editTransactions(transaction_id, req.body);
+
+    console.log("ID recebido no controller:", transaction_id);
+
+    if (!transaction_id) {
+      return res.status(400).json({ error: "ID da transação não informado" });
+    }
+
+    const data = await editTransactions(transaction_id);
+    console.log("Resultado da Query:", data);
+
+    if (!data) {
+      return res.status(404).json({ error: "Transação não encontrada" });
+    }
+
     res.status(200).json(data);
   } catch (err) {
-    console.error("Erro ao editar transação: ", err);
+    console.error("Erro ao editar transação:", err);
     res.status(500).json({ error: err.message });
   }
 }
