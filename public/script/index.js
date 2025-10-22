@@ -241,8 +241,13 @@ document.addEventListener("click", async (e) => {
       console.error("Erro ao buscar transação:", response.status);
       return;
     }
-    const data = await response.json();
-    console.log("Dados da transacao", data);
+    const transaction = await response.json();
+    console.log("Dados da transacao", transaction);
+    if (!transaction || !transaction.due_date) {
+      console.error("Transação inválida recebida:", transaction);
+      return;
+    }
+
     await loadCategoryForm();
     await loadPaymentMethods();
     await initExpensesForm();
