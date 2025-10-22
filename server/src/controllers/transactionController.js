@@ -79,7 +79,7 @@ export async function consultStatusController(req, res) {
 export async function sumTransactionController(req, res) {
   try {
     const { month, year } = req.params;
-    const data = await sumTransactions(month, year);
+    const data = await sumTransactions({ month, year });
     res.status(200).json(data);
   } catch (err) {
     console.error("Erro ao somar as transações: ", err);
@@ -90,7 +90,7 @@ export async function sumTransactionController(req, res) {
 export async function pendingTransactionsController(req, res) {
   try {
     const { month, year } = req.params;
-    const data = await pendingTransactions(month, year);
+    const data = await pendingTransactions({ month, year });
     res.status(200).json(data);
   } catch (err) {
     console.error("Erro ao somar as transações: ", err);
@@ -101,8 +101,9 @@ export async function pendingTransactionsController(req, res) {
 export async function paidTransactionsController(req, res) {
   try {
     const { month, year } = req.params;
-    const data = await paidTransactions(month, year);
-    res.status(200).json(data);
+    console.log("Mês e ano recebidos:", month, year);
+    const data = await paidTransactions({ month, year });
+    res.json(data);
   } catch (err) {
     console.error("Erro ao somar as transações: ", err);
     res.status(500).json({ error: err.message });

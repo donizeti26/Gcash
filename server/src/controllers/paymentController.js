@@ -1,4 +1,4 @@
-import getPaymentMethodsModel from "../models/paymentMethodModel";
+import { getPaymentMethodsModel } from "../models/paymentMethodModel.js";
 
 export async function getPaymentMethodsController(req, res) {
   try {

@@ -1,35 +1,42 @@
+// server.js
 import express from "express";
-import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
+import cors from "cors";
 
-import userRoutes from "./src/routes/userRoutes.js";
-import categoryRoutes from "./src/routes/categoryRoutes.js";
-import paymentRoutes from "./src/routes/paymentRoutes.js";
+// Importando rotas
 import transactionRoutes from "./src/routes/transactionRoutes.js";
+import categoryRoutes from "./src/routes/categoryRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import paymentRoutes from "./src/routes/paymentRoutes.js";
+
+// Criando __dirname no ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3000;
 
-// middlewares
-app.use(cors());
-app.use(express.json());
-//servir arquivos estatitucos da pasta public
+// Middlewares
+app.use(cors()); // se precisar de CORS
+app.use(express.json()); // para interpretar JSON do body
+app.use(express.urlencoded({ extended: true })); // interpretar form data
+
+// Static folder (arquivos públicos)
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-// Usa o arquivo de rotas
-app.use("/api/users", userRoutes);
-app.use("/api/categories", categoryRoutes);
-app.use("/api/paymentmethods", paymentRoutes);
+// Rotas
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/paymentmethods", paymentRoutes);
 
-app.use((req, res) => {
-  res.status(404).json({ error: "Rota não encontrada" });
+// Rota teste
+app.get("/", (req, res) => {
+  res.send("Servidor rodando corretamente!");
 });
 
-// Inicia o servidor
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });

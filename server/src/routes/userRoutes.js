@@ -1,5 +1,5 @@
 import express from "express";
-const { createUser } = require("../controllers/userController");
+import { createUser } from "../controllers/userController.js";
 const router = express.Router();
 
 router.post("/usuarios", createUser);
