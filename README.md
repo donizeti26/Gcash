@@ -8,7 +8,13 @@
 
 # 💰 Gcash - Gerenciador Financeiro Pessoal
 
-🎯 O Gcash foi criado para ajudar você a se organizar financeiramente, permitindo acompanhar todos os seus gastos e assim visualizar quanto você realmente gasta, mensalmente ou anualmente. Sua versão é para descktop e mobile. Comtém um desginer altamente simples priorizando a facilidade de acesso a informações e ferramentas pelo usuário
+<div align="center">
+<a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"> <img src="./docs/thumbnail.svg" width="900px"></a>
+</div>
+
+# Objetivo
+
+🎯 O Gcash foi criado para ajudar você a se organizar financeiramente, permitindo acompanhar todos os seus gastos e assim visualizar quanto você realmente gasta, mensalmente ou anualmente. Sua versão é para descktop e mobile. Contém um desginer altamente simples priorizando a facilidade de acesso a informações e ferramentas pelo usuário
 
 # Funcionalidades
 
@@ -36,7 +42,7 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
   - [x] Modais
 - [x] Implementar back-end
   - [x] Implementar Banco de dados
-    - [ ] 
+    - [ ]
   - [x] Implementar inserção e remoção de dados
     - [x] Inserir categorias
     - [x] Inserir transações
@@ -44,13 +50,11 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
     - [ ] Remover transações
     - [ ] Editar categorias
     - [ ] Editar transações
-      
-      
 - [ ] Publicar no **Vercel/GitHub Pages**
 - [ ] Documentação
   - [ ] Documentação de rotas
   - [ ] Diagrama de fluxo do banco
-  - [ ] Fluxo da aplicação 
+  - [ ] Fluxo da aplicação
   - [ ] Prototipação da aplicação
     - [ ] Sobre
     - [ ] Briefing
@@ -80,7 +84,7 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 │────── /assets **Ícones, imagens**
 |── Server **Servidor**
 
- │────── /node_modules
+│────── /node_modules
 
 │────── /src
 
