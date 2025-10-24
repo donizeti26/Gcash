@@ -6,6 +6,8 @@ import {
   loadCategoryForm,
   loadPaymentMethods,
   initExpensesForm,
+  sumAtualMonthPaid,
+  sumAtualMonthPeding,
 } from "./installments.js";
 
 // INICIALIÇÕES GLOBAIS
@@ -284,6 +286,8 @@ document.addEventListener("click", async (e) => {
   console.log("Mudando status da transação " + id);
 
   await SetStatusInTransations(id);
+  await sumAtualMonthPaid();
+  await sumAtualMonthPeding();
   await LoadExpenses();
 });
 
