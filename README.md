@@ -33,10 +33,40 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - [x] Estrutura inicial do projeto
   - [x] Página de Login
   - [x] Página Index
-  - [ ] Modais
-- [ ] Implementar back-end
-  - [ ] Implementar Banco de dados - [ ] Implementar inserção e remoção de dados
+  - [x] Modais
+- [x] Implementar back-end
+  - [x] Implementar Banco de dados
+    - [ ] 
+  - [x] Implementar inserção e remoção de dados
+    - [x] Inserir categorias
+    - [x] Inserir transações
+    - [ ] Remover categorias
+    - [ ] Remover transações
+    - [ ] Editar categorias
+    - [ ] Editar transações
+      
+      
 - [ ] Publicar no **Vercel/GitHub Pages**
+- [ ] Documentação
+  - [ ] Documentação de rotas
+  - [ ] Diagrama de fluxo do banco
+  - [ ] Fluxo da aplicação 
+  - [ ] Prototipação da aplicação
+    - [ ] Sobre
+    - [ ] Briefing
+    - [ ] Fluxo
+    - [ ] Orçamento
+    - [ ] Pesquisa
+      - [x] Concorrentes
+      - [ ] Painel Semântico
+      - [ ] Imagens
+    - [ ] Projeto
+      - [x] WireFrame
+      - [ ] Interfaces
+        - [ ] Web
+        - [ ] Mobile
+        - [ ] Style Guide
+      - [ ] Protótipo
 
 ## 📂 Estrutura Inicial do Projeto
 
@@ -49,5 +79,9 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 │────── /scripts **Scripts** (fetch, manipulação DOM)  
 │────── /assets **Ícones, imagens**
 |── Server **Servidor**
+
+ │────── /node_modules
+
+│────── /src
 
 ✍️ _Projeto autoral desenvolvido para aprendizado e portfólio._
