@@ -1,7 +1,8 @@
 import pool from "../config/db.js";
 
-export async function getTransactions() {
-  const result = await pool.query(`
+export async function getTransactions({ month, year }) {
+  const result = await pool.query(
+    `
 SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
 t.transaction_id  AS transaction_id ,
 c.name AS name,
@@ -16,7 +17,10 @@ from transactions AS t
 
 INNER JOIN categories
 AS c ON t.category_id = c.category_id
-INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id`);
+INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id
+  WHERE EXTRACT(MONTH FROM due_date) = $1 and  EXTRACT(YEAR FROM due_date) = $2`,
+    [month, year]
+  );
   return result.rows;
 }
 export async function registerTransactions({

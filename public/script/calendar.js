@@ -4,6 +4,7 @@ import {
   sumAtualMonthPeding,
 } from "./installments.js";
 
+import { LoadExpenses } from "./index.js";
 /*==========================
         Controlador de meses
 ===========================*/
@@ -56,8 +57,7 @@ export function setupCalendar() {
 
   // Atualiza mes na sidbar
   function showMonth() {
-    months.innerHTML =
-      " <h2> " + month[ContMonth] + "<br>" + ContYear + "</h2>";
+    months.innerHTML = ` <h2 data-id=${ContMonth} id="month_index" > ${month[ContMonth]}</h2><br><h2 data-id =${ContYear} id="year_index"> ${ContYear}</h2>`;
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
@@ -75,6 +75,7 @@ export function setupCalendar() {
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
+    LoadExpenses(ContMonth, ContYear);
     showMonth();
   });
   // Voltar (Back)
@@ -88,6 +89,7 @@ export function setupCalendar() {
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
+    LoadExpenses(ContMonth, ContYear);
 
     showMonth();
   });

@@ -115,9 +115,13 @@ if (btnReceita) {
 /////////////////////Carregar despesas na tela inicial.//////////////////
 //////////////////////////////////////////////////////////////////////////
 
-async function LoadExpenses() {
+export async function LoadExpenses(monthIndex, yearIndex) {
   try {
-    const response = await fetch("/api/transactions/transactionsGet");
+    const month = monthIndex + 1;
+    const year = yearIndex;
+    const response = await fetch(
+      `/api/transactions/transactionsGet/${month}/${year}`
+    );
     const transactions = await response.json();
 
     const group_cards = document.getElementById("group_cards");
@@ -224,7 +228,13 @@ async function LoadExpenses() {
     console.error("Erro ao carregar Transações no Index", err);
   }
 }
-LoadExpenses();
+
+const month = document.getElementById("month_index");
+const year = document.getElementById("year_index");
+const monthIndex = Number(month.dataset.id);
+const year_index = Number(year.dataset.id);
+
+LoadExpenses(monthIndex, year_index);
 
 /////////////////////////////////////////
 /////////EDITAR TRANSACOES///////////////////
@@ -286,9 +296,9 @@ document.addEventListener("click", async (e) => {
   console.log("Mudando status da transação " + id);
 
   await SetStatusInTransations(id);
-  await sumAtualMonthPaid();
-  await sumAtualMonthPeding();
-  await LoadExpenses();
+  await sumAtualMonthPaid(monthIndex, year_index);
+  await sumAtualMonthPeding(monthIndex, year_index);
+  await LoadExpenses(monthIndex, year_index);
 });
 
 ///////////////////////////////////////////////////////////

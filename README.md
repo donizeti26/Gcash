@@ -9,7 +9,7 @@
 # 💰 Gcash - Gerenciador Financeiro Pessoal
 
 <div align="center">
-<a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"> <img src="./docs/thumbnail.svg" width="900px"></a>
+<a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"><img src="./docs/thumbnail.svg" width="900px"></a>
 </div>
 
 # Objetivo
@@ -54,12 +54,11 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - [ ] Documentação
   - [ ] Documentação de rotas
   - [ ] Diagrama de fluxo do banco
-  - [ ] Fluxo da aplicação
   - [ ] Prototipação da aplicação
     - [ ] Sobre
     - [ ] Briefing
-    - [ ] Fluxo
-    - [ ] Orçamento
+    - [x] Fluxo
+    - [x] Orçamento
     - [ ] Pesquisa
       - [x] Concorrentes
       - [ ] Painel Semântico

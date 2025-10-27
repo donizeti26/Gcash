@@ -11,7 +11,8 @@ import {
 
 export async function getTransactionsController(req, res) {
   try {
-    const data = await getTransactions();
+    const { month, year } = req.params;
+    const data = await getTransactions({ month, year });
     res.json(data);
   } catch (err) {
     console.error("Erro ao buscar  transação");

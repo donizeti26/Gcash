@@ -13,7 +13,7 @@ import {
 const router = express.Router();
 
 // Rotas de transações
-router.get("/transactionsGet", getTransactionsController);
+router.get("/transactionsGet/:month/:year", getTransactionsController);
 router.post("/transactions", createTransactionController);
 router.get("/transactions/:transaction_id", editTransactionsController);
 router.patch("/transactions/:transaction_id/status", updateStatusController);
