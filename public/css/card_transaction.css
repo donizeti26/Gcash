@@ -74,7 +74,7 @@
   color: #cecece;
   background-color: #00c030;
   transition: all;
-  border: #ffd600;
+  border: 1px solid #00c030;
 
   transition-duration: 0.2s;
 }

@@ -9,7 +9,7 @@ import {
   sumAtualMonthPaid,
   sumAtualMonthPeding,
 } from "./installments.js";
-
+import { showLoading, hideLoading } from "./utils.js";
 // INICIALIÇÕES GLOBAIS
 /*
 setupUI();
@@ -22,6 +22,7 @@ setupModalGlobalListeners();
 ////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
   // BOTAO PARA ABRIR DESPESAS (E INICIALIZAR INSTALLMENTS)
+  showLoading();
   const btnDespesas = document.getElementById("despesas");
   if (btnDespesas) {
     btnDespesas.addEventListener("click", async () => {
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         event.target.value = "R$" + valor;
+        hideLoading();
       });
     });
   }
@@ -68,6 +70,7 @@ if (btnCategoria) {
 ////////////INICIAR FORM CATEGORIAS//////////////
 ////////////////////////////////////////////////////
 async function abrirCategorias() {
+  showLoading();
   await openModal("form_categories.html");
 
   const categoriesMod = await import("./categories.js").catch(() => ({}));
@@ -84,6 +87,7 @@ async function abrirCategorias() {
     });
 
     btnNewCategorie.dataset.listenerAdded = "true";
+    hideLoading();
   }
 }
 
@@ -115,12 +119,12 @@ if (btnReceita) {
 /////////////////////Carregar despesas na tela inicial.//////////////////
 //////////////////////////////////////////////////////////////////////////
 
-export async function LoadExpenses(monthIndex, yearIndex) {
+export async function LoadExpenses(monthIndex, year_index) {
+  const monthForApi = monthIndex + 1;
+  showLoading();
   try {
-    const month = monthIndex + 1;
-    const year = yearIndex;
     const response = await fetch(
-      `/api/transactions/transactionsGet/${month}/${year}`
+      `/api/transactions/transactionsGet/${monthForApi}/${year_index}`
     );
     const transactions = await response.json();
 
@@ -226,9 +230,10 @@ export async function LoadExpenses(monthIndex, yearIndex) {
     });
   } catch (err) {
     console.error("Erro ao carregar Transações no Index", err);
+  } finally {
+    hideLoading();
   }
 }
-
 const month = document.getElementById("month_index");
 const year = document.getElementById("year_index");
 const monthIndex = Number(month.dataset.id);
@@ -246,7 +251,7 @@ document.addEventListener("click", async (e) => {
 
   const id = button.dataset.id; // pegar direto do botão
   console.log("O botão clicado foi da transação", id);
-
+  showLoading();
   await openModal("edit_transactions.html");
 
   try {
@@ -268,6 +273,8 @@ document.addEventListener("click", async (e) => {
     carregarDadosEditarTransacao(transaction);
   } catch (err) {
     console.error("Erro ao buscar transacao", err);
+  } finally {
+    hideLoading();
   }
 });
 ////////////////////////////////////////////////////////
@@ -311,7 +318,7 @@ export async function SetStatusInTransations(id) {
     alert("Você cancelou a mudança de status.");
     return;
   }
-
+  showLoading();
   try {
     const status = await consultStatus(id);
     const newStatus = status === "paid" ? "peding" : "paid";
@@ -330,6 +337,8 @@ export async function SetStatusInTransations(id) {
     await LoadExpenses();
   } catch (err) {
     console.error("Erro ao atualizar status da transação" + err);
+  } finally {
+    hideLoading();
   }
 }
 

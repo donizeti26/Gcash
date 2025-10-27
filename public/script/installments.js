@@ -1,3 +1,5 @@
+import { LoadExpenses } from "./index.js";
+import { fecharModal } from "./modal.js";
 // agora o HTML já está dentro do modalContainer
 
 export function initExpensesForm() {
@@ -86,6 +88,15 @@ export async function initTransactionForm() {
         } else {
           alert("Erro: " + data.error);
         }
+
+        const month = document.getElementById("month_index");
+        const year = document.getElementById("year_index");
+        const monthIndex = Number(month.dataset.id);
+        const year_index = Number(year.dataset.id);
+
+        LoadExpenses(monthIndex, year_index);
+
+        fecharModal();
       } catch (err) {
         console.error("Erro no Front: ", err);
         alert("Erro ao enviar transação");

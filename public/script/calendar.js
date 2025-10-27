@@ -62,7 +62,7 @@ export function setupCalendar() {
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
 
-    console.log(month[ContMonth]);
+    console.log("TESTGE" + month[ContMonth]);
   }
   // Avançar (GO)
   GO.addEventListener("click", () => {
@@ -72,11 +72,11 @@ export function setupCalendar() {
       ContYear = ContYear + 1;
       console.log(ContYear);
     }
+    showMonth();
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
-    showMonth();
   });
   // Voltar (Back)
   BACK.addEventListener("click", () => {
@@ -86,12 +86,12 @@ export function setupCalendar() {
       ContYear = ContYear - 1;
       console.log(ContYear);
     }
+    showMonth();
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
-    LoadExpenses(ContMonth, ContYear);
 
-    showMonth();
+    LoadExpenses(ContMonth, ContYear);
   });
 
   // Mostra o primeiro mês ao carregar
