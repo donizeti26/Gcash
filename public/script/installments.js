@@ -1,5 +1,6 @@
 import { LoadExpenses } from "./index.js";
 import { fecharModal } from "./modal.js";
+import { showMonth } from "./calendar.js";
 // agora o HTML já está dentro do modalContainer
 
 export function initExpensesForm() {
@@ -89,17 +90,18 @@ export async function initTransactionForm() {
           alert("Erro: " + data.error);
         }
 
-        const month = document.getElementById("month_index");
-        const year = document.getElementById("year_index");
-        const monthIndex = Number(month.dataset.id);
-        const year_index = Number(year.dataset.id);
-
-        LoadExpenses(monthIndex, year_index);
-
         fecharModal();
       } catch (err) {
         console.error("Erro no Front: ", err);
         alert("Erro ao enviar transação");
+      } finally {
+        const month = document.getElementById("month_index");
+        const year = document.getElementById("year_index");
+        const monthIndex = Number(month.dataset.id);
+        const year_index = Number(year.dataset.id);
+        LoadExpenses(monthIndex, year_index);
+
+        showMonth();
       }
     });
   }
@@ -187,8 +189,8 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
   }
 }
 
-export async function sumAtualMonthPaid(month, yearIndex) {
-  month = month + 1;
+export async function sumAtualMonthPaid(monthIndex, yearIndex) {
+  const month = monthIndex + 1;
   try {
     console.log("Month no front:", month);
     console.log("Year no front:", yearIndex);
@@ -215,8 +217,8 @@ export async function sumAtualMonthPaid(month, yearIndex) {
   }
 }
 
-export async function sumAtualMonthPeding(month, yearIndex) {
-  month = month + 1;
+export async function sumAtualMonthPeding(monthIndex, yearIndex) {
+  const month = monthIndex + 1;
   try {
     const response = await fetch(
       `/api/transactions/transactions/pending/${month}/${yearIndex}`

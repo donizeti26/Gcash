@@ -1,6 +1,6 @@
 import { openModal, fecharModal, setupModalGlobalListeners } from "./modal.js";
 /*import { setupUI } from "./ui.js";*/
-import { setupCalendar } from "./calendar.js";
+import { setupCalendar, setAtualMonth } from "./calendar.js";
 import { carregarDadosEditarTransacao } from "./edit_transactions.js";
 import {
   loadCategoryForm,
@@ -10,6 +10,7 @@ import {
   sumAtualMonthPeding,
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
+
 // INICIALIÇÕES GLOBAIS
 /*
 setupUI();
@@ -37,8 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       installmentsMod.loadPaymentMethods?.();
       installmentsMod.initExpensesForm?.();
       installmentsMod.initCategoryForm?.();
-      setupCalendar?.();
-
+      setAtualMonth();
       const amount = document.getElementById("amount");
 
       amount.addEventListener("input", (event) => {
@@ -108,7 +108,6 @@ const btnReceita = document.getElementById("receita");
 if (btnReceita) {
   btnReceita.addEventListener("click", async () => {
     await openModal("form_revenue.html");
-    setupCalendar();
 
     const revenueMod = await import("./installments.js").catch(() => ({}));
     revenueMod.initExpensesForm?.();
@@ -120,6 +119,7 @@ if (btnReceita) {
 //////////////////////////////////////////////////////////////////////////
 
 export async function LoadExpenses(monthIndex, year_index) {
+  console.log("-LOADEXPENSES-");
   const monthForApi = monthIndex + 1;
   showLoading();
   try {
@@ -142,7 +142,7 @@ export async function LoadExpenses(monthIndex, year_index) {
         style: "currency",
         currency: "BRL",
       });
-
+      let statusTrasaction = cat.status == "paid" ? "Pago" : "Pendente";
       item.innerHTML = `
       <div class="title_date">
         <strong class="title_categorie">${cat.name}</strong>
@@ -167,7 +167,7 @@ export async function LoadExpenses(monthIndex, year_index) {
         <div>
           <p><strong>Parcela:</strong> 1/1</p>
           <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
-          <p><strong>Status: </strong>${cat.status}</p>
+          <p><strong>Status: </strong>${statusTrasaction}</p>
           <p> <strong>Descrição: </strong>${cat.description}
           </p>
         </div>

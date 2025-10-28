@@ -33,40 +33,13 @@ const anoAtual = dataAtual.getFullYear();
 let ContMonth = mesAtual; // começa em Janeiro
 let ContYear = anoAtual;
 export function setupCalendar() {
-  const inputDataExpenses = document.getElementById("due_date");
-  if (inputDataExpenses) {
-    inputDataExpenses.addEventListener(
-      "click",
-      () => {
-        console.log("testamdp");
-        inputDataExpenses.value = "";
-
-        const today = new Date();
-        const day = String(today.getDate()).padStart(2, "0");
-        const month = String(today.getMonth() + 1).padStart(2, "0");
-        const year = today.getFullYear();
-
-        const dateFormated = `${year}-${month}-${day}`;
-        inputDataExpenses.value = dateFormated;
-      },
-      {
-        once: true,
-      }
-    );
-  }
-
   // Atualiza mes na sidbar
-  function showMonth() {
-    months.innerHTML = ` <h2 data-id=${ContMonth} id="month_index" > ${month[ContMonth]}</h2><br><h2 data-id =${ContYear} id="year_index"> ${ContYear}</h2>`;
-    sumAmountMonth(ContMonth, ContYear);
-    sumAtualMonthPaid(ContMonth, ContYear);
-    sumAtualMonthPeding(ContMonth, ContYear);
+  setAtualMonth();
 
-    console.log("TESTGE" + month[ContMonth]);
-  }
   // Avançar (GO)
   GO.addEventListener("click", () => {
     ContMonth = ContMonth + 1;
+    console.log("AAAAAAAAAAAAvançando mês, índice atual:", ContMonth);
     if (ContMonth >= 12) {
       ContMonth = 0;
       ContYear = ContYear + 1;
@@ -81,6 +54,7 @@ export function setupCalendar() {
   // Voltar (Back)
   BACK.addEventListener("click", () => {
     ContMonth = ContMonth - 1;
+    console.log("AAAAAAAAAvançando mês, índice atual:", ContMonth);
     if (ContMonth < 0) {
       ContMonth = 11;
       ContYear = ContYear - 1;
@@ -96,4 +70,36 @@ export function setupCalendar() {
 
   // Mostra o primeiro mês ao carregar
   showMonth();
+}
+export function showMonth() {
+  months.innerHTML = ` <h2 data-id=${ContMonth} id="month_index" > ${month[ContMonth]}</h2><br><h2 data-id =${ContYear} id="year_index"> ${ContYear}</h2>`;
+  sumAmountMonth(ContMonth, ContYear);
+  sumAtualMonthPaid(ContMonth, ContYear);
+  sumAtualMonthPeding(ContMonth, ContYear);
+
+  console.log("TESTGE" + month[ContMonth]);
+}
+
+export function setAtualMonth() {
+  const inputDataExpenses = document.getElementById("due_date");
+  if (inputDataExpenses) {
+    inputDataExpenses.addEventListener(
+      "click",
+      () => {
+        console.log("%%%FYB%%%");
+        inputDataExpenses.value = "";
+
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, "0");
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const year = today.getFullYear();
+
+        const dateFormated = `${year}-${month}-${day}`;
+        inputDataExpenses.value = dateFormated;
+      },
+      {
+        once: true,
+      }
+    );
+  }
 }
