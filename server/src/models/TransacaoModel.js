@@ -98,7 +98,7 @@ export async function sumTransactions({ month, year }) {
 export async function pendingTransactions({ month, year }) {
   const query = `SELECT SUM(amount) AS total
 FROM transactions
-WHERE status = 'peding' AND
+WHERE status = 'pending' AND
 EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2`;
   const result = await pool.query(query, [month, year]);
   console.log("Resultado da Query (total pendente):", result.rows);

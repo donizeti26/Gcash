@@ -42,15 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const amount = document.getElementById("amount");
 
       amount.addEventListener("input", (event) => {
-        let valor = event.target.value;
-        valor = valor.replace(/\D/g, "");
-
-        valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
-
-        valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-        event.target.value = "R$" + valor;
-        hideLoading();
+        setFormatMoney(event);
       });
     });
   }
@@ -64,6 +56,18 @@ if (btnCategoria) {
     //ABRIR MODAL COM CATEGORIAS
     await abrirCategorias();
   });
+}
+
+async function setFormatMoney(event) {
+  let valor = event.target.value;
+  valor = valor.replace(/\D/g, "");
+
+  valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
+
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  event.target.value = "R$" + valor;
+  hideLoading();
 }
 
 /////////////////////////////////////////////////////
@@ -103,14 +107,23 @@ document.addEventListener("click", async (e) => {
   await abrirCategorias();
 });
 
-//BOTAO RECEITAS
+/////////////////////////////////////////////////////////
+////////////INICIAR FORM REVENUE//////////////
+////////////////////////////////////////////////////////
 const btnReceita = document.getElementById("receita");
 if (btnReceita) {
   btnReceita.addEventListener("click", async () => {
     await openModal("form_revenue.html");
 
+    const revenueForm = await import("./form_revenue.js").catch(() => ({}));
     const revenueMod = await import("./installments.js").catch(() => ({}));
     revenueMod.initExpensesForm?.();
+    revenueForm.loadCategoryFormRevenue?.();
+    revenueMod.loadPaymentMethods?.();
+    setAtualMonth();
+    amount.addEventListener("input", (event) => {
+      setFormatMoney(event);
+    });
   });
 }
 

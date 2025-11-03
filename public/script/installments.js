@@ -111,6 +111,8 @@ export async function initTransactionForm() {
 //////carregando dados de metodo de pagamento para form.///////////
 ////////////////////////////////////////////////////////////////////////////////
 
+//CARREGANDO METODOS DE PAGAMENTO
+
 export async function loadPaymentMethods() {
   try {
     const response = await fetch("/api/paymentmethods/paymentmethods");
@@ -136,6 +138,8 @@ export async function loadPaymentMethods() {
     console.error("Erro ao carregar metodos de pagamento", err);
   }
 }
+
+//CARREGANDO CATEGORIAS  DESPESAS
 
 export async function loadCategoryForm() {
   try {

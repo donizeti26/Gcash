@@ -26,6 +26,8 @@ export async function getExpenseCategories() {
 }
 
 export async function getRevenueCategories() {
-  const result = await pool.query("SELECT * FROM categories");
+  const result = await pool.query(
+    "SELECT * FROM categories  WHERE  type='revenue'"
+  );
   return result.rows;
 }
