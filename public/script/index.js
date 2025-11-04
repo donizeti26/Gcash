@@ -8,6 +8,7 @@ import {
   initExpensesForm,
   sumAtualMonthPaid,
   sumAtualMonthPeding,
+  sumAmountMonth,
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
 
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnDespesas.addEventListener("click", async () => {
       //ABRIR MODAL COM HTML DE DESPESAS
       //DEPOIS QUE O HTML É INJETADO, INICIALIZA A LÓGICA DAS PARCELAS
-      await openModal("form_expenses.html");
+      await openModal("../views/form_expenses.html");
       const installmentsMod = await import("./installments.js").catch(
         () => ({})
       );
@@ -75,7 +76,7 @@ async function setFormatMoney(event) {
 ////////////////////////////////////////////////////
 async function abrirCategorias() {
   showLoading();
-  await openModal("form_categories.html");
+  await openModal("../views/form_categories.html");
 
   const categoriesMod = await import("./form_expenses.js").catch(() => ({}));
   categoriesMod.loadCategories?.();
@@ -96,7 +97,7 @@ async function abrirCategorias() {
 }
 
 async function abrirNovaCategoria(categoriesMod) {
-  await openModal("new_categorie.html");
+  await openModal("../views/new_categorie.html");
   categoriesMod.sendCategoryNewCategory?.();
 }
 
@@ -113,7 +114,7 @@ document.addEventListener("click", async (e) => {
 const btnReceita = document.getElementById("receita");
 if (btnReceita) {
   btnReceita.addEventListener("click", async () => {
-    await openModal("form_revenue.html");
+    await openModal("../views/form_revenue.html");
 
     const revenueForm = await import("./form_revenue.js").catch(() => ({}));
     const revenueMod = await import("./installments.js").catch(() => ({}));
@@ -277,7 +278,7 @@ document.addEventListener("click", async (e) => {
   const id = button.dataset.id; // pegar direto do botão
   console.log("O botão clicado foi da transação", id);
   showLoading();
-  await openModal("edit_transactions.html");
+  await openModal("../views/edit_transactions.html");
 
   try {
     const response = await fetch(`/api/transactions/transactions/${id}`);
@@ -302,18 +303,7 @@ document.addEventListener("click", async (e) => {
     hideLoading();
   }
 });
-////////////////////////////////////////////////////////
-/////////PAGAR TRANSACOES//////////////////////
-////////////////////////////////////////////////////////
 
-document.addEventListener("click", async (e) => {
-  const button = e.target.closest(".button_remove");
-  if (!button) return;
-
-  const indexCard = button.closest(".index_card");
-  const id = indexCard.dataset.id;
-  console.log("O botão clicado foi da transanção AAAAS", id);
-});
 ////////////////////////////////////////////////////////////////////
 /////////ALTERAR STATUS TRANSACOES//////////////////////
 /////////////////////////////////////////////////////////////////
@@ -328,6 +318,7 @@ document.addEventListener("click", async (e) => {
   console.log("Mudando status da transação " + id);
 
   await SetStatusInTransations(id);
+  await sumAmountMonth(monthIndex, year_index);
   await sumAtualMonthPaid(monthIndex, year_index);
   await sumAtualMonthPeding(monthIndex, year_index);
   await LoadExpenses(monthIndex, year_index);
@@ -388,6 +379,28 @@ document.addEventListener("click", async (e) => {
   const button = e.target.closest(".button_remove");
   if (!button) return;
 
+  const ConfirmStatus = confirm("Você quer realmente apagar essa transação?");
+
+  if (!ConfirmStatus) {
+    alert("Você cancelou a operação.");
+    return;
+  }
   const id = button.dataset.id; // pegar direto do botão
   console.log("O botão clicado foi da transação", id);
+
+  try {
+    const response = await fetch(`api/transactions/${id}`, {
+      method: "DELETE",
+    });
+
+    const data = await response.json();
+    console.log(data.message);
+    await SetStatusInTransations(id);
+    await sumAmountMonth(monthIndex, year_index);
+    await sumAtualMonthPaid(monthIndex, year_index);
+    await sumAtualMonthPeding(monthIndex, year_index);
+    await LoadExpenses(monthIndex, year_index);
+  } catch (err) {
+    console.error("Erro ao apagar: ", err);
+  }
 });
