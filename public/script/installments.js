@@ -195,6 +195,33 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
   }
 }
 
+//////////////////////////////////////////
+/////////////receita  DO MES///////////
+//////////////////////////////////////////
+export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
+  const month = monthIndex + 1;
+  try {
+    const response = await fetch(
+      `/api/transactions/transactions/sum/revenue/${month}/${yearIndex}`
+    );
+    const transactionsSum = await response.json();
+
+    const total_month = document.getElementById("month_revenue");
+
+    if (total_month) {
+      const total = Number(transactionsSum.total) || 0;
+      const convertAmount = Number(total).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      total_month.textContent = `${convertAmount}`;
+      console.log(`Total gastos no mes de ${monthIndex}: `, total);
+    }
+  } catch (err) {
+    console.error("Erro ao carregar total transacoes front", err);
+  }
+}
+
 export async function sumAtualMonthPaid(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {

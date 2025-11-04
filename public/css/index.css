@@ -23,7 +23,7 @@ button,
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 #pay,
 #no_pay,
@@ -52,7 +52,6 @@ button,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 0rem;
 }
 
 #atual_month p {
@@ -131,8 +130,7 @@ button,
 }
 
 #button_option {
-  bottom: 10px;
-  right: 23px;
+  padding-top: 1rem;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -315,13 +313,13 @@ CSS LOADING
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 80%;
   }
   #logo {
     content: url(../assets/logo.svg);
     display: flex;
-    width: 16rem;
+    width: 10rem;
   }
 
   #button_option {
@@ -339,17 +337,16 @@ CSS LOADING
   }
 
   #group_pay,
-  #month_value {
-    font-size: 1.3rem;
+  #month_value,
+  #revenue {
+    font-size: 1rem;
     text-align: center;
   }
   #month {
     font-size: 1.1rem;
     text-align: center;
   }
-  #group_cards {
-    padding-right: 2rem;
-  }
+
   #opcoes ul {
     display: flex;
     flex-direction: column;
@@ -378,5 +375,23 @@ CSS LOADING
   p,
   a {
     font-size: 16px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  #aside_menu {
+    gap: 1.5rem;
+  }
+  #atual_month {
+    padding-bottom: 4rem;
+  }
+
+  #group_pay,
+  #month_value,
+  #revenue {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  #logo {
+    width: 16rem;
   }
 }

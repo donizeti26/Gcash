@@ -8,6 +8,7 @@ import {
   initExpensesForm,
   sumAtualMonthPaid,
   sumAtualMonthPeding,
+  sumAmountMonthRevenue,
   sumAmountMonth,
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
@@ -320,6 +321,7 @@ document.addEventListener("click", async (e) => {
   await SetStatusInTransations(id);
   await sumAmountMonth(monthIndex, year_index);
   await sumAtualMonthPaid(monthIndex, year_index);
+  await sumAmountMonthRevenue(monthIndex, year_index);
   await sumAtualMonthPeding(monthIndex, year_index);
   await LoadExpenses(monthIndex, year_index);
 });
@@ -398,6 +400,7 @@ document.addEventListener("click", async (e) => {
     await SetStatusInTransations(id);
     await sumAmountMonth(monthIndex, year_index);
     await sumAtualMonthPaid(monthIndex, year_index);
+    await sumAmountMonthRevenue(monthIndex, year_index);
     await sumAtualMonthPeding(monthIndex, year_index);
     await LoadExpenses(monthIndex, year_index);
   } catch (err) {

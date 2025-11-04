@@ -4,9 +4,11 @@ import {
   updateStatus,
   consultStatus,
   sumTransactions,
+  sumTransactionsRevenue,
   pendingTransactions,
   paidTransactions,
   registerTransactions,
+  deleteTransactions,
 } from "../models/TransacaoModel.js";
 
 export async function getTransactionsController(req, res) {
@@ -107,6 +109,32 @@ export async function paidTransactionsController(req, res) {
     res.json(data);
   } catch (err) {
     console.error("Erro ao somar as transações: ", err);
+    res.status(500).json({ error: err.message });
+  }
+}
+
+export async function deleteTransactionsController(req, res) {
+  try {
+    const { transaction_id } = req.params;
+    const deletedCount = await deleteTransactions(transaction_id);
+    if (deletedCount === 0) {
+      return res.status(404).json({ message: "Transação não encontrada." });
+    }
+
+    res.json({ message: "Transação apagada com sucesso!" });
+  } catch (err) {
+    console.error("Erro ao apagar transação: ", err);
+    res.status(500).json({ error: err.message });
+  }
+}
+
+export async function sumTransactionRevenueController(req, res) {
+  try {
+    const { month, year } = req.params;
+    const data = await sumTransactionsRevenue({ month, year });
+    res.status(200).json(data);
+  } catch (err) {
+    console.error("Erro ao somar as Receitas : ", err);
     res.status(500).json({ error: err.message });
   }
 }

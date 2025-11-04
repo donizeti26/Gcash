@@ -6,8 +6,10 @@ import {
   updateStatusController,
   consultStatusController,
   sumTransactionController,
+  sumTransactionRevenueController,
   pendingTransactionsController,
   paidTransactionsController,
+  deleteTransactionsController,
 } from "../controllers/transactionController.js";
 
 const router = express.Router();
@@ -19,7 +21,13 @@ router.get("/transactions/:transaction_id", editTransactionsController);
 router.patch("/transactions/:transaction_id/status", updateStatusController);
 router.get("/transactions/:transaction_id/status", consultStatusController);
 router.get("/transactions/sum/:month/:year", sumTransactionController);
+router.get(
+  "/transactions/sum/revenue/:month/:year",
+  sumTransactionRevenueController
+);
+
 router.get("/transactions/pending/:month/:year", pendingTransactionsController);
 router.get("/transactions/paid/:month/:year", paidTransactionsController);
+router.delete("/:transaction_id", deleteTransactionsController);
 
 export default router;

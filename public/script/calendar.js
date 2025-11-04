@@ -2,6 +2,7 @@ import {
   sumAmountMonth,
   sumAtualMonthPaid,
   sumAtualMonthPeding,
+  sumAmountMonthRevenue,
 } from "./installments.js";
 
 import { LoadExpenses } from "./index.js";
@@ -47,6 +48,7 @@ export function setupCalendar() {
     }
     showMonth();
     sumAmountMonth(ContMonth, ContYear);
+    sumAmountMonthRevenue(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
@@ -64,7 +66,7 @@ export function setupCalendar() {
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
     sumAtualMonthPeding(ContMonth, ContYear);
-
+    sumAmountMonthRevenue(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
   });
 
@@ -76,6 +78,7 @@ export function showMonth() {
   sumAmountMonth(ContMonth, ContYear);
   sumAtualMonthPaid(ContMonth, ContYear);
   sumAtualMonthPeding(ContMonth, ContYear);
+  sumAmountMonthRevenue(ContMonth, ContYear);
 
   console.log("TESTGE" + month[ContMonth]);
 }
