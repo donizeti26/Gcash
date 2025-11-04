@@ -307,6 +307,10 @@ CSS LOADING
     display: flex;
     justify-content: space-between;
   }
+  #group_total {
+    display: flex;
+    justify-content: space-between;
+  }
   #aside_menu {
     display: flex;
     flex-direction: column;

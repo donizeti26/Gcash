@@ -61,9 +61,11 @@ export async function initTransactionForm() {
       const due_date = document.getElementById("due_date").value;
       const amount = document.getElementById("amount").value;
       const description = document.getElementById("description").value;
-      const status = document.querySelector(
+
+      const statusElement = document.querySelector(
         'input[name="response_status"]:checked'
-      ).value;
+      );
+      const status = statusElement?.value || null;
 
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
       amountNumber = parseFloat(amountNumber);

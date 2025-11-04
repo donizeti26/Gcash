@@ -32,7 +32,7 @@ app.use("/api/paymentmethods", paymentRoutes);
 
 // Rota teste
 app.get("/", (req, res) => {
-  res.send("Servidor rodando corretamente!");
+  res.sendFile(path.join(__dirname, "../public/views/index.html"));
 });
 
 // Start server

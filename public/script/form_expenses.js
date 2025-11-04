@@ -1,4 +1,4 @@
-export function initCategoryForm() {
+export function sendCategoryNewCategory() {
   const formNewCategorie = document.getElementById("form_new_categorie");
 
   if (formNewCategorie) {

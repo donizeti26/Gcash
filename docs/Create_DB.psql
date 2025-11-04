@@ -44,7 +44,7 @@ CREATE TABLE transactions(
 	due_date TIMESTAMPTZ NOT NULL,
 	amount NUMERIC(10,2) NOT NULL,
 	description TEXT NOT NULL,
-	status transaction_status NOT NULL,
+	status transaction_status ,
 	created_at TIMESTAMPTZ DEFAULT NOW(),
 	update_at TIMESTAMPTZ DEFAULT NOW()
 );

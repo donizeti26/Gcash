@@ -126,6 +126,9 @@
 .circle_peding {
   background-color: #e2a601;
 }
+.circle_revenue {
+  background-color: #005eff;
+}
 
 .card_text {
   grid-area: card_text;

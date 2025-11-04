@@ -77,7 +77,7 @@ async function abrirCategorias() {
   showLoading();
   await openModal("form_categories.html");
 
-  const categoriesMod = await import("./categories.js").catch(() => ({}));
+  const categoriesMod = await import("./form_expenses.js").catch(() => ({}));
   categoriesMod.loadCategories?.();
 
   const iconsMod = await import("./icons.js").catch(() => ({}));
@@ -97,7 +97,7 @@ async function abrirCategorias() {
 
 async function abrirNovaCategoria(categoriesMod) {
   await openModal("new_categorie.html");
-  categoriesMod.initCategoryForm?.();
+  categoriesMod.sendCategoryNewCategory?.();
 }
 
 document.addEventListener("click", async (e) => {
@@ -117,6 +117,7 @@ if (btnReceita) {
 
     const revenueForm = await import("./form_revenue.js").catch(() => ({}));
     const revenueMod = await import("./installments.js").catch(() => ({}));
+    revenueMod.initTransactionForm?.();
     revenueMod.initExpensesForm?.();
     revenueForm.loadCategoryFormRevenue?.();
     revenueMod.loadPaymentMethods?.();
@@ -155,7 +156,15 @@ export async function LoadExpenses(monthIndex, year_index) {
         style: "currency",
         currency: "BRL",
       });
-      let statusTrasaction = cat.status == "paid" ? "Pago" : "Pendente";
+      let statusTrasaction;
+      if (cat.status == "paid") {
+        statusTrasaction = "Pago";
+      } else if (cat.status == "pending") {
+        statusTrasaction = "Pendente";
+      } else {
+        statusTrasaction = "Receita";
+      }
+
       item.innerHTML = `
       <div class="title_date">
         <strong class="title_categorie">${cat.name}</strong>
@@ -234,9 +243,12 @@ export async function LoadExpenses(monthIndex, year_index) {
       }
       if (circle && cat.status === "paid") {
         circle.classList.add("circle_paid");
-      } else if (circle && cat.status === "peding") {
+      } else if (circle && cat.status === "pending") {
         circle.classList.add("circle_peding");
+      } else {
+        circle.classList.add("circle_revenue");
       }
+
       if (group_cards) {
         group_cards.appendChild(item);
       }
@@ -334,7 +346,7 @@ export async function SetStatusInTransations(id) {
   showLoading();
   try {
     const status = await consultStatus(id);
-    const newStatus = status === "paid" ? "peding" : "paid";
+    const newStatus = status === "paid" ? "pending" : "paid";
 
     const response = await fetch(
       `/api/transactions/transactions/${id}/status`,
@@ -367,3 +379,15 @@ export async function consultStatus(id) {
     return null;
   }
 }
+
+////////////////////////////////////////////////////////
+/////////APAGAR TRANSACOES///////////////////
+///////////////////////////////////////////////////
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".button_remove");
+  if (!button) return;
+
+  const id = button.dataset.id; // pegar direto do botão
+  console.log("O botão clicado foi da transação", id);
+});
