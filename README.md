@@ -87,12 +87,13 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 │────── 📁views **HTML**
 
 |── 📁Server **Servidor**
-│────── 📁node_modules
-│────── 📁src
-│──────── 📁config **Tela inicial**  
-│──────── 📁controllers**Tela inicial**  
-│──────── 📁 models **Tela inicial**  
-│──────── 📁 routes **Tela inicial**  
-│──────── 📁 services **Tela inicial**
+
+│────── 📁node_modules **Node**
+│────── 📁src **Código-fonte do projeto**
+│──────── 📁config **Conexão com Banco**  
+│──────── 📁controllers**Controladores**  
+│──────── 📁 models **Lógica relacionada ao armazenamento**  
+│──────── 📁 routes **Rotas**  
+│──────── 📁 services **Lógica de negócio**
 
 ✍️ _Projeto autoral desenvolvido para aprendizado e portfólio._
