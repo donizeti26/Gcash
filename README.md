@@ -88,8 +88,8 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 
 |── 📁Server **Servidor**
 
-│────── 📁node_modules **Node**
-│────── 📁src **Código-fonte do projeto**
+│────── 📁node_modules **Node**  
+│────── 📁src **Código-fonte do projeto**  
 │──────── 📁config **Conexão com Banco**  
 │──────── 📁controllers**Controladores**  
 │──────── 📁 models **Lógica relacionada ao armazenamento**  
