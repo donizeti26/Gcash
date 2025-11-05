@@ -83,7 +83,7 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 │──📁Public **Arquivos**  
 │──────📁css **Estilos**  
 │────── 📁scripts **Scripts** (fetch, manipulação DOM)  
-│────── 📁assets **Ícones, imagens**
+│────── 📁assets **Ícones, imagens**  
 │────── 📁views **HTML**
 
 |── 📁Server **Servidor**
