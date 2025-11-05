@@ -1,6 +1,8 @@
 <div align="center">
-<img src="https://portalpadrao.ufma.br/dted/imagens/construcao.png/@@images/image.png" width="300px" >
+<img src="./docs/construction.png" width="100%" >
 </div>
+<br>
+<br>
 
 **🚧 Projeto em desenvolvimento - Aplicação web para gerenciamento de finanças pessoais.**
 
