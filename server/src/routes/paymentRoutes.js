@@ -1,9 +1,13 @@
 // src/routes/paymentRoutes.js
 import express from "express";
-import { getPaymentMethodsController } from "../controllers/paymentController.js";
+import {
+  getPaymentMethodsExpensesController,
+  getPaymentMethodsRevenueController,
+} from "../controllers/paymentController.js";
 
 const router = express.Router();
 
-router.get("/paymentmethods", getPaymentMethodsController);
+router.get("/paymentmethods/expense", getPaymentMethodsExpensesController);
+router.get("/paymentmethods/revenue", getPaymentMethodsRevenueController);
 
 export default router;

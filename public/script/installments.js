@@ -113,11 +113,39 @@ export async function initTransactionForm() {
 //////carregando dados de metodo de pagamento para form.///////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//CARREGANDO METODOS DE PAGAMENTO
+//CARREGANDO METODOS DE PAGAMENTO REVENUE
 
-export async function loadPaymentMethods() {
+export async function loadPaymentMethodsRevenue() {
   try {
-    const response = await fetch("/api/paymentmethods/paymentmethods");
+    const response = await fetch("/api/paymentmethods/paymentmethods/revenue");
+    const paymentmethods = await response.json();
+
+    const selectPayment = document.getElementById("payment_method_id");
+
+    if (selectPayment) {
+      selectPayment.innerHTML = `<option value="" disabled="" selected="">Selecionar</option>`;
+    }
+
+    paymentmethods.forEach((cat) => {
+      const item = document.createElement("option");
+
+      item.value = cat.payment_method_id; // ou cat.id (depende do nome da coluna no banco)
+      item.textContent = cat.name; // certifique-se do nome correto da coluna
+
+      if (selectPayment) {
+        selectPayment.appendChild(item);
+      }
+    });
+  } catch (err) {
+    console.error("Erro ao carregar metodos de pagamento", err);
+  }
+}
+
+//CARREGANDO METODOS DE PAGAMENTO REVENUE
+
+export async function loadPaymentMethodsExpense() {
+  try {
+    const response = await fetch("/api/paymentmethods/paymentmethods/expense");
     const paymentmethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");

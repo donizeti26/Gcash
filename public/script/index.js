@@ -4,7 +4,8 @@ import { setupCalendar, setAtualMonth } from "./calendar.js";
 import { carregarDadosEditarTransacao } from "./edit_transactions.js";
 import {
   loadCategoryForm,
-  loadPaymentMethods,
+  loadPaymentMethodsRevenue,
+  loadPaymentMethodsExpense,
   initExpensesForm,
   sumAtualMonthPaid,
   sumAtualMonthPeding,
@@ -12,7 +13,7 @@ import {
   sumAmountMonth,
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
-
+import { setupTransactionForm } from "./form_transactions.js";
 // INICIALIÇÕES GLOBAIS
 /*
 setupUI();
@@ -31,16 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
     btnDespesas.addEventListener("click", async () => {
       //ABRIR MODAL COM HTML DE DESPESAS
       //DEPOIS QUE O HTML É INJETADO, INICIALIZA A LÓGICA DAS PARCELAS
-      await openModal("../views/form_expenses.html");
+      await openModal("../views/form_transactions.html");
       const installmentsMod = await import("./installments.js").catch(
         () => ({})
       );
+      const modal = document.querySelector("#new_modal_js");
+      modal.dataset.formType = "expense";
+
       installmentsMod.initTransactionForm?.();
       installmentsMod.loadCategoryForm?.();
-      installmentsMod.loadPaymentMethods?.();
+      installmentsMod.loadPaymentMethodsExpense?.();
       installmentsMod.initExpensesForm?.();
       installmentsMod.initCategoryForm?.();
       setAtualMonth();
+      setupTransactionForm();
+
       const amount = document.getElementById("amount");
 
       amount.addEventListener("input", (event) => {
@@ -72,9 +78,82 @@ async function setFormatMoney(event) {
   hideLoading();
 }
 
-/////////////////////////////////////////////////////
-////////////INICIAR FORM CATEGORIAS//////////////
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+////////////INICIAR FORM REVENUE//////////////
+////////////////////////////////////////////////////////
+const btnReceita = document.getElementById("receita");
+if (btnReceita) {
+  btnReceita.addEventListener("click", async () => {
+    await openModal("../views/form_transactions.html");
+    //definindo que é um formuilário de receitas
+    const modal = document.querySelector("#new_modal_js");
+    modal.dataset.formType = "revenue";
+
+    const revenueForm = await import("./form_revenue.js").catch(() => ({}));
+    const revenueMod = await import("./installments.js").catch(() => ({}));
+    setupTransactionForm();
+
+    //carregando
+    revenueMod.initTransactionForm?.();
+    revenueMod.initExpensesForm?.();
+    revenueForm.loadCategoryFormRevenue?.();
+    revenueMod.loadPaymentMethodsRevenue?.();
+    installmentsMod.loadPaymentMethodsExpense?.();
+
+    setAtualMonth();
+
+    amount.addEventListener("input", (event) => {
+      setFormatMoney(event);
+    });
+  });
+}
+
+///////////////////////////////////////////////////////////////
+/////////FORM EDITAR TRANSACOES///////////////////
+///////////////////////////////////////////////////////////////
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".edit_transaction");
+  if (!button) return;
+
+  const id = button.dataset.id; // pegar direto do botão
+  console.log("O botão clicado foi da transação", id);
+  showLoading();
+  await openModal("../views/form_transactions.html");
+  //definindo que é um formuilário de receitas
+  const modal = document.querySelector("#new_modal_js");
+  modal.dataset.formType = "edit_expense";
+
+  try {
+    const response = await fetch(`/api/transactions/transactions/${id}`);
+    if (!response.ok) {
+      console.error("Erro ao buscar transação:", response.status);
+      return;
+    }
+    const transaction = await response.json();
+    console.log("Dados da transacao", transaction);
+    if (!transaction || !transaction.due_date) {
+      console.error("Transação inválida recebida:", transaction);
+      return;
+    }
+
+    await loadCategoryForm();
+    await loadPaymentMethodsRevenue();
+    await loadPaymentMethodsExpense?.();
+
+    await initExpensesForm();
+    carregarDadosEditarTransacao(transaction);
+    setupTransactionForm();
+  } catch (err) {
+    console.error("Erro ao buscar transacao", err);
+  } finally {
+    hideLoading();
+  }
+});
+
+///////////////////////////////////////////////////////////////
+////////////INICIAR LISTA DE CATEGORIAS//////////////
+/////////////////////////////////////////////////////////
 async function abrirCategorias() {
   showLoading();
   await openModal("../views/form_categories.html");
@@ -108,27 +187,6 @@ document.addEventListener("click", async (e) => {
   fecharModal();
   await abrirCategorias();
 });
-
-/////////////////////////////////////////////////////////
-////////////INICIAR FORM REVENUE//////////////
-////////////////////////////////////////////////////////
-const btnReceita = document.getElementById("receita");
-if (btnReceita) {
-  btnReceita.addEventListener("click", async () => {
-    await openModal("../views/form_revenue.html");
-
-    const revenueForm = await import("./form_revenue.js").catch(() => ({}));
-    const revenueMod = await import("./installments.js").catch(() => ({}));
-    revenueMod.initTransactionForm?.();
-    revenueMod.initExpensesForm?.();
-    revenueForm.loadCategoryFormRevenue?.();
-    revenueMod.loadPaymentMethods?.();
-    setAtualMonth();
-    amount.addEventListener("input", (event) => {
-      setFormatMoney(event);
-    });
-  });
-}
 
 ////////////////////////////////////////////////////////////////////////////
 /////////////////////Carregar despesas na tela inicial.//////////////////
@@ -267,43 +325,6 @@ const monthIndex = Number(month.dataset.id);
 const year_index = Number(year.dataset.id);
 
 LoadExpenses(monthIndex, year_index);
-
-/////////////////////////////////////////
-/////////EDITAR TRANSACOES///////////////////
-/////////////////////////////////////////
-
-document.addEventListener("click", async (e) => {
-  const button = e.target.closest(".edit_transaction");
-  if (!button) return;
-
-  const id = button.dataset.id; // pegar direto do botão
-  console.log("O botão clicado foi da transação", id);
-  showLoading();
-  await openModal("../views/edit_transactions.html");
-
-  try {
-    const response = await fetch(`/api/transactions/transactions/${id}`);
-    if (!response.ok) {
-      console.error("Erro ao buscar transação:", response.status);
-      return;
-    }
-    const transaction = await response.json();
-    console.log("Dados da transacao", transaction);
-    if (!transaction || !transaction.due_date) {
-      console.error("Transação inválida recebida:", transaction);
-      return;
-    }
-
-    await loadCategoryForm();
-    await loadPaymentMethods();
-    await initExpensesForm();
-    carregarDadosEditarTransacao(transaction);
-  } catch (err) {
-    console.error("Erro ao buscar transacao", err);
-  } finally {
-    hideLoading();
-  }
-});
 
 ////////////////////////////////////////////////////////////////////
 /////////ALTERAR STATUS TRANSACOES//////////////////////
