@@ -24,7 +24,7 @@ Resumo mensal dos gastos, destacando total gasto e total pago.
 Facilita o planejamento financeiro e o controle do orçamento futuro.
 Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte dos recursos são encontrados facilmente na pagina inicial.
 
-## 🛠️ Tecnologias e Ferramentas usadas
+# 🛠️ Tecnologias e Ferramentas usadas
 
 - HTML5
 - CSS3
@@ -34,7 +34,7 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - Draw io
 - [Material Symbols (Google Icons)](https://fonts.google.com/icons)
 
-## 📌 Roadmap
+# 📌 Roadmap
 
 - [x] Implementar Front-end
 - [x] Estrutura inicial do projeto
@@ -76,9 +76,9 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
         - [ ] Style Guide
       - [ ] Protótipo
 
-## 📂 Estrutura Inicial do Projeto
+# 📂 Estrutura Inicial do Projeto
 
-📁Gcash
+📁Gcash  
 |── 📁Docs **Documentação**  
 │──📁Public **Arquivos**  
 │──────📁css **Estilos**  
