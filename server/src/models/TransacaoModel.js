@@ -102,9 +102,11 @@ AND EXTRACT(YEAR FROM due_date) = $2 and c.type = 'expense'`;
 
 export async function pendingTransactions({ month, year }) {
   const query = `SELECT SUM(amount) AS total
-FROM transactions
+FROM transactions as t
+inner join categories as c on
+ t.category_id = c.category_id
 WHERE status = 'pending' AND
-EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2`;
+EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense'`;
   const result = await pool.query(query, [month, year]);
   console.log("Resultado da Query (total pendente):", result.rows);
 
@@ -115,10 +117,11 @@ EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2`;
 
 export async function paidTransactions({ month, year }) {
   const query = `SELECT SUM(amount) AS total
-FROM transactions
+FROM transactions as t
+inner join categories as c on
+ t.category_id = c.category_id
 WHERE status = 'paid' AND
-EXTRACT(MONTH FROM due_date) = $1 
- AND EXTRACT(YEAR FROM due_date) = $2`;
+EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense'`;
 
   console.log(">>> DEBUG pendingTransactions");
   console.log("Mês recebido:", month, "Tipo:", typeof month);

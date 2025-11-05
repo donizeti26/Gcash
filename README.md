@@ -9,14 +9,14 @@
 # 💰 Gcash - Gerenciador Financeiro Pessoal
 
 <div align="center">
-<a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"><img src="./docs/thumbnail.svg" width="900px"></a>
+<a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"><img src="https://raw.githubusercontent.com/donizeti26/Gcash/2c2b5f364764424f766b0db0adf1593e9f080224/docs/thumbnail.svg" width="900px"></a>
 </div>
 
-# Objetivo
+# 🎯 Objetivo
 
-🎯 O Gcash foi criado para ajudar você a se organizar financeiramente, permitindo acompanhar todos os seus gastos e assim visualizar quanto você realmente gasta, mensalmente ou anualmente. Sua versão é para descktop e mobile. Contém um desginer altamente simples priorizando a facilidade de acesso a informações e ferramentas pelo usuário
+O Gcash foi criado para ajudar você a se organizar financeiramente, permitindo acompanhar todos os seus gastos e assim visualizar quanto você realmente gasta, mensalmente ou anualmente. Sua versão é para descktop e mobile. Contém um desginer altamente simples priorizando a facilidade de acesso a informações e ferramentas pelo usuário
 
-# Funcionalidades
+# 🧩 Funcionalidades
 
 Plataforma online para gerenciamento de receitas e despesas pessoais.
 Registro de gastos com categorias, valores, parcelas e status de pago ou não pago.
@@ -24,7 +24,7 @@ Resumo mensal dos gastos, destacando total gasto e total pago.
 Facilita o planejamento financeiro e o controle do orçamento futuro.
 Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte dos recursos são encontrados facilmente na pagina inicial.
 
-## 🚀 Tecnologias
+## 🛠️ Tecnologias e Ferramentas usadas
 
 - HTML5
 - CSS3
@@ -36,21 +36,26 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 
 ## 📌 Roadmap
 
+- [x] Implementar Front-end
 - [x] Estrutura inicial do projeto
+
   - [x] Página de Login
   - [x] Página Index
   - [x] Modais
+
 - [x] Implementar back-end
+
   - [x] Implementar Banco de dados
-    - [ ]
   - [x] Implementar inserção e remoção de dados
     - [x] Inserir categorias
     - [x] Inserir transações
-    - [ ] Remover categorias
-    - [ ] Remover transações
+    - [x] Remover categorias
+    - [x] Remover transações
     - [ ] Editar categorias
     - [ ] Editar transações
+
 - [ ] Publicar no **Vercel/GitHub Pages**
+
 - [ ] Documentação
   - [ ] Documentação de rotas
   - [ ] Diagrama de fluxo do banco
@@ -74,17 +79,20 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 ## 📂 Estrutura Inicial do Projeto
 
 📁Gcash
-|── Docs **Documentação**  
-│──Public **Arquivos**  
-│────── index.html **Tela inicial**  
-│────── login.html **Página de login**  
-│──────/css **Estilos**  
-│────── /scripts **Scripts** (fetch, manipulação DOM)  
-│────── /assets **Ícones, imagens**
-|── Server **Servidor**
+|── 📁Docs **Documentação**  
+│──📁Public **Arquivos**  
+│──────📁css **Estilos**  
+│────── 📁scripts **Scripts** (fetch, manipulação DOM)  
+│────── 📁assets **Ícones, imagens**
+│────── 📁views **HTML**
 
-│────── /node_modules
-
-│────── /src
+|── 📁Server **Servidor**
+│────── 📁node_modules
+│────── 📁src
+│──────── 📁config **Tela inicial**  
+│──────── 📁controllers**Tela inicial**  
+│──────── 📁 models **Tela inicial**  
+│──────── 📁 routes **Tela inicial**  
+│──────── 📁 services **Tela inicial**
 
 ✍️ _Projeto autoral desenvolvido para aprendizado e portfólio._

@@ -122,6 +122,8 @@ document.addEventListener("click", async (e) => {
   await openModal("../views/form_transactions.html");
   //definindo que é um formuilário de receitas
   const modal = document.querySelector("#new_modal_js");
+
+  //tenho que verificar se é expense ou revenue e depois setar typo
   modal.dataset.formType = "edit_expense";
 
   try {
@@ -138,7 +140,6 @@ document.addEventListener("click", async (e) => {
     }
 
     await loadCategoryForm();
-    await loadPaymentMethodsRevenue();
     await loadPaymentMethodsExpense?.();
 
     await initExpensesForm();
@@ -265,33 +266,27 @@ export async function LoadExpenses(monthIndex, year_index) {
 
       async function renderTransactionButton(id) {
         const groupButton = item.querySelector(".group_button_transactions");
-        if (cat.type === "expense") {
-          console.log("FUCIONANDO MEU PATRÃO MESMO");
-          const buttonPay = document.createElement("button");
-          buttonPay.id = `transaction_${cat.transaction_id}`;
-          buttonPay.dataset.id = cat.transaction_id;
-          console.log("ID da transação:", id);
-          const res = await fetch(
-            `/api/transactions/transactions/${id}/status`
+        console.log("FUCIONANDO MEU PATRÃO MESMO");
+        const buttonPay = document.createElement("button");
+        buttonPay.id = `transaction_${cat.transaction_id}`;
+        buttonPay.dataset.id = cat.transaction_id;
+        console.log("ID da transação:", id);
+        const res = await fetch(`/api/transactions/transactions/${id}/status`);
+        const statusData = await res.json();
+        if (statusData == "paid") {
+          buttonPay.classList.add(
+            "button_set_status",
+            "button_set_status_peding"
           );
-          const statusData = await res.json();
-          if (statusData == "paid") {
-            buttonPay.classList.add(
-              "button_set_status",
-              "button_set_status_peding"
-            );
-            buttonPay.innerHTML = "Tornar pendente";
-          } else {
-            buttonPay.classList.add(
-              "button_set_status",
-              "button_set_status_paid"
-            );
-            buttonPay.innerHTML = "Pagar";
-          }
-          groupButton.appendChild(buttonPay);
+          buttonPay.innerHTML = "Tornar pendente";
         } else {
-          console.log("FUCIONANDO MEU PATRÃO");
+          buttonPay.classList.add(
+            "button_set_status",
+            "button_set_status_paid"
+          );
+          buttonPay.innerHTML = "Pagar";
         }
+        groupButton.appendChild(buttonPay);
       }
       renderTransactionButton(cat.transaction_id);
       const iconSpan = item.querySelector(`#icon_${cat.transaction_id}`);

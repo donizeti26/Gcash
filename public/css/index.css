@@ -324,7 +324,7 @@ CSS LOADING
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    width: 80%;
+    width: 100%;
   }
   #logo {
     content: url(../assets/logo.svg);
@@ -349,7 +349,7 @@ CSS LOADING
   #group_pay,
   #month_value,
   #revenue {
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-align: center;
   }
   #month {
