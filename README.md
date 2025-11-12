@@ -3,7 +3,17 @@
 </div>
 <br>
 <br>
-
+<div align="center">
+<img src="./docs/logo_readme.png" width="40%" >
+</div>
+<br>
+<p align="center">
+  <a href="#objetivo">Objetivo</a> | 
+  <a href="#funcionalidades">Funcionalidades</a> | 
+  <a href="#tecnologias">Tec. e Ferramentas</a> | 
+  <a href="#roadmap">Roadmap</a> | 
+    <a href="#estrutura">Estrutura</a>
+</p>
 **🚧 Projeto em desenvolvimento - Aplicação web para gerenciamento de finanças pessoais.**
 
 **_Objetivo: praticar JavaScript, boas práticas de front-end e back-end, e criar uma aplicação para meu portfólio._**
@@ -14,9 +24,12 @@
 <a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"><img src="https://raw.githubusercontent.com/donizeti26/Gcash/2c2b5f364764424f766b0db0adf1593e9f080224/docs/thumbnail.svg" width="900px"></a>
 </div>
 
+<a id="objetivo"></a>
+
 # 🎯 Objetivo
 
 O Gcash foi criado para ajudar você a se organizar financeiramente, permitindo acompanhar todos os seus gastos e assim visualizar quanto você realmente gasta, mensalmente ou anualmente. Sua versão é para descktop e mobile. Contém um desginer altamente simples priorizando a facilidade de acesso a informações e ferramentas pelo usuário
+<a id="funcionalidades"></a>
 
 # 🧩 Funcionalidades
 
@@ -25,6 +38,7 @@ Registro de gastos com categorias, valores, parcelas e status de pago ou não pa
 Resumo mensal dos gastos, destacando total gasto e total pago.
 Facilita o planejamento financeiro e o controle do orçamento futuro.
 Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte dos recursos são encontrados facilmente na pagina inicial.
+<a id="tecnologias"></a>
 
 # 🛠️ Tecnologias e Ferramentas usadas
 
@@ -33,8 +47,10 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - JavaScript (ES6+)
 - Fetch API (requisições HTTP)
 - Figma
-- Draw io
+- Draw.io
 - [Material Symbols (Google Icons)](https://fonts.google.com/icons)
+
+  <a id="roadmap"></a>
 
 # 📌 Roadmap
 
@@ -48,13 +64,7 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - [x] Implementar back-end
 
   - [x] Implementar Banco de dados
-  - [x] Implementar inserção e remoção de dados
-    - [x] Inserir categorias
-    - [x] Inserir transações
-    - [x] Remover categorias
-    - [x] Remover transações
-    - [ ] Editar categorias
-    - [ ] Editar transações
+  - [ ] CRUD no banco de dados
 
 - [ ] Publicar no **Vercel/GitHub Pages**
 
@@ -77,6 +87,8 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
         - [ ] Mobile
         - [ ] Style Guide
       - [ ] Protótipo
+
+<a id="estrutura"></a>
 
 # 📂 Estrutura Inicial do Projeto
 
