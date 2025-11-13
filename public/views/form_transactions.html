@@ -3,13 +3,17 @@
     <div id="head_card">
       <h2 id="page_title">TITULO DO MODAL</h2>
       <div>
-        <span><button class="button_close_card">Fechar</button></span>
+        <span
+          ><button class="button_close_card">
+            <span class="material-symbols-outlined"> close </span>Fechar
+          </button></span
+        >
       </div>
     </div>
     <!--Categoria-->
     <div>
       <label for="category_id"
-        >Categoria
+        >Categoria:
         <abbr class="required_abbr" title="campo obrigatório">*</abbr></label
       >
       <select
@@ -22,7 +26,7 @@
     <!--Metodo de Pagamento-->
     <div>
       <label for="payment_method_id"
-        >Metodo de Pagamento
+        >Metodo de Pagamento:
         <abbr class="required_abbr" title="campo obrigatório">*</abbr>
       </label>
       <select id="payment_method_id" name="select" class="input_style"></select>
@@ -72,7 +76,7 @@
 
     <div id="question_repet">
       <p>
-        Repetir mensalmente?:
+        Repetir mensalmente? :
         <abbr class="required_abbr" title="campo obrigatório">*</abbr>
       </p>
       <div class="installments_option">
@@ -98,16 +102,14 @@
       </div>
     </div>
     <div>
-      <label for="installments">Número de Parcelas:</label>
+      <label for="installments">Número de Parcelas :</label>
       <select id="installments" name="select" disabled required>
         <option value="1">Em 1x</option>
       </select>
     </div>
     <div id="status">
-      <p>
-        Status da nova Ação?:
-        <abbr class="required_abbr" title="campo obrigatório">*</abbr>
-      </p>
+      Status da nova ação:
+      <abbr class="required_abbr" title="campo obrigatório">*</abbr>
 
       <input
         type="radio"

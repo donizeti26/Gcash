@@ -20,6 +20,12 @@ footer {
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" -25, "opsz" 20;
 }
 
+.button_close_card,
+.button_back_card {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
 .button_back_card {
   padding: 1rem;
   background-color: rgb(32, 32, 32);
@@ -33,6 +39,9 @@ footer {
 }
 
 .button_close_card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   background-color: rgb(255, 6, 6);
   color: white;
@@ -41,7 +50,9 @@ footer {
   transition-property: all;
   transition-duration: 0.5s;
 }
-
+.button_close_card span {
+  font-weight: 700;
+}
 .button_close_card:hover {
   background-color: #ff5757;
   transition-property: backgroun-color;

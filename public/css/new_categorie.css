@@ -88,7 +88,11 @@
 .edit_categorie {
   display: flex;
   flex-direction: row;
-  gap: 0.4em;
+  align-items: center;
+  gap: 0.2em;
+}
+.edit_categorie:hover {
+  color: #005eff;
 }
 
 #display_icon_on span:hover {
