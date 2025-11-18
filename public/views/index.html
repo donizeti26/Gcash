@@ -29,6 +29,8 @@
 
   <body>
     <div id="main_content">
+      <div id="menu_mobile"></div>
+
       <article id="resume_month">
         <div id="aside_menu">
           <img id="logo" alt="" />
@@ -45,19 +47,21 @@
               </span>
             </button>
           </span>
-          <div id="group_resume">
-            <div id="group_total">
-              <span id="month_value"
-                >Total do mes:<br /><span id="total_month"></span
+          <div id="group_total_resume">
+            <div id="group_resume">
+              <div id="group_total">
+                <span id="month_value"
+                  >Total do mes:<br /><span id="total_month"></span
+                ></span>
+              </div>
+              <span id="revenue"
+                >Receita mensal:<br /><span id="month_revenue"></span
               ></span>
             </div>
-            <span id="revenue"
-              >Receita mensal:<br /><span id="month_revenue"></span
-            ></span>
-          </div>
-          <div id="group_pay">
-            <span>Pago: <span id="amount_paid"></span></span>
-            <span>A pagar: <span id="amount_peding"></span></span>
+            <div id="group_pay">
+              <span>Pago: <span id="amount_paid"></span></span>
+              <span>A pagar: <span id="amount_peding"></span></span>
+            </div>
           </div>
         </div>
 
@@ -78,11 +82,10 @@
               </li>
             </ul>
           </div>
-
           <!--        <button class="buttonCreate buttonHover" id="button_modais">
-          <span class="material-symbols-outlined add_up"> add </span>
-        </button>
--->
+            <span class="material-symbols-outlined add_up"> add </span>
+          </button>
+          -->
         </div>
       </article>
       <main id="other_body">
@@ -105,4 +108,5 @@
   </body>
   <script type="module" src="./script/index.js"></script>
   <script type="module" src="./script/utils.js"></script>
+  <script type="module" src="./script/mobileScript.js"></script>
 </html>

@@ -7,8 +7,7 @@
     "group_button_transactions group_button_transactions";
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 0.2fr 0.7fr 2fr 8rem;
-}
-.card_pay {
+  place-items: center;
   width: 100%;
   background-color: rgb(219, 223, 225);
   border-radius: 3rem;
@@ -110,6 +109,7 @@
 .amount_circle {
   grid-area: amount_circle;
   gap: 0.5rem;
+  padding-right: 2rem;
 }
 .amount_transaction {
   font-size: 1.5rem;
@@ -135,18 +135,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 0.7rem;
-  padding-left: 0.7rem;
+  width: 80%;
 }
 .card_text div {
   width: 80%;
   border-top: 1px solid #85858552;
-  padding-top: 1rem;
+  padding-top: 1rem;`
+  
 }
 .group_button_transactions {
   align-content: center;
   grid-area: group_button_transactions;
   flex-wrap: wrap-reverse;
+  max-width: 90%;
+  padding: 2rem;
 }
 .icon_categorie {
   background-color: blueviolet;
@@ -220,6 +222,8 @@
 
   .card_text {
     grid-row: card_text;
+    padding-top: 0.7rem;
+    padding-left: 0.7rem;
   }
   .card_text div {
     width: 100%;
@@ -252,5 +256,6 @@
       "div_icon_categorie card_text group_button_transactions";
     grid-template-columns: 4.9rem 4fr 2fr;
     grid-template-rows: 4rem auto;
+    place-items: inherit;
   }
 }

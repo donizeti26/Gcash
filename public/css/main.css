@@ -96,3 +96,22 @@ footer {
   font-weight: 900;
   color: red;
 }
+
+#group_total_resume {
+  opacity: 1;
+  transform: translateX(0);
+}
+#group_total_resume.show {
+  background-color: #14e701;
+  opacity: 0;
+  transform: translateX(100%);
+  display: none;
+}
+#resume_month.fixed {
+  position: fixed;
+  height: auto;
+}
+#menu_mobile {
+  position: relative;
+  top: 280px;
+}

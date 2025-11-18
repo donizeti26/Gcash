@@ -18,12 +18,29 @@ button,
 .material-symbols-outlined {
   user-select: none;
 }
+
+#group_total_resume {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+}
+#group_resume {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  line-height: 2rem;
+}
 #aside_menu {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 13px;
+  gap: 1rem;
+  width: 80%;
 }
 #pay,
 #no_pay,
@@ -47,10 +64,10 @@ button,
 }
 
 #atual_month {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 #atual_month p {
@@ -70,7 +87,7 @@ button,
 }
 #group_pay {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 100%;
 }
 
@@ -180,7 +197,7 @@ button,
 
 #opcoes ul li {
   text-decoration: none;
-  padding: 1rem 2rem;
+  padding: 0.6rem 2rem;
   color: #ffffff;
   border-radius: 1rem;
   cursor: pointer;
@@ -188,7 +205,7 @@ button,
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 11rem;
+  width: 10rem;
 }
 
 #despesas {
@@ -249,13 +266,7 @@ button,
   background-color: rgb(0 0 0 / 20%);
   backdrop-filter: blur(4px);
 }
-#group_resume {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  justify-content: space-between;
-  line-height: 2rem;
-}
+
 /*//////////////////////////////////////////////////////////////////////////
 CSS LOADING
 //////////////////////////////////////////////////////////////////////////*/
