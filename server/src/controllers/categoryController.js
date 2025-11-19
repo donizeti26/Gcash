@@ -1,16 +1,16 @@
 import {
-  registerCatergory,
+  registerCategory,
   getCategories,
   getExpenseCategories,
   getRevenueCategories,
 } from "../models/categoryModel.js";
 
-export async function registerCatergoryController(req, res) {
-  const { name_categorie, color_selector, icon_selected, category_selected } =
+export async function registerCategoryController(req, res) {
+  const { name_category, color_selector, icon_selected, category_selected } =
     req.body;
   try {
-    const category = await registerCatergory({
-      name_categorie,
+    const category = await registerCategory({
+      name_category,
       color_selector,
       icon_selected,
       category_selected,
@@ -27,7 +27,7 @@ export async function getCategoriesController(req, res) {
     const categories = await getCategories();
     res.json(categories);
   } catch (err) {
-    console.error("Eeeo ao buscar categorias: ", err);
+    console.error("Erro ao buscar categorias: ", err);
     res.status(500).json({ error: err.message });
   }
 }
@@ -37,7 +37,7 @@ export async function getExpenseCategoriesController(req, res) {
     const categories = await getExpenseCategories();
     res.json(categories);
   } catch (err) {
-    console.error("Erro ao buscar categorias de despeas: ", err);
+    console.error("Erro ao buscar categorias de despesas: ", err);
     res.status(500).json({ error: err.message });
   }
 }

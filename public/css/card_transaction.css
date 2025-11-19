@@ -2,86 +2,15 @@
   display: grid;
   grid-template-areas:
     "title_date title_date"
-    "div_icon_categorie  amount_circle"
+    "div_icon_category  amount_circle"
     "card_text card_text"
     "group_button_transactions group_button_transactions";
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.2fr 0.7fr 2fr 8rem;
+  grid-template-rows: 0.4fr 0.4fr 0.8fr 0.3fr;
   place-items: center;
   width: 100%;
-  background-color: rgb(219, 223, 225);
+  background-color: var(--cinza-900);
   border-radius: 3rem;
-}
-.button_remove {
-  cursor: pointer;
-  background-color: #dbdfe1;
-  font-weight: 700;
-  color: #ff4000;
-  border: 1px solid #ff4000;
-  transition: all;
-  transition-duration: 0.2s;
-  padding: 0.6rem 1.7rem;
-  border-radius: 15px;
-}
-.button_remove:hover {
-  color: #cecece;
-  background-color: #ff4000;
-  transition: all;
-  transition-duration: 0.2s;
-}
-.button_edit {
-  cursor: pointer;
-  background-color: #dbdfe1;
-  font-weight: 700;
-  color: #448aff;
-  border: 1px solid #448aff;
-  transition: all;
-  transition-duration: 0.2s;
-  padding: 0.6rem 1.7rem;
-  border-radius: 15px;
-}
-.button_edit:hover {
-  color: #cecece;
-  background-color: #448aff;
-  transition: all;
-  transition-duration: 0.2s;
-}
-.button_set_status_paid {
-  cursor: pointer;
-  background-color: #dbdfe1;
-  font-weight: 700;
-  color: #00c030;
-  border: 1px solid #00c030;
-  transition: all;
-  transition-duration: 0.2s;
-  padding: 0.6rem 1.7rem;
-  border-radius: 15px;
-}
-.button_set_status_peding {
-  white-space: nowrap;
-  cursor: pointer;
-  background-color: #dbdfe1;
-  font-weight: 700;
-  color: #474747;
-  border: 1px solid #ccb334;
-  transition: all;
-  transition-duration: 0.2s;
-  padding: 0.6rem 1.7rem;
-  border-radius: 15px;
-}
-.button_set_status_paid:hover {
-  color: #cecece;
-  background-color: #00c030;
-  transition: all;
-  border: 1px solid #00c030;
-
-  transition-duration: 0.2s;
-}
-.button_set_status_peding:hover {
-  color: #474747;
-  background-color: #ffd600;
-  transition: all;
-  transition-duration: 0.2s;
 }
 .title_date {
   grid-area: title_date;
@@ -91,14 +20,15 @@
   align-items: center;
   padding-left: 0.8rem;
 }
-.title_categorie {
-  padding-top: 1rem;
+.title_category {
+  padding-top: 3rem;
   font-size: 1.5rem;
+  text-align: center;
 }
-.div_icon_categorie {
-  grid-area: div_icon_categorie;
+.div_icon_category {
+  grid-area: div_icon_category;
 }
-.div_icon_categorie,
+.div_icon_category,
 .amount_circle,
 .group_button_transactions {
   display: flex;
@@ -118,16 +48,16 @@
   border-radius: 50%;
   width: 10px;
   height: 10px;
-  background-color: red;
+  background-color: var(--button-color-red);
 }
 .circle_paid {
-  background-color: #008a50;
+  background-color: var(--button-color-green);
 }
-.circle_peding {
-  background-color: #e2a601;
+.circle_pending {
+  background-color: var(--button-color-yellow);
 }
 .circle_revenue {
-  background-color: #005eff;
+  background-color: var(--button-color-blue);
 }
 
 .card_text {
@@ -136,31 +66,29 @@
   justify-content: center;
   align-items: center;
   width: 80%;
+  padding-top: 1rem;
 }
 .card_text div {
   width: 80%;
-  border-top: 1px solid #85858552;
-  padding-top: 1rem;`
-  
+  border-top: 1px solid var(--text-legend);
+  padding-top: 1rem;
 }
 .group_button_transactions {
   align-content: center;
   grid-area: group_button_transactions;
   flex-wrap: wrap-reverse;
-  max-width: 90%;
   padding: 2rem;
 }
-.icon_categorie {
-  background-color: blueviolet;
+.icon_category {
   padding: 1rem;
   border-radius: 1rem;
 }
-.div_icon_categorie span {
+.div_icon_category span {
   color: #fff;
 }
 .card_text p {
   font-size: 1rem;
-  color: #7b7b7b;
+  color: var(--text-legend);
 }
 .card_text strong {
   color: #000;
@@ -174,7 +102,7 @@
   }
   .card_pay {
     width: 100%;
-    background-color: rgb(219, 223, 225);
+    background-color: var(--cinza-900);
     padding: 2rem;
     border-radius: 3rem;
   }
@@ -204,11 +132,11 @@
     flex-direction: column;
   }
 
-  .title_categorie {
+  .title_category {
     font-size: 2rem;
   }
   .title_date p {
-    color: #7b7b7b;
+    color: var(--text-legend);
   }
   .amount_circle {
     grid-area: amount_circle;
@@ -240,9 +168,9 @@
     align-items: end;
     flex-wrap: nowrap;
   }
-  .div_icon_categorie {
-    grid-area: div_icon_categorie;
-    border-right: solid 2px #bbbbbbad;
+  .div_icon_category {
+    grid-area: div_icon_category;
+    border-right: solid 1px var(--text-legend);
 
     display: flex;
     justify-content: start;
@@ -252,8 +180,8 @@
   .card_pay {
     display: grid;
     grid-template-areas:
-      "div_icon_categorie title_date amount_circle"
-      "div_icon_categorie card_text group_button_transactions";
+      "div_icon_category title_date amount_circle"
+      "div_icon_category card_text group_button_transactions";
     grid-template-columns: 4.9rem 4fr 2fr;
     grid-template-rows: 4rem auto;
     place-items: inherit;

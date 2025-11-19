@@ -18,11 +18,13 @@
     />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+
     <link rel="stylesheet" href="css/form_expenses.css" />
-    <link rel="stylesheet" href="css/new_categorie.css" />
     <link rel="stylesheet" href="css/form_categories.css" />
-    <link rel="stylesheet" href="css/edit_expenses.css" />
+
     <link rel="stylesheet" href="css/card_transaction.css" />
+    <link rel="stylesheet" href="css/new_category.css" />
 
     <title>Gcash</title>
   </head>
@@ -51,7 +53,8 @@
             <div id="group_resume">
               <div id="group_total">
                 <span id="month_value"
-                  >Total do mes:<br /><span id="total_month"></span
+                  >Transações<br />
+                  mensais:<br /><span id="total_month"></span
                 ></span>
               </div>
               <span id="revenue"
@@ -60,21 +63,21 @@
             </div>
             <div id="group_pay">
               <span>Pago: <span id="amount_paid"></span></span>
-              <span>A pagar: <span id="amount_peding"></span></span>
+              <span>A pagar: <span id="amount_pending"></span></span>
             </div>
           </div>
         </div>
 
         <div id="button_option">
-          <div class="open" id="opcoes">
+          <div class="open" id="options">
             <ul>
-              <li id="receita">
+              <li id="btn_revenue">
                 <span class="material-symbols-outlined"> add </span> Receita
               </li>
-              <li id="despesas">
+              <li id="btn_expense">
                 <span class="material-symbols-outlined"> add </span> Despesa
               </li>
-              <li id="categoria">
+              <li id="btn_category">
                 <span class="material-symbols-outlined">
                   tv_options_edit_channels
                 </span>
@@ -82,10 +85,6 @@
               </li>
             </ul>
           </div>
-          <!--        <button class="buttonCreate buttonHover" id="button_modais">
-            <span class="material-symbols-outlined add_up"> add </span>
-          </button>
-          -->
         </div>
       </article>
       <main id="other_body">
@@ -99,7 +98,7 @@
     <footer>
       <!-- Informações do rodapé -->
       <p>&copy; 2025 Minha Empresa. Todos os direitos reservados.</p>
-      <p><a href="/contato">Contacte-nos</a></p>
+      <p><a href="/contact">Contacte-nos</a></p>
     </footer>
     <div id="loading-overlay" class="hidden">
       <div class="spinner"></div>

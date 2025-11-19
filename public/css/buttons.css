@@ -1,0 +1,195 @@
+.button_month {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#btn_expense {
+  background-color: var(--button-color-red);
+  user-select: none;
+  transition: all;
+  transition-duration: 0.5s;
+}
+#btn_revenue {
+  background-color: var(--button-color-green);
+  user-select: none;
+  transition: all;
+  transition-duration: 0.5s;
+}
+#btn_category {
+  background-color: var(--button-color-blue);
+  transition: all;
+  transition-duration: 0.5s;
+}
+
+#btn_category:hover {
+  background-color: var(--button-color-blue-hover);
+  transition: all;
+  transition-duration: 0.5s;
+}
+
+#btn_expense:hover {
+  background-color: var(--button-color-red-hover);
+  color: #ffffff;
+  transition: all;
+  transition-duration: 0.5s;
+}
+
+#btn_revenue:hover {
+  background-color: var(--button-color-green-hover);
+  transition: all;
+  transition-duration: 0.5s;
+}
+
+.button_remove {
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: var(--button-color-red);
+  border: 1px solid var(--button-color-red);
+  transition: all;
+  transition-duration: 0.2s;
+  border-radius: 15px;
+}
+.button_remove:hover {
+  color: #cecece;
+  background-color: var(--button-color-red);
+  transition: all;
+  transition-duration: 0.2s;
+}
+
+.button_edit,
+.button_remove,
+.button_set_status_pending {
+  padding: 0.5rem 1rem;
+}
+.button_edit {
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: var(--button-color-blue);
+  border: 1px solid var(--button-color-blue);
+  transition: all;
+  transition-duration: 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+.button_edit:hover {
+  color: #cecece;
+  background-color: var(--button-color-blue);
+  transition: all;
+  transition-duration: 0.2s;
+}
+.button_set_status_paid {
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: var(--button-color-green);
+  border: 1px solid var(--button-color-green);
+  transition: all;
+  transition-duration: 0.2s;
+  border-radius: 15px;
+}
+.button_set_status_pending {
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: #dbdfe1;
+  font-weight: 700;
+  color: var(--button-color-yellow-marge);
+  border: 1px solid var(--button-color-yellow-marge);
+  transition: all;
+  transition-duration: 0.2s;
+  border-radius: 15px;
+}
+.button_set_status_paid:hover {
+  color: #cecece;
+  background-color: var(--button-color-green);
+  transition: all;
+  border: 1px solid var(--button-color-green);
+
+  transition-duration: 0.2s;
+}
+.button_set_status_pending:hover {
+  color: var(--button-color-yellow-marge);
+  background-color: var(--button-color-yellow);
+  transition: all;
+  transition-duration: 0.2s;
+}
+
+.button_close_card,
+.button_back_card {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.button_back_card {
+  padding: 1rem;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.button_back_card:hover {
+  background-color: #363636;
+}
+
+.button_close_card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--button-color-red);
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+.button_close_card span {
+  font-weight: 700;
+}
+.button_close_card:hover {
+  background-color: var(--button-color-red-hover);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+#buttonLogin,
+#buttonLogin_create,
+#buttonNewCategory,
+#button_transactions {
+  background-color: var(--button-color-blue);
+  padding: 16px 64px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+#buttonLogin:hover,
+#buttonLogin_create:hover {
+  background-color: var(--button-color-blue-hover);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  color: #ffffff;
+}
+#button_category {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  background-color: var(--button-color-green);
+  transition-duration: 1s;
+  transition-property: background-color;
+  border-radius: 1rem;
+  color: white;
+}
+
+#button_category:hover {
+  background-color: var(--button-color-green-hover);
+  transition-property: all;
+  transition-duration: 0.5s;
+}

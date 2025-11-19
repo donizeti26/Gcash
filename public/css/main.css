@@ -1,3 +1,26 @@
+:root {
+  --button-color-red: #ff4000;
+  --button-color-red-hover: #ff5757;
+
+  --button-color-blue: #448aff;
+  --button-color-blue-hover: #6ba1ff;
+  --button-color-green: #00c030;
+  --button-color-green-hover: #00c030;
+
+  --button-color-yellow: #ffd600;
+
+  --button-color-yellow-marge: #ccb334;
+
+  --azul-200: #263940;
+  --azul-400: #30434c;
+  --cinza-900: #dbdfe1;
+  --white-900: #ffffff;
+  --white-200: #c3c3c3;
+
+  --input-color: rgb(115, 115, 115, 0.251);
+  --text-default: #373737;
+  --text-legend: #7b7b7b;
+}
 * {
   margin: 0;
   border: 0;
@@ -6,7 +29,6 @@
   font-optical-sizing: auto;
   font-style: normal;
 }
-
 html {
   user-select: none;
   font-size: 16px;
@@ -20,47 +42,8 @@ footer {
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" -25, "opsz" 20;
 }
 
-.button_close_card,
-.button_back_card {
-  display: flex;
-  align-content: center;
-  align-items: center;
-}
-.button_back_card {
-  padding: 1rem;
-  background-color: rgb(32, 32, 32);
-  color: white;
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-
-.button_back_card:hover {
-  background-color: #363636;
-}
-
-.button_close_card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background-color: rgb(255, 6, 6);
-  color: white;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition-property: all;
-  transition-duration: 0.5s;
-}
-.button_close_card span {
-  font-weight: 700;
-}
-.button_close_card:hover {
-  background-color: #ff5757;
-  transition-property: backgroun-color;
-  transition-duration: 0.5s;
-}
-
 .input_style {
-  background-color: #d0d0d0;
+  background-color: var(--input-color);
   padding: 0.5rem;
   border-radius: 0.4rem;
 }
@@ -69,32 +52,10 @@ footer {
   background-color: #ececec;
 }
 
-#buttonLogin,
-#buttonLogin_create,
-#buttonNewCategory,
-#button_transactions {
-  background-color: #3498db;
-  padding: 16px 64px;
-  border-radius: 15px;
-  text-decoration: none;
-  font-weight: 600;
-  color: #ffffff;
-  cursor: pointer;
-  transition-property: all;
-  transition-duration: 0.5s;
-}
-
-#buttonLogin:hover,
-#buttonLogin_create:hover {
-  background-color: #2880b9;
-  transition-property: backgroun-color;
-  transition-duration: 0.5s;
-  color: #ffffff;
-}
 .required_abbr {
   text-decoration: none;
   font-weight: 900;
-  color: red;
+  color: var(--button-color-red);
 }
 
 #group_total_resume {
@@ -102,7 +63,7 @@ footer {
   transform: translateX(0);
 }
 #group_total_resume.show {
-  background-color: #14e701;
+  background-color: var(--button-color-green);
   opacity: 0;
   transform: translateX(100%);
   display: none;

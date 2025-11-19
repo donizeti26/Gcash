@@ -1,7 +1,7 @@
 import {
   sumAmountMonth,
   sumAtualMonthPaid,
-  sumAtualMonthPeding,
+  sumAtualMonthPending,
   sumAmountMonthRevenue,
 } from "./installments.js";
 
@@ -34,7 +34,7 @@ const anoAtual = dataAtual.getFullYear();
 let ContMonth = mesAtual; // começa em Janeiro
 let ContYear = anoAtual;
 export function setupCalendar() {
-  // Atualiza mes na sidbar
+  // Atualiza mes na sidebar
   setAtualMonth();
 
   // Avançar (GO)
@@ -50,7 +50,7 @@ export function setupCalendar() {
     sumAmountMonth(ContMonth, ContYear);
     sumAmountMonthRevenue(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
-    sumAtualMonthPeding(ContMonth, ContYear);
+    sumAtualMonthPending(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
   });
   // Voltar (Back)
@@ -65,7 +65,7 @@ export function setupCalendar() {
     showMonth();
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
-    sumAtualMonthPeding(ContMonth, ContYear);
+    sumAtualMonthPending(ContMonth, ContYear);
     sumAmountMonthRevenue(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
   });
@@ -77,10 +77,8 @@ export function showMonth() {
   months.innerHTML = ` <h2 data-id=${ContMonth} id="month_index" > ${month[ContMonth]}</h2><br><h2 data-id =${ContYear} id="year_index"> ${ContYear}</h2>`;
   sumAmountMonth(ContMonth, ContYear);
   sumAtualMonthPaid(ContMonth, ContYear);
-  sumAtualMonthPeding(ContMonth, ContYear);
+  sumAtualMonthPending(ContMonth, ContYear);
   sumAmountMonthRevenue(ContMonth, ContYear);
-
-  console.log("TESTGE" + month[ContMonth]);
 }
 
 export function setAtualMonth() {
@@ -97,8 +95,8 @@ export function setAtualMonth() {
         const month = String(today.getMonth() + 1).padStart(2, "0");
         const year = today.getFullYear();
 
-        const dateFormated = `${year}-${month}-${day}`;
-        inputDataExpenses.value = dateFormated;
+        const dateFormatted = `${year}-${month}-${day}`;
+        inputDataExpenses.value = dateFormatted;
       },
       {
         once: true,

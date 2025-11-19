@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
-  registerCatergoryController,
+  registerCategoryController,
   getCategoriesController,
   getExpenseCategoriesController,
   getRevenueCategoriesController,
@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.post("/categories", registerCatergoryController);
+router.post("/categories", registerCategoryController);
 router.get("/categories", getCategoriesController);
 router.get("/categoriesExpense", getExpenseCategoriesController);
 router.get("/categoriesRevenue", getRevenueCategoriesController);

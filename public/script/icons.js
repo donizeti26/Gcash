@@ -1,21 +1,19 @@
 // icons.js - cria a lista de ícones dinamicamente
 
-export function test_display() {
-  const test_new_categorie = document.getElementById("form_new_categorie");
+export function testDisplay() {
+  const test_new_category = document.getElementById("form_new_category");
   const test_display_on = document.getElementById("display_icon_on");
 
-  if (!test_new_categorie) return;
+  if (!test_new_category) return;
   const contains =
-    test_display_on && test_new_categorie.contains(test_display_on);
+    test_display_on && test_new_category.contains(test_display_on);
 
   if (!contains) {
-    criate_icons();
+    create_icons();
   } else {
     test_display_on.remove();
   }
 }
-
-window.test_display = test_display;
 
 const bank_icons = [
   { icon: "shopping_cart", text: "Compras" },
@@ -47,16 +45,17 @@ const bank_icons = [
   { icon: "construction", text: "Reparos" },
   { icon: "devices_other", text: "Eletrônicos" },
 ];
+window.test_display = testDisplay;
 
-export function criate_icons() {
-  const form_new_categorie = document.getElementById("form_new_categorie");
+export function create_icons() {
+  const form_new_category = document.getElementById("form_new_category");
   const div_button_expense = document.getElementById("div_button_expense");
   const hiddenInput = document.getElementById("selected_icon");
   const display_icon_on = document.createElement("div");
 
   display_icon_on.id = "display_icon_on";
-  if (form_new_categorie) {
-    form_new_categorie.insertBefore(display_icon_on, div_button_expense);
+  if (form_new_category) {
+    form_new_category.insertBefore(display_icon_on, div_button_expense);
   }
 
   bank_icons.forEach(function (item, index) {
@@ -64,7 +63,7 @@ export function criate_icons() {
     const new_icons = document.createElement("span");
 
     new_button.type = "button"; // evita submit indesejado
-    new_button.setAttribute("onclick", "test_display()");
+    new_button.addEventListener("click", testDisplay);
     new_button.dataset.icon = item.icon; // <-- aqui guardamos o nome do ícone
     new_button.className = "list_button_icons";
     new_icons.className = "material-symbols-outlined new_icon";

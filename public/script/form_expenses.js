@@ -1,11 +1,11 @@
 export function sendCategoryNewCategory() {
-  const formNewCategorie = document.getElementById("form_new_categorie");
+  const formNewCategory = document.getElementById("form_new_category");
 
-  if (formNewCategorie) {
-    formNewCategorie.addEventListener("submit", async (e) => {
-      e.preventDefault(); /*inpede o envio padrão do formulário */
+  if (formNewCategory) {
+    formNewCategory.addEventListener("submit", async (e) => {
+      e.preventDefault(); /*impede o envio padrão do formulário */
 
-      const name_categorie = document.getElementById("name_categorie").value;
+      const name_category = document.getElementById("name_category").value;
       const color_selector = document.getElementById("color_selector").value;
       const icon_selected = document.getElementById("selected_icon").value;
       const option_new_category = document.getElementById(
@@ -18,18 +18,18 @@ export function sendCategoryNewCategory() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            name_categorie,
+            name_category,
             color_selector,
             icon_selected,
             category_selected,
           }),
         });
         const data = await response.json();
-        console.log("📦 Resposta do servidor:", data); // <-- aqui você vê o que voltou
+        console.log("Resposta do servidor:", data); // <-- aqui você vê o que voltou
         window.alert("Categoria " + data.name + " cadastrada com sucesso!");
       } catch (err) {
-        console.error("❌ Erro no cadastro:", err);
-        window.alert("Erro no cadatrado");
+        console.error("Erro no cadastro:", err);
+        window.alert("Erro no cadastrado");
       }
     });
   }
@@ -47,7 +47,7 @@ export async function loadCategories() {
 
     categories.forEach((cat) => {
       const item = document.createElement("li");
-      item.classList.add("categorie_item");
+      item.classList.add("category_item");
 
       item.innerHTML = `
           <div class="group_category">
@@ -56,7 +56,7 @@ export async function loadCategories() {
                  ${cat.icon}
               </span> ${cat.name}
             </div>
-          <div class="edit_categorie">
+          <div class="edit_category">
 
             <span class="edit_document  material-symbols-outlined">
               edit_document 

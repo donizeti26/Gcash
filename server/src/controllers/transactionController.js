@@ -9,7 +9,7 @@ import {
   paidTransactions,
   registerTransactions,
   deleteTransactions,
-} from "../models/TransacaoModel.js";
+} from "../models/TransactionModel.js";
 
 export async function getTransactionsController(req, res) {
   try {
@@ -74,7 +74,7 @@ export async function consultStatusController(req, res) {
     const data = await consultStatus(transaction_id);
     res.json(data);
   } catch (err) {
-    console.error("Erro ao consulltar status: ", err);
+    console.error("Erro ao consultar status: ", err);
     res.status(500).json({ error: err.message });
   }
 }

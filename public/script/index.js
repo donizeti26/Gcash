@@ -1,23 +1,25 @@
-import { openModal, fecharModal, setupModalGlobalListeners } from "./modal.js";
+import { openModal, closeModal, setupModalGlobalListeners } from "./modal.js";
 /*import { setupUI } from "./ui.js";*/
 import { setupCalendar, setAtualMonth } from "./calendar.js";
-import { carregarDadosEditarTransacao } from "./edit_transactions.js";
+import { LoadDataAndEditTransaction } from "./edit_transactions.js";
+import { loadCategories, sendCategoryNewCategory } from "./form_expenses.js";
 import {
   loadCategoryForm,
   loadPaymentMethodsRevenue,
   loadPaymentMethodsExpense,
   initExpensesForm,
+  initTransactionForm,
   sumAtualMonthPaid,
-  sumAtualMonthPeding,
+  sumAtualMonthPending,
   sumAmountMonthRevenue,
   sumAmountMonth,
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
 import { setupTransactionForm } from "./form_transactions.js";
-// INICIALIÇÕES GLOBAIS
-/*
-setupUI();
-*/
+import { loadCategoryFormRevenue } from "./form_revenue.js";
+import { create_icons, testDisplay } from "./icons.js";
+// INICIALIZAÇÕES GLOBAIS
+
 setupCalendar();
 setupModalGlobalListeners();
 
@@ -25,25 +27,22 @@ setupModalGlobalListeners();
 ////////////INICIAR FORM TRANSAÇÕES//////////////
 ////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
-  // BOTAO PARA ABRIR DESPESAS (E INICIALIZAR INSTALLMENTS)
+  // BOTÃO PARA ABRIR DESPESAS (E INICIALIZAR INSTALLMENTS)
   showLoading();
-  const btnDespesas = document.getElementById("despesas");
-  if (btnDespesas) {
-    btnDespesas.addEventListener("click", async () => {
+  const btnExpense = document.getElementById("btn_expense");
+  if (btnExpense) {
+    btnExpense.addEventListener("click", async () => {
       //ABRIR MODAL COM HTML DE DESPESAS
       //DEPOIS QUE O HTML É INJETADO, INICIALIZA A LÓGICA DAS PARCELAS
       await openModal("../views/form_transactions.html");
-      const installmentsMod = await import("./installments.js").catch(
-        () => ({})
-      );
+
       const modal = document.querySelector("#new_modal_js");
       modal.dataset.formType = "expense";
 
-      installmentsMod.initTransactionForm?.();
-      installmentsMod.loadCategoryForm?.();
-      installmentsMod.loadPaymentMethodsExpense?.();
-      installmentsMod.initExpensesForm?.();
-      installmentsMod.initCategoryForm?.();
+      initTransactionForm?.();
+      loadCategoryForm?.();
+      loadPaymentMethodsExpense?.();
+      initExpensesForm?.();
       setAtualMonth();
       setupTransactionForm();
 
@@ -56,11 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//BOTAO CATEGORIA (ABRE O FORM_CATEGORIASHTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
-const btnCategoria = document.getElementById("categoria");
+//BOTÃO CATEGORIA (ABRE O FORM_CATEGORIAS HTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
+const btnCategory = document.getElementById("btn_category");
 
-if (btnCategoria) {
-  btnCategoria.addEventListener("click", async () => {
+if (btnCategory) {
+  btnCategory.addEventListener("click", async () => {
     //ABRIR MODAL COM CATEGORIAS
     await abrirCategorias();
   });
@@ -81,24 +80,22 @@ async function setFormatMoney(event) {
 /////////////////////////////////////////////////////////
 ////////////INICIAR FORM REVENUE//////////////
 ////////////////////////////////////////////////////////
-const btnReceita = document.getElementById("receita");
-if (btnReceita) {
-  btnReceita.addEventListener("click", async () => {
+const btnRevenue = document.getElementById("btn_revenue");
+if (btnRevenue) {
+  btnRevenue.addEventListener("click", async () => {
     await openModal("../views/form_transactions.html");
-    //definindo que é um formuilário de receitas
+    //definindo que é um formulário de receitas
     const modal = document.querySelector("#new_modal_js");
     modal.dataset.formType = "revenue";
 
-    const revenueForm = await import("./form_revenue.js").catch(() => ({}));
-    const revenueMod = await import("./installments.js").catch(() => ({}));
     setupTransactionForm();
 
     //carregando
-    revenueMod.initTransactionForm?.();
-    revenueMod.initExpensesForm?.();
-    revenueForm.loadCategoryFormRevenue?.();
-    revenueMod.loadPaymentMethodsRevenue?.();
-    installmentsMod.loadPaymentMethodsExpense?.();
+    initTransactionForm?.();
+    initExpensesForm?.();
+    loadCategoryFormRevenue?.();
+    loadPaymentMethodsRevenue?.();
+    loadPaymentMethodsExpense?.();
 
     setAtualMonth();
 
@@ -120,7 +117,7 @@ document.addEventListener("click", async (e) => {
   console.log("O botão clicado foi da transação", id);
   showLoading();
   await openModal("../views/form_transactions.html");
-  //definindo que é um formuilário de receitas
+  //definindo que é um formulário de receitas
   const modal = document.querySelector("#new_modal_js");
 
   //tenho que verificar se é expense ou revenue e depois setar typo
@@ -143,7 +140,7 @@ document.addEventListener("click", async (e) => {
     await loadPaymentMethodsExpense?.();
 
     await initExpensesForm();
-    carregarDadosEditarTransacao(transaction);
+    LoadDataAndEditTransaction(transaction);
     setupTransactionForm();
   } catch (err) {
     console.error("Erro ao buscar transacao", err);
@@ -158,34 +155,31 @@ document.addEventListener("click", async (e) => {
 async function abrirCategorias() {
   showLoading();
   await openModal("../views/form_categories.html");
+  loadCategories?.();
+  create_icons?.();
 
-  const categoriesMod = await import("./form_expenses.js").catch(() => ({}));
-  categoriesMod.loadCategories?.();
+  const btnNewCategory = document.getElementById("button_category");
 
-  const iconsMod = await import("./icons.js").catch(() => ({}));
-  iconsMod.criate_icons?.();
-
-  const btnNewCategorie = document.getElementById("button_categorie");
-
-  if (btnNewCategorie && !btnNewCategorie.dataset.listenerAdded) {
-    btnNewCategorie.addEventListener("click", async () => {
-      await abrirNovaCategoria(categoriesMod);
+  if (btnNewCategory && !btnNewCategory.dataset.listenerAdded) {
+    btnNewCategory.addEventListener("click", async () => {
+      await abrirNovaCategoria();
     });
 
-    btnNewCategorie.dataset.listenerAdded = "true";
+    btnNewCategory.dataset.listenerAdded = "true";
     hideLoading();
   }
 }
 
-async function abrirNovaCategoria(categoriesMod) {
-  await openModal("../views/new_categorie.html");
-  categoriesMod.sendCategoryNewCategory?.();
+async function abrirNovaCategoria() {
+  await openModal("../views/new_category.html");
+
+  sendCategoryNewCategory?.();
 }
 
 document.addEventListener("click", async (e) => {
   const backBtn = e.target.closest(".button_back_card");
   if (!backBtn) return;
-  fecharModal();
+  closeModal();
   await abrirCategorias();
 });
 
@@ -217,23 +211,23 @@ export async function LoadExpenses(monthIndex, year_index) {
         style: "currency",
         currency: "BRL",
       });
-      let statusTrasaction;
+      let statusTransaction;
       if (cat.status == "paid") {
-        statusTrasaction = "Pago";
+        statusTransaction = "Pago";
       } else if (cat.status == "pending") {
-        statusTrasaction = "Pendente";
+        statusTransaction = "Pendente";
       } else {
-        statusTrasaction = "Receita";
+        statusTransaction = "Receita";
       }
 
       item.innerHTML = `
       <div class="title_date">
-        <strong class="title_categorie">${cat.name}</strong>
+        <strong class="title_category">${cat.name}</strong>
         <p>${cat.due_date}</p>
       </div>
-      <div class="div_icon_categorie">
+      <div class="div_icon_category">
         <span
-          class="material-symbols-outlined icon_categorie"
+          class="material-symbols-outlined icon_category"
           id="icon_${cat.transaction_id}"
         > ${cat.icon}
         </span>
@@ -250,7 +244,7 @@ export async function LoadExpenses(monthIndex, year_index) {
         <div>
           <p><strong>Parcela:</strong> 1/1</p>
           <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
-          <p><strong>Status: </strong>${statusTrasaction}</p>
+          <p><strong>Status: </strong>${statusTransaction}</p>
           <p> <strong>Descrição: </strong>${cat.description}
           </p>
         </div>
@@ -266,7 +260,6 @@ export async function LoadExpenses(monthIndex, year_index) {
 
       async function renderTransactionButton(id) {
         const groupButton = item.querySelector(".group_button_transactions");
-        console.log("FUCIONANDO MEU PATRÃO MESMO");
         const buttonPay = document.createElement("button");
         buttonPay.id = `transaction_${cat.transaction_id}`;
         buttonPay.dataset.id = cat.transaction_id;
@@ -276,7 +269,7 @@ export async function LoadExpenses(monthIndex, year_index) {
         if (statusData == "paid") {
           buttonPay.classList.add(
             "button_set_status",
-            "button_set_status_peding"
+            "button_set_status_pending"
           );
           buttonPay.innerHTML = "Tornar pendente";
         } else {
@@ -299,7 +292,7 @@ export async function LoadExpenses(monthIndex, year_index) {
       if (circle && cat.status === "paid") {
         circle.classList.add("circle_paid");
       } else if (circle && cat.status === "pending") {
-        circle.classList.add("circle_peding");
+        circle.classList.add("circle_pending");
       } else {
         circle.classList.add("circle_revenue");
       }
@@ -334,18 +327,18 @@ document.addEventListener("click", async (e) => {
 
   console.log("Mudando status da transação " + id);
 
-  await SetStatusInTransations(id);
+  await SetStatusInTransactions(id);
   await sumAmountMonth(monthIndex, year_index);
   await sumAtualMonthPaid(monthIndex, year_index);
   await sumAmountMonthRevenue(monthIndex, year_index);
-  await sumAtualMonthPeding(monthIndex, year_index);
+  await sumAtualMonthPending(monthIndex, year_index);
   await LoadExpenses(monthIndex, year_index);
 });
 
 ///////////////////////////////////////////////////////////
 ////////pedindo para o back mudar o status/////////
 //////////////////////////////////////////////////////////
-export async function SetStatusInTransations(id) {
+export async function SetStatusInTransactions(id) {
   const ConfirmStatus = confirm("Você quer realmente mudar o status?");
 
   if (!ConfirmStatus) {
@@ -379,12 +372,12 @@ export async function SetStatusInTransations(id) {
 export async function consultStatus(id) {
   try {
     const response = await fetch(`/api/transactions/transactions/${id}/status`);
-    const status = await response.json(); // status agora é diretamente a string "paid" ou "peding"
+    const status = await response.json(); // status agora é diretamente a string "paid" ou "pending"
 
     console.log("Status da transação", id, "é", status);
     return status;
   } catch (err) {
-    console.error("Error ao consulktar status: ", err.message);
+    console.error("Error ao consultar status: ", err.message);
     return null;
   }
 }
@@ -413,11 +406,11 @@ document.addEventListener("click", async (e) => {
 
     const data = await response.json();
     console.log(data.message);
-    await SetStatusInTransations(id);
+    await SetStatusInTransactions(id);
     await sumAmountMonth(monthIndex, year_index);
     await sumAtualMonthPaid(monthIndex, year_index);
     await sumAmountMonthRevenue(monthIndex, year_index);
-    await sumAtualMonthPeding(monthIndex, year_index);
+    await sumAtualMonthPending(monthIndex, year_index);
     await LoadExpenses(monthIndex, year_index);
   } catch (err) {
     console.error("Erro ao apagar: ", err);

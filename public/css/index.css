@@ -1,18 +1,17 @@
 #replacement {
-  background-color: #d9d9d9;
+  background-color: var(--cinza-900);
 }
-
 #main_content {
   display: flex;
   flex-direction: column;
 
   height: 100%;
   width: 100%;
-  background-color: #374953;
+  background-color: var(--azul-200);
 }
 
 p {
-  font-size: 12px;
+  font-size: 16px;
 }
 button,
 .material-symbols-outlined {
@@ -32,7 +31,6 @@ button,
   flex-direction: row;
   width: 100%;
   justify-content: space-around;
-  line-height: 2rem;
 }
 #aside_menu {
   display: flex;
@@ -55,7 +53,7 @@ button,
   padding: 2rem;
   align-items: center;
   flex-direction: column;
-  background-color: #263940;
+  background-color: var(--azul-200);
   color: #ffffff;
   height: 100%;
   width: 100%;
@@ -124,14 +122,6 @@ button,
   color: #ffffff;
 }
 
-.button_month {
-  background: none;
-  border: none;
-  outline: none;
-  box-shadow: none;
-  cursor: pointer;
-}
-
 .card_pay p {
   color: #000000;
 }
@@ -159,7 +149,7 @@ button,
   align-items: center;
 }
 
-#opcoes {
+#options {
   padding: 0rem;
   opacity: 0;
   transform: scale(0.98);
@@ -177,14 +167,14 @@ button,
   opacity: 0;
 }
 
-#opcoes.open {
+#options.open {
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
   transition: all 0.5s linear 0.5s;
 }
 
-#opcoes ul {
+#options ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -195,7 +185,7 @@ button,
   padding: 0;
 }
 
-#opcoes ul li {
+#options ul li {
   text-decoration: none;
   padding: 0.6rem 2rem;
   color: #ffffff;
@@ -208,42 +198,6 @@ button,
   width: 10rem;
 }
 
-#despesas {
-  background-color: #ff4000;
-  user-select: none;
-  transition: all;
-  transition-duration: 0.5s;
-}
-#receita {
-  background-color: #00c030;
-  user-select: none;
-  transition: all;
-  transition-duration: 0.5s;
-}
-#categoria {
-  background-color: #005eff;
-  transition: all;
-  transition-duration: 0.5s;
-}
-
-#categoria:hover {
-  background-color: #6ba1ff;
-  transition: all;
-  transition-duration: 0.5s;
-}
-
-#despesas:hover {
-  background-color: #ff6a6a;
-  color: #ffffff;
-  transition: all;
-  transition-duration: 0.5s;
-}
-
-#receita:hover {
-  background-color: #58ff82;
-  transition: all;
-  transition-duration: 0.5s;
-}
 .add_up {
   font-size: 35px;
 }
@@ -312,19 +266,22 @@ CSS LOADING
 //////////////////////////////////////////////////////////////////////////*/
 @media screen and (min-width: 1200px) {
   #main_content {
-    background-color: #263940;
+    background-color: var(--azul-200);
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 100vh;
     width: 100vw;
   }
+  p {
+    font-size: 12px;
+  }
   #aside_menu {
     gap: 4px;
   }
   #group_pay {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   #group_total {
     display: flex;
@@ -368,7 +325,7 @@ CSS LOADING
     text-align: center;
   }
 
-  #opcoes ul {
+  #options ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -379,7 +336,7 @@ CSS LOADING
     margin: 0 1.5rem 0rem 0rem;
     padding: 2rem;
     border-radius: 4rem;
-    background-color: #37495399;
+    background-color: var(--azul-400);
     max-width: 66%;
     height: 90%;
   }
@@ -398,6 +355,7 @@ CSS LOADING
     font-size: 16px;
   }
 }
+
 @media screen and (min-width: 1600px) {
   #aside_menu {
     gap: 1.5rem;
@@ -417,8 +375,5 @@ CSS LOADING
   }
   #logo {
     width: 16rem;
-  }
-  #group_pay {
-    width: 80%;
   }
 }

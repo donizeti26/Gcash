@@ -1,21 +1,21 @@
 import { LoadExpenses } from "./index.js";
-import { fecharModal } from "./modal.js";
+import { closeModal } from "./modal.js";
 import { showMonth } from "./calendar.js";
 // agora o HTML já está dentro do modalContainer
 
 export function initExpensesForm() {
-  const question_repet = document.getElementById("question_repet");
+  const question_repeat = document.getElementById("question_repeat");
   var valueEvent;
-  if (question_repet) {
-    const radios = question_repet.querySelectorAll(
-      'input[name="reponse_radio"]'
+  if (question_repeat) {
+    const radios = question_repeat.querySelectorAll(
+      'input[name="response_radio"]'
     );
 
     radios.forEach((radio) => {
       radio.addEventListener("change", (e) => {
         valueEvent = parseInt(e.target.value);
         console.log("Usuário escolheu:", typeof e.target.value, valueEvent);
-        onofOption();
+        onOfOption();
       });
     });
 
@@ -31,7 +31,7 @@ export function initExpensesForm() {
         installments.appendChild(option);
       }
     }
-    function onofOption() {
+    function onOfOption() {
       if (valueEvent === 0) {
         installments.disabled = true;
         installments.value = 1;
@@ -87,12 +87,12 @@ export async function initTransactionForm() {
         console.log("Resposta do servidor: ", data);
 
         if (response.ok) {
-          alert("Transacção cadastrada com sucesso!");
+          alert("Transação cadastrada com sucesso!");
         } else {
           alert("Erro: " + data.error);
         }
 
-        fecharModal();
+        closeModal();
       } catch (err) {
         console.error("Erro no Front: ", err);
         alert("Erro ao enviar transação");
@@ -110,15 +110,15 @@ export async function initTransactionForm() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-//////carregando dados de metodo de pagamento para form.///////////
+//////carregando dados de método de pagamento para form.///////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//CARREGANDO METODOS DE PAGAMENTO REVENUE
+//CARREGANDO MÉTODOS DE PAGAMENTO REVENUE
 
 export async function loadPaymentMethodsRevenue() {
   try {
     const response = await fetch("/api/paymentmethods/paymentmethods/revenue");
-    const paymentmethods = await response.json();
+    const paymentMethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");
 
@@ -126,7 +126,7 @@ export async function loadPaymentMethodsRevenue() {
       selectPayment.innerHTML = `<option value="" disabled="" selected="">Selecionar</option>`;
     }
 
-    paymentmethods.forEach((cat) => {
+    paymentMethods.forEach((cat) => {
       const item = document.createElement("option");
 
       item.value = cat.payment_method_id; // ou cat.id (depende do nome da coluna no banco)
@@ -137,7 +137,7 @@ export async function loadPaymentMethodsRevenue() {
       }
     });
   } catch (err) {
-    console.error("Erro ao carregar metodos de pagamento", err);
+    console.error("Erro ao carregar métodos de pagamento", err);
   }
 }
 
@@ -146,7 +146,7 @@ export async function loadPaymentMethodsRevenue() {
 export async function loadPaymentMethodsExpense() {
   try {
     const response = await fetch("/api/paymentmethods/paymentmethods/expense");
-    const paymentmethods = await response.json();
+    const paymentMethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");
 
@@ -154,7 +154,7 @@ export async function loadPaymentMethodsExpense() {
       selectPayment.innerHTML = `<option value="" disabled="" selected="">Selecionar</option>`;
     }
 
-    paymentmethods.forEach((cat) => {
+    paymentMethods.forEach((cat) => {
       const item = document.createElement("option");
 
       item.value = cat.payment_method_id; // ou cat.id (depende do nome da coluna no banco)
@@ -165,7 +165,7 @@ export async function loadPaymentMethodsExpense() {
       }
     });
   } catch (err) {
-    console.error("Erro ao carregar metodos de pagamento", err);
+    console.error("Erro ao carregar métodos de pagamento", err);
   }
 }
 
@@ -278,25 +278,25 @@ export async function sumAtualMonthPaid(monthIndex, yearIndex) {
   }
 }
 
-export async function sumAtualMonthPeding(monthIndex, yearIndex) {
+export async function sumAtualMonthPending(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
     const response = await fetch(
       `/api/transactions/transactions/pending/${month}/${yearIndex}`
     );
 
-    const transactionsSumPeding = await response.json();
+    const transactionsSumPending = await response.json();
     console.log("TUDO OK AQUI");
 
-    const amount_peding = document.getElementById("amount_peding");
+    const amount_pending = document.getElementById("amount_pending");
 
-    if (amount_peding) {
-      const total = Number(transactionsSumPeding.total) || 0;
+    if (amount_pending) {
+      const total = Number(transactionsSumPending.total) || 0;
       const convertAmount = Number(total).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
-      amount_peding.textContent = `${convertAmount}`;
+      amount_pending.textContent = `${convertAmount}`;
       console.log(`Total não pago no mes de ${month} foi de ${total}`);
     }
   } catch (err) {

@@ -1,11 +1,7 @@
 export function setupTransactionForm() {
   const modal = document.querySelector("#new_modal_js");
   const type = modal.dataset.formType;
-
   const title = document.querySelector("#page_title");
-  const paymentDiv = document
-    .querySelector("#payment_method_id")
-    ?.closest("div");
 
   if (!title) return;
 

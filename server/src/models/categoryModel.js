@@ -1,14 +1,14 @@
 import pool from "../config/db.js";
 
-export async function registerCatergory({
-  name_categorie,
+export async function registerCategory({
+  name_category,
   color_selector,
   icon_selected,
   category_selected,
 }) {
   const result = await pool.query(
     "INSERT INTO categories(name, color, icon, type) VALUES($1, $2, $3, $4) RETURNING*",
-    [name_categorie, color_selector, icon_selected, category_selected]
+    [name_category, color_selector, icon_selected, category_selected]
   );
   return result.rows[0];
 }
