@@ -7,7 +7,7 @@
 
   height: 100%;
   width: 100%;
-  background-color: var(--azul-200);
+  background-color: var(--azul-400);
 }
 
 p {
@@ -38,7 +38,7 @@ button,
   align-items: center;
   flex-direction: column;
   gap: 1rem;
-  width: 80%;
+  width: 100%;
 }
 #pay,
 #no_pay,
@@ -91,7 +91,7 @@ button,
 
 #other_body {
   flex-grow: 1;
-
+  background-color: var(--azul-400);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -213,10 +213,11 @@ button,
 
 #new_modal_js {
   display: flex;
+  position: fixed;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 100lvh;
   background-color: rgb(0 0 0 / 20%);
   backdrop-filter: blur(4px);
 }

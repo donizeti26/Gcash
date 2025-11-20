@@ -32,6 +32,7 @@
   display: flex;
   gap: 0.3rem;
   align-items: center;
+  text-align: initial;
 }
 
 .group_category {
@@ -39,7 +40,7 @@
   justify-content: space-between;
   background-color: var(--input-color);
   transition: background-color 0.2s linear;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
 }

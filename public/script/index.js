@@ -143,7 +143,7 @@ document.addEventListener("click", async (e) => {
     LoadDataAndEditTransaction(transaction);
     setupTransactionForm();
   } catch (err) {
-    console.error("Erro ao buscar transacao", err);
+    console.error("Erro ao buscar transação", err);
   } finally {
     hideLoading();
   }
@@ -155,8 +155,8 @@ document.addEventListener("click", async (e) => {
 async function abrirCategorias() {
   showLoading();
   await openModal("../views/form_categories.html");
+
   loadCategories?.();
-  create_icons?.();
 
   const btnNewCategory = document.getElementById("button_category");
 

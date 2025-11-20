@@ -1,6 +1,6 @@
 export async function openModal(file) {
   const res = await fetch(file);
-
+  overflowHidden(true);
   if (!res.ok) throw new Error(`Falha ao carregar ${file}: ${res.status}`);
   const html = await res.text();
   const modalContainer = document.getElementById("modalContainer");
@@ -34,6 +34,7 @@ export async function openModal(file) {
 
 export function closeModal() {
   document.getElementById("modalContainer").innerHTML = "";
+  overflowHidden(false);
 }
 export function setupModalGlobalListeners() {
   const modalContainer = document.getElementById("modalContainer");
@@ -42,7 +43,7 @@ export function setupModalGlobalListeners() {
   // ESC
   window.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
-      fecharModal();
+      closeModal();
     }
   });
 
@@ -57,7 +58,14 @@ export function setupModalGlobalListeners() {
       other_body.contains(e.target)
     ) {
       closeModal();
-      console.log("FUNCIONANDO");
+      console.log("FUNCIONANDO CLICAR FORA");
     }
   });
+}
+function overflowHidden(component = true) {
+  if (component) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 }

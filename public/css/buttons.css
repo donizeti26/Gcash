@@ -62,7 +62,8 @@
 
 .button_edit,
 .button_remove,
-.button_set_status_pending {
+.button_set_status_pending,
+.button_set_status_paid {
   padding: 0.5rem 1rem;
 }
 .button_edit {
@@ -125,7 +126,7 @@
   align-items: center;
 }
 .button_back_card {
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: rgb(32, 32, 32);
   color: white;
   border-radius: 0.4rem;

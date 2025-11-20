@@ -1,4 +1,5 @@
 const section = document.querySelector("#menu_mobile");
+const formCard = document.querySelector("#form_card");
 const group = document.querySelector("#group_total_resume");
 const resumeMonth = document.querySelector("#resume_month");
 

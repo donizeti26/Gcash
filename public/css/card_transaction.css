@@ -11,6 +11,7 @@
   width: 100%;
   background-color: var(--cinza-900);
   border-radius: 3rem;
+  padding: 1rem;
 }
 .title_date {
   grid-area: title_date;
@@ -18,7 +19,9 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding-left: 0.8rem;
+
+  gap: 0.4rem;
+  padding-bottom: 1.5rem;
 }
 .title_category {
   padding-top: 3rem;
@@ -70,7 +73,7 @@
 }
 .card_text div {
   width: 80%;
-  border-top: 1px solid var(--text-legend);
+  border-top: 1px solid #c3c3c3;
   padding-top: 1rem;
 }
 .group_button_transactions {
@@ -130,6 +133,7 @@
     align-items: start;
     gap: 2px;
     flex-direction: column;
+    padding: 0 0 0 0.8rem;
   }
 
   .title_category {
@@ -164,9 +168,10 @@
   .group_button_transactions {
     grid-area: group_button_transactions;
     display: flex;
+    flex-direction: row;
     justify-content: end;
     align-items: end;
-    flex-wrap: nowrap;
+    width: auto;
   }
   .div_icon_category {
     grid-area: div_icon_category;
@@ -182,8 +187,8 @@
     grid-template-areas:
       "div_icon_category title_date amount_circle"
       "div_icon_category card_text group_button_transactions";
-    grid-template-columns: 4.9rem 4fr 2fr;
-    grid-template-rows: 4rem auto;
+    grid-template-columns: 4.9rem 3fr 3fr;
+    grid-template-rows: 6rem 3fr auto;
     place-items: inherit;
   }
 }
