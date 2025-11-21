@@ -4,7 +4,6 @@ import { setupCalendar, setAtualMonth } from "./calendar.js";
 import { LoadDataAndEditTransaction } from "./edit_transactions.js";
 import { loadCategories, sendCategoryNewCategory } from "./form_expenses.js";
 import {
-  loadCategoryForm,
   loadPaymentMethodsRevenue,
   loadPaymentMethodsExpense,
   initExpensesForm,
@@ -16,6 +15,7 @@ import {
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
 import { setupTitleTransactionForm } from "./form_transactions.js";
+import { loadCategoryFormExpense } from "./form_expenses.js";
 import { loadCategoryFormRevenue } from "./form_revenue.js";
 import { create_icons, testDisplay } from "./icons.js";
 // INICIALIZAÇÕES GLOBAIS
@@ -88,7 +88,7 @@ if (btnRevenue) {
     const modal = document.querySelector("#new_modal_js");
     modal.dataset.formType = "revenue";
 
-    setupTransactionForm();
+    setupTitleTransactionForm();
 
     //carregando
     initTransactionForm?.();
@@ -144,7 +144,11 @@ document.addEventListener("click", async (e) => {
       return;
     }
 
-    await loadCategoryForm();
+    if (category.data.toString() === "expense") {
+      await loadCategoryFormExpense();
+    } else {
+      await loadCategoryFormRevenue();
+    }
     await loadPaymentMethodsExpense?.();
 
     await initExpensesForm();
