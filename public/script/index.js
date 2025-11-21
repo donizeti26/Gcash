@@ -15,7 +15,7 @@ import {
   sumAmountMonth,
 } from "./installments.js";
 import { showLoading, hideLoading } from "./utils.js";
-import { setupTransactionForm } from "./form_transactions.js";
+import { setupTitleTransactionForm } from "./form_transactions.js";
 import { loadCategoryFormRevenue } from "./form_revenue.js";
 import { create_icons, testDisplay } from "./icons.js";
 // INICIALIZAÇÕES GLOBAIS
@@ -115,13 +115,21 @@ document.addEventListener("click", async (e) => {
 
   const id = button.dataset.id; // pegar direto do botão
   console.log("O botão clicado foi da transação", id);
+
+  const categoryModal = await fetch(
+    `/api/transactions/transactionscategory/${id}`
+  );
+  const category = await categoryModal.json();
+
   showLoading();
   await openModal("../views/form_transactions.html");
+
   //definindo que é um formulário de receitas
   const modal = document.querySelector("#new_modal_js");
 
   //tenho que verificar se é expense ou revenue e depois setar typo
-  modal.dataset.formType = "edit_expense";
+
+  modal.dataset.formType = `edit_${category.data.toString()}`;
 
   try {
     const response = await fetch(`/api/transactions/transactions/${id}`);
@@ -130,7 +138,7 @@ document.addEventListener("click", async (e) => {
       return;
     }
     const transaction = await response.json();
-    console.log("Dados da transacao", transaction);
+    console.log("Dados da transação", transaction);
     if (!transaction || !transaction.due_date) {
       console.error("Transação inválida recebida:", transaction);
       return;
@@ -141,7 +149,7 @@ document.addEventListener("click", async (e) => {
 
     await initExpensesForm();
     LoadDataAndEditTransaction(transaction);
-    setupTransactionForm();
+    setupTitleTransactionForm();
   } catch (err) {
     console.error("Erro ao buscar transação", err);
   } finally {
@@ -406,7 +414,7 @@ document.addEventListener("click", async (e) => {
 
     const data = await response.json();
     console.log(data.message);
-    await SetStatusInTransactions(id);
+
     await sumAmountMonth(monthIndex, year_index);
     await sumAtualMonthPaid(monthIndex, year_index);
     await sumAmountMonthRevenue(monthIndex, year_index);

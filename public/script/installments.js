@@ -141,7 +141,7 @@ export async function loadPaymentMethodsRevenue() {
   }
 }
 
-//CARREGANDO METODOS DE PAGAMENTO REVENUE
+//CARREGANDO métodos DE PAGAMENTO REVENUE
 
 export async function loadPaymentMethodsExpense() {
   try {
@@ -219,7 +219,7 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
       console.log(`Total gastos no mes de ${monthIndex}: `, total);
     }
   } catch (err) {
-    console.error("Erro ao carregar total transacoes front", err);
+    console.error("Erro ao carregar total transações front", err);
   }
 }
 
@@ -246,7 +246,7 @@ export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
       console.log(`Total gastos no mes de ${monthIndex}: `, total);
     }
   } catch (err) {
-    console.error("Erro ao carregar total transacoes front", err);
+    console.error("Erro ao carregar total transações front", err);
   }
 }
 

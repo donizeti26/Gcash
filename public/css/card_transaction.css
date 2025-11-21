@@ -154,8 +154,11 @@
 
   .card_text {
     grid-row: card_text;
-    padding-top: 0.7rem;
+    padding-top: 0;
     padding-left: 0.7rem;
+  }
+  .title_category {
+    padding-top: 0;
   }
   .card_text div {
     width: 100%;

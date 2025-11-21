@@ -38,6 +38,20 @@ export async function registerTransactions({
   return result.rows[0];
 }
 
+export async function consultCategory(transaction_id) {
+  const result = await pool.query(
+    `SELECT c.type AS tipo
+FROM transactions AS t INNER JOIN  categories AS c
+ON t.category_id = c.category_id
+WHERE t.transaction_id = $1
+`,
+    [transaction_id]
+  );
+  console.log("ID da transação: ", transaction_id);
+  console.log("Resultado da Query: ", result.rows);
+  return result.rows[0]?.tipo || null;
+}
+
 export async function editTransactions(transaction_id) {
   const result = await pool.query(
     `
@@ -58,8 +72,8 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id whe
     [transaction_id]
   );
 
-  console.log("ID recebido:", transaction_id); // 🧠 ADICIONE ISSO
-  console.log("Resultado da query:", result.rows); // 🧠 ADICIONE ISSO
+  console.log("ID recebido:", transaction_id);
+  console.log("Resultado da query:", result.rows);
   return result.rows[0] || null;
 }
 

@@ -1,6 +1,6 @@
 export function LoadDataAndEditTransaction(transaction) {
   const [dia, mes, ano] = transaction.due_date.split("/");
-  const dataFormatada = `${ano}-${mes}-${dia}`;
+  const dataFormatted = `${ano}-${mes}-${dia}`;
 
   document.getElementById("category_id").value = transaction.category_id;
   document.getElementById("payment_method_id").value =

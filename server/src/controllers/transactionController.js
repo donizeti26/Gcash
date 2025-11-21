@@ -1,6 +1,7 @@
 import {
   getTransactions,
   editTransactions,
+  consultCategory,
   updateStatus,
   consultStatus,
   sumTransactions,
@@ -32,15 +33,30 @@ export async function createTransactionController(req, res) {
   }
 }
 
-export async function editTransactionsController(req, res) {
+export async function consultCategoryController(req, res) {
   try {
     const { transaction_id } = req.params;
-
-    console.log("ID recebido no controller:", transaction_id);
-
     if (!transaction_id) {
       return res.status(400).json({ error: "ID da transação não informado" });
     }
+    console.log("ID que será consultado: ", transaction_id);
+
+    const data = await consultCategory(transaction_id);
+    console.log("Resultado da Query:", data);
+    return res.json({ data });
+  } catch (err) {
+    console.log("Erro ao consultar categoria para editar", err);
+    res.status(500).json({ error: err.message });
+  }
+}
+
+export async function editTransactionsController(req, res) {
+  try {
+    const { transaction_id } = req.params;
+    if (!transaction_id) {
+      return res.status(400).json({ error: "ID da transação não informado" });
+    }
+    console.log("ID recebido no controller:", transaction_id);
 
     const data = await editTransactions(transaction_id);
     console.log("Resultado da Query:", data);

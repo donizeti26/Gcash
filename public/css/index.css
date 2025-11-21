@@ -350,7 +350,9 @@ CSS LOADING
   .item_pay {
     justify-content: space-between;
   }
-
+  #new_modal_js {
+    position: unset;
+  }
   p,
   a {
     font-size: 16px;

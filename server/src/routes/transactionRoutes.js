@@ -2,6 +2,7 @@ import express from "express";
 import {
   getTransactionsController,
   createTransactionController,
+  consultCategoryController,
   editTransactionsController,
   updateStatusController,
   consultStatusController,
@@ -17,7 +18,9 @@ const router = express.Router();
 // Rotas de transações
 router.get("/transactionsGet/:month/:year", getTransactionsController);
 router.post("/transactions", createTransactionController);
+router.get("/transactionscategory/:transaction_id", consultCategoryController);
 router.get("/transactions/:transaction_id", editTransactionsController);
+
 router.patch("/transactions/:transaction_id/status", updateStatusController);
 router.get("/transactions/:transaction_id/status", consultStatusController);
 router.get("/transactions/sum/:month/:year", sumTransactionController);
