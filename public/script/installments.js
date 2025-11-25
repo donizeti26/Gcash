@@ -4,10 +4,10 @@ import { showMonth } from "./calendar.js";
 // agora o HTML já está dentro do modalContainer
 
 export function initExpensesForm() {
-  const question_repeat = document.getElementById("question_repeat");
+  const question_repeated = document.getElementById("question_repeated");
   var valueEvent;
-  if (question_repeat) {
-    const radios = question_repeat.querySelectorAll(
+  if (question_repeated) {
+    const radios = question_repeated.querySelectorAll(
       'input[name="response_radio"]'
     );
 

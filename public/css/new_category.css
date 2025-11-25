@@ -50,7 +50,7 @@
   width: 80%;
   padding: 2rem;
   background-color: var(--white-900);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 #select_icon {

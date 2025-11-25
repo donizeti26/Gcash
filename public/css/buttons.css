@@ -5,7 +5,9 @@
   box-shadow: none;
   cursor: pointer;
 }
-
+.material-symbols-outlined {
+  font-size: 20px;
+}
 #btn_expense {
   background-color: var(--button-color-red);
   user-select: none;
@@ -51,7 +53,7 @@
   border: 1px solid var(--button-color-red);
   transition: all;
   transition-duration: 0.2s;
-  border-radius: 15px;
+  border-radius: 0.5rem;
 }
 .button_remove:hover {
   color: #cecece;
@@ -75,7 +77,7 @@
   transition: all;
   transition-duration: 0.2s;
   padding: 0.5rem 1rem;
-  border-radius: 15px;
+  border-radius: 0.5rem;
 }
 .button_edit:hover {
   color: #cecece;
@@ -91,7 +93,7 @@
   border: 1px solid var(--button-color-green);
   transition: all;
   transition-duration: 0.2s;
-  border-radius: 15px;
+  border-radius: 0.5rem;
 }
 .button_set_status_pending {
   white-space: nowrap;
@@ -102,7 +104,7 @@
   border: 1px solid var(--button-color-yellow-marge);
   transition: all;
   transition-duration: 0.2s;
-  border-radius: 15px;
+  border-radius: 0.5rem;
 }
 .button_set_status_paid:hover {
   color: #cecece;
@@ -144,7 +146,7 @@
   padding: 0.5rem;
   background-color: var(--button-color-red);
   color: white;
-  border-radius: 0.4rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition-property: all;
   transition-duration: 0.5s;
@@ -163,13 +165,13 @@
 #button_transactions {
   background-color: var(--button-color-blue);
   padding: 16px 64px;
-  border-radius: 15px;
+  border-radius: 0.5rem;
   text-decoration: none;
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
   transition-property: all;
-  transition-duration: 0.5s;
+  transition-duration: 300ms;
 }
 
 #buttonLogin:hover,
@@ -185,12 +187,34 @@
   background-color: var(--button-color-green);
   transition-duration: 1s;
   transition-property: background-color;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   color: white;
 }
-
-#button_category:hover {
-  background-color: var(--button-color-green-hover);
+#buttonNewCategory:hover {
+  background-color: var(--button-color-green);
   transition-property: all;
   transition-duration: 0.5s;
+}
+#button_category:hover {
+  background-color: var(--button-color-blue);
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+#options ul li {
+  text-decoration: none;
+  padding: 0.6rem 2rem;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 10rem;
+}
+
+#button_transactions {
+  text-align: center;
+  cursor: pointer;
+  width: 13rem;
 }

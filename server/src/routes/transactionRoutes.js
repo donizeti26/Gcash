@@ -4,6 +4,7 @@ import {
   createTransactionController,
   consultCategoryController,
   editTransactionsController,
+  updateTransactionsController,
   updateStatusController,
   consultStatusController,
   sumTransactionController,
@@ -21,8 +22,12 @@ router.post("/transactions", createTransactionController);
 router.get("/transactionscategory/:transaction_id", consultCategoryController);
 router.get("/transactions/:transaction_id", editTransactionsController);
 
-router.patch("/transactions/:transaction_id/status", updateStatusController);
-router.get("/transactions/:transaction_id/status", consultStatusController);
+router.patch("/transactions/:transaction_id/:status", updateStatusController);
+router.put("/updatetransactions/:transaction_id", updateTransactionsController);
+router.get(
+  "/transactionsConsult/:transaction_id/:status",
+  consultStatusController
+);
 router.get("/transactions/sum/:month/:year", sumTransactionController);
 router.get(
   "/transactions/sum/revenue/:month/:year",

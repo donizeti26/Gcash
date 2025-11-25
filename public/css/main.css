@@ -71,6 +71,7 @@ footer {
 #resume_month.fixed {
   position: fixed;
   height: auto;
+  flex-direction: row;
 }
 #menu_mobile {
   position: relative;

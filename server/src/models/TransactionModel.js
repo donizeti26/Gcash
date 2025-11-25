@@ -47,8 +47,6 @@ WHERE t.transaction_id = $1
 `,
     [transaction_id]
   );
-  console.log("ID da transação: ", transaction_id);
-  console.log("Resultado da Query: ", result.rows);
   return result.rows[0]?.tipo || null;
 }
 
@@ -72,9 +70,34 @@ INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id whe
     [transaction_id]
   );
 
-  console.log("ID recebido:", transaction_id);
-  console.log("Resultado da query:", result.rows);
   return result.rows[0] || null;
+}
+
+export async function updateTransactions(
+  transaction_id,
+  category_id,
+  payment_method_id,
+  due_date,
+  amount,
+  description,
+  status
+) {
+  await pool.query(
+    `UPDATE transactions
+  SET category_id = $1, payment_method_id = $2, due_date = $3,
+amount = $4, description=$5, status=$6
+  where transaction_id = $7`,
+    [
+      category_id,
+      payment_method_id,
+      due_date,
+      amount,
+      description,
+      status,
+      transaction_id,
+    ]
+  );
+  return { message: "Transação atualizado" };
 }
 
 export async function updateStatus(transaction_id, status) {
@@ -95,8 +118,7 @@ export async function consultStatus(transaction_id) {
       SELECT status FROM transactions  WHERE transaction_id = $1`,
     [transaction_id]
   );
-  console.log("ID da transação: ", transaction_id);
-  console.log("Resultado da Query: ", result.rows);
+
   return result.rows[0]?.status || null;
 }
 

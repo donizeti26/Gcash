@@ -54,8 +54,8 @@ export function setupModalGlobalListeners() {
     const other_body = document.getElementById("other_body");
     if (
       e.target === new_modal_js ||
-      resume_month.contains(e.target) ||
-      other_body.contains(e.target)
+      (resume_month && resume_month.contains(e.target)) ||
+      (other_body && other_body.contains(e.target))
     ) {
       closeModal();
       console.log("FUNCIONANDO CLICAR FORA");

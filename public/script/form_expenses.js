@@ -77,6 +77,7 @@ export async function loadCategories() {
     console.error("Erro ao carregar categorias ", err);
   }
 }
+
 export async function loadCategoryFormExpense() {
   try {
     const response = await fetch("/api/categories/categoriesExpense");

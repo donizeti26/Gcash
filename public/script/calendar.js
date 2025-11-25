@@ -40,7 +40,6 @@ export function setupCalendar() {
   // Avançar (GO)
   GO.addEventListener("click", () => {
     ContMonth = ContMonth + 1;
-    console.log("AAAAAAAAAAAAvançando mês, índice atual:", ContMonth);
     if (ContMonth >= 12) {
       ContMonth = 0;
       ContYear = ContYear + 1;
@@ -56,7 +55,7 @@ export function setupCalendar() {
   // Voltar (Back)
   BACK.addEventListener("click", () => {
     ContMonth = ContMonth - 1;
-    console.log("AAAAAAAAAvançando mês, índice atual:", ContMonth);
+
     if (ContMonth < 0) {
       ContMonth = 11;
       ContYear = ContYear - 1;

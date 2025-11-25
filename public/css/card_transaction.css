@@ -10,8 +10,7 @@
   place-items: center;
   width: 100%;
   background-color: var(--cinza-900);
-  border-radius: 3rem;
-  padding: 1rem;
+  border-radius: 1rem;
 }
 .title_date {
   grid-area: title_date;
@@ -84,7 +83,7 @@
 }
 .icon_category {
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 .div_icon_category span {
   color: #fff;
@@ -107,7 +106,7 @@
     width: 100%;
     background-color: var(--cinza-900);
     padding: 2rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
   }
   .header_transaction {
     display: flex;
@@ -191,7 +190,7 @@
       "div_icon_category title_date amount_circle"
       "div_icon_category card_text group_button_transactions";
     grid-template-columns: 4.9rem 3fr 3fr;
-    grid-template-rows: 6rem 3fr auto;
+    grid-template-rows: 4rem 3fr auto;
     place-items: inherit;
   }
 }

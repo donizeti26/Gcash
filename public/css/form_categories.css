@@ -10,7 +10,7 @@
   max-height: 80%;
   color: #000;
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   text-align: center;
   gap: 1rem;
   display: flex;
@@ -18,10 +18,10 @@
 }
 
 #category_body ul {
-  padding: 0;
+  padding: 0 16px 0px 0px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 #category_body ul li {
@@ -40,7 +40,7 @@
   justify-content: space-between;
   background-color: var(--input-color);
   transition: background-color 0.2s linear;
-  padding: 0.5rem;
+  padding: 0.8rem;
   border-radius: 0.5rem;
   cursor: pointer;
 }
@@ -52,6 +52,8 @@
 
 #body_list_categories {
   overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(185, 185, 185) transparent;
 }
 
 #div_button_category {

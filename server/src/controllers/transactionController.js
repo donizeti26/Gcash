@@ -2,6 +2,7 @@ import {
   getTransactions,
   editTransactions,
   consultCategory,
+  updateTransactions,
   updateStatus,
   consultStatus,
   sumTransactions,
@@ -39,10 +40,9 @@ export async function consultCategoryController(req, res) {
     if (!transaction_id) {
       return res.status(400).json({ error: "ID da transação não informado" });
     }
-    console.log("ID que será consultado: ", transaction_id);
 
     const data = await consultCategory(transaction_id);
-    console.log("Resultado da Query:", data);
+
     return res.json({ data });
   } catch (err) {
     console.log("Erro ao consultar categoria para editar", err);
@@ -59,7 +59,6 @@ export async function editTransactionsController(req, res) {
     console.log("ID recebido no controller:", transaction_id);
 
     const data = await editTransactions(transaction_id);
-    console.log("Resultado da Query:", data);
 
     if (!data) {
       return res.status(404).json({ error: "Transação não encontrada" });
@@ -69,6 +68,42 @@ export async function editTransactionsController(req, res) {
   } catch (err) {
     console.error("Erro ao editar transação:", err);
     res.status(500).json({ error: err.message });
+  }
+}
+
+export async function updateTransactionsController(req, res) {
+  try {
+    console.log("REQ PARAMS:", req.params);
+    console.log("REQ BODY:", req.body);
+
+    const { transaction_id } = req.params;
+    const {
+      category_id,
+      payment_method_id,
+      due_date,
+      amount,
+      description,
+      status,
+    } = req.body;
+
+    if (!transaction_id) {
+      return res.status(400).json({ error: "transaction_id é obrigatório" });
+    }
+
+    await updateTransactions(
+      transaction_id,
+      category_id,
+      payment_method_id,
+      due_date,
+      amount,
+      description,
+      status
+    );
+
+    return res.status(200).json({ message: "Atualizado com sucesso" });
+  } catch (err) {
+    console.error("Erro ao atualizar transação: ", err);
+    res.status(500).json({ err: "Erro interno no servidor" });
   }
 }
 

@@ -1,7 +1,10 @@
 import { openModal, closeModal, setupModalGlobalListeners } from "./modal.js";
 /*import { setupUI } from "./ui.js";*/
 import { setupCalendar, setAtualMonth } from "./calendar.js";
-import { LoadDataAndEditTransaction } from "./edit_transactions.js";
+import {
+  LoadDataAndEditTransaction,
+  sendTransactionsEditions,
+} from "./edit_transactions.js";
 import { loadCategories, sendCategoryNewCategory } from "./form_expenses.js";
 import {
   loadPaymentMethodsRevenue,
@@ -24,27 +27,24 @@ setupCalendar();
 setupModalGlobalListeners();
 
 /////////////////////////////////////////////////////
-////////////INICIAR FORM TRANSAÇÕES//////////////
+////////////INICIAR FORM DESPESAS //////////////
 ////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
-  // BOTÃO PARA ABRIR DESPESAS (E INICIALIZAR INSTALLMENTS)
   showLoading();
   const btnExpense = document.getElementById("btn_expense");
   if (btnExpense) {
     btnExpense.addEventListener("click", async () => {
-      //ABRIR MODAL COM HTML DE DESPESAS
-      //DEPOIS QUE O HTML É INJETADO, INICIALIZA A LÓGICA DAS PARCELAS
       await openModal("../views/form_transactions.html");
 
       const modal = document.querySelector("#new_modal_js");
       modal.dataset.formType = "expense";
 
       initTransactionForm?.();
-      loadCategoryForm?.();
+      loadCategoryFormExpense?.();
       loadPaymentMethodsExpense?.();
       initExpensesForm?.();
       setAtualMonth();
-      setupTransactionForm();
+      setupTitleTransactionForm("expense");
 
       const amount = document.getElementById("amount");
 
@@ -88,7 +88,7 @@ if (btnRevenue) {
     const modal = document.querySelector("#new_modal_js");
     modal.dataset.formType = "revenue";
 
-    setupTitleTransactionForm();
+    setupTitleTransactionForm("revenue");
 
     //carregando
     initTransactionForm?.();
@@ -129,7 +129,7 @@ document.addEventListener("click", async (e) => {
 
   //tenho que verificar se é expense ou revenue e depois setar typo
 
-  modal.dataset.formType = `edit_${category.data.toString()}`;
+  document.getElementById("form_card").dataset.formType = id;
 
   try {
     const response = await fetch(`/api/transactions/transactions/${id}`);
@@ -146,14 +146,16 @@ document.addEventListener("click", async (e) => {
 
     if (category.data.toString() === "expense") {
       await loadCategoryFormExpense();
+      await setupTitleTransactionForm("edit_expense");
     } else {
       await loadCategoryFormRevenue();
+      await setupTitleTransactionForm("edit_revenue");
     }
+    await initExpensesForm();
     await loadPaymentMethodsExpense?.();
 
-    await initExpensesForm();
     LoadDataAndEditTransaction(transaction);
-    setupTitleTransactionForm();
+    sendTransactionsEditions();
   } catch (err) {
     console.error("Erro ao buscar transação", err);
   } finally {
@@ -199,13 +201,12 @@ document.addEventListener("click", async (e) => {
 /////////////////////Carregar despesas na tela inicial.//////////////////
 //////////////////////////////////////////////////////////////////////////
 
-export async function LoadExpenses(monthIndex, year_index) {
-  console.log("-LOADEXPENSES-");
+export async function LoadExpenses(monthIndex, yearIndex) {
   const monthForApi = monthIndex + 1;
   showLoading();
   try {
     const response = await fetch(
-      `/api/transactions/transactionsGet/${monthForApi}/${year_index}`
+      `/api/transactions/transactionsGet/${monthForApi}/${yearIndex}`
     );
     const transactions = await response.json();
 
@@ -275,8 +276,9 @@ export async function LoadExpenses(monthIndex, year_index) {
         const buttonPay = document.createElement("button");
         buttonPay.id = `transaction_${cat.transaction_id}`;
         buttonPay.dataset.id = cat.transaction_id;
-        console.log("ID da transação:", id);
-        const res = await fetch(`/api/transactions/transactions/${id}/status`);
+        const res = await fetch(
+          `/api/transactions/transactionsConsult/${id}/status`
+        );
         const statusData = await res.json();
         if (statusData == "paid") {
           buttonPay.classList.add(
@@ -319,38 +321,52 @@ export async function LoadExpenses(monthIndex, year_index) {
     hideLoading();
   }
 }
-const month = document.getElementById("month_index");
-const year = document.getElementById("year_index");
-const monthIndex = Number(month.dataset.id);
-const year_index = Number(year.dataset.id);
+function getCurrentMonthYear() {
+  const monthEl = document.getElementById("month_index");
+  const yearEl = document.getElementById("year_index");
 
-LoadExpenses(monthIndex, year_index);
+  if (!monthEl || !yearEl) {
+    console.warn("⚠ month_index ou year_index ainda não existem no DOM");
+    return null;
+  }
+
+  return {
+    monthIndex: Number(monthEl.dataset.id),
+    yearIndex: Number(yearEl.dataset.id),
+  };
+}
+const { monthIndex, yearIndex } = getCurrentMonthYear();
+
+LoadExpenses(monthIndex, yearIndex);
 
 ////////////////////////////////////////////////////////////////////
 /////////ALTERAR STATUS TRANSACOES//////////////////////
 /////////////////////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {
+  const { monthIndex, yearIndex } = getCurrentMonthYear();
   const button = e.target.closest(".button_set_status");
 
   if (!button) return;
 
+  console.log("NUMERO DO MES::" + monthIndex);
   const id = button.dataset.id;
 
   console.log("Mudando status da transação " + id);
 
   await SetStatusInTransactions(id);
-  await sumAmountMonth(monthIndex, year_index);
-  await sumAtualMonthPaid(monthIndex, year_index);
-  await sumAmountMonthRevenue(monthIndex, year_index);
-  await sumAtualMonthPending(monthIndex, year_index);
-  await LoadExpenses(monthIndex, year_index);
+  await sumAmountMonth(monthIndex, yearIndex);
+  await sumAtualMonthPaid(monthIndex, yearIndex);
+  await sumAmountMonthRevenue(monthIndex, yearIndex);
+  await sumAtualMonthPending(monthIndex, yearIndex);
+  await LoadExpenses(monthIndex, yearIndex);
 });
 
 ///////////////////////////////////////////////////////////
 ////////pedindo para o back mudar o status/////////
 //////////////////////////////////////////////////////////
 export async function SetStatusInTransactions(id) {
+  const { monthIndex, yearIndex } = getCurrentMonthYear();
   const ConfirmStatus = confirm("Você quer realmente mudar o status?");
 
   if (!ConfirmStatus) {
@@ -373,7 +389,7 @@ export async function SetStatusInTransactions(id) {
       }
     );
     if (!response.ok) throw new Error("Erro ao atualizar status");
-    await LoadExpenses();
+    await LoadExpenses(monthIndex, yearIndex);
   } catch (err) {
     console.error("Erro ao atualizar status da transação" + err);
   } finally {
@@ -383,7 +399,9 @@ export async function SetStatusInTransactions(id) {
 
 export async function consultStatus(id) {
   try {
-    const response = await fetch(`/api/transactions/transactions/${id}/status`);
+    const response = await fetch(
+      `/api/transactions/transactionsConsult/${id}/status`
+    );
     const status = await response.json(); // status agora é diretamente a string "paid" ou "pending"
 
     console.log("Status da transação", id, "é", status);
@@ -399,6 +417,7 @@ export async function consultStatus(id) {
 ///////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {
+  const { monthIndex, yearIndex } = getCurrentMonthYear();
   const button = e.target.closest(".button_remove");
   if (!button) return;
 
@@ -412,18 +431,18 @@ document.addEventListener("click", async (e) => {
   console.log("O botão clicado foi da transação", id);
 
   try {
-    const response = await fetch(`api/transactions/${id}`, {
+    const response = await fetch(`/api/transactions/${id}`, {
       method: "DELETE",
     });
 
     const data = await response.json();
     console.log(data.message);
 
-    await sumAmountMonth(monthIndex, year_index);
-    await sumAtualMonthPaid(monthIndex, year_index);
-    await sumAmountMonthRevenue(monthIndex, year_index);
-    await sumAtualMonthPending(monthIndex, year_index);
-    await LoadExpenses(monthIndex, year_index);
+    await sumAmountMonth(monthIndex, yearIndex);
+    await sumAtualMonthPaid(monthIndex, yearIndex);
+    await sumAmountMonthRevenue(monthIndex, yearIndex);
+    await sumAtualMonthPending(monthIndex, yearIndex);
+    await LoadExpenses(monthIndex, yearIndex);
   } catch (err) {
     console.error("Erro ao apagar: ", err);
   }

@@ -27,6 +27,7 @@ button,
   gap: 2rem;
 }
 #group_resume {
+  text-align: center;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -103,7 +104,7 @@ button,
 
 #group_cards {
   justify-content: start;
-  padding: 1rem;
+  padding: 0.5rem;
   overflow-y: auto;
   margin: 1rem;
   display: flex;
@@ -183,19 +184,6 @@ button,
   list-style: none;
   justify-content: center;
   padding: 0;
-}
-
-#options ul li {
-  text-decoration: none;
-  padding: 0.6rem 2rem;
-  color: #ffffff;
-  border-radius: 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 10rem;
 }
 
 .add_up {
@@ -335,8 +323,8 @@ CSS LOADING
   }
   #other_body {
     margin: 0 1.5rem 0rem 0rem;
-    padding: 2rem;
-    border-radius: 4rem;
+    padding: 1rem;
+    border-radius: 1rem;
     background-color: var(--azul-400);
     max-width: 66%;
     height: 90%;
@@ -373,9 +361,7 @@ CSS LOADING
     font-size: 1.3rem;
     text-align: center;
   }
-  #group_cards {
-    padding: 2rem;
-  }
+
   #logo {
     width: 16rem;
   }

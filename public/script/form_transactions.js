@@ -1,6 +1,4 @@
-export function setupTitleTransactionForm() {
-  const modal = document.querySelector("#new_modal_js");
-  const type = modal.dataset.formType;
+export function setupTitleTransactionForm(type) {
   const title = document.querySelector("#page_title");
 
   if (!title) return;
