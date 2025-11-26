@@ -1,0 +1,252 @@
+/*CARD TRANSACTIONS*/
+@media screen and (min-width: 620px) {
+  #resume_month {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1060px) {
+  .title_date strong {
+    font-size: 1.5rem;
+  }
+  .card_pay {
+    width: 100%;
+    background-color: var(--cinza-900);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  .header_transaction {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .title_card,
+  .icon_title,
+  .amount_circle {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .icon_title {
+    gap: 1.2rem;
+  }
+
+  .title_date {
+    grid-area: title_date;
+    display: flex;
+    align-items: start;
+    gap: 2px;
+    flex-direction: column;
+    padding: 0 0 0 0.8rem;
+  }
+
+  .title_category {
+    font-size: 2rem;
+  }
+  .title_date p {
+    color: var(--text-legend);
+  }
+  .amount_circle {
+    grid-area: amount_circle;
+    gap: 0.5rem;
+    display: flex;
+    justify-content: end;
+  }
+  .amount_transaction {
+    font-size: 1.5rem;
+  }
+
+  .card_text {
+    grid-row: card_text;
+    padding-top: 0;
+    padding-left: 0.7rem;
+  }
+  .title_category {
+    padding-top: 0;
+  }
+  .card_text div {
+    width: 100%;
+    padding-top: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .group_button_transactions {
+    grid-area: group_button_transactions;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+    width: auto;
+  }
+  .div_icon_category {
+    grid-area: div_icon_category;
+    border-right: solid 1px var(--text-legend);
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .card_pay {
+    display: grid;
+    grid-template-areas:
+      "div_icon_category title_date amount_circle"
+      "div_icon_category card_text group_button_transactions";
+    grid-template-columns: 4.9rem 3fr 3fr;
+    grid-template-rows: 4rem 3fr auto;
+    place-items: inherit;
+  }
+}
+
+/*FORM CATEGORIES*/
+@media screen and (min-width: 1060px) {
+  #category_body {
+    width: 50%;
+    height: 80%;
+  }
+}
+
+/*FORM TRANSACTIONS*/
+
+@media screen and (min-width: 1060px) {
+  #form_card {
+    width: 50%;
+  }
+}
+
+/*INDEX*/
+
+@media screen and (min-width: 1200px) {
+  #main_content {
+    background-color: var(--azul-200);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+  }
+  p {
+    font-size: 12px;
+  }
+
+  #aside_menu {
+    gap: 4px;
+  }
+  #group_pay {
+    display: flex;
+    justify-content: space-around;
+  }
+  #group_total {
+    display: flex;
+    justify-content: space-between;
+  }
+  #aside_menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  #logo {
+    content: url(../assets/logo.svg);
+    display: flex;
+    width: 10rem;
+  }
+
+  #button_option {
+    width: 50%;
+  }
+  #group_cards {
+    gap: 2rem;
+  }
+
+  #resume_month {
+    flex-direction: column;
+
+    justify-content: space-around;
+    height: 90%;
+    width: 30%;
+    border-radius: unset;
+  }
+
+  #group_pay,
+  #month_value,
+  #revenue {
+    font-size: 1rem;
+    text-align: center;
+  }
+  #month {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  #options ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    justify-content: center;
+  }
+  #other_body {
+    margin: 0 1.5rem 0rem 0rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--azul-400);
+    max-width: 66%;
+    height: 90%;
+  }
+
+  .card_transaction:hover {
+    transition: background-color 0.5s linear;
+    transform: scale(1.01); /* aumenta texto + ícone + caixa */
+    transition: transform 0.3s;
+  }
+  .item_pay {
+    justify-content: space-between;
+  }
+  #new_modal_js {
+    position: unset;
+  }
+  p,
+  a {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  #aside_menu {
+    gap: 1.5rem;
+  }
+  #atual_month {
+    padding-bottom: 4rem;
+  }
+
+  #group_pay,
+  #month_value,
+  #revenue {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  #logo {
+    width: 16rem;
+  }
+}
+
+/*NEW CATEGORY*/
+@media screen and (min-width: 1060px) {
+  #form_new_category {
+    width: 40%;
+  }
+  #header_new_category {
+    display: flex;
+    flex-direction: row;
+  }
+  #edit_category {
+    position: unset;
+  }
+}

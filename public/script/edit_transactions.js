@@ -1,4 +1,4 @@
-import { LoadExpenses } from "./index.js";
+import { LoadExpenses, setFormatMoney } from "./index.js";
 import { showMonth } from "./calendar.js";
 import { closeModal } from "./modal.js";
 
@@ -28,6 +28,12 @@ export function LoadDataAndEditTransaction(transaction) {
   } else {
     document.getElementById("radio_response_owing").checked = true;
   }
+
+  const amount = document.getElementById("amount");
+
+  amount.addEventListener("input", (event) => {
+    setFormatMoney(event);
+  });
 }
 
 export async function sendTransactionsEditions() {
@@ -57,7 +63,7 @@ export async function sendTransactionsEditions() {
     const due_date = document.getElementById("due_date").value;
     const amount = document.getElementById("amount").value;
     const description = document.getElementById("description").value;
-    const transaction_id = newForm.dataset.formType;
+    const transaction_id = form.dataset.formType;
 
     const statusElement = document.querySelector(
       'input[name="response_status"]:checked'

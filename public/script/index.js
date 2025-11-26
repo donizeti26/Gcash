@@ -65,7 +65,7 @@ if (btnCategory) {
   });
 }
 
-async function setFormatMoney(event) {
+export async function setFormatMoney(event) {
   let valor = event.target.value;
   valor = valor.replace(/\D/g, "");
 
@@ -203,7 +203,7 @@ document.addEventListener("click", async (e) => {
 
 export async function LoadExpenses(monthIndex, yearIndex) {
   const monthForApi = monthIndex + 1;
-  showLoading();
+
   try {
     const response = await fetch(
       `/api/transactions/transactionsGet/${monthForApi}/${yearIndex}`
@@ -367,14 +367,17 @@ document.addEventListener("click", async (e) => {
 //////////////////////////////////////////////////////////
 export async function SetStatusInTransactions(id) {
   const { monthIndex, yearIndex } = getCurrentMonthYear();
-  const ConfirmStatus = confirm("Você quer realmente mudar o status?");
+  const ConfirmStatus = await showConfirm({
+    message: "Você quer realmente alterar o status da transação?",
+    theme: "warning",
+  });
 
   if (!ConfirmStatus) {
-    alert("Você cancelou a mudança de status.");
     return;
   }
-  showLoading();
+
   try {
+    showLoading();
     const status = await consultStatus(id);
     const newStatus = status === "paid" ? "pending" : "paid";
 
@@ -421,16 +424,20 @@ document.addEventListener("click", async (e) => {
   const button = e.target.closest(".button_remove");
   if (!button) return;
 
-  const ConfirmStatus = confirm("Você quer realmente apagar essa transação?");
+  const ConfirmStatus = await showConfirm({
+    message: "Você quer realmente apagar essa transação?",
+    theme: "danger",
+  });
 
   if (!ConfirmStatus) {
-    alert("Você cancelou a operação.");
     return;
   }
+
   const id = button.dataset.id; // pegar direto do botão
   console.log("O botão clicado foi da transação", id);
 
   try {
+    showLoading();
     const response = await fetch(`/api/transactions/${id}`, {
       method: "DELETE",
     });
@@ -445,5 +452,39 @@ document.addEventListener("click", async (e) => {
     await LoadExpenses(monthIndex, yearIndex);
   } catch (err) {
     console.error("Erro ao apagar: ", err);
+  } finally {
+    hideLoading();
   }
 });
+
+function showConfirm({ message, theme }) {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("confirm_modal");
+    const bodyModal = document.getElementById("body_modal");
+    const iconModal = document.querySelector("#icon_modal");
+    modal.className = "modal_box";
+    modal.classList.add(theme);
+    switch (theme) {
+      case "danger":
+        iconModal.textContent = "delete_forever";
+        break;
+      case "warning":
+        iconModal.textContent = "notification_important";
+        break;
+    }
+
+    const btnYes = modal.querySelector("#confirm_yes");
+    modal.querySelector("#confirm_message").textContent = message;
+    bodyModal.classList.remove("hidden");
+
+    btnYes.onclick = () => {
+      bodyModal.classList.add("hidden");
+      resolve(true);
+    };
+
+    modal.querySelector("#confirm_no").onclick = () => {
+      bodyModal.classList.add("hidden");
+      resolve(false);
+    };
+  });
+}

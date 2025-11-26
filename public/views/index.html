@@ -16,6 +16,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200"
     />
+
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/buttons.css" />
@@ -25,6 +26,7 @@
 
     <link rel="stylesheet" href="css/card_transaction.css" />
     <link rel="stylesheet" href="css/new_category.css" />
+    <link rel="stylesheet" href="css/media_query.css" />
 
     <title>Gcash</title>
   </head>
@@ -104,6 +106,24 @@
     <div id="loading-overlay" class="hidden">
       <div class="spinner"></div>
       <p>Carregando...</p>
+    </div>
+    <div id="body_modal" class="hidden">
+      <div id="confirm_modal" class="modal danger">
+        <div id="modal_box">
+          <p id="confirm_title">
+            <span id="icon_modal" class="material-symbols-outlined"
+              >delete_forever</span
+            >
+            Atenção
+          </p>
+          <p id="confirm_message"></p>
+
+          <div class="actions">
+            <button id="confirm_yes">Ok</button>
+            <button id="confirm_no">Cancelar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script type="module" src="./script/index.js"></script>

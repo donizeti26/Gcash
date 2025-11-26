@@ -118,18 +118,3 @@
 #display_icon_on span:hover {
   color: #8a8a8a;
 }
-/*//////////////////////////////////////////////////////////////////////////
-//////////////////////////CSS PARA DESKTOP ////////////////////////
-//////////////////////////////////////////////////////////////////////////*/
-@media screen and (min-width: 1060px) {
-  #form_new_category {
-    width: 40%;
-  }
-  #header_new_category {
-    display: flex;
-    flex-direction: row;
-  }
-  #edit_category {
-    position: unset;
-  }
-}
