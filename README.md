@@ -44,8 +44,9 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 
 - HTML5
 - CSS3
-- JavaScript (ES6+)
-- Fetch API (requisições HTTP)
+- JavaScript
+  - Fetch API (requisições HTTP)
+- PgAdmin
 - Figma
 - Draw.io
 - [Material Symbols (Google Icons)](https://fonts.google.com/icons)
