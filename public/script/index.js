@@ -471,6 +471,7 @@ function showConfirm({ message, theme }) {
       case "warning":
         iconModal.textContent = "notification_important";
         break;
+        break;
     }
 
     const btnYes = modal.querySelector("#confirm_yes");

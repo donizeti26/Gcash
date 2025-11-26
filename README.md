@@ -64,29 +64,20 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - [x] Implementar back-end
 
   - [x] Implementar Banco de dados
-  - [ ] CRUD no banco de dados
-
-- [ ] Publicar no **Vercel/GitHub Pages**
+  - [x] CRUD no banco de dados
 
 - [ ] Documentação
   - [ ] Documentação de rotas
-  - [ ] Diagrama de fluxo do banco
-  - [ ] Prototipação da aplicação
-    - [ ] Sobre
-    - [ ] Briefing
-    - [x] Fluxo
-    - [x] Orçamento
-    - [ ] Pesquisa
-      - [x] Concorrentes
-      - [ ] Painel Semântico
-      - [ ] Imagens
-    - [ ] Projeto
+  - [x] Diagrama de fluxo do banco
+  - [x] Prototipação da aplicação
+    - [x] Sobre
+    - [x] Projeto
       - [x] WireFrame
-      - [ ] Interfaces
-        - [ ] Web
-        - [ ] Mobile
-        - [ ] Style Guide
-      - [ ] Protótipo
+      - [x] Interfaces
+        - [x] Web
+        - [x] Mobile
+        - [x] Style Guide
+      - [x] Protótipo
 
 <a id="estrutura"></a>
 
