@@ -209,7 +209,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       `/api/transactions/transactionsGet/${monthForApi}/${yearIndex}`
     );
     const transactions = await response.json();
-
+    console.log(transactions[0]);
     const group_cards = document.getElementById("group_cards");
 
     if (group_cards) {
@@ -236,7 +236,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       item.innerHTML = `
       <div class="title_date">
         <strong class="title_category">${cat.name}</strong>
-        <p>${cat.due_date}</p>
+        <p id="dueDate${cat.transaction_id}"></p>
       </div>
       <div class="div_icon_category">
         <span
@@ -314,6 +314,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       if (group_cards) {
         group_cards.appendChild(item);
       }
+      IsExpired(cat.due_date, cat.transaction_id, cat.type);
     });
   } catch (err) {
     console.error("Erro ao carregar Transações no Index", err);
@@ -321,12 +322,34 @@ export async function LoadExpenses(monthIndex, yearIndex) {
     hideLoading();
   }
 }
+
+function IsExpired(dueDate, id, type) {
+  const [dia, mes, ano] = dueDate.split("/").map(Number);
+  const formatedDueDate = new Date(ano, mes - 1, dia).getTime();
+
+  const agora = Date.now(); // timestamp atual
+  const elementDueDate = document.getElementById(`dueDate${id}`);
+
+  if (type == "expense") {
+    if (formatedDueDate < agora) {
+      elementDueDate.classList.add("due_date_false");
+      elementDueDate.textContent = `Data de vencimento: ${dueDate}`;
+    } else {
+      elementDueDate.classList.add("due_date_true");
+      elementDueDate.textContent = `Data de vencimento: ${dueDate}`;
+    }
+  } else if (type == "revenue") {
+    elementDueDate.classList.add("due_date_revenue");
+    elementDueDate.textContent = `Data do pagamento: ${dueDate}`;
+  }
+}
+
 function getCurrentMonthYear() {
   const monthEl = document.getElementById("month_index");
   const yearEl = document.getElementById("year_index");
 
   if (!monthEl || !yearEl) {
-    console.warn("⚠ month_index ou year_index ainda não existem no DOM");
+    console.warn("month_index ou year_index ainda não existem no DOM");
     return null;
   }
 

@@ -196,3 +196,15 @@ footer {
   justify-content: end;
   gap: 1rem;
 }
+.due_date_false {
+  color: var(--button-color-red);
+  font-size: 0.8rem;
+}
+.due_date_true {
+  color: var(--button-color-green);
+  font-size: 0.8rem;
+}
+.due_date_revenue {
+  color: var(--button-color-blue);
+  font-size: 0.8rem;
+}

@@ -45,9 +45,7 @@
   .title_category {
     font-size: 2rem;
   }
-  .title_date p {
-    color: var(--text-legend);
-  }
+
   .amount_circle {
     grid-area: amount_circle;
     gap: 0.5rem;

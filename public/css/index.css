@@ -67,6 +67,7 @@ button,
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  width: 70%;
 }
 
 #atual_month p {
@@ -121,10 +122,6 @@ button,
 
 .arrow_month:hover {
   color: #ffffff;
-}
-
-.card_pay p {
-  color: #000000;
 }
 
 .card_transaction {
