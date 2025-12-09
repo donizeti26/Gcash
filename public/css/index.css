@@ -67,7 +67,6 @@ button,
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  width: 70%;
 }
 
 #atual_month p {

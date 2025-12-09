@@ -82,7 +82,7 @@
   }
   .div_icon_category {
     grid-area: div_icon_category;
-    border-right: solid 1px var(--text-legend);
+    border-right: solid 1px #7b7b7b33;
 
     display: flex;
     justify-content: start;
@@ -137,6 +137,9 @@
   #group_pay {
     display: flex;
     justify-content: space-around;
+  }
+  #atual_month {
+    width: 70%;
   }
   #group_total {
     display: flex;

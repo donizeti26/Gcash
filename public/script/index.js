@@ -65,15 +65,23 @@ if (btnCategory) {
   });
 }
 
-export async function setFormatMoney(event) {
-  let valor = event.target.value;
+export async function setFormatMoney(varValue) {
+  const valueAmount = document.getElementById("amount");
+  let valor;
+
+  if (varValue instanceof Event) {
+    valor = varValue.target.value;
+  } else if (varValue instanceof HTMLElement) {
+    valor = varValue.value;
+  }
+
   valor = valor.replace(/\D/g, "");
 
   valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
 
   valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-  event.target.value = "R$" + valor;
+  valueAmount.value = "R$" + valor;
   hideLoading();
 }
 
@@ -235,12 +243,13 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
       item.innerHTML = `
       <div class="title_date">
+      
         <strong class="title_category">${cat.name}</strong>
         <p id="dueDate${cat.transaction_id}"></p>
       </div>
       <div class="div_icon_category">
         <span
-          class="material-symbols-outlined icon_category"
+          class="material-symbols-rounded icon_category"
           id="icon_${cat.transaction_id}"
         > ${cat.icon}
         </span>

@@ -52,13 +52,13 @@ export async function loadCategories() {
       item.innerHTML = `
           <div class="group_category">
             <div class="icon_item_category" id="item_category_${cat.category_id}">
-              <span class="material-symbols-outlined">
+              <span class="material-symbols-rounded">
                  ${cat.icon}
               </span> ${cat.name}
             </div>
           <div class="edit_category">
 
-            <span class="edit_document  material-symbols-outlined">
+            <span class="edit_document  material-symbols-rounded">
               edit_document 
             </span>
                           <p> Editar</p>

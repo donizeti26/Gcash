@@ -21,8 +21,19 @@ export function LoadDataAndEditTransaction(transaction) {
   );
 
   document.getElementById("due_date").value = dataFormatted;
-  document.getElementById("amount").value = transaction.amount;
+
+  function setValueAmount() {
+    const valueAmount = document.getElementById("amount");
+    valueAmount.value = transaction.amount;
+    setFormatMoney(valueAmount);
+
+    console.error(valueAmount);
+  }
+
+  setValueAmount();
+
   document.getElementById("description").value = transaction.description;
+
   if (transaction.status === "paid") {
     document.getElementById("radio_response_paid").checked = true;
   } else {
@@ -33,6 +44,7 @@ export function LoadDataAndEditTransaction(transaction) {
 
   amount.addEventListener("input", (event) => {
     setFormatMoney(event);
+    console.log(event);
   });
 }
 
@@ -70,9 +82,14 @@ export async function sendTransactionsEditions() {
     );
     const status = statusElement?.value || null;
 
-    let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
-    amountNumber = parseFloat(amountNumber);
+    let amountNumber = amount
+      .replace("R$", "") // remove somente o R$
+      .replace(/\s/g, "") // remove espaços
+      .replace(/\./g, "") // remove pontos de milhar
+      .replace(",", "."); // troca vírgula por ponto
 
+    amountNumber = parseFloat(amountNumber);
+    console.log("AAAAAAAAAAAAAAAAAAAAA A " + amountNumber);
     try {
       await fetch(`/api/transactions/updatetransactions/${transaction_id}`, {
         method: "PUT",
