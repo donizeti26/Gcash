@@ -1,11 +1,18 @@
-import { openModal, closeModal, setupModalGlobalListeners } from "./modal.js";
+import {
+  openModal,
+  closeModal,
+  setupModalGlobalListeners,
+} from "./modalUtils.js";
 /*import { setupUI } from "./ui.js";*/
-import { setupCalendar, setAtualMonth } from "./calendar.js";
+import { setupCalendar, setAtualMonth } from "./calendarUtils.js";
+
 import {
   LoadDataAndEditTransaction,
   sendTransactionsEditions,
-} from "./edit_transactions.js";
-import { loadCategories, sendCategoryNewCategory } from "./form_expenses.js";
+  setupTitleTransactionForm,
+} from "./transactionsUtils.js";
+
+import { loadCategories, sendCategoryNewCategory } from "./categoriesUtils.js";
 import {
   loadPaymentMethodsRevenue,
   loadPaymentMethodsExpense,
@@ -15,12 +22,13 @@ import {
   sumAtualMonthPending,
   sumAmountMonthRevenue,
   sumAmountMonth,
-} from "./installments.js";
-import { showLoading, hideLoading } from "./utils.js";
-import { setupTitleTransactionForm } from "./form_transactions.js";
-import { loadCategoryFormExpense } from "./form_expenses.js";
-import { loadCategoryFormRevenue } from "./form_revenue.js";
-import { create_icons, testDisplay } from "./icons.js";
+} from "./formTransactionsUtils.js";
+import { showLoading, hideLoading } from "./loadingUtils.js";
+import {
+  loadCategoryFormExpense,
+  loadCategoryFormRevenue,
+} from "./categoriesUtils.js";
+import { testDisplay } from "./iconsUtils.js";
 // INICIALIZAÇÕES GLOBAIS
 
 setupCalendar();
@@ -172,11 +180,11 @@ document.addEventListener("click", async (e) => {
 });
 
 ///////////////////////////////////////////////////////////////
-////////////INICIAR LISTA DE CATEGORIAS//////////////
+////////////MODAL DE CATEGORIAS TELA INICIAL//////////////
 /////////////////////////////////////////////////////////
 async function abrirCategorias() {
   showLoading();
-  await openModal("../views/form_categories.html");
+  await openModal("../views/list_categories.html");
 
   loadCategories?.();
 
@@ -193,7 +201,11 @@ async function abrirCategorias() {
 }
 
 async function abrirNovaCategoria() {
-  await openModal("../views/new_category.html");
+  await openModal("../views/form_category.html");
+  const buttonIcons = document.getElementById("button_icons");
+  buttonIcons.addEventListener("click", async (e) => {
+    testDisplay();
+  });
 
   sendCategoryNewCategory?.();
 }
@@ -372,7 +384,7 @@ const { monthIndex, yearIndex } = getCurrentMonthYear();
 LoadExpenses(monthIndex, yearIndex);
 
 ////////////////////////////////////////////////////////////////////
-/////////ALTERAR STATUS TRANSACOES//////////////////////
+/////////ALTERAR STATUS TRANSAÇÕES//////////////////////
 /////////////////////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {

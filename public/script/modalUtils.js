@@ -14,7 +14,7 @@ export async function openModal(file) {
 
   if (button_category) {
     button_category.addEventListener("click", () => {
-      openModal("../views/new_category.html");
+      openModal("../views/form_category.html");
     });
   }
   if (button_close_card) {

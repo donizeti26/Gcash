@@ -1,5 +1,3 @@
-// icons.js - cria a lista de ícones dinamicamente
-
 export function testDisplay() {
   const test_new_category = document.getElementById("form_new_category");
   const test_display_on = document.getElementById("display_icon_on");

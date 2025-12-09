@@ -1,7 +1,6 @@
 import { LoadExpenses } from "./index.js";
-import { closeModal } from "./modal.js";
-import { showMonth } from "./calendar.js";
-// agora o HTML já está dentro do modalContainer
+import { closeModal } from "./modalUtils.js";
+import { showMonth } from "./calendarUtils.js";
 
 export function initExpensesForm() {
   const question_repeated = document.getElementById("question_repeated");
@@ -14,7 +13,6 @@ export function initExpensesForm() {
     radios.forEach((radio) => {
       radio.addEventListener("change", (e) => {
         valueEvent = parseInt(e.target.value);
-        console.log("Usuário escolheu:", typeof e.target.value, valueEvent);
         onOfOption();
       });
     });
@@ -170,7 +168,7 @@ export async function loadPaymentMethodsExpense() {
 }
 
 //////////////////////////////////////////
-/////////////TOTAL DO MES///////////
+/////////////TOTAL DO ME2S///////////
 //////////////////////////////////////////
 export async function sumAmountMonth(monthIndex, yearIndex) {
   const month = monthIndex + 1;

@@ -1,6 +1,6 @@
 import { LoadExpenses, setFormatMoney } from "./index.js";
-import { showMonth } from "./calendar.js";
-import { closeModal } from "./modal.js";
+import { showMonth } from "./calendarUtils.js";
+import { closeModal } from "./modalUtils.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
@@ -26,8 +26,6 @@ export function LoadDataAndEditTransaction(transaction) {
     const valueAmount = document.getElementById("amount");
     valueAmount.value = transaction.amount;
     setFormatMoney(valueAmount);
-
-    console.error(valueAmount);
   }
 
   setValueAmount();
@@ -120,4 +118,31 @@ export async function sendTransactionsEditions() {
       closeModal(); // ← ISSO AGORA VAI RODAR!
     }
   });
+}
+
+export function setupTitleTransactionForm(type) {
+  const title = document.querySelector("#page_title");
+
+  if (!title) return;
+
+  switch (type) {
+    case "revenue":
+      title.textContent = "Nova Receita";
+      break;
+
+    case "expense":
+      title.textContent = "Nova Despesa";
+      break;
+
+    case "edit_revenue":
+      title.textContent = "Editar Receita";
+      break;
+
+    case "edit_expense":
+      title.textContent = "Editar Despesa";
+      break;
+
+    default:
+      title.textContent = "Nova Transação";
+  }
 }
