@@ -198,14 +198,23 @@ footer {
   gap: 1rem;
 }
 .due_date_false {
-  color: var(--button-color-red);
+  color: white;
   font-size: 0.8rem;
+  background-color: var(--button-color-red);
+  padding: 3px 5px;
+  border-radius: 4px;
 }
 .due_date_true {
-  color: var(--button-color-green);
+  color: white;
   font-size: 0.8rem;
+  background-color: var(--button-color-green);
+  padding: 3px 5px;
+  border-radius: 4px;
 }
 .due_date_revenue {
-  color: var(--button-color-blue);
+  color: white;
   font-size: 0.8rem;
+  background-color: var(--azul-400);
+  border-radius: 4px;
+  padding: 3px 5px;
 }

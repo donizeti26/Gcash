@@ -40,9 +40,8 @@
   justify-content: space-between;
   background-color: var(--input-color);
   transition: background-color 0.2s linear;
-  padding: 0.8rem;
+  padding: 2rem;
   border-radius: 0.5rem;
-  cursor: pointer;
 }
 
 .group_category:hover {

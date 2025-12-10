@@ -1,6 +1,7 @@
 import {
   registerCategory,
   getCategories,
+  getCategory,
   getExpenseCategories,
   getRevenueCategories,
 } from "../models/categoryModel.js";
@@ -29,6 +30,17 @@ export async function getCategoriesController(req, res) {
   } catch (err) {
     console.error("Erro ao buscar categorias: ", err);
     res.status(500).json({ error: err.message });
+  }
+}
+
+export async function getSelectedCategoryController(req, res) {
+  try {
+    const { id } = req.params;
+    const category = await getCategory(id);
+    res.json(category);
+  } catch (error) {
+    console.error("Erro ao buscar a categoria: ", error);
+    res.status(500).json({ error: error.message });
   }
 }
 

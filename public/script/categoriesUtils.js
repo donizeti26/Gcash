@@ -1,3 +1,5 @@
+import { openModal } from "./modalUtils.js";
+
 export function sendCategoryNewCategory() {
   const formNewCategory = document.getElementById("form_new_category");
 
@@ -50,7 +52,7 @@ export async function loadCategories() {
       item.classList.add("category_item");
 
       item.innerHTML = `
-          <div class="group_category">
+          <div class="group_category" ">
             <div class="icon_item_category" id="item_category_${cat.category_id}">
               <span class="material-symbols-rounded">
                  ${cat.icon}
@@ -58,10 +60,12 @@ export async function loadCategories() {
             </div>
           <div class="edit_category">
 
-            <span class="edit_document  material-symbols-rounded">
+            <span class="edit_document  material-symbols-rounded"  data-id="${cat.category_id}">
               edit_document 
             </span>
-                          <p> Editar</p>
+            <span class="delete_forever  material-symbols-rounded"  data-id="${cat.category_id}">
+              delete_forever 
+            </span>
             </div>
           </div>`;
 
@@ -121,5 +125,13 @@ export async function loadCategoryFormRevenue() {
     });
   } catch (err) {
     console.error("Erro ao carregar categorias", err);
+  }
+}
+
+export async function openCategoryEditor(categoryId) {
+  try {
+    await openModal("../views/list_categories.html");
+  } catch (err) {
+    console.error("Erro ao abrir modal de editar categorias", err);
   }
 }

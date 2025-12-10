@@ -63,13 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//BOTÃO CATEGORIA (ABRE O FORM_CATEGORIAS HTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
+//BOTÃO CATEGORIA (ABRE LIST_CATEGORY.HTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
 const btnCategory = document.getElementById("btn_category");
 
 if (btnCategory) {
   btnCategory.addEventListener("click", async () => {
     //ABRIR MODAL COM CATEGORIAS
-    await abrirCategorias();
+    await openListCategory();
   });
 }
 
@@ -122,7 +122,7 @@ if (btnRevenue) {
 }
 
 ///////////////////////////////////////////////////////////////
-/////////FORM EDITAR TRANSACOES///////////////////
+/////////FORM EDITAR TRANSAÇÕES///////////////////
 ///////////////////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {
@@ -179,25 +179,71 @@ document.addEventListener("click", async (e) => {
   }
 });
 
-///////////////////////////////////////////////////////////////
-////////////MODAL DE CATEGORIAS TELA INICIAL//////////////
-/////////////////////////////////////////////////////////
-async function abrirCategorias() {
+///////////////////////////////////////////////////////////////////////
+////////////ABRIR MODAL DE LISTA CATEGORIAS TELA INICIAL//////////////
+/////////////////////////////////////////////////////////////////////
+async function openListCategory() {
   showLoading();
   await openModal("../views/list_categories.html");
 
-  loadCategories?.();
+  await loadCategories?.();
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+
+  const listCategories = document.querySelector("#list_categories");
+  listCategories.addEventListener("click", async (e) => {
+    const editButton = e.target.closest(".edit_document");
+
+    if (editButton) {
+      showLoading();
+
+      console.log(editButton);
+      const id = editButton.dataset.id;
+      console.log(id);
+      if (editButton) {
+        await openModal("../views/form_category.html");
+      }
+      try {
+        const selectedCategory = await fetch(
+          `/api/categories/category/selected/${id}`
+        );
+        const category = await selectedCategory.json();
+
+        const formNewCategory = document.getElementById("form_new_category");
+        const titleModal = formNewCategory.querySelector("#title_modal");
+        const nameCategory = formNewCategory.querySelector("#name_category");
+        const optionNewCategory = formNewCategory.querySelector(
+          "#option_new_category"
+        );
+        const colorSelector = formNewCategory.querySelector("#color_selector");
+        const selectedIcon = formNewCategory.querySelector("#selected_icon");
+        const buttonIcon = formNewCategory.querySelector("#add_reaction");
+
+        titleModal.textContent = "Editando categoria";
+        nameCategory.value = category.name;
+        optionNewCategory.value = category.type;
+        colorSelector.value = category.color;
+        selectedIcon.value = category.icon;
+        buttonIcon.textContent = category.icon;
+
+        console.log(formNewCategory);
+        console.log(category);
+      } catch (err) {
+        console.log("Erro ao buscar a categoria", err);
+      }
+      hideLoading();
+    }
+  });
 
   const btnNewCategory = document.getElementById("button_category");
-
   if (btnNewCategory && !btnNewCategory.dataset.listenerAdded) {
     btnNewCategory.addEventListener("click", async () => {
       await abrirNovaCategoria();
     });
 
     btnNewCategory.dataset.listenerAdded = "true";
-    hideLoading();
   }
+
+  hideLoading();
 }
 
 async function abrirNovaCategoria() {
@@ -214,7 +260,7 @@ document.addEventListener("click", async (e) => {
   const backBtn = e.target.closest(".button_back_card");
   if (!backBtn) return;
   closeModal();
-  await abrirCategorias();
+  await openListCategory();
 });
 
 ////////////////////////////////////////////////////////////////////////////
@@ -460,7 +506,7 @@ export async function consultStatus(id) {
 }
 
 ////////////////////////////////////////////////////////
-/////////APAGAR TRANSACOES///////////////////
+/////////APAGAR TRANSAÇÕES///////////////////
 ///////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {

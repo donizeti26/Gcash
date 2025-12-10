@@ -6,9 +6,9 @@ import {
 } from "./formTransactionsUtils.js";
 
 import { LoadExpenses } from "./index.js";
-/*==========================
-        Controlador de meses
-===========================*/
+/*/////////////////////////////////////
+///////CONTROLADOR DOS MESES //////////
+/////////////////////////////////////*/
 
 const month = [
   "Janeiro",
