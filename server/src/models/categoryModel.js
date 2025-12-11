@@ -39,3 +39,8 @@ export async function getRevenueCategories() {
   );
   return result.rows;
 }
+export async function deleteCategory(id) {
+  const query = "DELETE FROM categories WHERE category_id = $1";
+  const result = await pool.query(query, [id]);
+  return result.rowCount;
+}

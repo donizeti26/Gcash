@@ -12,7 +12,12 @@ import {
   setupTitleTransactionForm,
 } from "./transactionsUtils.js";
 
-import { loadCategories, sendCategoryNewCategory } from "./categoriesUtils.js";
+import {
+  loadCategories,
+  sendCategoryNewCategory,
+  fillCategoryForm,
+  fetchCategory,
+} from "./categoriesUtils.js";
 import {
   loadPaymentMethodsRevenue,
   loadPaymentMethodsExpense,
@@ -192,7 +197,9 @@ async function openListCategory() {
   const listCategories = document.querySelector("#list_categories");
   listCategories.addEventListener("click", async (e) => {
     const editButton = e.target.closest(".edit_document");
+    const deleteButton = e.target.closest(".delete_forever");
 
+    console.log(deleteButton);
     if (editButton) {
       showLoading();
 
@@ -202,35 +209,47 @@ async function openListCategory() {
       if (editButton) {
         await openModal("../views/form_category.html");
       }
+
       try {
-        const selectedCategory = await fetch(
-          `/api/categories/category/selected/${id}`
-        );
-        const category = await selectedCategory.json();
-
-        const formNewCategory = document.getElementById("form_new_category");
-        const titleModal = formNewCategory.querySelector("#title_modal");
-        const nameCategory = formNewCategory.querySelector("#name_category");
-        const optionNewCategory = formNewCategory.querySelector(
-          "#option_new_category"
-        );
-        const colorSelector = formNewCategory.querySelector("#color_selector");
-        const selectedIcon = formNewCategory.querySelector("#selected_icon");
-        const buttonIcon = formNewCategory.querySelector("#add_reaction");
-
-        titleModal.textContent = "Editando categoria";
-        nameCategory.value = category.name;
-        optionNewCategory.value = category.type;
-        colorSelector.value = category.color;
-        selectedIcon.value = category.icon;
-        buttonIcon.textContent = category.icon;
-
-        console.log(formNewCategory);
-        console.log(category);
+        const category = await fetchCategory(id);
+        await fillCategoryForm(category);
       } catch (err) {
-        console.log("Erro ao buscar a categoria", err);
+        console.error("Erro ao buscar a categoria", err);
       }
       hideLoading();
+    }
+    if (deleteButton) {
+      const id = deleteButton.dataset.id;
+
+      const response = await fetch(`/api/transactions/contTransaction/${id}`);
+      const data = await response.json();
+      const totalTransactions = Number(data.total);
+
+      const ConfirmStatus = await DeleteOptions(id, totalTransactions);
+
+      if (!ConfirmStatus) {
+        return;
+      }
+
+      try {
+        showLoading();
+
+        const response = await fetch(`/api/categories/${id}`, {
+          method: "DELETE",
+        });
+
+        const data = await response.json();
+        console.log(data.message);
+
+        await loadCategories();
+        await sumAmountMonth(monthIndex, yearIndex);
+        await sumAtualMonthPaid(monthIndex, yearIndex);
+        await sumAmountMonthRevenue(monthIndex, yearIndex);
+        await sumAtualMonthPending(monthIndex, yearIndex);
+        await LoadExpenses(monthIndex, yearIndex);
+      } catch (err) {
+        console.error("Erro ao buscar a categoria", err);
+      }
     }
   });
 
@@ -299,6 +318,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
         statusTransaction = "Receita";
       }
 
+      const TYPECATEGORY = cat.type == "revenue" ? "Receita" : "Despesa";
       item.innerHTML = `
       <div class="title_date">
       
@@ -322,11 +342,15 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
       <div class="card_text">
         <div>
-          <p><strong>Parcela:</strong> 1/1</p>
+        <p> <strong>Categoria: ${cat.name}</strong></p>
+                  <p> <strong>Tipo:</strong> ${TYPECATEGORY}</p>
+
+          <p><strong>Parcela: ???</strong></p>
           <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
           <p><strong>Status: </strong>${statusTransaction}</p>
           <p> <strong>Descrição: </strong>${cat.description}
           </p>
+
         </div>
       </div>
       <div class="group_button_transactions index_card">
@@ -520,6 +544,8 @@ document.addEventListener("click", async (e) => {
   });
 
   if (!ConfirmStatus) {
+    console.log(ConfirmStatus);
+    console.log("EEEEEEEEE");
     return;
   }
 
@@ -561,7 +587,6 @@ function showConfirm({ message, theme }) {
       case "warning":
         iconModal.textContent = "notification_important";
         break;
-        break;
     }
 
     const btnYes = modal.querySelector("#confirm_yes");
@@ -576,6 +601,29 @@ function showConfirm({ message, theme }) {
     modal.querySelector("#confirm_no").onclick = () => {
       bodyModal.classList.add("hidden");
       resolve(false);
+    };
+  });
+}
+async function DeleteOptions(id, totalTransactions) {
+  await openModal("../views/delete_category_options.html");
+  // await new Promise((resolve) => requestAnimationFrame(resolve));
+
+  const containerTitle = document.getElementById("containerOptionsDelete");
+  const title = containerTitle.querySelector("#contTransactions");
+  title.textContent = totalTransactions;
+  console.log(title);
+
+  return new Promise((resolve) => {
+    const modal = document.getElementById("containerOptionsDelete");
+    modal.querySelector("#buttonCancel").onclick = () => {
+      resolve(false);
+      closeModal();
+      openListCategory();
+    };
+    modal.querySelector("#buttonSetSubmit").onclick = () => {
+      resolve(true);
+      closeModal();
+      openListCategory();
     };
   });
 }

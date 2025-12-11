@@ -12,6 +12,7 @@ import {
   pendingTransactionsController,
   paidTransactionsController,
   deleteTransactionsController,
+  countTransactionsController,
 } from "../controllers/transactionController.js";
 
 const router = express.Router();
@@ -37,5 +38,5 @@ router.get(
 router.get("/transactions/pending/:month/:year", pendingTransactionsController);
 router.get("/transactions/paid/:month/:year", paidTransactionsController);
 router.delete("/:transaction_id", deleteTransactionsController);
-
+router.get("/contTransaction/:id", countTransactionsController);
 export default router;

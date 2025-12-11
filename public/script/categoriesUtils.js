@@ -77,7 +77,37 @@ export async function loadCategories() {
     console.error("Erro ao carregar categorias ", err);
   }
 }
+export async function fillCategoryForm(category) {
+  const formNewCategory = document.getElementById("form_new_category");
+  const titleModal = formNewCategory.querySelector("#title_modal");
+  const nameCategory = formNewCategory.querySelector("#name_category");
+  const optionNewCategory = formNewCategory.querySelector(
+    "#option_new_category"
+  );
+  const colorSelector = formNewCategory.querySelector("#color_selector");
+  const selectedIcon = formNewCategory.querySelector("#selected_icon");
+  const buttonIcon = formNewCategory.querySelector("#add_reaction");
 
+  titleModal.textContent = "Editando categoria";
+  nameCategory.value = category.name;
+  optionNewCategory.value = category.type;
+  colorSelector.value = category.color;
+  selectedIcon.value = category.icon;
+  buttonIcon.textContent = category.icon;
+}
+
+export async function fetchCategory(id) {
+  try {
+    const selectedCategory = await fetch(
+      `/api/categories/category/selected/${id}`
+    );
+    const category = await selectedCategory.json();
+
+    return category;
+  } catch (err) {
+    console.log("Erro ao buscar a categoria", err);
+  }
+}
 export async function loadCategoryFormExpense() {
   try {
     const response = await fetch("/api/categories/categoriesExpense");

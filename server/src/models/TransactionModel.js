@@ -7,6 +7,7 @@ SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
 t.transaction_id  AS transaction_id ,
 c.name AS name,
 t.description AS description,
+c.type as typeCategory,
 t.amount as amount,
 c.color  as color,
 c.icon as icon,
@@ -186,4 +187,11 @@ AND EXTRACT(YEAR FROM due_date) = $2 and c.type = 'revenue'`;
   console.log("Resultado da Query (total do mes):", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
+}
+
+export async function countTransactions({ id }) {
+  const query = `SELECT COUNT(*) AS total_transactions FROM transactions AS t INNER JOIN categories AS c ON t.category_id = c.category_id WHERE t.category_id = $1 `;
+  const result = await pool.query(query, [id]);
+
+  return { total: Number(result.rows[0]?.total_transactions) || 0 };
 }

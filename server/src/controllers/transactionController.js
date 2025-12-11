@@ -11,6 +11,7 @@ import {
   paidTransactions,
   registerTransactions,
   deleteTransactions,
+  countTransactions,
 } from "../models/TransactionModel.js";
 
 export async function getTransactionsController(req, res) {
@@ -185,7 +186,18 @@ export async function sumTransactionRevenueController(req, res) {
     const data = await sumTransactionsRevenue({ month, year });
     res.status(200).json(data);
   } catch (err) {
-    console.error("Erro ao somar as Receitas : ", err);
-    res.status(500).json({ error: err.message });
+    console.error("Erro ao somar as Receitas : ", error);
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export async function countTransactionsController(req, res) {
+  try {
+    const { id } = req.params;
+    const data = await countTransactions({ id });
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Erro ao somar as Receitas : ", error);
+    res.status(500).json({ error: error.message });
   }
 }

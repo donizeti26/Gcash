@@ -14,30 +14,38 @@
         <div>
           <img src="../assets/logo.svg" id="logo" alt="" />
         </div>
-        <div>
-          <img src="../assets/backgroundLogin.png" id="womanBackground" />
-        </div>
+        <div id="imageBackground"></div>
       </div>
       <div id="right_side">
-        <h1>Login</h1>
         <div>
+          <h1 id="titlePage">Login</h1>
           <form action="" id="formLogin">
             <div class="divInput">
-              <label for="inputemail">Seu endereço de email: </label>
+              <label for="inputemail">Endereço de email: </label>
               <input type="text" name="inputEmail" id="inputEmail" />
             </div>
             <div class="divInput">
               <label for="password">Senha</label>
 
-              <input type="password" name="inputPassword" id="inputPassword" />
+              <input
+                type="password"
+                name="inputPassword"
+                id="inputPassword"
+                required
+              />
             </div>
-            <div>
-              <option value=""></option>
-              <a href="">Link aqui</a>
+            <div id="groupLinks">
+              <span id="groupRemember">
+                <input type="radio" name="remember" id="remember" required />
+                <label for="remember">Lembre de mim</label>
+              </span>
+              <span>
+                <a id="forget" href="">Esqueceu a senha?</a>
+              </span>
             </div>
-            <div>
-              <button>Entrar</button>
-              <button>Criar conta</button>
+            <div id="groupButtons">
+              <button id="loginButton">Entrar</button>
+              <button id="singInButton">Criar conta</button>
             </div>
           </form>
         </div>

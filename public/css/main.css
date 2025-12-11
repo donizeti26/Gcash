@@ -142,7 +142,9 @@ footer {
 #confirm_modal.warning {
   background-color: #2f2600;
 }
-
+#confirm_modal.category {
+  background-color: #fff;
+}
 #confirm_modal.danger {
   background-color: #2f0000;
 }
