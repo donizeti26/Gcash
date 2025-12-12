@@ -2,6 +2,7 @@ import {
   openModal,
   closeModal,
   setupModalGlobalListeners,
+  overflowHidden,
 } from "./modalUtils.js";
 /*import { setupUI } from "./ui.js";*/
 import { setupCalendar, setAtualMonth } from "./calendarUtils.js";
@@ -225,7 +226,15 @@ async function openListCategory() {
       const data = await response.json();
       const totalTransactions = Number(data.total);
 
-      const ConfirmStatus = await DeleteOptions(id, totalTransactions);
+      let ConfirmStatus;
+      if (totalTransactions > 0) {
+        ConfirmStatus = await DeleteOptions(id, totalTransactions);
+      } else {
+        ConfirmStatus = await showConfirm({
+          message: "Você quer realmente apagar essa transação?",
+          theme: "danger",
+        });
+      }
 
       if (!ConfirmStatus) {
         return;
@@ -605,7 +614,17 @@ function showConfirm({ message, theme }) {
   });
 }
 async function DeleteOptions(id, totalTransactions) {
-  await openModal("../views/delete_category_options.html");
+  const res = await fetch("../views/delete_category_options.html");
+  overflowHidden(true);
+  if (!res.ok) throw new Error(`Falha ao carregar ${file}: ${res.status}`);
+  const html = await res.text();
+  const deleteCategoryOptions = document.getElementById(
+    "delete_category_options"
+  );
+
+  if (!deleteCategoryOptions)
+    throw new Error("#modaContainer não encontrado na DOM");
+  deleteCategoryOptions.innerHTML = html;
   // await new Promise((resolve) => requestAnimationFrame(resolve));
 
   const containerTitle = document.getElementById("containerOptionsDelete");
@@ -615,15 +634,24 @@ async function DeleteOptions(id, totalTransactions) {
 
   return new Promise((resolve) => {
     const modal = document.getElementById("containerOptionsDelete");
+    const form = modal.querySelector("#formOptionsDelete");
     modal.querySelector("#buttonCancel").onclick = () => {
       resolve(false);
       closeModal();
       openListCategory();
     };
-    modal.querySelector("#buttonSetSubmit").onclick = () => {
+    form.addEventListener("submit", (e) => {
+      // Primeiro: validação nativa
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        form.reportValidity();
+        return;
+      }
       resolve(true);
+
+      e.preventDefault();
       closeModal();
       openListCategory();
-    };
+    });
   });
 }

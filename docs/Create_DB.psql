@@ -38,9 +38,21 @@ CREATE TABLE payment_methods(
 //Criando tabela de Transações
 CREATE TABLE transactions(
 	transaction_id SERIAL PRIMARY KEY,
+
 	user_id INT REFERENCES users(user_id),
-	category_id INT REFERENCES categories(category_id),
-	payment_method_id INT REFERENCES payment_methods(payment_method_id),
+
+	category_id INT,
+	CONSTRAINT fk_categories
+        FOREIGN KEY (category_id)
+        REFERENCES categories(category_id)
+        ON DELETE CASCADE,
+
+	payment_method_id INT,
+	CONSTRAINT fk_payment_methods
+        FOREIGN KEY (payment_method_id)
+        REFERENCES payment_methods (payment_method_id)
+        ON DELETE CASCADE,
+				
 	due_date TIMESTAMPTZ NOT NULL,
 	amount NUMERIC(10,2) NOT NULL,
 	description TEXT NOT NULL,

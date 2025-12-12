@@ -1,0 +1,87 @@
+INSERT INTO users (name, email, password_hash, status) VALUES
+('João Silva', 'joao.silva@example.com', 'a1b2c3d4e5f60718293aaabbccddee1122334455', 'enable'),
+('Maria Ferreira', 'maria.ferreira@example.com', 'bb11cc22dd33ee44ff5500112233445566778899', 'enable'),
+('Paulo Andrade', 'paulo.andrade@example.com', 'ff11223344556677889900aabbccddeeff001122', 'enable'),
+('Ana Oliveira', 'ana.oliveira@example.com', '1234567890abcdef1234567890abcdef12345678', 'enable'),
+('Lucas Pereira', 'lucas.pereira@example.com', 'abcdefabcdefabcdefabcdefabcdefabcdefabcd', 'enable'),
+('Camila Santos', 'camila.santos@example.com', '99887766554433221100ffeeddccbbaa99887766', 'enable'),
+('Rafael Costa', 'rafael.costa@example.com', '11223344556677889900aabbccddeeff11223344', 'enable'),
+('Juliana Rocha', 'juliana.rocha@example.com', 'deadbeefdeadbeefdeadbeefdeadbeefdeadbeef', 'enable'),
+('Bruno Martins', 'bruno.martins@example.com', 'cafebabecafebabecafebabecafebabecafebabe', 'enable'),
+('Patrícia Gomes', 'patricia.gomes@example.com', '00112233445566778899aabbccddeeff00112233', 'enable');
+
+select * from categories
+
+INSERT INTO categories (user_id, name, type, color, icon) VALUES
+(1, 'Alimentação', 'expense', '#FF5733', 'restaurant'),
+(1, 'Supermercado', 'expense', '#8D44AD', 'local_grocery_store'),
+(1, 'Combustível', 'expense', '#E67E22', 'local_gas_station'),
+(1, 'Moradia', 'expense', '#2ECC71', 'house'),
+(1, 'Transporte', 'expense', '#3498DB', 'directions_bus'),
+(1, 'Saúde', 'expense', '#E74C3C', 'local_hospital'),
+(1, 'Farmácia', 'expense', '#C0392B', 'medical_services'),
+(1, 'Roupas', 'expense', '#9B59B6', 'shopping_bag'),
+(1, 'Academia', 'expense', '#1ABC9C', 'fitness_center'),
+(1, 'Jogos', 'expense', '#F1C40F', 'sports_esports'),
+(1, 'Cinema', 'expense', '#D35400', 'theaters'),
+(1, 'Internet', 'expense', '#16A085', 'wifi'),
+(1, 'Telefonia', 'expense', '#2980B9', 'phone_iphone'),
+
+(1, 'Salário', 'revenue', '#27AE60', 'payments'),
+(1, 'Venda de Produtos', 'revenue', '#F39C12', 'shopping_cart');
+
+
+
+
+INSERT INTO transactions (user_id, category_id, payment_method_id, due_date, amount, description, status) VALUES
+(1, 1, 1, '2025-12-29', 42.90, 'Almoço no restaurante', 'pending'),
+(1, 1, 2, '2025-12-29', 18.50, 'Lanche rápido', 'pending'),
+(1, 2, 1, '2025-12-29', 230.00, 'Compras do mês', 'pending'),
+(1, 2, 3, '2025-12-29', 58.90, 'Supermercado extra', 'pending'),
+(1, 3, 1, '2025-12-29', 120.00, 'Gasolina carro', 'pending'),
+(1, 3, 2, '2025-12-29', 20.00, 'Combustível emergencial', 'pending'),
+(1, 4, 2, '2025-12-29', 950.00, 'Aluguel', 'pending'),
+(1, 4, 1, '2025-12-29', 155.00, 'Conta de energia', 'pending'),
+(1, 5, 3, '2025-12-29', 18.00, 'Ônibus diário', 'pending'),
+(1, 6, 1, '2025-12-29', 110.00, 'Consulta médica', 'pending'),
+(1, 7, 2, '2025-12-29', 54.90, 'Remédios farmácia', 'pending'),
+(1, 8, 2, '2025-12-29', 160.00, 'Compra de roupas', 'pending'),
+(1, 9, 1, '2025-12-29', 89.90, 'Mensalidade academia', 'pending'),
+(1, 10, 3, '2025-12-29', 39.90, 'Compra de jogo digital', 'pending'),
+(1, 11, 1, '2025-12-29', 28.00, 'Entrada cinema', 'pending');
+INSERT INTO transactions (user_id, category_id, payment_method_id, due_date, amount, description, status) VALUES
+(1, 1, 1, '2025-12-29', 42.90, 'Almoço no restaurante', 'pending'),
+(1, 1, 2, '2025-12-29', 18.50, 'Lanche rápido', 'pending'),
+(1, 2, 1, '2025-12-29', 230.00, 'Compras do mês', 'pending'),
+(1, 2, 3, '2025-12-29', 58.90, 'Supermercado extra', 'pending'),
+(1, 3, 1, '2025-12-29', 120.00, 'Gasolina carro', 'pending'),
+(1, 3, 2, '2025-12-29', 20.00, 'Combustível emergencial', 'pending'),
+(1, 4, 2, '2025-12-29', 950.00, 'Aluguel', 'pending'),
+(1, 4, 1, '2025-12-29', 155.00, 'Conta de energia', 'pending'),
+(1, 5, 3, '2025-12-29', 18.00, 'Ônibus diário', 'pending'),
+(1, 6, 1, '2025-12-29', 110.00, 'Consulta médica', 'pending'),
+(1, 7, 2, '2025-12-29', 54.90, 'Remédios farmácia', 'pending'),
+(1, 8, 2, '2025-12-29', 160.00, 'Compra de roupas', 'pending'),
+(1, 9, 1, '2025-12-29', 89.90, 'Mensalidade academia', 'pending'),
+(1, 10, 3, '2025-12-29', 39.90, 'Compra de jogo digital', 'pending'),
+(1, 11, 1, '2025-12-29', 28.00, 'Entrada cinema', 'pending');
+
+
+
+
+INSERT INTO transactions (user_id, category_id, payment_method_id, due_date, amount, description, status) VALUES
+(1, 14, 1, '2025-12-29', 3500.00, 'Salário mensal', 'pending'),
+(1, 14, 1, '2025-12-29', 500.00, 'Bônus mensal', 'pending'),
+(1, 15, 2, '2025-12-29', 250.00, 'Venda de camiseta', 'pending'),
+(1, 15, 3, '2025-12-29', 120.00, 'Venda de livro usado', 'pending'),
+(1, 15, 1, '2025-12-29', 90.00, 'Venda de acessórios', 'pending'),
+(1, 14, 2, '2025-12-29', 1300.00, 'Pagamento extra', 'pending'),
+(1, 15, 1, '2025-12-29', 300.00, 'Venda de peças', 'pending'),
+(1, 14, 3, '2025-12-29', 420.00, 'Complemento salarial', 'pending'),
+(1, 15, 2, '2025-12-29', 150.00, 'Venda via marketplace', 'pending'),
+(1, 14, 1, '2025-12-29', 200.00, 'Reembolso corporativo', 'pending'),
+(1, 15, 3, '2025-12-29', 70.00, 'Venda item doméstico', 'pending'),
+(1, 15, 1, '2025-12-29', 45.00, 'Venda acessório pequeno', 'pending'),
+(1, 14, 2, '2025-12-29', 180.00, 'Rendimento financeiro', 'pending'),
+(1, 15, 2, '2025-12-29', 55.00, 'Venda simples', 'pending'),
+(1, 14, 1, '2025-12-29', 4000.00, 'Salário variável', 'pending');

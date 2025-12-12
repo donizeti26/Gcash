@@ -195,6 +195,10 @@ button,
   width: 30%;
 }
 
+#delete_category_options {
+  position: absolute;
+}
+
 #new_modal_js {
   display: flex;
   position: fixed;

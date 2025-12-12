@@ -62,7 +62,7 @@ export function setupModalGlobalListeners() {
     }
   });
 }
-function overflowHidden(component = true) {
+export function overflowHidden(component = true) {
   if (component) {
     document.body.style.overflow = "hidden";
   } else {

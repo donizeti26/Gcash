@@ -68,3 +68,7 @@
   border-radius: 0.5rem;
   cursor: pointer;
 }
+#groupOptionsChangeCategory {
+  padding: 0 0 0 3rem;
+  font-size: 0.8rem;
+}
