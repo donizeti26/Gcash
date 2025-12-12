@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/main.css" />
-
+    <link rel="icon" href="./assets/favicon.svg" />
     <link rel="stylesheet" href="../css/login.css" />
     <title>Login</title>
   </head>
@@ -17,39 +18,53 @@
         <div id="imageBackground"></div>
       </div>
       <div id="right_side">
-        <div>
+        <div id="contentRightSid">
           <h1 id="titlePage">Login</h1>
           <form action="" id="formLogin">
-            <div class="divInput">
-              <label for="inputemail">Endereço de email: </label>
-              <input type="text" name="inputEmail" id="inputEmail" />
-            </div>
-            <div class="divInput">
-              <label for="password">Senha</label>
+            <label for="inputEmail">
+              <div id="divInputEmail">
+                Endereço de email:
+                <input type="text" name="inputEmail" id="inputEmail" />
+              </div>
+            </label>
+            <label for="inputPassword">
+              <div id="divInputPassword">
+                Senha
 
-              <input
-                type="password"
-                name="inputPassword"
-                id="inputPassword"
-                required
-              />
-            </div>
-            <div id="groupLinks">
-              <span id="groupRemember">
-                <input type="radio" name="remember" id="remember" required />
-                <label for="remember">Lembre de mim</label>
-              </span>
-              <span>
-                <a id="forget" href="">Esqueceu a senha?</a>
-              </span>
-            </div>
-            <div id="groupButtons">
-              <button id="loginButton">Entrar</button>
-              <button id="singInButton">Criar conta</button>
+                <input
+                  type="password"
+                  name="inputPassword"
+                  id="inputPassword"
+                  required
+                />
+              </div>
+            </label>
+
+            <div id="linksAndButtons">
+              <div id="groupLinks">
+                <span id="groupRemember">
+                  <label for="remember" id="labelRemember">
+                    <input
+                      type="radio"
+                      name="remember"
+                      id="remember"
+                      required
+                    />Lembre de mim</label
+                  >
+                </span>
+                <span>
+                  <a id="forget" href="">Esqueceu a senha?</a>
+                </span>
+              </div>
+              <div id="groupButtons">
+                <button id="loginButton">Entrar</button>
+                <button id="singInButton">Criar conta</button>
+              </div>
             </div>
           </form>
         </div>
       </div>
     </main>
   </body>
+  <script type="module" src="../script/loginUtils.js"></script>
 </html>

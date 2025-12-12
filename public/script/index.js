@@ -7,6 +7,7 @@ import {
 /*import { setupUI } from "./ui.js";*/
 import { setupCalendar, setAtualMonth } from "./calendarUtils.js";
 
+import { selectRadioDeleteCategory } from "./logicIndex.js";
 import {
   LoadDataAndEditTransaction,
   sendTransactionsEditions,
@@ -196,6 +197,7 @@ async function openListCategory() {
   await new Promise((resolve) => requestAnimationFrame(resolve));
 
   const listCategories = document.querySelector("#list_categories");
+
   listCategories.addEventListener("click", async (e) => {
     const editButton = e.target.closest(".edit_document");
     const deleteButton = e.target.closest(".delete_forever");
@@ -637,8 +639,8 @@ async function DeleteOptions(id, totalTransactions) {
     const form = modal.querySelector("#formOptionsDelete");
     modal.querySelector("#buttonCancel").onclick = () => {
       resolve(false);
-      closeModal();
-      openListCategory();
+      deleteCategoryOptions.innerHTML = "";
+      overflowHidden(false);
     };
     form.addEventListener("submit", (e) => {
       // Primeiro: validação nativa

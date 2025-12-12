@@ -34,6 +34,9 @@ app.use("/api/paymentmethods", paymentRoutes);
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/views/index.html"));
 });
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/views/login.html"));
+});
 
 // Start server
 const PORT = process.env.PORT || 3000;
