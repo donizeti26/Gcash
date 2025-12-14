@@ -13,7 +13,13 @@ export async function registerCategory({
   return result.rows[0];
 }
 
-export async function getCategories() {
+export async function getCategories(type) {
+  if (type) {
+    const result = await pool.query("SELECT * FROM categories WHERE type=$1", [
+      type,
+    ]);
+    return result.rows;
+  }
   const result = await pool.query("SELECT * FROM categories");
   return result.rows;
 }
@@ -26,19 +32,6 @@ export async function getCategory(id) {
   return result.rows[0];
 }
 
-export async function getExpenseCategories() {
-  const result = await pool.query(
-    "SELECT * FROM categories WHERE  type='expense'"
-  );
-  return result.rows;
-}
-
-export async function getRevenueCategories() {
-  const result = await pool.query(
-    "SELECT * FROM categories  WHERE  type='revenue'"
-  );
-  return result.rows;
-}
 export async function deleteCategory(id) {
   const query = "DELETE FROM categories WHERE category_id = $1";
   const result = await pool.query(query, [id]);

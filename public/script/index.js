@@ -140,7 +140,7 @@ document.addEventListener("click", async (e) => {
   console.log("O botão clicado foi da transação", id);
 
   const categoryModal = await fetch(
-    `/api/transactions/transactionscategory/${id}`
+    `/api/transactions/transactionsCategory/${id}`
   );
   const category = await categoryModal.json();
 
@@ -245,7 +245,7 @@ async function openListCategory() {
       try {
         showLoading();
 
-        const response = await fetch(`/api/categories/${id}`, {
+        const response = await fetch(`/api/categories/categories/${id}`, {
           method: "DELETE",
         });
 
@@ -586,6 +586,8 @@ document.addEventListener("click", async (e) => {
 
 function showConfirm({ message, theme }) {
   return new Promise((resolve) => {
+    overflowHidden(true);
+
     const modal = document.getElementById("confirm_modal");
     const bodyModal = document.getElementById("body_modal");
     const iconModal = document.querySelector("#icon_modal");

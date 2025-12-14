@@ -4,15 +4,53 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  background-color: #263940;
+  background-color: var(--azul-400);
 }
 main {
   display: flex;
+  flex-direction: column;
+
   width: 100%;
   height: 100%;
+  justify-content: space-evenly;
 }
 input {
   font-size: 1rem;
+}
+#contentRightSid {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#imageBackground {
+  display: none;
+}
+#areaLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#logo {
+  width: 242.15px;
+  height: 109px;
+}
+#right_side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#formLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#titlePage {
+  color: var(--white-900);
 }
 #divInputEmail,
 #divInputPassword {
@@ -23,29 +61,89 @@ input {
   flex-direction: column;
   align-items: self-start;
   border-radius: 10px;
-}
-#divInputEmail.focusOn,
-#divInputPassword.focusOn {
-  border-left: 16px solid var(--azul-400);
-  padding-left: 10px;
-}
-#imageBackground {
-  background-image: url(../assets/backgroundLogin.png);
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  opacity: 0.2;
+  background-color: #fff;
 }
 
+#inputEmail,
+#inputPassword {
+  outline: none;
+  width: 100%;
+}
+#linksAndButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#groupButtons,
+#groupLinks {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+#groupButtons {
+  gap: 1rem;
+  flex-direction: column;
+}
+#groupRemember {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-900);
+}
+
+#remember {
+  margin-right: 0.5rem;
+}
+#singInButton {
+  border: none;
+  text-decoration: none;
+  padding: 1rem 4rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  color: var(--azul-400);
+  border: 0.5px solid var(--azul-400);
+  outline-offset: -1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#loginButton {
+  text-decoration: none;
+  padding: 1rem 4rem;
+  background-color: var(--azul-400);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0.5px solid #fff;
+}
 @media screen and (min-width: 1060px) {
+  main {
+    flex-direction: row;
+  }
+  #divInputEmail,
+  #divInputPassword {
+    border-radius: 10px;
+  }
+  #divInputEmail.focusOn,
+  #divInputPassword.focusOn {
+    border-left: 16px solid var(--azul-400);
+    padding-left: 10px;
+  }
+  #imageBackground {
+    display: block;
+    background-image: url(../assets/backgroundLogin.png);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+  }
+
   #right_side {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     background-color: #fff;
     width: 50%;
-    gap: 2rem;
   }
   #contentRightSid {
     width: 60%;
@@ -94,55 +192,18 @@ input {
     outline: none;
     width: 100%;
   }
-  #formLogin {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  #linksAndButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  #groupButtons,
-  #groupLinks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
+  #groupButtons {
+    flex-direction: row;
   }
   #groupRemember {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
+    color: var(--text-default);
   }
   #forget {
     text-decoration: none;
     color: var(--button-color-blue);
   }
-  #singInButton {
-    border: none;
-    text-decoration: none;
-    padding: 1rem 4rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    color: var(--azul-400);
-    border: 0.5px solid var(--azul-400);
-    outline-offset: -1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
+
   #loginButton {
     border: none;
-    text-decoration: none;
-    padding: 1rem 4rem;
-    background-color: var(--azul-400);
-    border-radius: 0.5rem;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
   }
 }

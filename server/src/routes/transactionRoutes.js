@@ -20,11 +20,11 @@ const router = express.Router();
 // Rotas de transações
 router.get("/transactionsGet/:month/:year", getTransactionsController);
 router.post("/transactions", createTransactionController);
-router.get("/transactionscategory/:transaction_id", consultCategoryController);
+router.get("/transactionsCategory/:transaction_id", consultCategoryController);
 router.get("/transactions/:transaction_id", editTransactionsController);
 
 router.patch("/transactions/:transaction_id/:status", updateStatusController);
-router.put("/updatetransactions/:transaction_id", updateTransactionsController);
+router.put("/updateTransactions/:transaction_id", updateTransactionsController);
 router.get(
   "/transactionsConsult/:transaction_id/:status",
   consultStatusController

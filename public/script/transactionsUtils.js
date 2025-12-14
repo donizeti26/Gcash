@@ -4,7 +4,7 @@ import { closeModal } from "./modalUtils.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
-    "ID DA CATEGORIA DA TRANSACAO: " + typeof transaction.category_id
+    "ID DA CATEGORIA DA TRANSAÇÃO: " + typeof transaction.category_id
   );
 
   const [dia, mes, ano] = transaction.due_date.split("/");
@@ -89,7 +89,7 @@ export async function sendTransactionsEditions() {
     amountNumber = parseFloat(amountNumber);
     console.log("AAAAAAAAAAAAAAAAAAAAA A " + amountNumber);
     try {
-      await fetch(`/api/transactions/updatetransactions/${transaction_id}`, {
+      await fetch(`/api/transactions/updateTransactions/${transaction_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

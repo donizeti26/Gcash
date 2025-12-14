@@ -2,8 +2,6 @@ import {
   registerCategory,
   getCategories,
   getCategory,
-  getExpenseCategories,
-  getRevenueCategories,
   deleteCategory,
 } from "../models/categoryModel.js";
 
@@ -18,17 +16,18 @@ export async function registerCategoryController(req, res) {
       category_selected,
     });
     res.status(201).json(category);
-  } catch (err) {
+  } catch (error) {
     console.error("Erro ao cadastrar categoria: ", error);
     res.status(500).json({ error: error.message });
   }
 }
 
 export async function getCategoriesController(req, res) {
+  const { type } = req.query;
   try {
-    const categories = await getCategories();
-    res.json(categories);
-  } catch (err) {
+    const categories = await getCategories(type);
+    res.status(200).json(categories);
+  } catch (error) {
     console.error("Erro ao buscar categorias: ", error);
     res.status(500).json({ error: error.message });
   }
@@ -41,26 +40,6 @@ export async function getSelectedCategoryController(req, res) {
     res.json(category);
   } catch (error) {
     console.error("Erro ao buscar a categoria: ", error);
-    res.status(500).json({ error: error.message });
-  }
-}
-
-export async function getExpenseCategoriesController(req, res) {
-  try {
-    const categories = await getExpenseCategories();
-    res.json(categories);
-  } catch (err) {
-    console.error("Erro ao buscar categorias de despesas: ", error);
-    res.status(500).json({ error: error.message });
-  }
-}
-
-export async function getRevenueCategoriesController(req, res) {
-  try {
-    const categories = await getRevenueCategories();
-    res.json(categories);
-  } catch (err) {
-    console.error("Erro ao buscar categorias de receita", error);
     res.status(500).json({ error: error.message });
   }
 }

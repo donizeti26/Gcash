@@ -16,7 +16,7 @@ export function sendCategoryNewCategory() {
       const category_selected = option_new_category.value;
 
       try {
-        const response = await fetch("/api/categories/categories", {
+        const response = await fetch("/api/categories", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -39,7 +39,7 @@ export function sendCategoryNewCategory() {
 
 export async function loadCategories() {
   try {
-    const response = await fetch("/api/categories/categories");
+    const response = await fetch("/api/categories");
     const categories = await response.json();
 
     const list = document.getElementById("list_categories");
@@ -98,9 +98,7 @@ export async function fillCategoryForm(category) {
 
 export async function fetchCategory(id) {
   try {
-    const selectedCategory = await fetch(
-      `/api/categories/category/selected/${id}`
-    );
+    const selectedCategory = await fetch(`/api/categories/categories/${id}`);
     const category = await selectedCategory.json();
 
     return category;
@@ -110,7 +108,7 @@ export async function fetchCategory(id) {
 }
 export async function loadCategoryFormExpense() {
   try {
-    const response = await fetch("/api/categories/categoriesExpense");
+    const response = await fetch("/api/categories?type=expense");
     const categories = await response.json();
 
     const select = document.getElementById("category_id");
@@ -135,7 +133,7 @@ export async function loadCategoryFormExpense() {
 
 export async function loadCategoryFormRevenue() {
   try {
-    const response = await fetch("/api/categories/categoriesRevenue");
+    const response = await fetch("/api/categories?type=revenue");
     const categories = await response.json();
 
     const select = document.getElementById("category_id");

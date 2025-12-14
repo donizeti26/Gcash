@@ -7,7 +7,7 @@ import {
 
 const router = express.Router();
 
-router.get("/paymentmethods/expense", getPaymentMethodsExpensesController);
-router.get("/paymentmethods/revenue", getPaymentMethodsRevenueController);
+router.get("/paymentMethods/expense", getPaymentMethodsExpensesController);
+router.get("/paymentMethods/revenue", getPaymentMethodsRevenueController);
 
 export default router;
