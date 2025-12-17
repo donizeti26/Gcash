@@ -68,7 +68,7 @@ export async function initTransactionForm() {
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
       amountNumber = parseFloat(amountNumber);
       try {
-        const response = await fetch("/api/transactions/transactions", {
+        const response = await fetch("/api/transactions/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -115,7 +115,7 @@ export async function initTransactionForm() {
 
 export async function loadPaymentMethodsRevenue() {
   try {
-    const response = await fetch("/api/paymentMethods/paymentMethods/revenue");
+    const response = await fetch("/api/payment-methods/paymentMethods/revenue");
     const paymentMethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");
@@ -143,7 +143,7 @@ export async function loadPaymentMethodsRevenue() {
 
 export async function loadPaymentMethodsExpense() {
   try {
-    const response = await fetch("/api/paymentMethods/paymentMethods/expense");
+    const response = await fetch("/api/payment-methods/paymentMethods/expense");
     const paymentMethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");
@@ -174,7 +174,7 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
     const response = await fetch(
-      `/api/transactions/transactions/sum/${month}/${yearIndex}`
+      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=sum`
     );
     const transactionsSum = await response.json();
 
@@ -201,7 +201,7 @@ export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
     const response = await fetch(
-      `/api/transactions/transactions/sum/revenue/${month}/${yearIndex}`
+      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=pending`
     );
     const transactionsSum = await response.json();
 
@@ -227,7 +227,7 @@ export async function sumAtualMonthPaid(monthIndex, yearIndex) {
     console.log("Month no front:", month);
     console.log("Year no front:", yearIndex);
     const response = await fetch(
-      `/api/transactions/transactions/paid/${month}/${yearIndex}`
+      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=paid`
     );
 
     const transactionsSumPaid = await response.json();
@@ -253,7 +253,7 @@ export async function sumAtualMonthPending(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
     const response = await fetch(
-      `/api/transactions/transactions/pending/${month}/${yearIndex}`
+      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=revenue`
     );
 
     const transactionsSumPending = await response.json();

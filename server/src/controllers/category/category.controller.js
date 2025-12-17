@@ -1,9 +1,8 @@
 import {
   registerCategory,
   getCategories,
-  getCategory,
   deleteCategory,
-} from "../models/categoryModel.js";
+} from "../../models/category/index.js";
 
 export async function registerCategoryController(req, res) {
   const { name_category, color_selector, icon_selected, category_selected } =
@@ -29,17 +28,6 @@ export async function getCategoriesController(req, res) {
     res.status(200).json(categories);
   } catch (error) {
     console.error("Erro ao buscar categorias: ", error);
-    res.status(500).json({ error: error.message });
-  }
-}
-
-export async function getSelectedCategoryController(req, res) {
-  try {
-    const { id } = req.params;
-    const category = await getCategory(id);
-    res.json(category);
-  } catch (error) {
-    console.error("Erro ao buscar a categoria: ", error);
     res.status(500).json({ error: error.message });
   }
 }

@@ -1,12 +1,13 @@
 // src/routes/paymentRoutes.js
-import express from "express";
+import Router from "express";
 import {
   getPaymentMethodsExpensesController,
   getPaymentMethodsRevenueController,
-} from "../controllers/paymentController.js";
+} from "../../controllers/payment-method/index.js";
 
-const router = express.Router();
+const router = Router();
 
+/* QUERIES */
 router.get("/paymentMethods/expense", getPaymentMethodsExpensesController);
 router.get("/paymentMethods/revenue", getPaymentMethodsRevenueController);
 

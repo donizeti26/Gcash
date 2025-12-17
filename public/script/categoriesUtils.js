@@ -98,7 +98,7 @@ export async function fillCategoryForm(category) {
 
 export async function fetchCategory(id) {
   try {
-    const selectedCategory = await fetch(`/api/categories/categories/${id}`);
+    const selectedCategory = await fetch(`/api/categories/category/${id}`);
     const category = await selectedCategory.json();
 
     return category;

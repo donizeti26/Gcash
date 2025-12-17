@@ -1,14 +1,22 @@
-import express from "express";
+import { Router } from "express";
 
 import {
   registerCategoryController,
   getCategoriesController,
   getSelectedCategoryController,
   deleteCategoryController,
-} from "../controllers/categoryController.js";
+} from "../../controllers/category/index.js";
 
-const router = express.Router();
+/**
+ * @swagger
+ * tags:
+ * name: Categories
+ * description: Operações relacionadas a transações
+ */
 
+const router = Router();
+
+/* CRUD */
 router.post("/", registerCategoryController);
 /**
  * @swagger
@@ -99,7 +107,38 @@ router.get("/", getCategoriesController);
  *         description: Erro interno do servidor
  */
 
+router.delete("/categories/:id", deleteCategoryController);
+
+/**
+ * @swagger
+ * /api/categories/{id}:
+ *   delete:
+ *     tags: [Categories]
+ *     summary: Remove uma categoria
+ *     description: Remove uma categoria pelo ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID da categoria
+ *     responses:
+ *       200:
+ *         description: Categoria removida com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Categoria removida com sucesso
+ */
+
+/* QUERIES */
 router.get("/category/:id", getSelectedCategoryController);
+
 /**
  * @swagger
  * /api/categories/category/{id}:
@@ -136,35 +175,6 @@ router.get("/category/:id", getSelectedCategoryController);
  *         description: Categoria não encontrada
  *       500:
  *         description: Erro interno do servidor
- */
-
-router.delete("/categories/:id", deleteCategoryController);
-
-/**
- * @swagger
- * /api/categories/{id}:
- *   delete:
- *     tags: [Categories]
- *     summary: Remove uma categoria
- *     description: Remove uma categoria pelo ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID da categoria
- *     responses:
- *       200:
- *         description: Categoria removida com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Categoria removida com sucesso
  */
 
 export default router;

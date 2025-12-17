@@ -41,9 +41,8 @@ import { testDisplay } from "./iconsUtils.js";
 setupCalendar();
 setupModalGlobalListeners();
 
-/////////////////////////////////////////////////////
-////////////INICIAR FORM DESPESAS //////////////
-////////////////////////////////////////////////////
+//BOTÃO CATEGORIA (ABRE LIST_CATEGORY.HTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
+
 document.addEventListener("DOMContentLoaded", () => {
   showLoading();
   const btnExpense = document.getElementById("btn_expense");
@@ -70,9 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//BOTÃO CATEGORIA (ABRE LIST_CATEGORY.HTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
 const btnCategory = document.getElementById("btn_category");
-
 if (btnCategory) {
   btnCategory.addEventListener("click", async () => {
     //ABRIR MODAL COM CATEGORIAS
@@ -80,29 +77,6 @@ if (btnCategory) {
   });
 }
 
-export async function setFormatMoney(varValue) {
-  const valueAmount = document.getElementById("amount");
-  let valor;
-
-  if (varValue instanceof Event) {
-    valor = varValue.target.value;
-  } else if (varValue instanceof HTMLElement) {
-    valor = varValue.value;
-  }
-
-  valor = valor.replace(/\D/g, "");
-
-  valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
-
-  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-  valueAmount.value = "R$" + valor;
-  hideLoading();
-}
-
-/////////////////////////////////////////////////////////
-////////////INICIAR FORM REVENUE//////////////
-////////////////////////////////////////////////////////
 const btnRevenue = document.getElementById("btn_revenue");
 if (btnRevenue) {
   btnRevenue.addEventListener("click", async () => {
@@ -129,62 +103,136 @@ if (btnRevenue) {
 }
 
 ///////////////////////////////////////////////////////////////
-/////////FORM EDITAR TRANSAÇÕES///////////////////
+/////////CRUD TRANSAÇÕES TELA INICIAL ///////////////////
 ///////////////////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {
-  const button = e.target.closest(".edit_transaction");
-  if (!button) return;
+  const { monthIndex, yearIndex } = getCurrentMonthYear();
 
-  const id = button.dataset.id; // pegar direto do botão
-  console.log("O botão clicado foi da transação", id);
+  const buttonEdit = e.target.closest(".edit_transaction");
+  if (buttonEdit) {
+    const id = buttonEdit.dataset.id; // pegar direto do botão
+    console.log("O botão clicado foi da transação", id);
 
-  const categoryModal = await fetch(
-    `/api/transactions/transactionsCategory/${id}`
-  );
-  const category = await categoryModal.json();
+    const categoryModal = await fetch(`/api/transactions/${id}/category`);
+    const category = await categoryModal.json();
 
-  showLoading();
-  await openModal("../views/form_transactions.html");
+    console.log(category.data);
+    showLoading();
+    await openModal("../views/form_transactions.html");
 
-  //definindo que é um formulário de receitas
-  const modal = document.querySelector("#new_modal_js");
+    //definindo que é um formulário de receitas
+    const modal = document.querySelector("#new_modal_js");
 
-  //tenho que verificar se é expense ou revenue e depois setar typo
+    //tenho que verificar se é expense ou revenue e depois setar typo
 
-  document.getElementById("form_card").dataset.formType = id;
+    document.getElementById("form_card").dataset.formType = id;
 
-  try {
-    const response = await fetch(`/api/transactions/transactions/${id}`);
-    if (!response.ok) {
-      console.error("Erro ao buscar transação:", response.status);
+    try {
+      const response = await fetch(`/api/transactions/${id}`);
+      if (!response.ok) {
+        console.error("Erro ao buscar transação:", response.status);
+        return;
+      }
+      const transaction = await response.json();
+
+      console.log("Dados da transação", transaction);
+      if (!transaction || !transaction.due_date) {
+        console.error("Transação inválida recebida:", transaction);
+        return;
+      }
+
+      if (category.data.toString() === "expense") {
+        await loadCategoryFormExpense();
+        await setupTitleTransactionForm("edit_expense");
+      } else {
+        await loadCategoryFormRevenue();
+        await setupTitleTransactionForm("edit_revenue");
+      }
+      await initExpensesForm();
+      await loadPaymentMethodsExpense?.();
+
+      LoadDataAndEditTransaction(transaction);
+      sendTransactionsEditions();
+    } catch (err) {
+      console.error("Erro ao buscar transação", err);
+    } finally {
+      hideLoading();
+    }
+  }
+
+  const buttonRemove = e.target.closest(".button_remove");
+  if (buttonRemove) {
+    const ConfirmStatus = await showConfirm({
+      message: "Você quer realmente apagar essa transação?",
+      theme: "danger",
+    });
+
+    if (!ConfirmStatus) {
+      console.log(ConfirmStatus);
+      console.log("EEEEEEEEE");
       return;
     }
-    const transaction = await response.json();
-    console.log("Dados da transação", transaction);
-    if (!transaction || !transaction.due_date) {
-      console.error("Transação inválida recebida:", transaction);
-      return;
-    }
 
-    if (category.data.toString() === "expense") {
-      await loadCategoryFormExpense();
-      await setupTitleTransactionForm("edit_expense");
-    } else {
-      await loadCategoryFormRevenue();
-      await setupTitleTransactionForm("edit_revenue");
-    }
-    await initExpensesForm();
-    await loadPaymentMethodsExpense?.();
+    const id = buttonRemove.dataset.id; // pegar direto do botão
+    console.log("O botão clicado foi da transação", id);
 
-    LoadDataAndEditTransaction(transaction);
-    sendTransactionsEditions();
-  } catch (err) {
-    console.error("Erro ao buscar transação", err);
-  } finally {
-    hideLoading();
+    try {
+      showLoading();
+      const response = await fetch(`/api/transactions/${id}`, {
+        method: "DELETE",
+      });
+
+      const data = await response.json();
+      console.log(data.message);
+
+      await sumAmountMonth(monthIndex, yearIndex);
+      await sumAtualMonthPaid(monthIndex, yearIndex);
+      await sumAmountMonthRevenue(monthIndex, yearIndex);
+      await sumAtualMonthPending(monthIndex, yearIndex);
+      await LoadExpenses(monthIndex, yearIndex);
+    } catch (err) {
+      console.error("Erro ao apagar: ", err);
+    } finally {
+      hideLoading();
+    }
+  }
+
+  const buttonStatus = e.target.closest(".button_set_status");
+  if (buttonStatus) {
+    console.log("NUMERO DO MES::" + monthIndex);
+    const id = buttonStatus.dataset.id;
+
+    console.log("Mudando status da transação " + id);
+
+    await SetStatusInTransactions(id);
+    await sumAmountMonth(monthIndex, yearIndex);
+    await sumAtualMonthPaid(monthIndex, yearIndex);
+    await sumAmountMonthRevenue(monthIndex, yearIndex);
+    await sumAtualMonthPending(monthIndex, yearIndex);
+    await LoadExpenses(monthIndex, yearIndex);
   }
 });
+
+export async function setFormatMoney(varValue) {
+  const valueAmount = document.getElementById("amount");
+  let valor;
+
+  if (varValue instanceof Event) {
+    valor = varValue.target.value;
+  } else if (varValue instanceof HTMLElement) {
+    valor = varValue.value;
+  }
+
+  valor = valor.replace(/\D/g, "");
+
+  valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
+
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  valueAmount.value = "R$" + valor;
+  hideLoading();
+}
 
 ///////////////////////////////////////////////////////////////////////
 ////////////ABRIR MODAL DE LISTA CATEGORIAS TELA INICIAL//////////////
@@ -224,7 +272,7 @@ async function openListCategory() {
     if (deleteButton) {
       const id = deleteButton.dataset.id;
 
-      const response = await fetch(`/api/transactions/contTransaction/${id}`);
+      const response = await fetch(`/api/transactions/reports/count?id=${id}`);
       const data = await response.json();
       const totalTransactions = Number(data.total);
 
@@ -302,7 +350,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
   try {
     const response = await fetch(
-      `/api/transactions/transactionsGet/${monthForApi}/${yearIndex}`
+      `/api/transactions/${monthForApi}/${yearIndex}`
     );
     const transactions = await response.json();
     console.log(transactions[0]);
@@ -378,11 +426,11 @@ export async function LoadExpenses(monthIndex, yearIndex) {
         const buttonPay = document.createElement("button");
         buttonPay.id = `transaction_${cat.transaction_id}`;
         buttonPay.dataset.id = cat.transaction_id;
-        const res = await fetch(
-          `/api/transactions/transactionsConsult/${id}/status`
-        );
+        const res = await fetch(`/api/transactions/${id}/status`);
+
         const statusData = await res.json();
-        if (statusData == "paid") {
+        const statusString = statusData.status || statusData;
+        if (statusString == "paid") {
           buttonPay.classList.add(
             "button_set_status",
             "button_set_status_pending"
@@ -464,29 +512,6 @@ const { monthIndex, yearIndex } = getCurrentMonthYear();
 
 LoadExpenses(monthIndex, yearIndex);
 
-////////////////////////////////////////////////////////////////////
-/////////ALTERAR STATUS TRANSAÇÕES//////////////////////
-/////////////////////////////////////////////////////////////////
-
-document.addEventListener("click", async (e) => {
-  const { monthIndex, yearIndex } = getCurrentMonthYear();
-  const button = e.target.closest(".button_set_status");
-
-  if (!button) return;
-
-  console.log("NUMERO DO MES::" + monthIndex);
-  const id = button.dataset.id;
-
-  console.log("Mudando status da transação " + id);
-
-  await SetStatusInTransactions(id);
-  await sumAmountMonth(monthIndex, yearIndex);
-  await sumAtualMonthPaid(monthIndex, yearIndex);
-  await sumAmountMonthRevenue(monthIndex, yearIndex);
-  await sumAtualMonthPending(monthIndex, yearIndex);
-  await LoadExpenses(monthIndex, yearIndex);
-});
-
 ///////////////////////////////////////////////////////////
 ////////pedindo para o back mudar o status/////////
 //////////////////////////////////////////////////////////
@@ -503,19 +528,17 @@ export async function SetStatusInTransactions(id) {
 
   try {
     showLoading();
-    const status = await consultStatus(id);
-    const newStatus = status === "paid" ? "pending" : "paid";
+    const currentStatus = await consultStatus(id);
+    const statusString = currentStatus.status || currentStatus;
+    const newStatus = statusString === "paid" ? "pending" : "paid";
 
-    const response = await fetch(
-      `/api/transactions/transactions/${id}/status`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: newStatus }),
-      }
-    );
+    const response = await fetch(`/api/transactions/${id}/statusUpdate`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
     if (!response.ok) throw new Error("Erro ao atualizar status");
     await LoadExpenses(monthIndex, yearIndex);
   } catch (err) {
@@ -527,9 +550,7 @@ export async function SetStatusInTransactions(id) {
 
 export async function consultStatus(id) {
   try {
-    const response = await fetch(
-      `/api/transactions/transactionsConsult/${id}/status`
-    );
+    const response = await fetch(`/api/transactions/${id}/status`);
     const status = await response.json(); // status agora é diretamente a string "paid" ou "pending"
 
     console.log("Status da transação", id, "é", status);
@@ -544,45 +565,7 @@ export async function consultStatus(id) {
 /////////APAGAR TRANSAÇÕES///////////////////
 ///////////////////////////////////////////////////
 
-document.addEventListener("click", async (e) => {
-  const { monthIndex, yearIndex } = getCurrentMonthYear();
-  const button = e.target.closest(".button_remove");
-  if (!button) return;
-
-  const ConfirmStatus = await showConfirm({
-    message: "Você quer realmente apagar essa transação?",
-    theme: "danger",
-  });
-
-  if (!ConfirmStatus) {
-    console.log(ConfirmStatus);
-    console.log("EEEEEEEEE");
-    return;
-  }
-
-  const id = button.dataset.id; // pegar direto do botão
-  console.log("O botão clicado foi da transação", id);
-
-  try {
-    showLoading();
-    const response = await fetch(`/api/transactions/${id}`, {
-      method: "DELETE",
-    });
-
-    const data = await response.json();
-    console.log(data.message);
-
-    await sumAmountMonth(monthIndex, yearIndex);
-    await sumAtualMonthPaid(monthIndex, yearIndex);
-    await sumAmountMonthRevenue(monthIndex, yearIndex);
-    await sumAtualMonthPending(monthIndex, yearIndex);
-    await LoadExpenses(monthIndex, yearIndex);
-  } catch (err) {
-    console.error("Erro ao apagar: ", err);
-  } finally {
-    hideLoading();
-  }
-});
+document.addEventListener("click", async (e) => {});
 
 function showConfirm({ message, theme }) {
   return new Promise((resolve) => {

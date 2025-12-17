@@ -1,7 +1,7 @@
 import {
   getPaymentMethodsModelExpense,
   getPaymentMethodsModelRevenue,
-} from "../models/paymentMethodModel.js";
+} from "../../models/payment-method/index.js";
 
 export async function getPaymentMethodsExpensesController(req, res) {
   try {

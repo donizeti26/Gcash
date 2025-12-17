@@ -89,7 +89,7 @@ export async function sendTransactionsEditions() {
     amountNumber = parseFloat(amountNumber);
     console.log("AAAAAAAAAAAAAAAAAAAAA A " + amountNumber);
     try {
-      await fetch(`/api/transactions/updateTransactions/${transaction_id}`, {
+      await fetch(`/api/transactions/${transaction_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

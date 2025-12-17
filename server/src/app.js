@@ -8,10 +8,8 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
 
 // Importando rotas
-import transactionRoutes from "./routes/transactionRoutes.js";
-import categoryRoutes from "./routes/categoryRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import paymentRoutes from "./routes/paymentRoutes.js";
+
+import routes from "./routes/index.js";
 
 // Criando __dirname no ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -28,11 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../../public")));
 
 // Rotas da API
-app.use("/api/transactions", transactionRoutes);
-app.use("/api/categories", categoryRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/paymentMethods", paymentRoutes);
-
+app.use("/api", routes);
 //Rota Swagger
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

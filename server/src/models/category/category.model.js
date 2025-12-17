@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import pool from "../../config/db.js";
 
 export async function registerCategory({
   name_category,
@@ -22,14 +22,6 @@ export async function getCategories(type) {
   }
   const result = await pool.query("SELECT * FROM categories");
   return result.rows;
-}
-
-export async function getCategory(id) {
-  const result = await pool.query(
-    "SELECT * FROM categories WHERE category_id = $1",
-    [id]
-  );
-  return result.rows[0];
 }
 
 export async function deleteCategory(id) {
