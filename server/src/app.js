@@ -3,13 +3,10 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import { fileURLToPath } from "url";
-
-import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./config/swagger.js";
-
 // Importando rotas
 
 import routes from "./routes/index.js";
+import { setupSwagger } from "./docs/swagger.js";
 
 // Criando __dirname no ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -28,7 +25,6 @@ app.use(express.static(path.join(__dirname, "../../public")));
 // Rotas da API
 app.use("/api", routes);
 //Rota Swagger
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //Rotas Web
 app.get("/", (req, res) => {
@@ -38,5 +34,5 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../../public/views/login.html"));
 });
-
+setupSwagger(app);
 export default app;

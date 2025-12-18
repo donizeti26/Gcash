@@ -1,1 +1,1 @@
-export * from "./category.controller.js";
+export * from "./payment-method.controller.js";

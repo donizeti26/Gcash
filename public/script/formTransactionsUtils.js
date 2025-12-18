@@ -115,7 +115,7 @@ export async function initTransactionForm() {
 
 export async function loadPaymentMethodsRevenue() {
   try {
-    const response = await fetch("/api/payment-methods/paymentMethods/revenue");
+    const response = await fetch("/api/payment-methods?type=revenue");
     const paymentMethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");
@@ -143,7 +143,7 @@ export async function loadPaymentMethodsRevenue() {
 
 export async function loadPaymentMethodsExpense() {
   try {
-    const response = await fetch("/api/payment-methods/paymentMethods/expense");
+    const response = await fetch("/api/payment-methods?type=expense");
     const paymentMethods = await response.json();
 
     const selectPayment = document.getElementById("payment_method_id");

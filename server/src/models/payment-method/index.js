@@ -1,1 +1,1 @@
-export * from "./category.model.js";
+export * from "./payment-method.model.js";

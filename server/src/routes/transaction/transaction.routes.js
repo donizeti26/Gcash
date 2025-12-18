@@ -34,7 +34,7 @@ router.get("/:month/:year", getTransactionsController);
 router.post("/", createTransactionController);
 /**
  * @swagger
- * /api/transaction:
+ * /api/transactions:
  *   post:
  *     summary: Criar transação
  *     tags: [Transaction]
@@ -43,78 +43,75 @@ router.post("/", createTransactionController);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - category_id
- *               - payment_method_id
- *               - due_date
- *               - amount
- *               - description
- *               - status
- *             properties:
- *               category_id:
- *                 type: integer
- *                 example: 26
- *               payment_method_id:
- *                 type: string
- *                 example: 5
- *               due_date:
- *                 type: date
- *                 example: 26/12/2025
- *               amount:
- *                 type: integer
- *                 example: 500.00
- *               description:
- *                 type: string
- *                 example: Viagem ao litoral
- *               status:
- *                 type: string
- *                 enum: [paid, pending]
- *                 example: paid
  *     responses:
- *       201:
+ *       200:
  *         description: Transação criada com sucesso
  *         content:
  *           application/json:
  *             schema:
  *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Transação cadastrada com sucesso
- *                 data:
- *                   type: object
- *                   properties:
- *                     category_id:
- *                       type: integer
- *                       example: 26
- *                     payment_method_id:
- *                       type: string
- *                       example: 2
- *                     due_date:
- *                       type: date
- *                       example: 26/12/2025
- *                     amount:
- *                       type: integer
- *                       example: 250.00
- *                     description:
- *                       type: string
- *                       example:  Café da manhã
- *                     status:
- *                       type: string
- *                       enum: [paid, pending]
- *                       example: paid
+ *               items:
+ *                 $ref: '#/components/schemas/Transaction'
  *       500:
  *         description: Erro ao cadastrar  transação
  */
 
 router.get("/:transaction_id", editTransactionsController);
+/**
+ * @swagger
+ * /api/transactions/{transaction_id}:
+ *   get:
+ *    tags: [Transaction]
+ *    summary: Buscar transação pelo ID
+ *    description: Retorna dados de uma transação para modal de edição
+ *    parameters:
+ *      - in: path
+ *        name: transaction_id
+ *        required: true
+ *        schema:
+ *          type: string
+ *        description: ID único da transação
+ *    responses:
+ *      200:
+ *        description: Transação encontrada com sucesso
+ *      400:
+ *        description: ID da transação não informado
+ *      404:
+ *        description: Transação não encontrada
+ *
+ */
+
 router.put("/:transaction_id", updateTransactionsController);
 /**
  * @swagger
- * /api/transactions/{transaction_id}
- *   patch:
+ * /api/transactions/{transaction_id}:
+ *   put:
  *     tags: [Transaction]
+ *     summary: Atualizar todos os dados de uma transação
+ *     description: editando dados de uma transação já existente
+ *     parameters:
+ *       - in: path
+ *         name: transaction_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID único da transação
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *                amount:
+ *                  type: number
+ *                description:
+ *                  type: string
+ *     responses:
+ *       200:
+ *         description: Transação atualizada com sucesso
+ *       500:
+ *         description: Erro ao atualizar transação
  */
 router.patch("/:transaction_id/statusUpdate", updateStatusController);
 
@@ -157,7 +154,6 @@ router.delete("/:transaction_id", deleteTransactionsController);
  *   delete:
  *     tags: [Transaction]
  *     summary: Remove uma transação
- *     description: Remove uma categoria pelo ID
  *     parameters:
  *       - in: path
  *         name: transaction_id

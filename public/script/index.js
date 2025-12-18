@@ -92,7 +92,6 @@ if (btnRevenue) {
     initExpensesForm?.();
     loadCategoryFormRevenue?.();
     loadPaymentMethodsRevenue?.();
-    loadPaymentMethodsExpense?.();
 
     setAtualMonth();
 
@@ -117,7 +116,7 @@ document.addEventListener("click", async (e) => {
     const categoryModal = await fetch(`/api/transactions/${id}/category`);
     const category = await categoryModal.json();
 
-    console.log(category.data);
+    console.log("ADFWDAWFAWSEF" + category.data);
     showLoading();
     await openModal("../views/form_transactions.html");
 
@@ -141,17 +140,20 @@ document.addEventListener("click", async (e) => {
         console.error("Transação inválida recebida:", transaction);
         return;
       }
+      console.log("ADFWDAWFAWSEF" + category.data);
 
       if (category.data.toString() === "expense") {
+        console.log("FATO" + category.data);
         await loadCategoryFormExpense();
         await setupTitleTransactionForm("edit_expense");
-      } else {
+        await loadPaymentMethodsExpense?.();
+      } else if (category.data.toString() === "revenue") {
         await loadCategoryFormRevenue();
         await setupTitleTransactionForm("edit_revenue");
+        await loadPaymentMethodsRevenue?.();
       }
-      await initExpensesForm();
-      await loadPaymentMethodsExpense?.();
 
+      await initExpensesForm();
       LoadDataAndEditTransaction(transaction);
       sendTransactionsEditions();
     } catch (err) {
