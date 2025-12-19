@@ -6,20 +6,13 @@ import {
 } from "./modalUtils.js";
 /*import { setupUI } from "./ui.js";*/
 import { setupCalendar, setAtualMonth } from "./calendarUtils.js";
-
-import { selectRadioDeleteCategory } from "./logicIndex.js";
 import {
   LoadDataAndEditTransaction,
   sendTransactionsEditions,
   setupTitleTransactionForm,
 } from "./transactionsUtils.js";
 
-import {
-  loadCategories,
-  sendCategoryNewCategory,
-  fillCategoryForm,
-  fetchCategory,
-} from "./categoriesUtils.js";
+import { openListCategory } from "./categoriesUtils.js";
 import {
   loadPaymentMethodsRevenue,
   loadPaymentMethodsExpense,
@@ -100,10 +93,6 @@ if (btnRevenue) {
     });
   });
 }
-
-///////////////////////////////////////////////////////////////
-/////////CRUD TRANSAÇÕES TELA INICIAL ///////////////////
-///////////////////////////////////////////////////////////////
 
 document.addEventListener("click", async (e) => {
   const { monthIndex, yearIndex } = getCurrentMonthYear();
@@ -216,6 +205,8 @@ document.addEventListener("click", async (e) => {
   }
 });
 
+/*FORMATAR VAlORES */
+
 export async function setFormatMoney(varValue) {
   const valueAmount = document.getElementById("amount");
   let valor;
@@ -239,102 +230,6 @@ export async function setFormatMoney(varValue) {
 ///////////////////////////////////////////////////////////////////////
 ////////////ABRIR MODAL DE LISTA CATEGORIAS TELA INICIAL//////////////
 /////////////////////////////////////////////////////////////////////
-async function openListCategory() {
-  showLoading();
-  await openModal("../views/list_categories.html");
-
-  await loadCategories?.();
-  await new Promise((resolve) => requestAnimationFrame(resolve));
-
-  const listCategories = document.querySelector("#list_categories");
-
-  listCategories.addEventListener("click", async (e) => {
-    const editButton = e.target.closest(".edit_document");
-    const deleteButton = e.target.closest(".delete_forever");
-
-    console.log(deleteButton);
-    if (editButton) {
-      showLoading();
-
-      console.log(editButton);
-      const id = editButton.dataset.id;
-      console.log(id);
-      if (editButton) {
-        await openModal("../views/form_category.html");
-      }
-
-      try {
-        const category = await fetchCategory(id);
-        await fillCategoryForm(category);
-      } catch (err) {
-        console.error("Erro ao buscar a categoria", err);
-      }
-      hideLoading();
-    }
-    if (deleteButton) {
-      const id = deleteButton.dataset.id;
-
-      const response = await fetch(`/api/transactions/reports/count?id=${id}`);
-      const data = await response.json();
-      const totalTransactions = Number(data.total);
-
-      let ConfirmStatus;
-      if (totalTransactions > 0) {
-        ConfirmStatus = await DeleteOptions(id, totalTransactions);
-      } else {
-        ConfirmStatus = await showConfirm({
-          message: "Você quer realmente apagar essa transação?",
-          theme: "danger",
-        });
-      }
-
-      if (!ConfirmStatus) {
-        return;
-      }
-
-      try {
-        showLoading();
-
-        const response = await fetch(`/api/categories/categories/${id}`, {
-          method: "DELETE",
-        });
-
-        const data = await response.json();
-        console.log(data.message);
-
-        await loadCategories();
-        await sumAmountMonth(monthIndex, yearIndex);
-        await sumAtualMonthPaid(monthIndex, yearIndex);
-        await sumAmountMonthRevenue(monthIndex, yearIndex);
-        await sumAtualMonthPending(monthIndex, yearIndex);
-        await LoadExpenses(monthIndex, yearIndex);
-      } catch (err) {
-        console.error("Erro ao buscar a categoria", err);
-      }
-    }
-  });
-
-  const btnNewCategory = document.getElementById("button_category");
-  if (btnNewCategory && !btnNewCategory.dataset.listenerAdded) {
-    btnNewCategory.addEventListener("click", async () => {
-      await abrirNovaCategoria();
-    });
-
-    btnNewCategory.dataset.listenerAdded = "true";
-  }
-
-  hideLoading();
-}
-
-async function abrirNovaCategoria() {
-  await openModal("../views/form_category.html");
-  const buttonIcons = document.getElementById("button_icons");
-  buttonIcons.addEventListener("click", async (e) => {
-    testDisplay();
-  });
-
-  sendCategoryNewCategory?.();
-}
 
 document.addEventListener("click", async (e) => {
   const backBtn = e.target.closest(".button_back_card");
@@ -569,7 +464,7 @@ export async function consultStatus(id) {
 
 document.addEventListener("click", async (e) => {});
 
-function showConfirm({ message, theme }) {
+export function showConfirm({ message, theme }) {
   return new Promise((resolve) => {
     overflowHidden(true);
 
@@ -600,47 +495,5 @@ function showConfirm({ message, theme }) {
       bodyModal.classList.add("hidden");
       resolve(false);
     };
-  });
-}
-async function DeleteOptions(id, totalTransactions) {
-  const res = await fetch("../views/delete_category_options.html");
-  overflowHidden(true);
-  if (!res.ok) throw new Error(`Falha ao carregar ${file}: ${res.status}`);
-  const html = await res.text();
-  const deleteCategoryOptions = document.getElementById(
-    "delete_category_options"
-  );
-
-  if (!deleteCategoryOptions)
-    throw new Error("#modaContainer não encontrado na DOM");
-  deleteCategoryOptions.innerHTML = html;
-  // await new Promise((resolve) => requestAnimationFrame(resolve));
-
-  const containerTitle = document.getElementById("containerOptionsDelete");
-  const title = containerTitle.querySelector("#contTransactions");
-  title.textContent = totalTransactions;
-  console.log(title);
-
-  return new Promise((resolve) => {
-    const modal = document.getElementById("containerOptionsDelete");
-    const form = modal.querySelector("#formOptionsDelete");
-    modal.querySelector("#buttonCancel").onclick = () => {
-      resolve(false);
-      deleteCategoryOptions.innerHTML = "";
-      overflowHidden(false);
-    };
-    form.addEventListener("submit", (e) => {
-      // Primeiro: validação nativa
-      if (!form.checkValidity()) {
-        e.preventDefault();
-        form.reportValidity();
-        return;
-      }
-      resolve(true);
-
-      e.preventDefault();
-      closeModal();
-      openListCategory();
-    });
   });
 }

@@ -6,6 +6,9 @@
 }
 
 @media screen and (min-width: 1060px) {
+  #containerOptionsDelete {
+    width: 40%;
+  }
   .title_date strong {
     font-size: 1.5rem;
   }
@@ -106,11 +109,6 @@
     width: 50%;
     height: 80%;
   }
-}
-
-/*FORM TRANSACTIONS*/
-
-@media screen and (min-width: 1060px) {
   #form_card {
     width: 50%;
   }

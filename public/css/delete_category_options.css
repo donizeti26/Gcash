@@ -8,6 +8,7 @@
   font-size: 1rem;
 }
 #containerOptionsDelete {
+  width: 80%;
   padding: 2rem;
   border-radius: 1rem;
   background-color: #fff;
