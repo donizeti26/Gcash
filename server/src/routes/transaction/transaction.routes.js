@@ -23,12 +23,230 @@ const router = Router();
 
 /* REPORTS - Relatórios */
 router.get("/reports/", reportsController);
+/**
+ * @swagger
+ * /api/reports:
+ *   get:
+ *     tags: [Reports]
+ *     summary: Gerar relatório
+ *     description: Gera relatório filtrado por mês, ano e tipo
+ *     parameters:
+ *       - in: query
+ *         name: month
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 12
+ *         example: 6
+ *         description: Mês do relatório (1 a 12)
+ *
+ *       - in: query
+ *         name: year
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 2000
+ *         example: 2025
+ *         description: Ano do relatório
+ *
+ *       - in: query
+ *         name: type
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [expense, revenue]
+ *         example: expense
+ *         description: Tipo do relatório
+ *
+ *     responses:
+ *       200:
+ *         description: Relatório gerado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Report'
+ *       400:
+ *         description: Parâmetro inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Erro interno do servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+
 router.get("/reports/count/", countTransactionsController);
+/**
+ * @swagger
+ * /api/transactions/reports/count:
+ *   get:
+ *     tags: [Reports]
+ *     summary: Gerar relatório
+ *     description: Calcula a quantidade de transações existentes com o ID
+ *     parameters:
+ *      - in: query
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *        description: ID único da categoria
+ *     responses:
+ *       200:
+ *         description: Contagem realizada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 type: object
+ *                 properties:
+ *                   total:
+ *                     type: number
+ *                     example: 2
+ *       400:
+ *         description: Parâmetro inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Erro interno do servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
 
 /* QUERIES - Consultas específicas */
 router.get("/:transaction_id/status", consultStatusController);
+/**
+ * @swagger
+ * /api/transactions/{transaction_id}/status:
+ *   get:
+ *     tags: [Reports]
+ *     summary: Consultar Status
+ *     description: Verifica o status da transação pelo ID informado
+ *     parameters:
+ *      - in: path
+ *        name: transaction_id
+ *        required: true
+ *        schema:
+ *          type: string
+ *        description: ID único da categoria
+ *     responses:
+ *       200:
+ *         description: Consulta realizada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 type: object
+ *                 properties:
+ *                   status:
+ *                     type: string
+ *                     enum: [paid, pending]
+ *                     example: paid
+ *       400:
+ *         description: Parâmetro inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Erro interno do servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
 router.get("/:transaction_id/category", consultCategoryController);
+/**
+ * @swagger
+ * /api/transactions/{transaction_id}/category:
+ *   get:
+ *     tags: [Reports]
+ *     summary: Consultar Categoria
+ *     description: Verifica a categoria da transação pelo ID informado
+ *     parameters:
+ *      - in: path
+ *        name: transaction_id
+ *        required: true
+ *        schema:
+ *          type: string
+ *        description: ID único da categoria
+ *     responses:
+ *       200:
+ *         description: Consulta realizada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 type: object
+ *                 properties:
+ *                   data:
+ *                     type: string
+ *                     enum: [expense, revenue]
+ *                     example: expense
+ *       400:
+ *         description: Parâmetro inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Erro interno do servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
 router.get("/:month/:year", getTransactionsController);
+
+/**
+ * @swagger
+ * /api/transactions/{month}/{year}:
+ *   get:
+ *     tags: [Reports]
+ *     summary: Consultar Transações
+ *     description: Consulta todas as transações do mes e ano especificados.
+ *     parameters:
+ *      - in: path
+ *        name: month
+ *        required: true
+ *        schema:
+ *          type: integer
+ *          example: 6
+ *        description: mês especifico das transações
+ *      - in: path
+ *        name: year
+ *        required: true
+ *        schema:
+ *          type: integer
+ *          example: 2025
+ *        description: ano especifico das transações
+ *     responses:
+ *       200:
+ *         description: Transação criada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Transaction'
+ *       400:
+ *         description: Parâmetro inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Erro interno do servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
 
 /* CRUD */
 router.post("/", createTransactionController);

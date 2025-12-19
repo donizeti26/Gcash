@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     PaymentMethod:
+ *     PaymentMethods:
  *       type: object
  *       properties:
  *         id:

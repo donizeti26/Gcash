@@ -23,7 +23,9 @@ const router = Router();
  *             $ref: '#/components/schemas/CategoryInput'
  *     responses:
  *       201:
- *         description: Categoria criada com sucesso
+ *         description: Categoria criada com sucesso!
+ *       500:
+ *         description: Erro ao cadastrar categoria!
  */
 router.post("/", registerCategoryController);
 

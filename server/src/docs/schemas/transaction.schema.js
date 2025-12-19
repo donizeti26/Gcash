@@ -22,7 +22,6 @@
  *         status:
  *           type: string
  *           enum: [paid, pending]
- *
  *     TransactionInput:
  *       type: object
  *       required:

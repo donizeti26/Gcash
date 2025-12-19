@@ -8,13 +8,17 @@ export async function registerCategoryController(req, res) {
   const { name_category, color_selector, icon_selected, category_selected } =
     req.body;
   try {
-    const category = await registerCategory({
-      name_category,
-      color_selector,
-      icon_selected,
-      category_selected,
-    });
-    res.status(201).json(category);
+    if (name_category && color_selector && icon_selected && category_selected) {
+      const category = await registerCategory({
+        name_category,
+        color_selector,
+        icon_selected,
+        category_selected,
+      });
+      res.status(201).json(category);
+    } else {
+      res.status(400).json("Todas os Campos devem ser preenchidos:");
+    }
   } catch (error) {
     console.error("Erro ao cadastrar categoria: ", error);
     res.status(500).json({ error: error.message });

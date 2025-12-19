@@ -117,14 +117,13 @@ export async function loadPaymentMethodsRevenue() {
   try {
     const response = await fetch("/api/payment-methods?type=revenue");
     const paymentMethods = await response.json();
-
     const selectPayment = document.getElementById("payment_method_id");
 
     if (selectPayment) {
       selectPayment.innerHTML = `<option value="" disabled="" selected="">Selecionar</option>`;
     }
 
-    paymentMethods.forEach((cat) => {
+    paymentMethods.data.forEach((cat) => {
       const item = document.createElement("option");
 
       item.value = cat.payment_method_id; // ou cat.id (depende do nome da coluna no banco)
@@ -144,15 +143,16 @@ export async function loadPaymentMethodsRevenue() {
 export async function loadPaymentMethodsExpense() {
   try {
     const response = await fetch("/api/payment-methods?type=expense");
-    const paymentMethods = await response.json();
 
+    const paymentMethods = await response.json();
+    console.warn(paymentMethods.message);
     const selectPayment = document.getElementById("payment_method_id");
 
     if (selectPayment) {
       selectPayment.innerHTML = `<option value="" disabled="" selected="">Selecionar</option>`;
     }
 
-    paymentMethods.forEach((cat) => {
+    paymentMethods.data.forEach((cat) => {
       const item = document.createElement("option");
 
       item.value = cat.payment_method_id; // ou cat.id (depende do nome da coluna no banco)

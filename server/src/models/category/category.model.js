@@ -15,12 +15,13 @@ export async function registerCategory({
 
 export async function getCategories(type) {
   if (type) {
-    const result = await pool.query("SELECT * FROM categories WHERE type=$1", [
-      type,
-    ]);
+    const result = await pool.query(
+      "SELECT * FROM categories WHERE type=$1 ORDER BY name",
+      [type]
+    );
     return result.rows;
   }
-  const result = await pool.query("SELECT * FROM categories");
+  const result = await pool.query("SELECT * FROM categories ORDER BY name");
   return result.rows;
 }
 

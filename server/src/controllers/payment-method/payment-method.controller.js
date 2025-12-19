@@ -10,7 +10,12 @@ export async function getPaymentMethodsController(req, res) {
 
   try {
     const data = await getPaymentMethodsModel(type);
-    res.status(200).json(data);
+    res
+      .status(200)
+      .json({
+        data: data,
+        message: "Busca por métodos de pagamento feita com sucesso!",
+      });
   } catch (err) {
     console.error("Erro ao buscar métodos de pagamento", err);
     res.status(500).json({ error: err.message });

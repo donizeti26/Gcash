@@ -9,7 +9,7 @@ export async function getSelectedCategoryController(req, res) {
       return res.status(404).json({ message: "Categoria não encontrada" });
     }
 
-    return res.json(category);
+    return res.status(200).json(category);
   } catch (error) {
     console.error("Erro ao buscar a categoria: ", error);
     res.status(500).json({ error: error.message });

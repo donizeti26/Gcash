@@ -62,7 +62,7 @@ export async function countTransactionsController(req, res) {
     const data = await countTransactions({ id });
     res.status(200).json(data);
   } catch (error) {
-    console.error("Erro ao somar as Receitas : ", error);
+    console.error("Erro ao contar Transações : ", error);
     res.status(500).json({ error: error.message });
   }
 }
