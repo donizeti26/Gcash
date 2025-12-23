@@ -1,4 +1,4 @@
-import { LoadExpenses, setFormatMoney } from "./index.js";
+import { LoadExpenses, setFormatMoney } from "./app.js";
 import { showMonth } from "./calendarUtils.js";
 import { closeModal } from "./modalUtils.js";
 
@@ -122,12 +122,13 @@ export async function sendTransactionsEditions() {
 
 export function setupTitleTransactionForm(type) {
   const title = document.querySelector("#page_title");
-
+  const DataTransaction = document.querySelector("#data_transaction");
   if (!title) return;
 
   switch (type) {
     case "revenue":
       title.textContent = "Nova Receita";
+      DataTransaction.textContent = "Data do Pagamento";
       break;
 
     case "expense":
@@ -136,6 +137,8 @@ export function setupTitleTransactionForm(type) {
 
     case "edit_revenue":
       title.textContent = "Editar Receita";
+      DataTransaction.textContent = "Data do Pagamento";
+
       break;
 
     case "edit_expense":

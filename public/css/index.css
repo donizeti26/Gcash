@@ -51,7 +51,7 @@ button,
 #resume_month {
   display: flex;
   gap: 1rem;
-  padding: 2rem;
+  padding: 1.5rem;
   align-items: center;
   flex-direction: column;
   background-color: var(--azul-200);

@@ -34,62 +34,88 @@
   <body>
     <div id="main_content">
       <div id="menu_mobile"></div>
-
-      <article id="resume_month">
-        <div id="aside_menu">
-          <img id="logo" alt="" />
-          <span id="atual_month">
-            <button id="BACK" type="button" class="button_month">
-              <span class="material-symbols-rounded arrow_month">
-                arrow_back_ios
-              </span>
-            </button>
-            <div id="month"></div>
-            <button id="GO" type="button" class="button_month">
-              <span class="material-symbols-rounded arrow_month">
-                arrow_forward_ios
-              </span>
-            </button>
-          </span>
-          <div id="group_total_resume">
-            <div id="group_resume">
-              <div id="group_total">
-                <span id="month_value"
-                  >Transações<br />
-                  mensais:<br /><span id="total_month"></span
+      <div id="left_side">
+        <div id="user">
+          <img id="user_avatar" src="../assets/user_teste.png" alt="" />
+          <p>Claudio CTE</p>
+        </div>
+        <div id="calendar">
+          <h3 id="calendar_month">Dezembro</h3>
+          <div id="calendar_week">
+            <div>Dom</div>
+            <div>Seg</div>
+            <div>Ter</div>
+            <div>Qua</div>
+            <div>Qui</div>
+            <div>Sex</div>
+            <div>Sab</div>
+          </div>
+          <div id="calendar_days"></div>
+        </div>
+        <div id="group_search">
+          <img
+            src="https://raw.githubusercontent.com/donizeti26/Gcash/1c73a28018f3c2df4c5ac04ff8110745233410b5/public/assets/favicon.svg"
+            alt=""
+          />
+          <input type="text" name="" id="search" />
+          <span class="material-symbols-rounded"> search </span>
+        </div>
+        <article id="resume_month">
+          <div id="aside_menu">
+            <span id="atual_month">
+              <button id="BACK" type="button" class="button_month">
+                <span class="material-symbols-rounded arrow_month">
+                  arrow_back_ios
+                </span>
+              </button>
+              <div id="month"></div>
+              <button id="GO" type="button" class="button_month">
+                <span class="material-symbols-rounded arrow_month">
+                  arrow_forward_ios
+                </span>
+              </button>
+            </span>
+            <div id="group_total_resume">
+              <div id="group_resume">
+                <div id="group_total">
+                  <span id="month_value"
+                    >Transações<br />
+                    mensais:<br /><span id="total_month"></span
+                  ></span>
+                </div>
+                <span id="revenue"
+                  >Receita<br />
+                  mensal:<br /><span id="month_revenue"></span
                 ></span>
               </div>
-              <span id="revenue"
-                >Receita<br />
-                mensal:<br /><span id="month_revenue"></span
-              ></span>
-            </div>
-            <div id="group_pay">
-              <span>Pago: <span id="amount_paid"></span></span>
-              <span>A pagar: <span id="amount_pending"></span></span>
+              <div id="group_pay">
+                <span>Pago: <span id="amount_paid"></span></span>
+                <span>A pagar: <span id="amount_pending"></span></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div id="button_option">
-          <div class="open" id="options">
-            <ul>
-              <li id="btn_revenue">
-                <span class="material-symbols-rounded"> add </span> Receita
-              </li>
-              <li id="btn_expense">
-                <span class="material-symbols-rounded"> add </span> Despesa
-              </li>
-              <li id="btn_category">
-                <span class="material-symbols-rounded">
-                  tv_options_edit_channels
-                </span>
-                Categorias
-              </li>
-            </ul>
+          <div id="button_option">
+            <div class="open" id="options">
+              <ul>
+                <li id="btn_revenue">
+                  <span class="material-symbols-rounded"> add </span> Receita
+                </li>
+                <li id="btn_expense">
+                  <span class="material-symbols-rounded"> add </span> Despesa
+                </li>
+                <li id="btn_category">
+                  <span class="material-symbols-rounded">
+                    tv_options_edit_channels
+                  </span>
+                  Categorias
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
+
       <main id="other_body">
         <div id="group_cards"></div>
       </main>
@@ -126,7 +152,7 @@
       </div>
     </div>
   </body>
-  <script type="module" src="../script/index.js"></script>
+  <script type="module" src="../script/app.js"></script>
   <script type="module" src="../script/loadingUtils.js"></script>
   <script type="module" src="../script/mobileScriptUtils.js"></script>
 </html>

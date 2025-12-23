@@ -88,10 +88,7 @@
 .div_icon_category span {
   color: #fff;
 }
-.card_text p {
-  font-size: 1rem;
-  color: var(--text-legend);
-}
+
 .card_text strong {
   color: #000;
 }

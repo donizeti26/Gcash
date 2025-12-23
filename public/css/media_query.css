@@ -6,6 +6,81 @@
 }
 
 @media screen and (min-width: 1060px) {
+  #calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--azul-400);
+    border-radius: 0.5rem;
+    width: 100%;
+
+    color: var(--white-900);
+  }
+  #calendar_week {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  #user_perfil {
+  }
+  #user_avatar {
+    width: 16%;
+  }
+  #user {
+    background-color: var(--azul-400);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+  }
+  #user p {
+    font-size: 12px;
+  }
+
+  #left_side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #search {
+    background-color: unset;
+    width: 70%;
+    color: var(--white-900);
+    caret-color: var(--white-900);
+  }
+  #search:focus {
+    outline: none;
+    background-color: unset;
+  }
+  #group_search {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    background-color: var(--azul-400);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  #group_search img {
+    width: 8%;
+  }
+  #group_search span {
+    color: #6d848f;
+    border-left: 1px solid #6d848f;
+    padding-left: 0.5rem;
+  }
   #containerOptionsDelete {
     width: 40%;
   }
@@ -124,6 +199,7 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
+    gap: 4rem;
   }
   p {
     font-size: 12px;
@@ -136,9 +212,7 @@
     display: flex;
     justify-content: space-around;
   }
-  #atual_month {
-    width: 70%;
-  }
+
   #group_total {
     display: flex;
     justify-content: space-between;
@@ -166,10 +240,10 @@
   #resume_month {
     flex-direction: column;
 
+    background-color: var(--azul-400);
     justify-content: space-around;
-    height: 90%;
-    width: 30%;
-    border-radius: unset;
+
+    border-radius: 1rem;
   }
 
   #group_pay,
@@ -186,7 +260,7 @@
   #options ul {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     list-style: none;
     justify-content: center;
   }
@@ -196,7 +270,7 @@
     border-radius: 1rem;
     background-color: var(--azul-400);
     max-width: 66%;
-    height: 90%;
+    height: 95%;
   }
 
   .card_transaction:hover {
@@ -221,7 +295,7 @@
     gap: 1.5rem;
   }
   #atual_month {
-    padding-bottom: 4rem;
+    padding-bottom: 1rem;
   }
 
   #group_pay,

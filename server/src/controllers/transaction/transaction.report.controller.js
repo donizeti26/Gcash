@@ -24,7 +24,7 @@ export async function reportsController(req, res) {
       case "paid":
         data = await paidTransactionsController(month, year);
         break;
-      default:
+      case "sum":
         data = await sumTransactionController(month, year);
     }
 

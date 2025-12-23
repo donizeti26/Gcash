@@ -1,15 +1,18 @@
 :root {
   --button-color-red: #ff4000;
   --button-color-red-hover: #ff5757;
+  --button-color-red-back: #e8cdcd;
 
   --button-color-blue: #448aff;
   --button-color-blue-hover: #6ba1ff;
+  --button-color-blue-back: #c7d9ff;
+
   --button-color-green: #00c030;
   --button-color-green-hover: #00c030;
 
-  --button-color-yellow: #ffd600;
+  --button-color-yellow: #f8b632;
 
-  --button-color-yellow-marge: #ccb334;
+  --button-color-back: #ebebeb;
 
   --azul-200: #263940;
   --azul-400: #30434c;

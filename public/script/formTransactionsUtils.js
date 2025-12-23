@@ -1,4 +1,4 @@
-import { LoadExpenses } from "./index.js";
+import { LoadExpenses } from "./app.js";
 import { closeModal } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
 
@@ -187,7 +187,7 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
         currency: "BRL",
       });
       total_month.textContent = `${convertAmount}`;
-      console.log(`Total gastos no mes de ${monthIndex}: `, total);
+      console.log(`Total transações no mes ${monthIndex}: `, total);
     }
   } catch (err) {
     console.error("Erro ao carregar total transações front", err);
@@ -201,7 +201,7 @@ export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
     const response = await fetch(
-      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=pending`
+      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=revenue`
     );
     const transactionsSum = await response.json();
 
@@ -253,7 +253,7 @@ export async function sumAtualMonthPending(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
     const response = await fetch(
-      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=revenue`
+      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=pending`
     );
 
     const transactionsSumPending = await response.json();

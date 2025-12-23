@@ -7,7 +7,7 @@ FROM transactions as t
 inner join categories as c on 
  t.category_id = c.category_id where
 EXTRACT(MONTH FROM due_date)=$1
-AND EXTRACT(YEAR FROM due_date) = $2 and c.type = 'expense'`;
+AND EXTRACT(YEAR FROM due_date) = $2`;
   const result = await pool.query(query, [month, year]);
   console.log("Resultado da Query (total do mes):", result.rows);
 

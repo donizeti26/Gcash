@@ -1,6 +1,16 @@
-import { openModal, overflowHidden } from "./modalUtils.js";
+import { openModal, closeModal, overflowHidden } from "./modalUtils.js";
 import { showLoading, hideLoading } from "./loadingUtils.js";
-import { showConfirm } from "./index.js";
+import { showConfirm, LoadExpenses } from "./app.js";
+import { testDisplay } from "./iconsUtils.js";
+import {
+  sumAtualMonthPaid,
+  sumAtualMonthPending,
+  sumAmountMonthRevenue,
+  sumAmountMonth,
+} from "./formTransactionsUtils.js";
+
+import { getCurrentMonthYear } from "./app.js";
+
 export async function openListCategory() {
   showLoading();
   await openModal("../views/list_categories.html");
@@ -13,7 +23,7 @@ export async function openListCategory() {
   listCategories.addEventListener("click", async (e) => {
     const editButton = e.target.closest(".edit_document");
     const deleteButton = e.target.closest(".delete_forever");
-
+    const { monthIndex, yearIndex } = getCurrentMonthYear();
     console.log(deleteButton);
     if (editButton) {
       showLoading();
@@ -57,7 +67,7 @@ export async function openListCategory() {
       try {
         showLoading();
 
-        const response = await fetch(`/api/categories/categories/${id}`, {
+        const response = await fetch(`/api/categories/${id}`, {
           method: "DELETE",
         });
 

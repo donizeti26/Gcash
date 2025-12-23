@@ -105,7 +105,6 @@ document.addEventListener("click", async (e) => {
     const categoryModal = await fetch(`/api/transactions/${id}/category`);
     const category = await categoryModal.json();
 
-    console.log("ADFWDAWFAWSEF" + category.data);
     showLoading();
     await openModal("../views/form_transactions.html");
 
@@ -129,7 +128,6 @@ document.addEventListener("click", async (e) => {
         console.error("Transação inválida recebida:", transaction);
         return;
       }
-      console.log("ADFWDAWFAWSEF" + category.data);
 
       if (category.data.toString() === "expense") {
         console.log("FATO" + category.data);
@@ -298,14 +296,14 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
       <div class="card_text">
         <div>
-        <p> <strong>Categoria: ${cat.name}</strong></p>
-                  <p> <strong>Tipo:</strong> ${TYPECATEGORY}</p>
 
-          <p><strong>Parcela: ???</strong></p>
+          <p class="status${statusTransaction}"><strong>Status:</strong>${statusTransaction}</p>
+          <p> <strong>Tipo:</strong> ${TYPECATEGORY}</p>
+          <p> <strong>Descrição: </strong>${cat.description}</p>
           <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
-          <p><strong>Status: </strong>${statusTransaction}</p>
-          <p> <strong>Descrição: </strong>${cat.description}
-          </p>
+          <p><strong>Parcela: ???</strong></p>
+        <p> <strong>Categoria: ${cat.name}</strong></p>
+
 
         </div>
       </div>
@@ -372,13 +370,13 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
 function IsExpired(dueDate, id, type) {
   const [dia, mes, ano] = dueDate.split("/").map(Number);
-  const formatedDueDate = new Date(ano, mes - 1, dia).getTime();
+  const formattedDueDate = new Date(ano, mes - 1, dia).getTime();
 
   const agora = Date.now(); // timestamp atual
   const elementDueDate = document.getElementById(`dueDate${id}`);
 
   if (type == "expense") {
-    if (formatedDueDate < agora) {
+    if (formattedDueDate < agora) {
       elementDueDate.classList.add("due_date_false");
       elementDueDate.textContent = `Data de vencimento: ${dueDate}`;
     } else {
@@ -391,7 +389,7 @@ function IsExpired(dueDate, id, type) {
   }
 }
 
-function getCurrentMonthYear() {
+export function getCurrentMonthYear() {
   const monthEl = document.getElementById("month_index");
   const yearEl = document.getElementById("year_index");
 
