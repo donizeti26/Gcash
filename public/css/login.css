@@ -48,7 +48,10 @@ input {
   flex-direction: column;
   gap: 1rem;
 }
-
+#forget {
+  text-decoration: none;
+  color: var(--button-color-blue);
+}
 #titlePage {
   color: var(--white-900);
 }
@@ -107,6 +110,7 @@ input {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  width: 54%;
 }
 #loginButton {
   text-decoration: none;
@@ -118,10 +122,14 @@ input {
   font-weight: 600;
   cursor: pointer;
   border: 0.5px solid #fff;
+  width: 54%;
 }
 @media screen and (min-width: 1060px) {
   main {
     flex-direction: row;
+  }
+  #titlePage {
+    color: var(--azul-400);
   }
   #divInputEmail,
   #divInputPassword {
@@ -197,10 +205,6 @@ input {
   }
   #groupRemember {
     color: var(--text-default);
-  }
-  #forget {
-    text-decoration: none;
-    color: var(--button-color-blue);
   }
 
   #loginButton {

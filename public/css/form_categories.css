@@ -12,7 +12,7 @@
   padding: 2rem;
   border-radius: 0.5rem;
   text-align: center;
-  gap: 1rem;
+  gap: 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -55,6 +55,14 @@
   scrollbar-color: rgb(185, 185, 185) transparent;
 }
 
+#head_card {
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
 #div_button_category {
   display: flex;
   justify-content: center;
@@ -63,4 +71,49 @@
 .label_radio,
 .group_radio {
   cursor: pointer;
+}
+#group_category_resume {
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+#head_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+#category_title {
+  text-align: left;
+}
+#category_title p {
+  font-size: 12px;
+  color: #656565;
+}
+.item_group_category_resume div p {
+  font-size: 12px;
+}
+.item_group_category_resume {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.item_group_category_resume div {
+  text-align: left;
+}
+.item_group_category_resume div p {
+  font-weight: 600;
+  color: var(--black-legend);
+}
+#labelIcon {
+  color: var(--button-color-blue);
+}
+#swapHorizIcon {
+  color: var(--button-color-purple);
+}
+#bookMarkStarIcon {
+  color: var(--button-color-yellow);
 }

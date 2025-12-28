@@ -281,7 +281,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       </div>
       <div class="div_icon_category">
         <span
-          class="material-symbols-rounded icon_category"
+          class="material-symbols-outlined icon_category"
           id="icon_${cat.transaction_id}"
         > ${cat.icon}
         </span>

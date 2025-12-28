@@ -1,3 +1,25 @@
+#left_side {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+#user {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--azul-200);
+  width: 40%;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: var(--white-900);
+}
+#resultResume {
+  font-size: 1rem;
+}
 #replacement {
   background-color: var(--cinza-900);
 }
@@ -26,12 +48,14 @@ button,
   width: 100%;
   gap: 2rem;
 }
-#group_resume {
+#group_resume,
+#group_pay {
   text-align: center;
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 2rem;
 }
 #aside_menu {
   display: flex;
@@ -73,10 +97,6 @@ button,
   font-size: 2rem;
 }
 
-#group_pay span {
-  display: flex;
-  flex-direction: column;
-}
 #group_pay,
 #month_value,
 #revenue,
@@ -84,10 +104,43 @@ button,
   font-size: 1.2rem;
   text-align: center;
 }
-#group_pay {
+
+#total_month,
+#month_revenue,
+#amount_paid,
+#amount_pending {
+  font-size: 1.25rem;
+}
+.containerResume {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: column;
+  background-color: var(--azul-200);
+  border-radius: 6px;
+  padding: 1rem;
+  width: 50%;
+}
+.titleContainerResume {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#walletIcon {
+  color: var(--button-color-green);
+}
+#arrowCircleUpIcon {
+  color: var(--button-color-blue);
+}
+#checkCircleIcon {
+  color: var(--button-color-yellow);
+}
+#arrowCircleDownIcon {
+  color: var(--button-color-red);
 }
 
 #other_body {
@@ -174,7 +227,6 @@ button,
 #options ul {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
   list-style: none;

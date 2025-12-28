@@ -7,7 +7,7 @@ const options = {
     info: {
       title: "API",
       description:
-        "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more ab",
+        "Plataforma online para gerenciamento de receitas e despesas pessoais. Registro de gastos com categorias, valores, parcelas,status,etc, resumo mensal dos gastos,etc. Com o objetivo de facilitar o planejamento financeiro e o controle do orçamento futuro.",
       version: "1.0.0",
       contact: {
         email: "https://www.linkedin.com/in/donizeti-silva-a666b31b0/",
@@ -16,7 +16,7 @@ const options = {
 
     servers: [
       {
-        url: "/api/",
+        url: "localhost:3000/api/",
       },
     ],
   },

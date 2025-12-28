@@ -40,13 +40,6 @@
     -7px 8px 42px rgba(3, 7, 18, 0.06);
 }
 
-#head_card {
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-}
-
 #input_description {
   width: 80%;
 }
