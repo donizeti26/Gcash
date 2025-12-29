@@ -7,7 +7,7 @@
 #category_body {
   background-color: var(--white-900);
   width: 80%;
-  max-height: 80%;
+  max-height: 90%;
   color: #000;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -30,7 +30,8 @@
 
 .icon_item_category {
   display: flex;
-  gap: 0.3rem;
+  flex-direction: row;
+  gap: 0.5rem;
   align-items: center;
   text-align: initial;
 }
@@ -45,7 +46,7 @@
 }
 
 .group_category:hover {
-  background-color: #30303040;
+  background-color: #30303013;
   transition: background-color 0.2s linear;
 }
 
@@ -74,8 +75,7 @@
 }
 #group_category_resume {
   display: flex;
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   width: 100%;
 }
@@ -116,4 +116,47 @@
 }
 #bookMarkStarIcon {
   color: var(--button-color-yellow);
+}
+.description_category {
+  font-size: 12px;
+  color: #5c5c5c;
+}
+.border_icon_list_category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #5c5c5c;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+}
+
+.border_uis_list_category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #d9d9d9;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+}
+.edit_category {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.edit_document,
+.delete_forever {
+  cursor: pointer;
+}
+.edit_document {
+  color: var(--button-color-blue);
+}
+.delete_forever {
+  color: var(--button-color-red);
+}
+.edit_document:hover {
+  color: var(--button-color-blue);
+}
+.delete_forever:hover {
+  color: var(--button-color-red);
 }

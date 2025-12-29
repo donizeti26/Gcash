@@ -204,18 +204,27 @@ export async function loadCategories() {
       item.innerHTML = `
           <div class="group_category" ">
             <div class="icon_item_category" id="item_category_${cat.category_id}">
+            <div class="border_icon_list_category">
               <span class="material-symbols-outlined">
                  ${cat.icon}
-              </span> ${cat.name}
+              </span>
+              </div>
+              <div>
+              <strong> ${cat.name}</strong>
+              <p class = "description_category">A descrição da Categoria aqui</p>
+              </div>
             </div>
           <div class="edit_category">
-
+            <div class="border_uis_list_category">
             <span class="edit_document  material-symbols-outlined"  data-id="${cat.category_id}">
               edit_document 
             </span>
+            </div>
+            <div class="border_uis_list_category">
             <span class="delete_forever  material-symbols-outlined"  data-id="${cat.category_id}">
               delete_forever 
             </span>
+            </div>
             </div>
           </div>`;
 

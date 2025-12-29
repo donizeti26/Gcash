@@ -115,7 +115,6 @@
     padding-top: 0;
     border: none;
     display: flex;
-    flex-direction: column;
     gap: 0.3rem;
   }
   .group_button_transactions {
@@ -149,8 +148,7 @@
 /*FORM CATEGORIES*/
 @media screen and (min-width: 1060px) {
   #category_body {
-    width: 50%;
-    height: 80%;
+    width: 70%;
   }
   #form_card {
     width: 50%;
@@ -169,12 +167,16 @@
     width: 100vw;
     gap: 4rem;
   }
-  p {
-    font-size: 12px;
+  #group_category_resume {
+    display: flex;
+    flex-direction: row;
   }
-
   #aside_menu {
     gap: 4px;
+  }
+
+  .titleContainerResume {
+    white-space: nowrap;
   }
 
   #group_total {
@@ -226,12 +228,9 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: nowrap;
   }
   #other_body {
-    margin: 0 1.5rem 0rem 0rem;
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: var(--azul-400);
     max-width: 66%;
     height: 95%;
   }
@@ -241,7 +240,6 @@
   }
   #resultResume p {
     font-size: 13px;
-    padding-right: 2rem;
     color: var(--white-900);
   }
   .card_transaction:hover {
@@ -255,18 +253,11 @@
   #new_modal_js {
     position: unset;
   }
-  p,
-  a {
-    font-size: 16px;
-  }
 }
 
 @media screen and (min-width: 1600px) {
   #aside_menu {
     gap: 1.5rem;
-  }
-  #atual_month {
-    padding-bottom: 1rem;
   }
 
   #group_pay,

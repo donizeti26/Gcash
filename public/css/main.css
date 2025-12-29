@@ -20,6 +20,7 @@
   --cinza-900: #dbdfe1;
   --white-900: #ffffff;
   --white-200: #c3c3c3;
+  --white-legend: #dbdfe136;
   --black-legend: #65656580;
 
   --input-color: #eeeeee;
@@ -81,12 +82,13 @@ footer {
 }
 
 #group_cards.padding_top {
-  padding-top: 37rem;
+  padding-top: 17rem;
 }
 #resume_month.fixed {
   position: fixed;
   height: auto;
   flex-direction: column;
+  top: 0;
 }
 #menu_mobile {
   position: relative;

@@ -17,8 +17,12 @@
   padding: 0.5rem;
   color: var(--white-900);
 }
+
 #resultResume {
   font-size: 1rem;
+  padding-right: 2rem;
+  text-align: center;
+  color: #ffffff;
 }
 #replacement {
   background-color: var(--cinza-900);
@@ -32,9 +36,6 @@
   background-color: var(--azul-400);
 }
 
-p {
-  font-size: 16px;
-}
 button,
 .material-symbols-outlined {
   user-select: none;
@@ -88,9 +89,12 @@ button,
 
 #atual_month {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 2rem;
+  width: 100%;
+  background-color: var(--azul-200);
+  border-radius: 6px;
+  padding: 1rem 5rem;
 }
 
 #atual_month p {
@@ -104,7 +108,9 @@ button,
   font-size: 1.2rem;
   text-align: center;
 }
-
+#month {
+  width: 100%;
+}
 #total_month,
 #month_revenue,
 #amount_paid,
@@ -123,7 +129,7 @@ button,
   width: 50%;
 }
 .titleContainerResume {
-  white-space: nowrap;
+  white-space: wrap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,12 +149,49 @@ button,
   color: var(--button-color-red);
 }
 
+#search_filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: var(--azul-400);
+}
+
+.search_item {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 #other_body {
   flex-grow: 1;
-  background-color: var(--azul-400);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+#main_content_body {
+  height: 90%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--azul-400);
+  padding: 1rem;
+  border-radius: 2rem;
+}
+.text_transaction {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: self-start;
+  gap: 0.5rem;
+}
+
+.status_type,
+.description_payment {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
 }
 
 .rotate_x {
@@ -232,6 +275,7 @@ button,
   list-style: none;
   justify-content: center;
   padding: 0;
+  flex-wrap: wrap;
 }
 
 .add_up {
@@ -249,6 +293,8 @@ button,
 
 #delete_category_options {
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #new_modal_js {
@@ -301,4 +347,37 @@ CSS LOADING
   100% {
     transform: rotate(360deg);
   }
+}
+
+#pagination {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+#pagination ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding-right: 2rem;
+}
+
+#pagination ul li:nth-child(2) {
+  background-color: var(--white-900);
+  color: var(--azul-400);
+}
+#pagination ul li {
+  cursor: pointer;
+  color: var(--white-900);
+  padding: 0.5rem;
+  border: solid 1px var(--white-legend);
+  border-radius: 0.5rem;
+  width: 2.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#pagination ul li:hover {
+  background-color: var(--white-900);
+  color: var(--azul-400);
 }

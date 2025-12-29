@@ -1,9 +1,17 @@
+#head_card_form_transactions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 #question_repeated {
   display: flex;
   gap: 1rem;
   flex-direction: row;
 }
-
+#page_legend_title {
+  font-size: 12px;
+  color: #656565;
+}
 .installments_option {
   user-select: none;
   cursor: pointer;
@@ -18,10 +26,7 @@
   display: flex;
   justify-content: center;
 }
-#form_card,
-#form_card p {
-  font-size: 1rem;
-}
+
 #form_card {
   width: 95%;
   color: black;

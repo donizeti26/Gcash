@@ -105,23 +105,6 @@
   border-radius: 0.5rem;
   gap: 1rem;
 }
-.edit_category {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-.edit_document,
-.delete_forever {
-  cursor: pointer;
-  color: #7b7b7b;
-}
-.edit_document:hover {
-  color: var(--button-color-blue);
-}
-.delete_forever:hover {
-  color: var(--button-color-red);
-}
 
 #display_icon_on span:hover {
   color: #8a8a8a;

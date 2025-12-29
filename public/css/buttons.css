@@ -183,7 +183,7 @@
   transition-duration: 0.5s;
 }
 #button_category:hover {
-  background-color: var(--button-color-blue);
+  background-color: #00c030a1;
   transition-property: all;
   transition-duration: 0.5s;
 }

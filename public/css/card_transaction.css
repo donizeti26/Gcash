@@ -67,7 +67,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
   padding-top: 1rem;
 }
 .card_text div {

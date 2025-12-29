@@ -126,9 +126,43 @@
       </div>
 
       <main id="other_body">
+        <div id="search_filters">
+
+          <div class="search_item"> 
+            <label for="search_input">Buscar</label>
+            <input type="search" id="search_input" placeholder="Buscar por descrição" />
+          </div>
+          <div class="search_item">
+            <label for="search_description">Tipo</label>
+            <select type="" id="search_description" placeholder="Buscar por descrição">
+              <option value="" disabled="" selected="">TODAS</option>
+            </select>
+          </div>
+          <div class="search_item">
+            <label for="search_category">Categoria</label>
+            <select type="" id="search_category" placeholder="Buscar por descrição">
+              <option value="" disabled="" selected="">TODAS</option>
+            </select>
+          </div>
+          <div class="search_item"  >
+            <label for="search_period">Período</label>
+            <input type="date" id="search_period" placeholder="Buscar por descrição" />
+          </div>
+        </div>
+      <div id="main_content_body">
       <div id="resultResume"><p>27 resultados</p></div>
 
         <div id="group_cards"></div>
+        <div id="pagination">
+          <ul>
+            <li><</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>></li>
+          </ul>
+        </div>
+      </div>
       </main>
 
       <div id="modalContainer">

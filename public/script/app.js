@@ -275,7 +275,6 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       const TYPECATEGORY = cat.type == "revenue" ? "Receita" : "Despesa";
       item.innerHTML = `
       <div class="title_date">
-      
         <strong class="title_category">${cat.name}</strong>
         <p id="dueDate${cat.transaction_id}"></p>
       </div>
@@ -295,15 +294,16 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       </div>
 
       <div class="card_text">
-        <div>
-
+        <div class="text_transaction">
+        <div class="status_type">
           <p class="status${statusTransaction}"><strong>Status:</strong>${statusTransaction}</p>
           <p> <strong>Tipo:</strong> ${TYPECATEGORY}</p>
-          <p> <strong>Descrição: </strong>${cat.description}</p>
-          <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
-          <p><strong>Parcela: ???</strong></p>
-        <p> <strong>Categoria: ${cat.name}</strong></p>
-
+        </div>
+          <div class="description_payment">
+            <p> <strong>Descrição: </strong>${cat.description}</p>
+            <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
+            <p><strong>Parcela: ???</strong></p>
+          </div>
 
         </div>
       </div>
