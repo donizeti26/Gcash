@@ -9,8 +9,9 @@
   grid-template-rows: 0.4fr 0.4fr 0.8fr 0.3fr;
   place-items: center;
   width: 100%;
-  background-color: var(--cinza-900);
+  background-color: var(--azul-200);
   border-radius: 1rem;
+  color: var(--white-900);
 }
 .title_date {
   grid-area: title_date;
@@ -72,7 +73,7 @@
 }
 .card_text div {
   width: 80%;
-  border-top: 1px solid #c3c3c3;
+
   padding-top: 1rem;
 }
 .group_button_transactions {
@@ -90,5 +91,5 @@
 }
 
 .card_text strong {
-  color: #000;
+  color: #fff;
 }

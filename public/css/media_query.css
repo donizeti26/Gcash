@@ -4,8 +4,18 @@
     flex-direction: row;
   }
 }
-
+/*NEW CATEGORY*/
 @media screen and (min-width: 1060px) {
+  #form_new_category {
+    width: 40%;
+  }
+  #header_new_category {
+    display: flex;
+    flex-direction: row;
+  }
+  #edit_category {
+    position: unset;
+  }
   #calendar {
     display: flex;
     justify-content: center;
@@ -57,8 +67,8 @@
   }
   .card_pay {
     width: 100%;
-    background-color: var(--cinza-900);
-    padding: 2rem;
+    background-color: var(--azul-200);
+    padding: 1.5rem;
     border-radius: 1rem;
   }
   .header_transaction {
@@ -135,6 +145,7 @@
   }
 
   .card_pay {
+    color: var(--white-900);
     display: grid;
     grid-template-areas:
       "div_icon_category title_date amount_circle"
@@ -155,7 +166,7 @@
   }
 }
 
-/*INDEX*/
+/*INDEX NOTEBOOK*/
 
 @media screen and (min-width: 1200px) {
   #main_content {
@@ -165,7 +176,7 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
-    gap: 4rem;
+    gap: 2rem;
   }
   #group_category_resume {
     display: flex;
@@ -233,6 +244,7 @@
   #other_body {
     max-width: 66%;
     height: 95%;
+    padding-right: 2rem;
   }
   #resultResume {
     display: flex;
@@ -270,18 +282,7 @@
   #logo {
     width: 16rem;
   }
-}
-
-/*NEW CATEGORY*/
-@media screen and (min-width: 1060px) {
-  #form_new_category {
-    width: 40%;
-  }
-  #header_new_category {
-    display: flex;
-    flex-direction: row;
-  }
-  #edit_category {
-    position: unset;
+  #other_body {
+    max-width: 100%;
   }
 }
