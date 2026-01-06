@@ -32,13 +32,13 @@ const router = Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  *       500:
  *         description: Erro ao buscar métodos de pagamento
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  */
 router.get("/", getPaymentMethodsController);
 

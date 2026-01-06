@@ -65,19 +65,19 @@ router.get("/reports/", reportsController);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Report'
+ *               $ref: '#/components/schemas/report.schema'
  *       400:
  *         description: Parâmetro inválido
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  *       500:
  *         description: Erro interno do servidor
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  */
 
 router.get("/reports/count/", countTransactionsController);
@@ -111,13 +111,13 @@ router.get("/reports/count/", countTransactionsController);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  *       500:
  *         description: Erro interno do servidor
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  */
 
 /* QUERIES - Consultas específicas */
@@ -153,13 +153,13 @@ router.get("/:transaction_id/status", consultStatusController);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  *       500:
  *         description: Erro interno do servidor
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  */
 router.get("/:transaction_id/category", consultCategoryController);
 /**
@@ -193,13 +193,13 @@ router.get("/:transaction_id/category", consultCategoryController);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  *       500:
  *         description: Erro interno do servidor
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  */
 router.get("/:month/:year", getTransactionsController);
 
@@ -239,13 +239,13 @@ router.get("/:month/:year", getTransactionsController);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  *       500:
  *         description: Erro interno do servidor
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/error_response.schema'
  */
 
 /* CRUD */

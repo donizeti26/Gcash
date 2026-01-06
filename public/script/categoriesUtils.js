@@ -4,6 +4,7 @@ import { showConfirm, LoadExpenses } from "./app.js";
 import { testDisplay } from "./iconsUtils.js";
 import {
   sumAtualMonthPaid,
+  resumeMonth,
   sumAtualMonthPending,
   sumAmountMonthRevenue,
   sumAmountMonth,
@@ -77,6 +78,7 @@ export async function openListCategory() {
         await loadCategories();
         await sumAmountMonth(monthIndex, yearIndex);
         await sumAtualMonthPaid(monthIndex, yearIndex);
+        await resumeMonth(monthIndex, yearIndex);
         await sumAmountMonthRevenue(monthIndex, yearIndex);
         await sumAtualMonthPending(monthIndex, yearIndex);
         await LoadExpenses(monthIndex, yearIndex);

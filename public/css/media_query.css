@@ -244,7 +244,7 @@
   #other_body {
     max-width: 66%;
     height: 95%;
-    padding-right: 2rem;
+    padding-right: 18rem;
   }
   #resultResume {
     display: flex;
@@ -284,5 +284,6 @@
   }
   #other_body {
     max-width: 100%;
+    padding-right: 2rem;
   }
 }

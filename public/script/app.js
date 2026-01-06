@@ -19,6 +19,7 @@ import {
   initExpensesForm,
   initTransactionForm,
   sumAtualMonthPaid,
+  resumeMonth,
   sumAtualMonthPending,
   sumAmountMonthRevenue,
   sumAmountMonth,
@@ -177,6 +178,7 @@ document.addEventListener("click", async (e) => {
 
       await sumAmountMonth(monthIndex, yearIndex);
       await sumAtualMonthPaid(monthIndex, yearIndex);
+      await resumeMonth(monthIndex, yearIndex);
       await sumAmountMonthRevenue(monthIndex, yearIndex);
       await sumAtualMonthPending(monthIndex, yearIndex);
       await LoadExpenses(monthIndex, yearIndex);
@@ -197,6 +199,7 @@ document.addEventListener("click", async (e) => {
     await SetStatusInTransactions(id);
     await sumAmountMonth(monthIndex, yearIndex);
     await sumAtualMonthPaid(monthIndex, yearIndex);
+    await resumeMonth(monthIndex, yearIndex);
     await sumAmountMonthRevenue(monthIndex, yearIndex);
     await sumAtualMonthPending(monthIndex, yearIndex);
     await LoadExpenses(monthIndex, yearIndex);

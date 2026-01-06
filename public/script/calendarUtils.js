@@ -1,6 +1,7 @@
 import {
   sumAmountMonth,
   sumAtualMonthPaid,
+  resumeMonth,
   sumAtualMonthPending,
   sumAmountMonthRevenue,
 } from "./formTransactionsUtils.js";
@@ -49,6 +50,7 @@ export function setupCalendar() {
     sumAmountMonth(ContMonth, ContYear);
     sumAmountMonthRevenue(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
+    resumeMonth(ContMonth, ContYear);
     sumAtualMonthPending(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
   });
@@ -64,6 +66,7 @@ export function setupCalendar() {
     showMonth();
     sumAmountMonth(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
+    resumeMonth(ContMonth, ContYear);
     sumAtualMonthPending(ContMonth, ContYear);
     sumAmountMonthRevenue(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
@@ -76,6 +79,7 @@ export function showMonth() {
   months.innerHTML = ` <h2 data-id=${ContMonth} id="month_index" > ${month[ContMonth]}</h2><br><h2 data-id =${ContYear} id="year_index"> ${ContYear}</h2>`;
   sumAmountMonth(ContMonth, ContYear);
   sumAtualMonthPaid(ContMonth, ContYear);
+  resumeMonth(ContMonth, ContYear);
   sumAtualMonthPending(ContMonth, ContYear);
   sumAmountMonthRevenue(ContMonth, ContYear);
 }

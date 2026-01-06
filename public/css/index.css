@@ -114,7 +114,8 @@ button,
 #total_month,
 #month_revenue,
 #amount_paid,
-#amount_pending {
+#amount_pending,
+#calc_resume_month {
   font-size: 1.25rem;
 }
 .containerResume {
@@ -148,6 +149,9 @@ button,
 #arrowCircleDownIcon {
   color: var(--button-color-red);
 }
+#articlePerson {
+  color: var(--button-color-purple);
+}
 
 #search_filters {
   display: flex;
@@ -167,6 +171,16 @@ button,
 .search_item input {
   color: var(--white-900);
 }
+
+#search_period {
+  color: var(--white-legend);
+}
+
+#search_period::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverte a cor do ícone (útil para fundos escuros) */
+  opacity: 0.3; /* Ajusta a opacidade */
+}
+
 .search_item input::placeholder,
 .search_item select::placeholder {
   color: var(--white-legend);

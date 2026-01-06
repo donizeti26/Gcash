@@ -66,21 +66,32 @@
             </span>
             <div id="group_total_resume">
               <div id="group_resume">
-                <span id="group_total"class="containerResume" >
-                  <span id="month_value" 
-                    >
+                <span id="group_total" class="containerResume">
+                  <span id="month_value">
                     <div class="titleContainerResume">
-
-                    <span class="material-symbols-outlined" id="walletIcon"> wallet </span
-                    >Saldo Total<br /></div><strong id="total_month"></strong
+                      <span class="material-symbols-outlined" id="walletIcon">
+                        wallet </span
+                      >Saldo Anual<br />
+                    </div>
+                    <strong id="total_month"></strong
                   ></span>
-                    </span>
-                <span id="revenue " class="containerResume"
-                  >
+                </span>
+                <span class="containerResume">
                   <div class="titleContainerResume">
-                      <span class="material-symbols-outlined" id="arrowCircleUpIcon">
+                    <span class="material-symbols-outlined" id="articlePerson">
+                      article_person </span
+                    >Resumo Mensal <br />
+                  </div>
+                  <strong id="calc_resume_month"></strong
+                ></span>
+                <span id="revenue " class="containerResume">
+                  <div class="titleContainerResume">
+                    <span
+                      class="material-symbols-outlined"
+                      id="arrowCircleUpIcon"
+                    >
                       arrow_circle_up </span
-                    >Saldo do Mês<br />
+                    >Recebidos Mesal<br />
                   </div>
                   <strong id="month_revenue"></strong
                 ></span>
@@ -88,17 +99,27 @@
               <div id="group_pay">
                 <span class="containerResume">
                   <div class="titleContainerResume">
-                    <span class="material-symbols-outlined" id="checkCircleIcon"> check_circle </span>
-                    Despesas pagas<br />
+                    <span
+                      class="material-symbols-outlined"
+                      id="checkCircleIcon"
+                    >
+                      check_circle
                     </span>
+                    Despesas pagas<br />
                   </div>
                   <strong id="amount_paid"></strong>
                 </span>
-                <span class="containerResume"
-                  >
-                  <div class="titleContainerResume"><span class="material-symbols-outlined" id="arrowCircleDownIcon">
-                    arrow_circle_down </span
-                  >Despesas ativas <br /></div><strong id="amount_pending"></strong
+
+                <span class="containerResume">
+                  <div class="titleContainerResume">
+                    <span
+                      class="material-symbols-outlined"
+                      id="arrowCircleDownIcon"
+                    >
+                      arrow_circle_down </span
+                    >Despesas ativas <br />
+                  </div>
+                  <strong id="amount_pending"></strong
                 ></span>
               </div>
             </div>
@@ -127,10 +148,14 @@
 
       <main id="other_body">
         <div id="search_filters">
-
-          <div class="search_item"> 
+          <div class="search_item">
             <label for="search_input">Buscar</label>
-            <input type="search" class="input_search" id="search_input" placeholder="Buscar por descrição..."></input>
+            <input
+              type="search"
+              class="input_search"
+              id="search_input"
+              placeholder="Buscar por descrição..."
+            />
           </div>
           <div class="search_item">
             <label for="search_description">Tipo</label>
@@ -140,29 +165,34 @@
           </div>
           <div class="search_item">
             <label for="search_category">Categoria</label>
-            <select type="" class="input_search"  id="search_category">
+            <select type="" class="input_search" id="search_category">
               <option value="" selected="">TODAS</option>
             </select>
           </div>
           <div class="search_item">
             <label for="search_period">Período</label>
-            <input type="date" class="input_search"  id="search_period" placeholder="Buscar por descrição" />
+            <input
+              type="date"
+              class="input_search"
+              id="search_period"
+              placeholder="Buscar por descrição"
+            />
           </div>
         </div>
-      <div id="main_content_body">
-      <div id="resultResume"><p>27 resultados</p></div>
+        <div id="main_content_body">
+          <div id="resultResume"><p>27 resultados</p></div>
 
-        <div id="group_cards"></div>
-        <div id="pagination">
-          <ul>
-            <li><</li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>></li>
-          </ul>
+          <div id="group_cards"></div>
+          <div id="pagination">
+            <ul>
+              <li><</li>
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>></li>
+            </ul>
+          </div>
         </div>
-      </div>
       </main>
 
       <div id="modalContainer">

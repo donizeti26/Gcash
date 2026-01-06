@@ -23,7 +23,7 @@ export async function reportsController(req, res) {
         data = await paidTransactions(month, year);
         break;
       default:
-        data = await sumTransaction(month, year);
+        data = await sumTransaction(year);
     }
 
     res.json(data);

@@ -221,27 +221,35 @@ export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
   }
 }
 
-export async function sumAtualMonthPaid(monthIndex, yearIndex) {
-  const month = monthIndex + 1;
+export async function getTransactionsTotal(monthIndex, yearIndex, type) {
   try {
-    console.log("Month no front:", month);
+    console.log("Month no front:", monthIndex);
     console.log("Year no front:", yearIndex);
     const response = await fetch(
-      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=paid`
+      `/api/transactions/reports?month=${monthIndex}&year=${yearIndex}&type=${type}`
     );
 
     const transactionsSumPaid = await response.json();
-    console.log("TUDO OK AQUI");
+    return Number(transactionsSumPaid.total) || 0;
+  } catch (err) {
+    console.error("Erro ao BUSCAR soma total do mes atual", err);
+  }
+}
+
+export async function sumAtualMonthPaid(monthIndex, yearIndex) {
+  const month = monthIndex + 1;
+  try {
+    const total = await getTransactionsTotal(month, yearIndex, "paid");
 
     const amount_paid = document.getElementById("amount_paid");
 
     if (amount_paid) {
-      const total = Number(transactionsSumPaid.total) || 0;
       const convertAmount = Number(total).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
       amount_paid.textContent = `${convertAmount}`;
+
       console.log(`Total pago no mes ${month} foi de ${total}`);
     }
   } catch (err) {
@@ -252,23 +260,43 @@ export async function sumAtualMonthPaid(monthIndex, yearIndex) {
 export async function sumAtualMonthPending(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
-    const response = await fetch(
-      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=pending`
-    );
-
-    const transactionsSumPending = await response.json();
-    console.log("TUDO OK AQUI");
+    const total = await getTransactionsTotal(month, yearIndex, "pending");
 
     const amount_pending = document.getElementById("amount_pending");
 
     if (amount_pending) {
-      const total = Number(transactionsSumPending.total) || 0;
       const convertAmount = Number(total).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
       amount_pending.textContent = `${convertAmount}`;
       console.log(`Total não pago no mes de ${month} foi de ${total}`);
+    }
+  } catch (err) {
+    console.error("Erro ao inserir soma total do mes atual", err);
+  }
+}
+
+export async function resumeMonth(monthIndex, yearIndex) {
+  const month = monthIndex + 1;
+  try {
+    const totalPending = await getTransactionsTotal(
+      month,
+      yearIndex,
+      "pending"
+    );
+    const totalPaid = await getTransactionsTotal(month, yearIndex, "paid");
+
+    const total = totalPaid - totalPending;
+    const calc_resume_month = document.getElementById("calc_resume_month");
+
+    if (calc_resume_month) {
+      const convertAmount = Number(total).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      calc_resume_month.textContent = `${convertAmount}`;
+      console.log(`O resumo desse mes foi de ${month} foi de ${total}`);
     }
   } catch (err) {
     console.error("Erro ao inserir soma total do mes atual", err);

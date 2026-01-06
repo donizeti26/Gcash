@@ -1,15 +1,17 @@
 import pool from "../../config/db.js";
 
-export async function sumTransactions({ month, year }) {
+export async function sumTransactions({ year }) {
   const query = `
-SELECT SUM(t.amount) AS total_month
-FROM transactions as t 
-inner join categories as c on 
- t.category_id = c.category_id where
-EXTRACT(MONTH FROM due_date)=$1
-AND EXTRACT(YEAR FROM due_date) = $2`;
-  const result = await pool.query(query, [month, year]);
-  console.log("Resultado da Query (total do mes):", result.rows);
+SELECT
+    COALESCE(SUM(t.amount) FILTER (WHERE c.type = 'revenue' ), 0)-
+    COALESCE(SUM(t.amount) FILTER (WHERE t.status = 'paid' AND c.type = 'expense'), 0)
+    AS total_month 
+FROM transactions t
+JOIN categories c ON c.category_id = t.category_id
+WHERE EXTRACT(YEAR FROM t.due_date) = $1;
+`;
+  const result = await pool.query(query, [year]);
+  console.log("Resultado da Query SALDO TOTAL:", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
 }
@@ -22,7 +24,7 @@ inner join categories as c on
 EXTRACT(MONTH FROM due_date)=$1
 AND EXTRACT(YEAR FROM due_date) = $2 and c.type = 'revenue'`;
   const result = await pool.query(query, [month, year]);
-  console.log("Resultado da Query (total do mes):", result.rows);
+  console.log("Resultado da Query SALDO DO MES:", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
 }
@@ -35,7 +37,7 @@ inner join categories as c on
 WHERE status = 'pending' AND
 EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense'`;
   const result = await pool.query(query, [month, year]);
-  console.log("Resultado da Query (total pendente):", result.rows);
+  console.log("Resultado da Query DESPESAS ATIVAS:", result.rows);
 
   console.log(result.rows);
 
@@ -50,12 +52,8 @@ inner join categories as c on
 WHERE status = 'paid' AND
 EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense'`;
 
-  console.log(">>> DEBUG pendingTransactions");
-  console.log("Mês recebido:", month, "Tipo:", typeof month);
-  console.log("Ano recebido:", year, "Tipo:", typeof year);
   const result = await pool.query(query, [month, year]);
-  console.log("Resultado da Query (total pago):", result.rows);
-  console.log(result.rows);
+  console.log("Resultado da Query DESPESAS PAGAS:", result.rows);
 
   return { total: Number(result.rows[0]?.total) || 0 };
 }
