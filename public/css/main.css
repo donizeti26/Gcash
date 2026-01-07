@@ -31,7 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; /* Para navegadores Firefox no macOS */
   font-smoothing: antialiased; /* Tentativa de suporte geral (não padrão) */
-  overflow-x: hidden;
+  overflow: hidden;
 }
 * {
   margin: 0;

@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const modal = document.querySelector("#new_modal_js");
       modal.dataset.formType = "expense";
 
-      initTransactionForm?.();
+      initTransactionForm?.("expense");
       loadCategoryFormExpense?.();
       loadPaymentMethodsExpense?.();
       initExpensesForm?.();
@@ -82,7 +82,7 @@ if (btnRevenue) {
     setupTitleTransactionForm("revenue");
 
     //carregando
-    initTransactionForm?.();
+    initTransactionForm?.("revenue");
     initExpensesForm?.();
     loadCategoryFormRevenue?.();
     loadPaymentMethodsRevenue?.();
@@ -262,10 +262,24 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
       item.classList.add("card_pay");
 
-      const convertAmount = Number(cat.amount).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
+      const typeCategory = cat.type == "revenue" ? "Receita" : "Despesa";
+      let convertAmount;
+
+      if (cat.type == "expense") {
+        convertAmount = Number(cat.amount)
+          .toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })
+          .replace("-R$", "- R$");
+      } else {
+        convertAmount =
+          "+ " +
+          Number(cat.amount).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          });
+      }
       let statusTransaction;
       if (cat.status == "paid") {
         statusTransaction = "Pago";
@@ -275,7 +289,6 @@ export async function LoadExpenses(monthIndex, yearIndex) {
         statusTransaction = "Receita";
       }
 
-      const TYPECATEGORY = cat.type == "revenue" ? "Receita" : "Despesa";
       item.innerHTML = `
       <div class="title_date">
         <strong class="title_category">${cat.name}</strong>
@@ -299,13 +312,13 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       <div class="card_text">
         <div class="text_transaction">
         <div class="status_type">
-          <p class="status${statusTransaction}"><strong>Status:</strong>${statusTransaction}</p>
-          <p> <strong>Tipo:</strong> ${TYPECATEGORY}</p>
+          <p class="status${statusTransaction} text_card"><strong>Status: </strong>${statusTransaction}</p>
+          <p  class="text_card" ><strong>Tipo: </strong> ${typeCategory}</p>
         </div>
           <div class="description_payment">
-            <p> <strong>Descrição: </strong>${cat.description}</p>
-            <p><strong>Forma de Pagamento: </strong>${cat.pmethod}</p>
-            <p><strong>Parcela: ???</strong></p>
+          <p class="text_card" ><strong>Forma de Pag.: </strong>${cat.pmethod}</p>
+          <p class="text_card" ><strong>Parcela: ???</strong></p>
+          <p class="text_card" > <strong>Descrição: </strong>${cat.description}</p>
           </div>
 
         </div>
@@ -313,8 +326,12 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       <div class="group_button_transactions index_card">
       
 
-      <button  data-id="${cat.transaction_id}"  class="button_remove">Remover</button>
-        <button data-id="${cat.transaction_id}"   class="button_edit edit_transaction">Editar</button>
+      <button  data-id="${cat.transaction_id}"  class="button_remove"><span class="material-symbols-outlined">
+delete_forever
+</span></button>
+        <button data-id="${cat.transaction_id}"   class="button_edit edit_transaction"><span class="material-symbols-outlined">
+edit_document
+</span></button>
       </div>
 
 `;
@@ -333,13 +350,17 @@ export async function LoadExpenses(monthIndex, yearIndex) {
             "button_set_status",
             "button_set_status_pending"
           );
-          buttonPay.innerHTML = "Tornar pendente";
+          buttonPay.innerHTML = `<span class="material-symbols-outlined">
+credit_card_off
+</span>`;
         } else {
           buttonPay.classList.add(
             "button_set_status",
             "button_set_status_paid"
           );
-          buttonPay.innerHTML = "Pagar";
+          buttonPay.innerHTML = `<span class="material-symbols-outlined">
+credit_score
+</span>`;
         }
         groupButton.appendChild(buttonPay);
       }

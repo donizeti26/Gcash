@@ -77,21 +77,21 @@
 }
 .button_set_status_paid {
   cursor: pointer;
-  background-color: var(--button-color-green);
+  background-color: var(--button-color-yellow);
   font-weight: 700;
   color: var(--button-color-back);
-  border: 1px solid var(--button-color-green);
+  border: 1px solid var(--button-color-yellow);
   transition: transform 0.3s ease-in-out;
   border-radius: 0.5rem;
 }
 .button_set_status_pending {
   white-space: nowrap;
   cursor: pointer;
-  background-color: var(--button-color-yellow);
+  background-color: var(--button-color-green);
   font-weight: 700;
   color: var(--button-color-back);
 
-  border: 1px solid var(--button-color-yellow);
+  border: 1px solid var(--button-color-green);
   transition: all;
   transition-duration: 0.2s;
   border-radius: 0.5rem;
@@ -99,13 +99,13 @@
 }
 .button_set_status_paid:hover {
   color: var(--white-900);
-  border: 1px solid var(--button-color-green);
+  border: 1px solid var(--button-color-yellow);
   transform: scale(1.1);
 }
 .button_set_status_pending:hover {
   color: var(--white-900);
   transform: scale(1.1);
-  background-color: var(--button-color-yellow);
+  background-color: var(--button-color-green);
 }
 
 .button_close_card,
@@ -189,15 +189,13 @@
 }
 #options ul li {
   text-decoration: none;
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 1rem;
   color: #ffffff;
   border-radius: 0.5rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 8rem;
 }
 
 #button_transactions {

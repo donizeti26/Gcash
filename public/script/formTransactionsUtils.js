@@ -46,7 +46,7 @@ export function initExpensesForm() {
 //////captura os dados do formulário e faz o fetch pro back.////////
 //////////////////////////////////////////////////////////////////////////
 
-export async function initTransactionForm() {
+export async function initTransactionForm(type) {
   const formTransaction = document.getElementById("form_card");
   if (formTransaction) {
     formTransaction.addEventListener("submit", async (e) => {
@@ -66,7 +66,12 @@ export async function initTransactionForm() {
       const status = statusElement?.value || null;
 
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
-      amountNumber = parseFloat(amountNumber);
+
+      if (type == "expense") {
+        amountNumber = parseFloat(amountNumber) * -1;
+      } else {
+        amountNumber = parseFloat(amountNumber);
+      }
       try {
         const response = await fetch("/api/transactions/", {
           method: "POST",
