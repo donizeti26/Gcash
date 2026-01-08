@@ -41,7 +41,7 @@ router.post("/", registerCategoryController);
  *         required: false
  *         schema:
  *           type: string
- *           enum: [expense, revenue]
+ *           enum: [expense, revenue, all]
  *     responses:
  *       200:
  *         description: Lista de categorias

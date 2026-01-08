@@ -239,6 +239,53 @@ document.addEventListener("click", async (e) => {
   await openListCategory();
 });
 
+///////////////////////////////////////////////////////////////////////
+////////////INICIAR FORMULÁRIO DE PESQUISA  //////////////////////////
+/////////////////////////////////////////////////////////////////////
+initSearchArea();
+export async function initSearchArea() {
+  console.log("DF FUNCIONANDO");
+  const type = document.getElementById("search_description");
+  const InputCategory = document.getElementById("search_category");
+
+  async function loadCategories(typeValue) {
+    try {
+      const response = await fetch(`/api/categories?type=${typeValue}`);
+      const listCategory = await response.json();
+      return listCategory;
+    } catch (err) {
+      console.error("Erro ao buscar categorias", err);
+    }
+  }
+
+  if (type.value) {
+    console.log("DF FUNCIONANDO");
+    const listCategories = await loadCategories(type.value);
+    InputCategory.innerHTML = `<option value="all" selected="">Todas as categorias...</option>`;
+    listCategories.forEach((cat) => {
+      const item = document.createElement("option");
+      item.innerHTML = `${cat.name}`;
+      if (InputCategory) {
+        InputCategory.appendChild(item);
+      }
+    });
+  }
+
+  type.addEventListener("change", async (event) => {
+    loadCategories(event.target.value);
+    console.log("DF FUNCIONANDO");
+    const listCategories = await loadCategories(type.value);
+    InputCategory.innerHTML = `<option value="all" selected="">Todas as categorias...</option>`;
+    listCategories.forEach((cat) => {
+      const item = document.createElement("option");
+      item.innerHTML = `${cat.name}`;
+      if (InputCategory) {
+        InputCategory.appendChild(item);
+      }
+    });
+  });
+}
+
 ////////////////////////////////////////////////////////////////////////////
 /////////////////////Carregar despesas na tela inicial.//////////////////
 //////////////////////////////////////////////////////////////////////////

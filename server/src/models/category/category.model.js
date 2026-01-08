@@ -14,6 +14,10 @@ export async function registerCategory({
 }
 
 export async function getCategories(type) {
+  if (type == "all") {
+    const result = await pool.query("SELECT * FROM categories ORDER BY name");
+    return result.rows;
+  }
   if (type) {
     const result = await pool.query(
       "SELECT * FROM categories WHERE type=$1 ORDER BY name",
@@ -21,8 +25,6 @@ export async function getCategories(type) {
     );
     return result.rows;
   }
-  const result = await pool.query("SELECT * FROM categories ORDER BY name");
-  return result.rows;
 }
 
 export async function deleteCategory(id) {
