@@ -38,7 +38,7 @@ router.post("/", registerCategoryController);
  *     parameters:
  *       - in: query
  *         name: type
- *         required: false
+ *         required: true
  *         schema:
  *           type: string
  *           enum: [expense, revenue, all]

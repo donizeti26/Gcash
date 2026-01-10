@@ -248,7 +248,7 @@ export async function initSearchArea() {
   const type = document.getElementById("search_description");
   const InputCategory = document.getElementById("search_category");
 
-  async function loadCategories(typeValue) {
+  async function searchLoadCategories(typeValue) {
     try {
       const response = await fetch(`/api/categories?type=${typeValue}`);
       const listCategory = await response.json();
@@ -260,7 +260,7 @@ export async function initSearchArea() {
 
   if (type.value) {
     console.log("DF FUNCIONANDO");
-    const listCategories = await loadCategories(type.value);
+    const listCategories = await searchLoadCategories(type.value);
     InputCategory.innerHTML = `<option value="all" selected="">Todas as categorias...</option>`;
     listCategories.forEach((cat) => {
       const item = document.createElement("option");
@@ -272,9 +272,9 @@ export async function initSearchArea() {
   }
 
   type.addEventListener("change", async (event) => {
-    loadCategories(event.target.value);
+    searchLoadCategories(event.target.value);
     console.log("DF FUNCIONANDO");
-    const listCategories = await loadCategories(type.value);
+    const listCategories = await searchLoadCategories(type.value);
     InputCategory.innerHTML = `<option value="all" selected="">Todas as categorias...</option>`;
     listCategories.forEach((cat) => {
       const item = document.createElement("option");

@@ -191,7 +191,7 @@ export function sendCategoryNewCategory() {
 
 export async function loadCategories() {
   try {
-    const response = await fetch("/api/categories");
+    const response = await fetch("/api/categories?type=all");
     const categories = await response.json();
 
     const list = document.getElementById("list_categories");
