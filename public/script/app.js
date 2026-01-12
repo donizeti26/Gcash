@@ -154,7 +154,7 @@ document.addEventListener("click", async (e) => {
   const buttonRemove = e.target.closest(".button_remove");
   if (buttonRemove) {
     const ConfirmStatus = await showConfirm({
-      message: "Você quer realmente apagar essa transação?",
+      message: "Você realmente quer excluir essa transação?",
       theme: "danger",
     });
 
@@ -186,6 +186,7 @@ document.addEventListener("click", async (e) => {
       console.error("Erro ao apagar: ", err);
     } finally {
       hideLoading();
+      setTimeout(async () => {}, 100);
     }
   }
 
@@ -538,16 +539,32 @@ export function showConfirm({ message, theme }) {
     overflowHidden(true);
 
     const modal = document.getElementById("confirm_modal");
+    const ConfirmTitle = document.getElementById("confirm_title");
     const bodyModal = document.getElementById("body_modal");
+    const buttonConfirm = document.getElementById("confirm_yes");
     const iconModal = document.querySelector("#icon_modal");
+
+    modal.classList.remove("*");
+
     modal.className = "modal_box";
     modal.classList.add(theme);
+    buttonConfirm.classList.add(theme);
+    iconModal.classList.add(theme);
+
     switch (theme) {
       case "danger":
+        iconModal.classList.remove("warning");
+        buttonConfirm.classList.remove("warning");
         iconModal.textContent = "delete_forever";
+        ConfirmTitle.textContent = "Deletar Transação";
+        buttonConfirm.textContent = "Sim, Deletar.";
         break;
       case "warning":
-        iconModal.textContent = "notification_important";
+        iconModal.classList.remove("danger");
+        buttonConfirm.classList.remove("danger");
+        iconModal.textContent = "compare_arrows";
+        ConfirmTitle.textContent = "Alterar Status";
+        buttonConfirm.textContent = "Sim, Alterar.";
         break;
     }
 
@@ -564,5 +581,12 @@ export function showConfirm({ message, theme }) {
       bodyModal.classList.add("hidden");
       resolve(false);
     };
+
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        bodyModal.classList.add("hidden");
+        resolve(false);
+      }
+    });
   });
 }

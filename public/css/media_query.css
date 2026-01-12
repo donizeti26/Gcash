@@ -16,17 +16,7 @@
   #edit_category {
     position: unset;
   }
-  #calendar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: var(--azul-400);
-    border-radius: 0.5rem;
-    width: 100%;
 
-    color: var(--white-900);
-  }
   #calendar_week {
     display: flex;
     justify-content: center;

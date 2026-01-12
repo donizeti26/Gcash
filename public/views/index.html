@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/buttons.css" />
+    <link rel="stylesheet" href="../css/modal_confirmation.css" />
     <link rel="stylesheet" href="../css/form_expenses.css" />
     <link rel="stylesheet" href="../css/form_categories.css" />
     <link rel="stylesheet" href="../css/card_transaction.css" />
@@ -35,19 +36,6 @@
       <div id="left_side">
         <div id="user">
           <p>Claudio CTE</p>
-        </div>
-        <div id="calendar">
-          <h3 id="calendar_month">Dezembro</h3>
-          <div id="calendar_week">
-            <div>Dom</div>
-            <div>Seg</div>
-            <div>Ter</div>
-            <div>Qua</div>
-            <div>Qui</div>
-            <div>Sex</div>
-            <div>Sab</div>
-          </div>
-          <div id="calendar_days"></div>
         </div>
         <article id="resume_month">
           <div id="aside_menu">
@@ -212,17 +200,15 @@
     <div id="body_modal" class="hidden">
       <div id="confirm_modal" class="modal danger">
         <div id="modal_box">
-          <p id="confirm_title">
-            <span id="icon_modal" class="material-symbols-outlined"
-              >delete_forever</span
-            >
-            Atenção
-          </p>
+          <span id="icon_modal" class="material-symbols-outlined"
+            >delete_forever</span
+          >
+          <p id="confirm_title">Atenção</p>
           <p id="confirm_message"></p>
 
           <div class="actions">
-            <button id="confirm_yes">Ok</button>
-            <button id="confirm_no">Cancelar</button>
+            <button id="confirm_no">Não, manter</button>
+            <button id="confirm_yes">Sim, Deletar.</button>
           </div>
         </div>
       </div>
