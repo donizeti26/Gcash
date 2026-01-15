@@ -3,15 +3,14 @@ import pool from "../../config/db.js";
 export async function sumTransactions({ year }) {
   const query = `
 SELECT
-    COALESCE(SUM(t.amount) FILTER (WHERE c.type = 'revenue' ), 0)-
-    COALESCE(SUM(t.amount) FILTER (WHERE t.status = 'paid' AND c.type = 'expense'), 0)
-    AS total_month 
+    COALESCE(SUM(t.amount) FILTER (WHERE c.type IN ('revenue','expense')), 0)
+    AS total_month
 FROM transactions t
 JOIN categories c ON c.category_id = t.category_id
-WHERE EXTRACT(YEAR FROM t.due_date) = $1;
+WHERE t.status = 'paid' AND EXTRACT(YEAR FROM t.due_date) = $1;
 `;
   const result = await pool.query(query, [year]);
-  console.log("Resultado da Query RESUMO MENSAL:", result.rows);
+  console.log("Resultado da Query RESUMO ANUAL:", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
 }
