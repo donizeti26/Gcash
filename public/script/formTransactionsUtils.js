@@ -176,25 +176,23 @@ export async function loadPaymentMethodsExpense() {
 }
 
 //////////////////////////////////////////
-/////////////TOTAL DO ME2S///////////
+/////////////TOTAL DO ANO///////////
 //////////////////////////////////////////
-export async function sumAmountMonth(monthIndex, yearIndex) {
+export async function sumAmountYear(monthIndex, yearIndex) {
   const month = monthIndex + 1;
+  const type = "sumYear";
   try {
-    const response = await fetch(
-      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=sum`
-    );
-    const transactionsSum = await response.json();
+    const response = await getResume(month, yearIndex, type);
 
-    const total_month = document.getElementById("total_month");
+    const total_year = document.getElementById("total_year");
 
-    if (total_month) {
-      const total = Number(transactionsSum.total) || 0;
+    if (total_year) {
+      const total = Number(response) || 0;
       const convertAmount = Number(total).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
-      total_month.textContent = `${convertAmount}`;
+      total_year.textContent = `${convertAmount}`;
       console.log(`Total transações no mes ${monthIndex}: `, total);
       console.log(`Total transações`, total);
     }
@@ -214,15 +212,15 @@ export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
     );
     const transactionsSum = await response.json();
 
-    const total_month = document.getElementById("month_revenue");
+    const total_year = document.getElementById("month_revenue");
 
-    if (total_month) {
+    if (total_year) {
       const total = Number(transactionsSum.total) || 0;
       const convertAmount = Number(total).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
-      total_month.textContent = `${convertAmount}`;
+      total_year.textContent = `${convertAmount}`;
       console.log(`Total gastos no mes de ${monthIndex}: `, total);
     }
   } catch (err) {
@@ -286,10 +284,40 @@ export async function sumAtualMonthPending(monthIndex, yearIndex) {
   }
 }
 
-export async function resumeMonth(monthIndex, yearIndex) {
-  const month = monthIndex + 1;
+export async function getResume(month, year, type) {
   try {
+    const response = await fetch(
+      `/api/transactions/reports?month=${month}&year=${year}&type=${type}`
+    );
+
+    const totalResumeMonth = await response.json();
+
+    console.log("RESUMO MENSAL" + totalResumeMonth.total);
+
+    return Number(totalResumeMonth.total) || 0;
   } catch (err) {
-    console.error("Erro ao inserir soma total do mes atual", err);
+    console.error("Erro ao BUSCAR soma total do mes atual", err);
+  }
+}
+
+export async function resumeMonthInsert(monthIndex, yearIndex) {
+  const month = monthIndex + 1;
+  const year = yearIndex;
+  const type = "sumMonth";
+
+  try {
+    const total = await getResume(month, year, type);
+    const calc_resume_month = document.getElementById("calc_resume_month");
+
+    if (calc_resume_month) {
+      const convertAmount = Number(total).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      calc_resume_month.textContent = `${convertAmount}`;
+      console.log(`Total de RESUMO no mes de ${month} foi de ${total}`);
+    }
+  } catch (err) {
+    console.error("Erro ao inserir resumo total do mes atual", err);
   }
 }

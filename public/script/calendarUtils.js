@@ -1,11 +1,12 @@
 import {
-  sumAmountMonth,
+  sumAmountYear,
   sumAtualMonthPaid,
-  resumeMonth,
+  resumeMonthInsert,
   sumAtualMonthPending,
   sumAmountMonthRevenue,
 } from "./formTransactionsUtils.js";
 
+import { insertCountTransaction } from "./transactionsUtils.js";
 import { LoadExpenses } from "./sharedUtils.js";
 /*/////////////////////////////////////
 ///////CONTROLADOR DOS MESES //////////
@@ -47,12 +48,13 @@ export function setupCalendar() {
       console.log(ContYear);
     }
     showMonth();
-    sumAmountMonth(ContMonth, ContYear);
+    sumAmountYear(ContMonth, ContYear);
     sumAmountMonthRevenue(ContMonth, ContYear);
     sumAtualMonthPaid(ContMonth, ContYear);
-    resumeMonth(ContMonth, ContYear);
+    resumeMonthInsert(ContMonth, ContYear);
     sumAtualMonthPending(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
+    insertCountTransaction(ContMonth);
   });
   // Voltar (Back)
   BACK.addEventListener("click", () => {
@@ -64,12 +66,13 @@ export function setupCalendar() {
       console.log(ContYear);
     }
     showMonth();
-    sumAmountMonth(ContMonth, ContYear);
-    sumAtualMonthPaid(ContMonth, ContYear);
-    resumeMonth(ContMonth, ContYear);
-    sumAtualMonthPending(ContMonth, ContYear);
+    sumAmountYear(ContMonth, ContYear);
     sumAmountMonthRevenue(ContMonth, ContYear);
+    sumAtualMonthPaid(ContMonth, ContYear);
+    resumeMonthInsert(ContMonth, ContYear);
+    sumAtualMonthPending(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
+    insertCountTransaction();
   });
 
   // Mostra o primeiro mês ao carregar
@@ -77,9 +80,9 @@ export function setupCalendar() {
 }
 export function showMonth() {
   months.innerHTML = ` <h2 data-id=${ContMonth} id="month_index" > ${month[ContMonth]}</h2><br><h2 data-id =${ContYear} id="year_index"> ${ContYear}</h2>`;
-  sumAmountMonth(ContMonth, ContYear);
+  sumAmountYear(ContMonth, ContYear);
   sumAtualMonthPaid(ContMonth, ContYear);
-  resumeMonth(ContMonth, ContYear);
+  resumeMonthInsert(ContMonth, ContYear);
   sumAtualMonthPending(ContMonth, ContYear);
   sumAmountMonthRevenue(ContMonth, ContYear);
 }

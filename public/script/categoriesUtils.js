@@ -11,10 +11,10 @@ import { countTransaction } from "./transactionsUtils.js";
 import { testDisplay } from "./iconsUtils.js";
 import {
   sumAtualMonthPaid,
-  resumeMonth,
+  resumeMonthInsert,
   sumAtualMonthPending,
   sumAmountMonthRevenue,
-  sumAmountMonth,
+  sumAmountYear,
 } from "./formTransactionsUtils.js";
 
 import { getCurrentMonthYear } from "./app.js";
@@ -93,9 +93,9 @@ export async function openListCategory() {
         console.log(data.message);
 
         await loadCategories();
-        await sumAmountMonth(monthIndex, yearIndex);
+        await sumAmountYear(monthIndex, yearIndex);
         await sumAtualMonthPaid(monthIndex, yearIndex);
-        await resumeMonth(monthIndex, yearIndex);
+        await resumeMonthInsert(monthIndex, yearIndex, "sum");
         await sumAmountMonthRevenue(monthIndex, yearIndex);
         await sumAtualMonthPending(monthIndex, yearIndex);
         await LoadExpenses(monthIndex, yearIndex);

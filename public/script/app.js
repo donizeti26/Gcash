@@ -21,10 +21,10 @@ import {
   initExpensesForm,
   initTransactionForm,
   sumAtualMonthPaid,
-  resumeMonth,
+  resumeMonthInsert,
   sumAtualMonthPending,
   sumAmountMonthRevenue,
-  sumAmountMonth,
+  sumAmountYear,
 } from "./formTransactionsUtils.js";
 import { showLoading, hideLoading } from "./loadingUtils.js";
 import {
@@ -40,11 +40,10 @@ setupModalGlobalListeners();
 
 //BOTÃO CATEGORIA (ABRE LIST_CATEGORY.HTML E INICIALIZA CATEGORIAS + ICONS DE NEW CATEGORIA)
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   showLoading();
   insertCountTransaction();
   const btnExpense = document.getElementById("btn_expense");
-
   if (btnExpense) {
     btnExpense.addEventListener("click", async () => {
       await openModal("../views/form_transactions.html");
@@ -181,13 +180,13 @@ document.addEventListener("click", async (e) => {
       const data = await response.json();
       console.log(data.message);
 
-      await sumAmountMonth(monthIndex, yearIndex);
+      await sumAmountYear(monthIndex, yearIndex);
       await sumAtualMonthPaid(monthIndex, yearIndex);
-      await resumeMonth(monthIndex, yearIndex);
+      await resumeMonthInsert(monthIndex, yearIndex);
       await sumAmountMonthRevenue(monthIndex, yearIndex);
       await sumAtualMonthPending(monthIndex, yearIndex);
       await LoadExpenses(monthIndex, yearIndex);
-      await insertCountTransaction();
+      await insertCountTransaction(monthIndex);
     } catch (err) {
       console.error("Erro ao apagar: ", err);
     } finally {
@@ -204,13 +203,13 @@ document.addEventListener("click", async (e) => {
     console.log("Mudando status da transação " + id);
 
     await SetStatusInTransactions(id);
-    await sumAmountMonth(monthIndex, yearIndex);
+    await sumAmountYear(monthIndex, yearIndex);
     await sumAtualMonthPaid(monthIndex, yearIndex);
-    await resumeMonth(monthIndex, yearIndex);
+    await resumeMonthInsert(monthIndex, yearIndex);
     await sumAmountMonthRevenue(monthIndex, yearIndex);
     await sumAtualMonthPending(monthIndex, yearIndex);
     await LoadExpenses(monthIndex, yearIndex);
-    insertCountTransaction();
+    await insertCountTransaction(monthIndex);
     hideLoading();
     showToast("Operação concluída com Sucesso", 3000);
   }

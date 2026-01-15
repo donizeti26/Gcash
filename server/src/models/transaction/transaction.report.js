@@ -1,18 +1,31 @@
 import pool from "../../config/db.js";
 
-export async function sumTransactions({ year }) {
-  const query = `
-SELECT
-    COALESCE(SUM(t.amount) FILTER (WHERE c.type IN ('revenue','expense')), 0)
-    AS total_month
-FROM transactions t
-JOIN categories c ON c.category_id = t.category_id
-WHERE t.status = 'paid' AND EXTRACT(YEAR FROM t.due_date) = $1;
-`;
-  const result = await pool.query(query, [year]);
-  console.log("Resultado da Query RESUMO ANUAL:", result.rows);
+export async function sumTransactions({ month, year, type }) {
+  if (type == "sumYear") {
+    const query = `
+      SELECT
+          COALESCE(SUM(t.amount) FILTER (WHERE c.type IN ('revenue','expense')), 0)
+          AS total_month
+      FROM transactions t
+      JOIN categories c ON c.category_id = t.category_id
+      WHERE t.status = 'paid' AND EXTRACT(YEAR FROM t.due_date) = $1;
+      `;
+    const result = await pool.query(query, [year]);
+    console.log("Resultado da Query RESUMO ANUAL:", result.rows);
 
-  return { total: Number(result.rows[0]?.total_month) || 0 };
+    return { total: Number(result.rows[0]?.total_month) || 0 };
+  } else if (type == "sumMonth") {
+    const query = `SELECT
+      COALESCE(SUM(t.amount) FILTER (WHERE c.type IN ('revenue','expense')), 0)
+      AS total_month
+      FROM transactions t
+      JOIN categories c ON c.category_id = t.category_id
+      WHERE t.status = 'paid' AND EXTRACT(MONTH FROM t.due_date) = $1 AND EXTRACT(YEAR FROM t.due_date) = $2;`;
+    const result = await pool.query(query, [month, year]);
+    console.log("Resultado da Query RESUMO MENSAL:", result.rows);
+
+    return { total: Number(result.rows[0]?.total_month) || 0 };
+  }
 }
 
 export async function sumTransactionsRevenue({ month, year }) {

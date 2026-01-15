@@ -72,7 +72,7 @@ button,
 }
 #pay,
 #no_pay,
-#total_month {
+#total_year {
   font-style: normal;
   color: #ffffff;
 }
@@ -115,7 +115,7 @@ button,
 #month {
   width: 100%;
 }
-#total_month,
+#total_year,
 #month_revenue,
 #amount_paid,
 #amount_pending,

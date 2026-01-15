@@ -24,8 +24,10 @@ export async function reportsController(req, res) {
       case "paid":
         data = await paidTransactionsController(month, year);
         break;
-      case "sum":
-        data = await sumTransactionController(month, year);
+      case "sumMonth":
+        data = await sumTransactionController(month, year, type);
+      case "sumYear":
+        data = await sumTransactionController(month, year, type);
     }
 
     res.json(data);
@@ -35,8 +37,8 @@ export async function reportsController(req, res) {
   }
 }
 
-async function sumTransactionController(month, year) {
-  const data = await sumTransactions({ month, year });
+async function sumTransactionController(month, year, type) {
+  const data = await sumTransactions({ month, year, type });
   return data;
 }
 async function sumTransactionRevenueController(month, year) {
