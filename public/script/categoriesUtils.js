@@ -7,7 +7,7 @@ import {
 import { showLoading, hideLoading } from "./loadingUtils.js";
 import { showConfirm } from "./app.js";
 import { LoadExpenses } from "./sharedUtils.js";
-
+import { countTransaction } from "./transactionsUtils.js";
 import { testDisplay } from "./iconsUtils.js";
 import {
   sumAtualMonthPaid,
@@ -26,7 +26,17 @@ export async function openListCategory() {
   await loadCategories?.();
   await new Promise((resolve) => requestAnimationFrame(resolve));
 
+  const dataAtual = new Date();
+  const mesNum = dataAtual.getMonth() + 1;
+
+  console.log("MES QUE ESTOU PEGANDO" + mesNum);
+
+  const totalTransactions = await countTransaction(mesNum);
+
+  const tagTotalTransactions = document.getElementById("num_transactions");
   const listCategories = document.querySelector("#list_categories");
+
+  tagTotalTransactions.textContent = ` ${totalTransactions}`;
 
   listCategories.addEventListener("click", async (e) => {
     const editButton = e.target.closest(".edit_document");

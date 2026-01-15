@@ -188,6 +188,7 @@
   transition-duration: 0.5s;
 }
 #options ul li {
+  width: 80%;
   text-decoration: none;
   padding: 0.6rem 1rem;
   color: #ffffff;

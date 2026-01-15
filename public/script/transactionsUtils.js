@@ -164,7 +164,9 @@ export async function countTransaction(month) {
   }
 }
 export async function insertCountTransaction() {
-  const total = await countTransaction(1);
+  const dataAtual = new Date();
+  const mesNum = dataAtual.getMonth() + 1;
+  const total = await countTransaction(mesNum);
   console.log("WWWWWWWWWWWWWWWWW ", total);
   const totalTransactions = document.getElementById("resultResume");
   const totalResult = document.createElement("p");
