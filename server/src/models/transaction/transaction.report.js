@@ -11,7 +11,7 @@ JOIN categories c ON c.category_id = t.category_id
 WHERE EXTRACT(YEAR FROM t.due_date) = $1;
 `;
   const result = await pool.query(query, [year]);
-  console.log("Resultado da Query SALDO TOTAL:", result.rows);
+  console.log("Resultado da Query RESUMO MENSAL:", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
 }
@@ -24,7 +24,7 @@ inner join categories as c on
 EXTRACT(MONTH FROM due_date)=$1
 AND EXTRACT(YEAR FROM due_date) = $2 and c.type = 'revenue'`;
   const result = await pool.query(query, [month, year]);
-  console.log("Resultado da Query SALDO DO MES:", result.rows);
+  console.log("Resultado da Query RECEBIDOS MENSAL:", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
 }
@@ -58,9 +58,14 @@ EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.ty
   return { total: Number(result.rows[0]?.total) || 0 };
 }
 
-export async function countTransactions({ id }) {
-  const query = `SELECT COUNT(*) AS total_transactions FROM transactions AS t INNER JOIN categories AS c ON t.category_id = c.category_id WHERE t.category_id = $1 `;
-  const result = await pool.query(query, [id]);
-
-  return { total: Number(result.rows[0]?.total_transactions) || 0 };
+export async function countTransactions({ id, month }) {
+  if (id) {
+    const query = `SELECT COUNT(*) AS total_transactions FROM transactions AS t INNER JOIN categories AS c ON t.category_id = c.category_id WHERE t.category_id = $1 `;
+    const result = await pool.query(query, [id]);
+    return { total: Number(result.rows[0]?.total_transactions) || 0 };
+  } else if (month) {
+    const query = `SELECT COUNT(*) AS total_transactions FROM transactions WHERE EXTRACT(MONTH FROM due_date)= $1 `;
+    const result = await pool.query(query, [month]);
+    return { total: Number(result.rows[0]?.total_transactions) || 0 };
+  }
 }

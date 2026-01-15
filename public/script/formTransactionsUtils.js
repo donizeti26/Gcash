@@ -1,6 +1,7 @@
-import { LoadExpenses } from "./app.js";
-import { closeModal } from "./modalUtils.js";
+import { LoadExpenses } from "./sharedUtils.js";
+import { closeModal, showToast } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
+import { insertCountTransaction } from "./transactionsUtils.js";
 
 export function initExpensesForm() {
   const question_repeated = document.getElementById("question_repeated");
@@ -90,7 +91,8 @@ export async function initTransactionForm(type) {
         console.log("Resposta do servidor: ", data);
 
         if (response.ok) {
-          alert("Transação cadastrada com sucesso!");
+          showToast("Operação concluída com Sucesso", 3000);
+          console.log("TUDO OK POR AQUI");
         } else {
           alert("Erro: " + data.error);
         }
@@ -100,12 +102,13 @@ export async function initTransactionForm(type) {
         console.error("Erro no Front: ", err);
         alert("Erro ao enviar transação");
       } finally {
+        console.log("AQUI");
         const month = document.getElementById("month_index");
         const year = document.getElementById("year_index");
         const monthIndex = Number(month.dataset.id);
         const year_index = Number(year.dataset.id);
         LoadExpenses(monthIndex, year_index);
-
+        insertCountTransaction();
         showMonth();
       }
     });
@@ -193,6 +196,7 @@ export async function sumAmountMonth(monthIndex, yearIndex) {
       });
       total_month.textContent = `${convertAmount}`;
       console.log(`Total transações no mes ${monthIndex}: `, total);
+      console.log(`Total transações`, total);
     }
   } catch (err) {
     console.error("Erro ao carregar total transações front", err);
@@ -285,24 +289,6 @@ export async function sumAtualMonthPending(monthIndex, yearIndex) {
 export async function resumeMonth(monthIndex, yearIndex) {
   const month = monthIndex + 1;
   try {
-    const totalPending = await getTransactionsTotal(
-      month,
-      yearIndex,
-      "pending"
-    );
-    const totalPaid = await getTransactionsTotal(month, yearIndex, "paid");
-
-    const total = totalPaid - totalPending;
-    const calc_resume_month = document.getElementById("calc_resume_month");
-
-    if (calc_resume_month) {
-      const convertAmount = Number(total).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-      calc_resume_month.textContent = `${convertAmount}`;
-      console.log(`O resumo desse mes foi de ${month} foi de ${total}`);
-    }
   } catch (err) {
     console.error("Erro ao inserir soma total do mes atual", err);
   }

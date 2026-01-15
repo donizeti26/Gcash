@@ -33,6 +33,7 @@ body {
   -moz-osx-font-smoothing: grayscale; /* Para navegadores Firefox no macOS */
   -webkit-font-smoothing: antialiased;
   /* Tentativa de suporte geral (não padrão) */
+  height: 100vh;
 }
 * {
   margin: 0;

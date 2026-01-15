@@ -6,7 +6,7 @@ import {
   sumAmountMonthRevenue,
 } from "./formTransactionsUtils.js";
 
-import { LoadExpenses } from "./app.js";
+import { LoadExpenses } from "./sharedUtils.js";
 /*/////////////////////////////////////
 ///////CONTROLADOR DOS MESES //////////
 /////////////////////////////////////*/

@@ -1,6 +1,6 @@
-import { LoadExpenses, setFormatMoney } from "./app.js";
+import { LoadExpenses, setFormatMoney } from "./sharedUtils.js";
 import { showMonth } from "./calendarUtils.js";
-import { closeModal } from "./modalUtils.js";
+import { closeModal, showToast } from "./modalUtils.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
@@ -114,6 +114,7 @@ export async function sendTransactionsEditions() {
 
       await LoadExpenses(monthIndex, yearIndex);
       await showMonth();
+      showToast("Operação concluída com Sucesso", 3000);
 
       closeModal(); // ← ISSO AGORA VAI RODAR!
     }
@@ -148,4 +149,30 @@ export function setupTitleTransactionForm(type) {
     default:
       title.textContent = "Nova Transação";
   }
+}
+
+export async function countTransaction(month) {
+  try {
+    const response = await fetch(
+      `/api/transactions/reports/count?month=${month}`
+    );
+    const totalTransactions = await response.json();
+    console.log("Total de transações: FDFDFD ", totalTransactions.total);
+    return totalTransactions.total;
+  } catch (err) {
+    console.error("Erro ao contar transações", err);
+  }
+}
+export async function insertCountTransaction() {
+  const total = await countTransaction(1);
+  console.log("WWWWWWWWWWWWWWWWW ", total);
+  const totalTransactions = document.getElementById("resultResume");
+  const totalResult = document.createElement("p");
+  if (total == 1) {
+    totalResult.textContent = `${total} resultado`;
+  } else {
+    totalResult.textContent = `${total} resultados`;
+  }
+  totalTransactions.innerHTML = "";
+  totalTransactions.appendChild(totalResult);
 }

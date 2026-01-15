@@ -1,6 +1,13 @@
-import { openModal, closeModal, overflowHidden } from "./modalUtils.js";
+import {
+  openModal,
+  closeModal,
+  overflowHidden,
+  showToast,
+} from "./modalUtils.js";
 import { showLoading, hideLoading } from "./loadingUtils.js";
-import { showConfirm, LoadExpenses } from "./app.js";
+import { showConfirm } from "./app.js";
+import { LoadExpenses } from "./sharedUtils.js";
+
 import { testDisplay } from "./iconsUtils.js";
 import {
   sumAtualMonthPaid,
@@ -82,6 +89,7 @@ export async function openListCategory() {
         await sumAmountMonthRevenue(monthIndex, yearIndex);
         await sumAtualMonthPending(monthIndex, yearIndex);
         await LoadExpenses(monthIndex, yearIndex);
+        showToast("Operação concluída com Sucesso", 3000);
       } catch (err) {
         console.error("Erro ao buscar a categoria", err);
       }
@@ -179,8 +187,10 @@ export function sendCategoryNewCategory() {
           }),
         });
         const data = await response.json();
-        console.log("Resposta do servidor:", data); // <-- aqui você vê o que voltou
-        window.alert("Categoria " + data.name + " cadastrada com sucesso!");
+        console.log("Resposta do servidor:", data);
+        showToast("Categoria " + data.name + " cadastrada com sucesso!", 3000);
+        closeModal();
+        openListCategory();
       } catch (err) {
         console.error("Erro no cadastro:", err);
         window.alert("Erro no cadastrado");

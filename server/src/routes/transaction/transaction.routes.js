@@ -6,15 +6,9 @@ import {
   updateTransactionsController,
   updateStatusController,
   deleteTransactionsController,
-} from "../../controllers/transaction/index.js";
-
-import {
   getTransactionsController,
   consultCategoryController,
   consultStatusController,
-} from "../../controllers/transaction/index.js";
-
-import {
   reportsController,
   countTransactionsController,
 } from "../../controllers/transaction/index.js";
@@ -80,6 +74,7 @@ router.get("/reports/", reportsController);
  *               $ref: '#/components/schemas/error_response.schema'
  */
 
+/*CORRIGIR DOCUMENTAÇÃO */
 router.get("/reports/count/", countTransactionsController);
 /**
  * @swagger
@@ -161,6 +156,7 @@ router.get("/:transaction_id/status", consultStatusController);
  *             schema:
  *               $ref: '#/components/schemas/error_response.schema'
  */
+
 router.get("/:transaction_id/category", consultCategoryController);
 /**
  * @swagger

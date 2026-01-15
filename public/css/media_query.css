@@ -43,7 +43,6 @@
 
   #left_side {
     display: flex;
-    width: 31%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -156,6 +155,9 @@
   #form_card {
     width: 50%;
   }
+  #left_side {
+    width: 100%;
+  }
 }
 
 /*INDEX NOTEBOOK*/
@@ -256,6 +258,9 @@
   }
   #new_modal_js {
     position: unset;
+  }
+  #left_side {
+    width: 37%;
   }
 }
 
