@@ -163,8 +163,9 @@ export async function countTransaction(month) {
     console.error("Erro ao contar transações", err);
   }
 }
-export async function insertCountTransaction(mesNum) {
-  const total = await countTransaction(mesNum);
+export async function insertCountTransaction(month) {
+  console.log("Valor de MONT", month);
+  const total = await countTransaction(month);
 
   const totalTransactions = document.getElementById("resultResume");
   const totalResult = document.createElement("p");

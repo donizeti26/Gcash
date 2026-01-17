@@ -5,6 +5,7 @@ import {
   getCategoriesController,
   getSelectedCategoryController,
   deleteCategoryController,
+  updateCategoryController,
 } from "../../controllers/category/index.js";
 
 const router = Router();
@@ -28,6 +29,43 @@ const router = Router();
  *         description: Erro ao cadastrar categoria!
  */
 router.post("/", registerCategoryController);
+
+/**
+ * @swagger
+ * /api/categories/{category_id}:
+ *   put:
+ *     tags: [Category]
+ *     summary: Atualizar todos os dados de uma categoria
+ *     description: editando dados de uma categoria já existente
+ *     parameters:
+ *       - in: path
+ *         name: category_id
+ *         required: true
+ *         schema:
+ *           type: number
+ *         description: ID único da Categoria
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *                nameCategory:
+ *                  type: string
+ *                optionNewCategory:
+ *                  type: string
+ *                colorSelector:
+ *                  type: string
+ *                selectedIcon:
+ *                  type: string
+ *     responses:
+ *       200:
+ *         description: Categoria atualizada com sucesso
+ *       500:
+ *         description: Erro ao atualizar Categoria
+ */
+router.put("/:category_id", updateCategoryController);
 
 /**
  * @swagger

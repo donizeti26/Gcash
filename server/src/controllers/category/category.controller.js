@@ -2,6 +2,7 @@ import {
   registerCategory,
   getCategories,
   deleteCategory,
+  updateCategory,
 } from "../../models/category/index.js";
 
 export async function registerCategoryController(req, res) {
@@ -47,5 +48,32 @@ export async function deleteCategoryController(req, res) {
   } catch (error) {
     console.error("Erro ao apagar a categoria", error);
     res.status(500).json({ error: err.message });
+  }
+}
+
+export async function updateCategoryController(req, res) {
+  try {
+    console.log("REQ PARAMS:", req.params);
+    console.log("REQ BODY:", req.body);
+
+    const { category_id } = req.params;
+    const { nameCategory, optionNewCategory, colorSelector, selectedIcon } =
+      req.body;
+
+    if (!category_id) {
+      return res.status(400).json({ error: "category_id é obrigatório" });
+    }
+
+    await updateCategory(
+      nameCategory,
+      optionNewCategory,
+      colorSelector,
+      selectedIcon
+    );
+
+    return res.status(200).json({ message: "Atualizado com sucesso" });
+  } catch (err) {
+    console.error("Erro ao atualizar transação: ", err);
+    res.status(500).json({ err: "Erro interno no servidor" });
   }
 }

@@ -281,7 +281,7 @@ export async function fetchCategory(id) {
   try {
     const selectedCategory = await fetch(`/api/categories/category/${id}`);
     const category = await selectedCategory.json();
-
+    sendCategoryEditions();
     return category;
   } catch (err) {
     console.log("Erro ao buscar a categoria", err);
@@ -343,4 +343,41 @@ export async function openCategoryEditor(categoryId) {
   } catch (err) {
     console.error("Erro ao abrir modal de editar categorias", err);
   }
+}
+
+export async function sendCategoryEditions() {
+  const formCategory = document.getElementById("form_new_category");
+
+  if (!formCategory) return;
+  formCategory.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nameCategory = document.getElementById("name_category").value;
+
+    const optionNewCategory = document.getElementById(
+      "option_new_category"
+    ).value;
+    const colorSelector = document.getElementById("color_selector").value;
+    const selectedIcon = document.getElementById("selected_icon").value;
+
+    try {
+      await fetch(`/api/categories/${category_id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nameCategory,
+          optionNewCategory,
+          colorSelector,
+          selectedIcon,
+        }),
+      });
+    } catch (err) {
+      alert("Erro ao atualizar Categoria");
+    } finally {
+      showToast("Operação concluída com Sucesso", 3000);
+
+      closeModal(); // ← ISSO AGORA VAI RODAR!
+      await loadCategories();
+    }
+  });
 }

@@ -42,7 +42,7 @@ setupModalGlobalListeners();
 
 document.addEventListener("DOMContentLoaded", async () => {
   showLoading();
-  insertCountTransaction();
+
   const btnExpense = document.getElementById("btn_expense");
   if (btnExpense) {
     btnExpense.addEventListener("click", async () => {

@@ -61,12 +61,12 @@ export async function countTransactionsController(req, res) {
     const { id, month } = req.query;
 
     if (!id && !month)
-      return res.status(400).json({ message: "ID é obrigatório" });
+      return res.status(400).json({ message: "ID ou MES é obrigatório" });
 
-    if (id) {
+    if (id && !month) {
       const data = await countTransactions({ id });
       res.status(200).json(data);
-    } else if (month) {
+    } else if (!id && month) {
       const data = await countTransactions({ month });
       res.status(200).json(data);
     }
