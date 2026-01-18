@@ -196,6 +196,47 @@ button,
   gap: 0.5rem;
   width: 22%;
 }
+
+/*Calendário*/
+body .litepicker {
+  top: 108.969px;
+}
+.litepicker .container__days .day-item.is-today {
+  color: var(--button-color-green);
+}
+.month-item {
+  background-color: var(--azul-200);
+  border-radius: 0.5rem;
+  border: 1px solid #ffffff3b;
+}
+.month-item .container__days .day-item {
+  color: var(--white-900);
+}
+.month-item .container__days .day-item:hover {
+  color: var(--button-color-blue);
+}
+.container__months .month-item .month-item-header {
+  color: var(--white-900);
+}
+#daterange {
+  background-color: var(--azul-200);
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  color: var(--white-legend);
+}
+.litepicker .month-item .container__days .day-item.is-in-range {
+  background-color: var(--azul-400);
+  border-radius: 0;
+}
+.container__main .container__months {
+  box-shadow: none;
+  border-radius: 1rem;
+  background: none;
+}
+.litepicker .container__months .month-item {
+  padding: 2px;
+}
+
 #other_body {
   flex-grow: 1;
   display: flex;
@@ -286,7 +327,9 @@ button,
   padding: 0rem;
   opacity: 0;
   transform: scale(0.98);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   pointer-events: none;
   /* impede clicar quando invisível */
 }

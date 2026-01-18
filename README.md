@@ -49,6 +49,7 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 - PgAdmin
 - Figma
 - Draw.io
+- [Seletor de intervalo de datas - daterangepicker](https://www.daterangepicker.com/)
 - [Material Symbols (Google Icons)](https://fonts.google.com/icons)
 
   <a id="roadmap"></a>
@@ -57,13 +58,11 @@ Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte d
 
 - [x] Implementar Front-end
 - [x] Estrutura inicial do projeto
-
   - [x] Página de Login
   - [x] Página Index
   - [x] Modais
 
 - [x] Implementar back-end
-
   - [x] Implementar Banco de dados
   - [x] CRUD no banco de dados
 

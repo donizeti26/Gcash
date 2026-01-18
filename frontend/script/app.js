@@ -33,6 +33,11 @@ import {
   loadCategoryFormRevenue,
 } from "./categoriesUtils.js";
 
+//CALENDÁRIO INICIAL
+new Litepicker({
+  element: document.getElementById("daterange"),
+  singleMode: false,
+});
 // INICIALIZAÇÕES GLOBAIS
 
 setupCalendar();

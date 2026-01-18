@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -12,6 +12,12 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
+    <!--Calendário no input-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
+    />
+    <!--------------->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
@@ -156,13 +162,14 @@
               <option value="all" selected="">Todas as categorias...</option>
             </select>
           </div>
+          <!--Calendário do input inicial-->
+
           <div class="search_item">
-            <label for="search_period">Período</label>
+            <label for="daterange">Período</label>
             <input
-              type="date"
-              class="input_search"
-              id="search_period"
-              placeholder="Buscar por descrição"
+              type="text"
+              id="daterange"
+              placeholder="Selecione o período"
             />
           </div>
         </div>
@@ -213,6 +220,8 @@
     </div>
     <div id="toast-container"></div>
   </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
   <script type="module" src="../script/app.js"></script>
   <script type="module" src="../script/loadingUtils.js"></script>
   <script type="module" src="../script/mobileScriptUtils.js"></script>
