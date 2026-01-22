@@ -1,0 +1,66 @@
+export function renderListCategories() {
+  const modalContainer = document.getElementById("modalContainer");
+  modalContainer.innerHTML = `
+  <div id="new_modal_js" class="modal_overlay_form">
+  <div id="category_body" class="modal_container_form">
+    <div id="head_card">
+      <div id="head_title">
+        <div id="category_title">
+          <h1>Categorias</h1>
+          <p>Organize suas transações por categorias</p>
+        </div>
+        <div>
+          <span>
+            <button class="button_close_card" type="button">
+              <span class="material-symbols-outlined">close</span>
+              Fechar
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div id="group_category_resume">
+        <div class="item_group_category_resume">
+          <span class="material-symbols-outlined" id="labelIcon">label</span>
+          <div>
+            <strong>16</strong>
+            <p>TOTAL DE CATEGORIAS</p>
+          </div>
+        </div>
+
+        <div class="item_group_category_resume">
+          <span class="material-symbols-outlined" id="swapHorizIcon">
+            swap_horiz
+          </span>
+          <div>
+            <strong id="num_transactions"></strong>
+            <p>TOTAL DE TRANSAÇÕES, MÊS ATUAL.</p>
+          </div>
+        </div>
+
+        <div class="item_group_category_resume">
+          <span class="material-symbols-outlined" id="bookMarkStarIcon">
+            bookmark_star
+          </span>
+          <div>
+            <strong>Freelancer</strong>
+            <p>CATEGORIA MAIS UTILIZADA, MÊS ATUAL.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTA DE CATEGORIAS -->
+    <div id="body_list_categories">
+      <ul id="list_categories"></ul>
+    </div>
+
+    <div id="div_button_category">
+      <button id="button_category">Criar categoria</button>
+    </div>
+<div id="modalContainerListCategories"><?div>
+    <div id="delete_category_options"></div>
+  </div>
+</div>
+`;
+}

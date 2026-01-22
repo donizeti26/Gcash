@@ -1,0 +1,208 @@
+.button_month {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+.material-symbols-outlined {
+  font-size: 20px;
+}
+#btn_expense {
+  background-color: var(--button-color-red);
+  user-select: none;
+  transition: transform 0.3s ease-in-out;
+}
+#btn_revenue {
+  background-color: var(--button-color-green);
+  user-select: none;
+  transition: transform 0.3s ease-in-out;
+}
+#btn_category {
+  background-color: var(--button-color-blue);
+  transition: transform 0.3s ease-in-out;
+}
+
+#btn_category:hover {
+  transform: scale(1.1);
+}
+
+#btn_expense:hover {
+  color: #ffffff;
+
+  transform: scale(1.1);
+}
+
+#btn_revenue:hover {
+  transform: scale(1.1);
+}
+
+.button_remove {
+  cursor: pointer;
+  background-color: var(--button-color-red);
+  font-weight: 700;
+  color: var(--button-color-back);
+  border: 1px solid var(--button-color-red);
+  transition: transform 0.3s ease-in-out;
+
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+.button_remove:hover {
+  transform: scale(1.1);
+  color: var(--white-900);
+}
+
+.button_edit,
+.button_remove,
+.button_set_status_pending,
+.button_set_status_paid {
+  padding: 0.5rem 1rem;
+}
+
+.button_edit {
+  cursor: pointer;
+  background-color: var(--button-color-blue);
+  font-weight: 700;
+  color: var(--button-color-back);
+  border: 1px solid var(--button-color-blue);
+  transition: transform 0.3s ease-in-out;
+
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.button_edit:hover {
+  color: var(--white-900);
+  transform: scale(1.1);
+}
+.button_set_status_paid {
+  cursor: pointer;
+  background-color: var(--button-color-yellow);
+  font-weight: 700;
+  color: var(--button-color-back);
+  border: 1px solid var(--button-color-yellow);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 0.5rem;
+}
+.button_set_status_pending {
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: var(--button-color-green);
+  font-weight: 700;
+  color: var(--button-color-back);
+
+  border: 1px solid var(--button-color-green);
+  transition: all;
+  transition-duration: 0.2s;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+.button_set_status_paid:hover {
+  color: var(--white-900);
+  border: 1px solid var(--button-color-yellow);
+  transform: scale(1.1);
+}
+.button_set_status_pending:hover {
+  color: var(--white-900);
+  transform: scale(1.1);
+  background-color: var(--button-color-green);
+}
+
+.button_close_card,
+.button_back_card {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.button_back_card {
+  padding: 0.5rem;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.button_back_card:hover {
+  background-color: #363636;
+}
+
+.button_close_card,
+.button_close_card_new_category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--button-color-red);
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+.button_close_card span {
+  font-weight: 700;
+}
+.button_close_card:hover,
+.button_close_card_new_category:hover {
+  background-color: var(--button-color-red-hover);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+#buttonLogin,
+#buttonLogin_create,
+#buttonNewCategory,
+#button_transactions {
+  background-color: var(--button-color-blue);
+  padding: 16px 64px;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+
+#buttonLogin:hover,
+#buttonLogin_create:hover {
+  background-color: var(--button-color-blue-hover);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  color: #ffffff;
+}
+#button_category {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  background-color: var(--button-color-green);
+  transition-duration: 1s;
+  transition-property: background-color;
+  border-radius: 0.5rem;
+  color: white;
+}
+#buttonNewCategory:hover {
+  background-color: var(--button-color-green);
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+#button_category:hover {
+  background-color: #00c030a1;
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+#options ul li {
+  width: 80%;
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button_transactions {
+  text-align: center;
+  cursor: pointer;
+  width: 13rem;
+}

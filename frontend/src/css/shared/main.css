@@ -1,0 +1,54 @@
+:root {
+  --button-color-red: #ff4000;
+  --button-color-red-hover: #ff5757;
+  --button-color-red-back: #e8cdcd;
+
+  --button-color-blue: #448aff;
+  --button-color-blue-hover: #6ba1ff;
+  --button-color-blue-back: #c7d9ff;
+
+  --button-color-green: #00c030;
+  --button-color-green-hover: #00c030;
+
+  --button-color-purple: #7142ff;
+  --button-color-yellow: #f8b632;
+
+  --button-color-back: #ebebeb;
+
+  --azul-200: #263940;
+  --azul-400: #30434c;
+  --cinza-900: #dbdfe1;
+  --white-900: #ffffff;
+  --white-200: #c3c3c3;
+  --white-legend: #dbdfe136;
+  --black-legend: #65656580;
+
+  --input-color: #eeeeee;
+  --text-default: #373737;
+  --text-legend: #7b7b7b;
+
+  --component-color: #9e9e9e;
+}
+body {
+  -moz-osx-font-smoothing: grayscale; /* Para navegadores Firefox no macOS */
+  -webkit-font-smoothing: antialiased;
+  /* Tentativa de suporte geral (não padrão) */
+  height: 100vh;
+}
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+html {
+  user-select: none;
+  font-size: 16px;
+  /* Padrão, mas pode ser ajustado */
+}
+
+footer {
+  display: none;
+}

@@ -19,19 +19,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static folder (arquivos estáticos)
-app.use(express.static(path.join(__dirname, "../../frontend")));
-
 // Rotas da API
 app.use("/api", routes);
 
-//Rotas Web
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/views/index.html"));
-});
-
-app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/views/login.html"));
-});
 setupSwagger(app);
 export default app;

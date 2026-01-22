@@ -1,0 +1,10 @@
+@import url("shared/main.css");
+@import url("shared/index.css");
+@import url("shared/buttons.css");
+@import url("shared/modal_confirmation.css");
+@import url("shared/form_expenses_revenue.css");
+@import url("shared/form_categories.css");
+@import url("shared/card_transaction.css");
+@import url("shared/new_category.css");
+@import url("shared/delete_category_options.css");
+@import url("shared/media_query.css");
