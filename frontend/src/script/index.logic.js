@@ -1,4 +1,13 @@
 import { overflowHidden } from "../script/utils/modalUtils.js";
+import {
+  sumAtualMonthPaid,
+  resumeMonthInsert,
+  sumAtualMonthPending,
+  sumAmountMonthRevenue,
+  sumAmountYear,
+} from "../script/utils/formTransactionsUtils.js";
+import { LoadExpenses } from "../script/utils/sharedUtils.js";
+import { insertCountTransaction } from "../script/utils/transactionsUtils.js";
 
 export function getCurrentMonthYear() {
   const monthEl = document.getElementById("month_index");
@@ -74,4 +83,51 @@ export function showConfirm({ message, theme }) {
       { once: true },
     );
   });
+}
+export async function loadComponentsHome(monthIndex, yearIndex) {
+  await sumAmountYear(monthIndex, yearIndex);
+  await sumAtualMonthPaid(monthIndex, yearIndex);
+  await resumeMonthInsert(monthIndex, yearIndex);
+  await sumAmountMonthRevenue(monthIndex, yearIndex);
+  await sumAtualMonthPending(monthIndex, yearIndex);
+  await LoadExpenses(monthIndex, yearIndex);
+  await insertCountTransaction(monthIndex);
+}
+
+export async function SetStatusInTransactions(id) {
+  const current = getCurrentMonthYear();
+  if (!current) return;
+
+  const { monthIndex, yearIndex } = current;
+  const ConfirmStatus = await showConfirm({
+    message: "Você quer realmente alterar o status da transação?",
+    theme: "warning",
+  });
+
+  if (!ConfirmStatus) {
+    return;
+  }
+
+  try {
+    showLoading();
+    const currentStatus = await consultStatus(id);
+    const statusString = currentStatus.status || currentStatus;
+    const newStatus = statusString === "paid" ? "pending" : "paid";
+
+    const response = await fetch(`/api/transactions/${id}/statusUpdate`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
+    if (!response.ok) throw new Error("Erro ao atualizar status");
+    await LoadExpenses(monthIndex, yearIndex);
+  } catch (err) {
+    console.error("Erro ao atualizar status da transação" + err);
+  } finally {
+    showToast("Operação concluída com Sucesso", 3000);
+
+    hideLoading();
+  }
 }

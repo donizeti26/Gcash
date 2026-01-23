@@ -1,4 +1,9 @@
-import { closeModal, overflowHidden, showToast } from "./modalUtils.js";
+import {
+  closeSubModal,
+  closeModal,
+  overflowHidden,
+  showToast,
+} from "./modalUtils.js";
 import { showLoading, hideLoading } from "./loadingUtils.js";
 import { renderFormCategory } from "../../views/form_category.js";
 
@@ -15,7 +20,12 @@ import {
 
 import { renderDeleteCategoryOption } from "../../views/delete_category_options.js";
 import { renderListCategories } from "../../views/list_categories.js";
-import { getCurrentMonthYear, showConfirm } from "../index.logic.js";
+import {
+  getCurrentMonthYear,
+  showConfirm,
+  loadComponentsHome,
+  SetStatusInTransactions,
+} from "../index.logic.js";
 
 export async function openListCategory() {
   showLoading();
@@ -273,7 +283,7 @@ export async function fetchCategory(id) {
   try {
     const selectedCategory = await fetch(`/api/categories/category/${id}`);
     const category = await selectedCategory.json();
-    sendCategoryEditions();
+    sendCategoryEditions(id);
     return category;
   } catch (err) {
     console.log("Erro ao buscar a categoria", err);
@@ -337,10 +347,11 @@ export async function openCategoryEditor(categoryId) {
   }
 }
 
-export async function sendCategoryEditions() {
+export async function sendCategoryEditions(category_id) {
   const formCategory = document.getElementById("form_new_category");
 
   if (!formCategory) return;
+
   formCategory.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -351,6 +362,7 @@ export async function sendCategoryEditions() {
     ).value;
     const colorSelector = document.getElementById("color_selector").value;
     const selectedIcon = document.getElementById("selected_icon").value;
+    console.log("★ sendCategoryEditions");
 
     try {
       await fetch(`/api/categories/${category_id}`, {
@@ -367,9 +379,12 @@ export async function sendCategoryEditions() {
       alert("Erro ao atualizar Categoria");
     } finally {
       showToast("Operação concluída com Sucesso", 3000);
-
-      closeModal(); // ← ISSO AGORA VAI RODAR!
+      const current = getCurrentMonthYear();
+      if (!current) return;
+      const { monthIndex, yearIndex } = current;
+      await loadComponentsHome(monthIndex, yearIndex);
       await loadCategories();
+      closeSubModal();
     }
   });
 }

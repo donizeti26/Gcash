@@ -8,7 +8,11 @@ import {
   showToast,
 } from "../script/utils/modalUtils.js";
 import { showConfirm } from "../script/index.logic.js";
-import { getCurrentMonthYear } from "../script/index.logic.js";
+import {
+  getCurrentMonthYear,
+  loadComponentsHome,
+  SetStatusInTransactions,
+} from "../script/index.logic.js";
 
 import { LoadExpenses, setFormatMoney } from "../script/utils/sharedUtils.js";
 import { setupCalendar, setAtualMonth } from "../script/utils/calendarUtils.js";
@@ -405,14 +409,8 @@ document.addEventListener("click", async (e) => {
 
       const data = await response.json();
       console.log(data.message);
-
-      await sumAmountYear(monthIndex, yearIndex);
-      await sumAtualMonthPaid(monthIndex, yearIndex);
-      await resumeMonthInsert(monthIndex, yearIndex);
-      await sumAmountMonthRevenue(monthIndex, yearIndex);
-      await sumAtualMonthPending(monthIndex, yearIndex);
-      await LoadExpenses(monthIndex, yearIndex);
-      await insertCountTransaction(monthIndex);
+      await SetStatusInTransactions(id);
+      await loadComponentsHome(monthIndex, yearIndex);
     } catch (err) {
       console.error("Erro ao apagar: ", err);
     } finally {
@@ -429,13 +427,7 @@ document.addEventListener("click", async (e) => {
     console.log("Mudando status da transação " + id);
 
     await SetStatusInTransactions(id);
-    await sumAmountYear(monthIndex, yearIndex);
-    await sumAtualMonthPaid(monthIndex, yearIndex);
-    await resumeMonthInsert(monthIndex, yearIndex);
-    await sumAmountMonthRevenue(monthIndex, yearIndex);
-    await sumAtualMonthPending(monthIndex, yearIndex);
-    await LoadExpenses(monthIndex, yearIndex);
-    await insertCountTransaction(monthIndex);
+    await loadComponentsHome(id, monthIndex, yearIndex);
     hideLoading();
   }
 
@@ -507,43 +499,5 @@ export async function consultStatus(id) {
   } catch (err) {
     console.error("Error ao consultar status: ", err.message);
     return null;
-  }
-}
-
-export async function SetStatusInTransactions(id) {
-  const current = getCurrentMonthYear();
-  if (!current) return;
-
-  const { monthIndex, yearIndex } = current;
-  const ConfirmStatus = await showConfirm({
-    message: "Você quer realmente alterar o status da transação?",
-    theme: "warning",
-  });
-
-  if (!ConfirmStatus) {
-    return;
-  }
-
-  try {
-    showLoading();
-    const currentStatus = await consultStatus(id);
-    const statusString = currentStatus.status || currentStatus;
-    const newStatus = statusString === "paid" ? "pending" : "paid";
-
-    const response = await fetch(`/api/transactions/${id}/statusUpdate`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: newStatus }),
-    });
-    if (!response.ok) throw new Error("Erro ao atualizar status");
-    await LoadExpenses(monthIndex, yearIndex);
-  } catch (err) {
-    console.error("Erro ao atualizar status da transação" + err);
-  } finally {
-    showToast("Operação concluída com Sucesso", 3000);
-
-    hideLoading();
   }
 }

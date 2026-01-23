@@ -68,7 +68,8 @@ export async function updateCategoryController(req, res) {
       nameCategory,
       optionNewCategory,
       colorSelector,
-      selectedIcon
+      selectedIcon,
+      category_id,
     );
 
     return res.status(200).json({ message: "Atualizado com sucesso" });

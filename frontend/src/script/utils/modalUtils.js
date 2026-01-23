@@ -2,6 +2,11 @@ export function closeModal() {
   document.getElementById("modalContainer").innerHTML = "";
   overflowHidden(false);
 }
+
+export function closeSubModal() {
+  document.getElementById("modalContainerListCategories").innerHTML = "";
+  overflowHidden(false);
+}
 export function setupModalGlobalListeners() {
   console.log("★ setupModalGlobalListeners");
   const modalContainer = document.getElementById("modalContainer");
