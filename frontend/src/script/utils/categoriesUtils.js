@@ -40,7 +40,6 @@ export async function openListCategory() {
     const editButton = e.target.closest(".edit_document");
     const deleteButton = e.target.closest(".delete_forever");
     const { monthIndex, yearIndex } = getCurrentMonthYear();
-    console.log(deleteButton);
     if (editButton) {
       showLoading();
 
@@ -127,17 +126,8 @@ export async function abrirNovaCategoria() {
 }
 
 export async function DeleteOptions(id, totalTransactions) {
-  const res = await renderDeleteCategoryOption();
+  await renderDeleteCategoryOption();
   overflowHidden(true);
-  if (!res.ok) throw new Error(`Falha ao carregar ${file}: ${res.status}`);
-  const html = await res.text();
-  const deleteCategoryOptions = document.getElementById(
-    "delete_category_options",
-  );
-  if (!deleteCategoryOptions)
-    throw new Error("#modaContainer não encontrado na DOM");
-  deleteCategoryOptions.innerHTML = html;
-  // await new Promise((resolve) => requestAnimationFrame(resolve));
 
   const containerTitle = document.getElementById("containerOptionsDelete");
   const title = containerTitle.querySelector("#contTransactions");
@@ -147,9 +137,14 @@ export async function DeleteOptions(id, totalTransactions) {
   return new Promise((resolve) => {
     const modal = document.getElementById("containerOptionsDelete");
     const form = modal.querySelector("#formOptionsDelete");
+
+    const modalContainerListCategories = document.getElementById(
+      "modalContainerListCategories",
+    );
+
     modal.querySelector("#buttonCancel").onclick = () => {
       resolve(false);
-      deleteCategoryOptions.innerHTML = "";
+      modalContainerListCategories.innerHTML = "";
       overflowHidden(false);
     };
     form.addEventListener("submit", (e) => {
@@ -163,7 +158,6 @@ export async function DeleteOptions(id, totalTransactions) {
 
       e.preventDefault();
       closeModal();
-      openListCategory();
     });
   });
 }

@@ -50,12 +50,18 @@ export async function updateTransactionsController(req, res) {
       amount,
       description,
       status,
+      type,
     } = req.body;
 
     if (!transaction_id) {
       return res.status(400).json({ error: "transaction_id é obrigatório" });
+    } else if (type == "expense" && amount > 0) {
+      return res
+        .status(400)
+        .json({
+          message: "Para Expenses/despesas o valor tem que ser negativo",
+        });
     }
-
     await updateTransactions(
       transaction_id,
       category_id,
@@ -63,7 +69,8 @@ export async function updateTransactionsController(req, res) {
       due_date,
       amount,
       description,
-      status
+      status,
+      type,
     );
 
     return res.status(200).json({ message: "Atualizado com sucesso" });

@@ -54,7 +54,7 @@ export function renderHome() {
       <div id="menu_mobile"></div>
       <div id="left_side">
         <div id="user">
-          <p>Claudio CTE</p>
+          <p>Claudio CTE 01</p>
         </div>
         <article id="resume_month">
           <div id="aside_menu">
@@ -342,9 +342,6 @@ document.addEventListener("click", async (e) => {
     showLoading();
     await renderFormTransaction();
 
-    //definindo que é um formulário de receitas
-    const modal = document.querySelector("#new_modal_js");
-
     //tenho que verificar se é expense ou revenue e depois setar typo
 
     document.getElementById("form_card").dataset.formType = id;
@@ -368,15 +365,18 @@ document.addEventListener("click", async (e) => {
         await loadCategoryFormExpense();
         await setupTitleTransactionForm("edit_expense");
         await loadPaymentMethodsExpense?.();
+        const type = "expense";
+        sendTransactionsEditions(type);
       } else if (category.data.toString() === "revenue") {
         await loadCategoryFormRevenue();
         await setupTitleTransactionForm("edit_revenue");
         await loadPaymentMethodsRevenue?.();
+        const type = "revenue";
+        sendTransactionsEditions(type);
       }
 
       await initExpensesForm();
       LoadDataAndEditTransaction(transaction);
-      sendTransactionsEditions();
     } catch (err) {
       console.error("Erro ao buscar transação", err);
     } finally {

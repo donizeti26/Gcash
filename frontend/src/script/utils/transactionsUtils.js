@@ -4,7 +4,7 @@ import { closeModal, showToast } from "./modalUtils.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
-    "ID DA CATEGORIA DA TRANSAÇÃO: " + typeof transaction.category_id
+    "ID DA CATEGORIA DA TRANSAÇÃO: " + typeof transaction.category_id,
   );
 
   const [dia, mes, ano] = transaction.due_date.split("/");
@@ -14,10 +14,10 @@ export function LoadDataAndEditTransaction(transaction) {
   formCard.dataset.formType = transaction.transaction_id;
 
   document.getElementById("category_id").value = String(
-    transaction.category_id
+    transaction.category_id,
   );
   document.getElementById("payment_method_id").value = String(
-    transaction.payment_method_id
+    transaction.payment_method_id,
   );
 
   document.getElementById("due_date").value = dataFormatted;
@@ -46,7 +46,7 @@ export function LoadDataAndEditTransaction(transaction) {
   });
 }
 
-export async function sendTransactionsEditions() {
+export async function sendTransactionsEditions(type) {
   document.addEventListener(
     "click",
     (e) => {
@@ -58,7 +58,7 @@ export async function sendTransactionsEditions() {
 
       closeModal();
     },
-    true
+    true,
   );
   const form = document.getElementById("form_card");
   if (!form) return;
@@ -76,7 +76,7 @@ export async function sendTransactionsEditions() {
     const transaction_id = form.dataset.formType;
 
     const statusElement = document.querySelector(
-      'input[name="response_status"]:checked'
+      'input[name="response_status"]:checked',
     );
     const status = statusElement?.value || null;
 
@@ -88,6 +88,15 @@ export async function sendTransactionsEditions() {
 
     amountNumber = parseFloat(amountNumber);
     console.log("AAAAAAAAAAAAAAAAAAAAA A " + amountNumber);
+    if (type == "expense") {
+      amountNumber = parseFloat(amountNumber) * -1;
+    } else {
+      amountNumber = parseFloat(amountNumber);
+    }
+    if (type == "expense" && amountNumber > 0) {
+      alert("Valor não pode ser negativo");
+      return;
+    }
     try {
       await fetch(`/api/transactions/${transaction_id}`, {
         method: "PUT",
@@ -100,16 +109,17 @@ export async function sendTransactionsEditions() {
           amount: amountNumber,
           description,
           status,
+          type,
         }),
       });
     } catch (err) {
       alert("Erro ao atualizar transação");
     } finally {
       const monthIndex = Number(
-        document.getElementById("month_index").dataset.id
+        document.getElementById("month_index").dataset.id,
       );
       const yearIndex = Number(
-        document.getElementById("year_index").dataset.id
+        document.getElementById("year_index").dataset.id,
       );
 
       await LoadExpenses(monthIndex, yearIndex);
@@ -154,7 +164,7 @@ export function setupTitleTransactionForm(type) {
 export async function countTransaction(month) {
   try {
     const response = await fetch(
-      `/api/transactions/reports/count?month=${month}`
+      `/api/transactions/reports/count?month=${month}`,
     );
     const totalTransactions = await response.json();
     console.log("Total de transações: FDFDFD ", totalTransactions.total);

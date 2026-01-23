@@ -73,6 +73,10 @@ export async function initTransactionForm(type) {
       } else {
         amountNumber = parseFloat(amountNumber);
       }
+      if (type == "expense" && amountNumber > 0) {
+        alert("Valor não pode ser negativo");
+        return;
+      }
       try {
         const response = await fetch("/api/transactions/", {
           method: "POST",
