@@ -1,5 +1,5 @@
 import "../css/login.css";
-
+import { focusOnOf } from "../script/utils/loginUtils";
 export function renderLogin() {
   const app = document.getElementById("app");
   app.innerHTML = `
@@ -63,4 +63,5 @@ export function renderLogin() {
         </div>
       </div>
     </main>`;
+  focusOnOf();
 }
