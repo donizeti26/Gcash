@@ -409,7 +409,6 @@ document.addEventListener("click", async (e) => {
 
       const data = await response.json();
       console.log(data.message);
-      await SetStatusInTransactions(id);
       await loadComponentsHome(monthIndex, yearIndex);
     } catch (err) {
       console.error("Erro ao apagar: ", err);
@@ -427,7 +426,7 @@ document.addEventListener("click", async (e) => {
     console.log("Mudando status da transação " + id);
 
     await SetStatusInTransactions(id);
-    await loadComponentsHome(id, monthIndex, yearIndex);
+    await loadComponentsHome(monthIndex, yearIndex);
     hideLoading();
   }
 
@@ -488,16 +487,3 @@ export async function initSearchArea() {
 /* ==============================
    UTILS
 ================================ */
-
-export async function consultStatus(id) {
-  try {
-    const response = await fetch(`/api/transactions/${id}/status`);
-    const status = await response.json(); // status agora é diretamente a string "paid" ou "pending"
-
-    console.log("Status da transação", id, "é", status);
-    return status;
-  } catch (err) {
-    console.error("Error ao consultar status: ", err.message);
-    return null;
-  }
-}

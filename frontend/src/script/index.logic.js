@@ -8,6 +8,8 @@ import {
 } from "../script/utils/formTransactionsUtils.js";
 import { LoadExpenses } from "../script/utils/sharedUtils.js";
 import { insertCountTransaction } from "../script/utils/transactionsUtils.js";
+import { showToast } from "../script/utils/modalUtils.js";
+import { showLoading, hideLoading } from "../script/utils/loadingUtils.js";
 
 export function getCurrentMonthYear() {
   const monthEl = document.getElementById("month_index");
@@ -129,5 +131,17 @@ export async function SetStatusInTransactions(id) {
     showToast("Operação concluída com Sucesso", 3000);
 
     hideLoading();
+  }
+}
+export async function consultStatus(id) {
+  try {
+    const response = await fetch(`/api/transactions/${id}/status`);
+    const status = await response.json(); // status agora é diretamente a string "paid" ou "pending"
+
+    console.log("Status da transação", id, "é", status);
+    return status;
+  } catch (err) {
+    console.error("Error ao consultar status: ", err.message);
+    return null;
   }
 }
