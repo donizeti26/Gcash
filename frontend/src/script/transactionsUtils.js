@@ -152,19 +152,21 @@ export function setupTitleTransactionForm(type) {
 }
 
 export async function countTransaction(month) {
+  console.log("★ Valor de MONT", month);
+
   try {
     const response = await fetch(
       `/api/transactions/reports/count?month=${month}`,
     );
     const totalTransactions = await response.json();
-    console.log("Total de transações: FDFDFD ", totalTransactions.total);
+    console.log("★ Valor de MONT", month);
     return totalTransactions.total;
   } catch (err) {
     console.error("Erro ao contar transações", err);
   }
 }
 export async function insertCountTransaction(month) {
-  console.log("Valor de MONT", month);
+  console.log("★ Valor de MONT", month);
   const total = await countTransaction(month);
 
   const totalTransactions = document.getElementById("resultResume");

@@ -100,7 +100,7 @@ export function renderHome() {
                       id="arrowCircleUpIcon"
                     >
                       arrow_circle_up </span
-                    >Recebidos Mesal<br />
+                    >Recebidos Mensal<br />
                   </div>
                   <strong id="month_revenue"></strong
                 ></span>
@@ -253,14 +253,15 @@ export function initHome() {
 
   setupCalendar();
   setupModalGlobalListeners();
-
   setupHomeButtons();
   showLoading();
 
   const current = getCurrentMonthYear();
   if (current) {
     LoadExpenses(current.monthIndex, current.yearIndex);
+    insertCountTransaction(current.monthIndex);
   }
+
   hideLoading();
   initSearchArea();
 }
