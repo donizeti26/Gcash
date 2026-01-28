@@ -24,6 +24,7 @@
 }
 #containerOptionsDelete h2 {
   font-weight: 600;
+  text-align: justify;
 }
 #containerOptionsDelete h2 strong {
   color: var(--button-color-red);
@@ -63,11 +64,12 @@
   text-decoration: none;
   color: #fff;
   padding: 1rem 3rem;
-  background-color: red;
+  background-color: var(--button-color-red);
   font-size: 1rem;
   font-weight: 800;
   border-radius: 0.5rem;
   cursor: pointer;
+  width: 30%;
 }
 #groupOptionsChangeCategory {
   padding: 0 0 0 3rem;

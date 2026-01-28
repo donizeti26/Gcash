@@ -1,6 +1,7 @@
 import { LoadExpenses, setFormatMoney } from "./sharedUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { closeModal, showToast } from "./modalUtils.js";
+import { loadComponentsHome } from "../index.logic.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
@@ -122,9 +123,9 @@ export async function sendTransactionsEditions(type) {
         document.getElementById("year_index").dataset.id,
       );
 
-      await LoadExpenses(monthIndex, yearIndex);
       await showMonth();
       showToast("Operação concluída com Sucesso", 3000);
+      await loadComponentsHome(monthIndex, yearIndex);
 
       closeModal(); // ← ISSO AGORA VAI RODAR!
     }

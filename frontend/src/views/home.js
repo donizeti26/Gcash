@@ -7,7 +7,7 @@ import {
   overflowHidden,
   showToast,
 } from "../script/utils/modalUtils.js";
-import { showConfirm } from "../script/index.logic.js";
+import { showConfirm, searchLoadCategories } from "../script/index.logic.js";
 import {
   getCurrentMonthYear,
   loadComponentsHome,
@@ -382,6 +382,7 @@ document.addEventListener("click", async (e) => {
 
       await initExpensesForm();
       LoadDataAndEditTransaction(transaction);
+      await loadComponentsHome(monthIndex, yearIndex);
     } catch (err) {
       console.error("Erro ao buscar transação", err);
     } finally {
@@ -446,16 +447,6 @@ export async function initSearchArea() {
   console.log("DF FUNCIONANDO");
   const type = document.getElementById("search_description");
   const InputCategory = document.getElementById("search_category");
-
-  async function searchLoadCategories(typeValue) {
-    try {
-      const response = await fetch(`/api/categories?type=${typeValue}`);
-      const listCategory = await response.json();
-      return listCategory;
-    } catch (err) {
-      console.error("Erro ao buscar categorias", err);
-    }
-  }
 
   if (type.value) {
     console.log("DF FUNCIONANDO");

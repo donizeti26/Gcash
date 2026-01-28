@@ -72,9 +72,15 @@ EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.ty
 
 export async function countTransactions({ id, month }) {
   if (id) {
-    const query = `SELECT COUNT(*) AS total_transactions FROM transactions AS t INNER JOIN categories AS c ON t.category_id = c.category_id WHERE t.category_id = $1 `;
+    const query = `SELECT c.type, COUNT(*) AS total_transactions 
+FROM transactions AS t INNER JOIN categories 
+AS c ON t.category_id = c.category_id
+WHERE t.category_id = $1  GROUP BY c.type; `;
     const result = await pool.query(query, [id]);
-    return { total: Number(result.rows[0]?.total_transactions) || 0 };
+    return {
+      total: Number(result.rows[0]?.total_transactions) || 0,
+      type: result.rows[0]?.type ?? null,
+    };
   } else if (month) {
     const query = `SELECT COUNT(*) AS total_transactions FROM transactions WHERE EXTRACT(MONTH FROM due_date)= $1 `;
     const result = await pool.query(query, [month]);

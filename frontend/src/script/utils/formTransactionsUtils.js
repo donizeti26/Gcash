@@ -2,6 +2,7 @@ import { LoadExpenses } from "./sharedUtils.js";
 import { closeModal, showToast } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { insertCountTransaction } from "./transactionsUtils.js";
+import { loadComponentsHome } from "../index.logic.js";
 
 export function initExpensesForm() {
   const question_repeated = document.getElementById("question_repeated");
@@ -111,8 +112,7 @@ export async function initTransactionForm(type) {
         const year = document.getElementById("year_index");
         const monthIndex = Number(month.dataset.id);
         const year_index = Number(year.dataset.id);
-        LoadExpenses(monthIndex, year_index);
-        insertCountTransaction();
+        await loadComponentsHome(monthIndex, year_index);
         showMonth();
       }
     });

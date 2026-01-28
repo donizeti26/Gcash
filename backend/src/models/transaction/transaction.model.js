@@ -10,7 +10,7 @@ export async function registerTransactions({
 }) {
   const result = await pool.query(
     "INSERT INTO transactions (category_id, payment_method_id, due_date, amount, description, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [category_id, payment_method_id, due_date, amount, description, status]
+    [category_id, payment_method_id, due_date, amount, description, status],
   );
   return result.rows[0];
 }
@@ -32,7 +32,7 @@ from transactions AS t
 INNER JOIN categories
 AS c ON t.category_id = c.category_id
 INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id where t.transaction_id = $1`,
-    [transaction_id]
+    [transaction_id],
   );
 
   return result.rows[0] || null;
@@ -45,7 +45,7 @@ export async function updateTransactions(
   due_date,
   amount,
   description,
-  status
+  status,
 ) {
   await pool.query(
     `UPDATE transactions
@@ -60,9 +60,24 @@ amount = $4, description=$5, status=$6
       description,
       status,
       transaction_id,
-    ]
+    ],
   );
   return { message: "Transação atualizado" };
+}
+
+export async function updateTransactionsByCategory(
+  categoria_origem_id,
+  categoria_destino_id,
+) {
+  const query = `UPDATE transactions
+  SET category_id = 2$
+  where category_id = 1$`;
+  const result = await pool.query(query, [
+    categoria_origem_id,
+    categoria_destino_id,
+  ]);
+
+  return { message: "Status atualizado", result };
 }
 
 export async function updateStatus(transaction_id, status) {
@@ -72,7 +87,7 @@ export async function updateStatus(transaction_id, status) {
   SET status = $1
   where transaction_id = $2
   `,
-    [status, transaction_id]
+    [status, transaction_id],
   );
   return { message: "Status atualizado", newStatus: status };
 }

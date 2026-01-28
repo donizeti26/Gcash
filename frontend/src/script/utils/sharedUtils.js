@@ -27,7 +27,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
   try {
     const response = await fetch(
-      `/api/transactions/${monthForApi}/${yearIndex}`
+      `/api/transactions/${monthForApi}/${yearIndex}`,
     );
     const transactions = await response.json();
     console.log(transactions[0]);
@@ -36,6 +36,10 @@ export async function LoadExpenses(monthIndex, yearIndex) {
     if (group_cards) {
       group_cards.innerHTML = "";
     }
+
+    console.log("★★" + transactions.length);
+    console.log("★★" + transactions);
+
     transactions.forEach((cat) => {
       const item = document.createElement("article");
 
@@ -127,7 +131,7 @@ edit_document
         if (statusString == "paid") {
           buttonPay.classList.add(
             "button_set_status",
-            "button_set_status_pending"
+            "button_set_status_pending",
           );
           buttonPay.innerHTML = `<span class="material-symbols-outlined">
 credit_card_off
@@ -135,7 +139,7 @@ credit_card_off
         } else {
           buttonPay.classList.add(
             "button_set_status",
-            "button_set_status_paid"
+            "button_set_status_paid",
           );
           buttonPay.innerHTML = `<span class="material-symbols-outlined">
 credit_score

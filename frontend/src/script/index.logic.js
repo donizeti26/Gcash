@@ -61,6 +61,8 @@ export function showConfirm({ message, theme }) {
     }
 
     const btnYes = modal.querySelector("#confirm_yes");
+    const btnNo = modal.querySelector("#confirm_no");
+
     modal.querySelector("#confirm_message").textContent = message;
     bodyModal.classList.remove("hidden");
 
@@ -69,7 +71,7 @@ export function showConfirm({ message, theme }) {
       resolve(true);
     };
 
-    modal.querySelector("#confirm_no").onclick = () => {
+    btnNo.onclick = () => {
       bodyModal.classList.add("hidden");
       resolve(false);
     };
@@ -143,5 +145,15 @@ export async function consultStatus(id) {
   } catch (err) {
     console.error("Error ao consultar status: ", err.message);
     return null;
+  }
+}
+
+export async function searchLoadCategories(typeValue) {
+  try {
+    const response = await fetch(`/api/categories?type=${typeValue}`);
+    const listCategory = await response.json();
+    return listCategory;
+  } catch (err) {
+    console.error("Erro ao buscar categorias", err);
   }
 }

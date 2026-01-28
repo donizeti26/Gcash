@@ -24,7 +24,7 @@ import {
   getCurrentMonthYear,
   showConfirm,
   loadComponentsHome,
-  SetStatusInTransactions,
+  searchLoadCategories,
 } from "../index.logic.js";
 
 export async function openListCategory() {
@@ -49,7 +49,6 @@ export async function openListCategory() {
   listCategories.addEventListener("click", async (e) => {
     const editButton = e.target.closest(".edit_document");
     const deleteButton = e.target.closest(".delete_forever");
-    const { monthIndex, yearIndex } = getCurrentMonthYear();
     if (editButton) {
       showLoading();
 
@@ -74,41 +73,32 @@ export async function openListCategory() {
       const response = await fetch(`/api/transactions/reports/count?id=${id}`);
       const data = await response.json();
       const totalTransactions = Number(data.total);
-
-      let ConfirmStatus;
+      const type = data.type;
+      console.table(data);
+      let decision;
       if (totalTransactions > 0) {
-        ConfirmStatus = await DeleteOptions(id, totalTransactions);
+        decision = await DeleteOptions(id, totalTransactions, type);
       } else {
-        ConfirmStatus = await showConfirm({
+        const confirmed = await showConfirm({
           message: "Você quer realmente apagar essa transação?",
           theme: "danger",
         });
+        decision = confirmed ? { action: "deleteAll" } : { action: "cancel" };
       }
 
-      if (!ConfirmStatus) {
+      if (decision.action === "cancel") {
         return;
       }
-
-      try {
-        showLoading();
-
-        const response = await fetch(`/api/categories/${id}`, {
-          method: "DELETE",
-        });
-
-        const data = await response.json();
-        console.log(data.message);
-
-        await loadCategories();
-        await sumAmountYear(monthIndex, yearIndex);
-        await sumAtualMonthPaid(monthIndex, yearIndex);
-        await resumeMonthInsert(monthIndex, yearIndex, "sum");
-        await sumAmountMonthRevenue(monthIndex, yearIndex);
-        await sumAtualMonthPending(monthIndex, yearIndex);
-        await LoadExpenses(monthIndex, yearIndex);
-        showToast("Operação concluída com Sucesso", 3000);
-      } catch (err) {
-        console.error("Erro ao buscar a categoria", err);
+      if (decision.action === "changeCategory") {
+        await updateCategoryOfTransactions(decision.newCategoryId);
+        await deleteCategoryAllTransactions(id);
+        console.log("★★★ deletou e alterou");
+        document.getElementById("modalContainerListCategories").innerHTML = "";
+        overflowHidden(false);
+        return;
+      }
+      if (decision.action === "deleteAll") {
+        await deleteCategoryAllTransactions(id);
       }
     }
   });
@@ -125,6 +115,45 @@ export async function openListCategory() {
   hideLoading();
 }
 
+async function updateCategoryOfTransactions(category) {
+  const response = fetch("/api/transactions/bulk?action=change-category", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(category),
+  });
+  if (!response.ok) {
+    throw new Error("Erro ao atualizar transação");
+  }
+
+  return response.json();
+}
+
+async function deleteCategoryAllTransactions(id) {
+  try {
+    showLoading();
+
+    const response = await fetch(`/api/categories/${id}`, {
+      method: "DELETE",
+    });
+
+    const data = await response.json();
+    console.log(data.message);
+    const { monthIndex, yearIndex } = getCurrentMonthYear();
+    await loadCategories();
+    await sumAmountYear(monthIndex, yearIndex);
+    await sumAtualMonthPaid(monthIndex, yearIndex);
+    await resumeMonthInsert(monthIndex, yearIndex, "sum");
+    await sumAmountMonthRevenue(monthIndex, yearIndex);
+    await sumAtualMonthPending(monthIndex, yearIndex);
+    await LoadExpenses(monthIndex, yearIndex);
+    showToast("Operação concluída com Sucesso", 3000);
+  } catch (err) {
+    console.error("Erro ao buscar a categoria", err);
+  }
+}
+
 export async function abrirNovaCategoria() {
   await renderFormCategory();
   const buttonIcons = document.getElementById("button_icons");
@@ -135,39 +164,90 @@ export async function abrirNovaCategoria() {
   sendCategoryNewCategory?.();
 }
 
-export async function DeleteOptions(id, totalTransactions) {
-  await renderDeleteCategoryOption();
-  overflowHidden(true);
-
+export async function DeleteOptions(id, totalTransactions, type) {
+  await renderDeleteCategoryOption(type);
+  const categoryToBeExcluded = Number(id);
+  const listCategoriesForm = await searchLoadCategories(type);
   const containerTitle = document.getElementById("containerOptionsDelete");
   const title = containerTitle.querySelector("#contTransactions");
+
+  overflowHidden(true);
+
   title.textContent = totalTransactions;
   console.log(title);
 
   return new Promise((resolve) => {
     const modal = document.getElementById("containerOptionsDelete");
     const form = modal.querySelector("#formOptionsDelete");
-
+    const buttonSubmit = form.querySelector("#buttonSetSubmit");
+    const changeCategory = document.getElementById("changeCategory");
+    const deleteAll = document.getElementById("deleteAll");
+    const otherCategories = document.getElementById("otherCategories");
     const modalContainerListCategories = document.getElementById(
       "modalContainerListCategories",
     );
 
     modal.querySelector("#buttonCancel").onclick = () => {
-      resolve(false);
+      resolve({ action: "cancel" });
       modalContainerListCategories.innerHTML = "";
       overflowHidden(false);
     };
+
+    form.addEventListener("click", () => {
+      changeCategory.addEventListener("change", handleChange);
+      deleteAll.addEventListener("change", handleChange);
+    });
+    console.log("★★★S★★" + id);
+    function handleChange() {
+      otherCategories.innerHTML = "";
+
+      if (changeCategory.checked) {
+        otherCategories.disabled = false;
+        listCategoriesForm
+          .filter((cat) => cat.category_id !== categoryToBeExcluded)
+          .forEach((cat) => {
+            const item = document.createElement("option");
+            item.innerHTML = `${cat.name}`;
+            item.value = `${cat.category_id}`;
+            if (otherCategories) {
+              otherCategories.appendChild(item);
+            }
+          });
+
+        buttonSubmit.textContent = "Alterar";
+        buttonSubmit.style.backgroundColor = "var(--button-color-purple)";
+      }
+      if (deleteAll.checked) {
+        otherCategories.disabled = true;
+        otherCategories.innerHTML = `<option value="" selected="">Selecionar</option>`;
+
+        buttonSubmit.textContent = "Deletar";
+        buttonSubmit.style.backgroundColor = "var(--button-color-red)";
+      }
+    }
     form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
       // Primeiro: validação nativa
       if (!form.checkValidity()) {
         e.preventDefault();
         form.reportValidity();
+        console.log("★ checkValidity");
         return;
       }
-      resolve(true);
 
-      e.preventDefault();
-      closeModal();
+      if (deleteAll.checked) {
+        resolve({ action: "deleteAll" });
+        e.preventDefault();
+        closeModal();
+      }
+
+      if (changeCategory.checked) {
+        console.log("otherCategories");
+        var newCategoryId = document.getElementById("otherCategories").value;
+        console.log("★★★★★" + newCategoryId);
+        resolve({ action: "changeCategory", newCategoryId });
+      }
     });
   });
 }
@@ -336,14 +416,6 @@ export async function loadCategoryFormRevenue() {
     });
   } catch (err) {
     console.error("Erro ao carregar categorias", err);
-  }
-}
-
-export async function openCategoryEditor(categoryId) {
-  try {
-    await openModal("../views/list_categories.html");
-  } catch (err) {
-    console.error("Erro ao abrir modal de editar categorias", err);
   }
 }
 

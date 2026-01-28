@@ -2,6 +2,7 @@ import {
   editTransactions,
   updateTransactions,
   updateStatus,
+  updateTransactionsByCategory,
   registerTransactions,
   deleteTransactions,
 } from "../../models/transaction/index.js";
@@ -43,41 +44,60 @@ export async function updateTransactionsController(req, res) {
     console.log("REQ BODY:", req.body);
 
     const { transaction_id } = req.params;
-    const {
-      category_id,
-      payment_method_id,
-      due_date,
-      amount,
-      description,
-      status,
-      type,
-    } = req.body;
+    const { action } = req.query;
 
-    if (!transaction_id) {
-      return res.status(400).json({ error: "transaction_id é obrigatório" });
-    } else if (type == "expense" && amount > 0) {
-      return res
-        .status(400)
-        .json({
-          message: "Para Expenses/despesas o valor tem que ser negativo",
-        });
+    if (transaction_id === "bulk" && action === "change-category") {
+      return updateByCategory(req, res);
     }
-    await updateTransactions(
-      transaction_id,
-      category_id,
-      payment_method_id,
-      due_date,
-      amount,
-      description,
-      status,
-      type,
-    );
-
-    return res.status(200).json({ message: "Atualizado com sucesso" });
+    return updateSingleTransaction(req, res);
   } catch (err) {
     console.error("Erro ao atualizar transação: ", err);
     res.status(500).json({ err: "Erro interno no servidor" });
   }
+}
+
+async function updateByCategory(req, res) {
+  const { transaction_id } = req.params;
+
+  const {
+    category_id,
+    payment_method_id,
+    due_date,
+    amount,
+    description,
+    status,
+    type,
+  } = req.body;
+
+  if (!transaction_id) {
+    return res.status(400).json({ error: "transaction_id é obrigatório" });
+  } else if (type == "expense" && amount > 0) {
+    return res.status(400).json({
+      message: "Para Expenses/despesas o valor tem que ser negativo",
+    });
+  }
+  await updateTransactions(
+    transaction_id,
+    category_id,
+    payment_method_id,
+    due_date,
+    amount,
+    description,
+    status,
+    type,
+  );
+
+  return res.status(200).json({ message: "Atualizado com sucesso" });
+}
+
+async function updateSingleTransaction(req, res) {
+  const { transaction_id } = req.params;
+  const { action } = req.query;
+  const { categoria_origem_id, categoria_destino_id } = req.body;
+
+  await updateTransactionsByCategory(categoria_origem_id, categoria_destino_id);
+
+  return res.status(200).json({ message: "Atualizado com sucesso" });
 }
 
 export async function updateStatusController(req, res) {
