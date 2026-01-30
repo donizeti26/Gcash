@@ -70,8 +70,8 @@ export async function updateTransactionsByCategory(
   categoria_destino_id,
 ) {
   const query = `UPDATE transactions
-  SET category_id = 2$
-  where category_id = 1$`;
+  SET category_id = $2
+  where category_id = $1`;
   const result = await pool.query(query, [
     categoria_origem_id,
     categoria_destino_id,

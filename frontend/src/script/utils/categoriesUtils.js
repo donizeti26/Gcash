@@ -69,7 +69,9 @@ export async function openListCategory() {
     }
     if (deleteButton) {
       const id = deleteButton.dataset.id;
+      const category = await fetchCategory(id);
 
+      console.log(category.name, category.category_id);
       const response = await fetch(`/api/transactions/reports/count?id=${id}`);
       const data = await response.json();
       const totalTransactions = Number(data.total);
@@ -90,15 +92,24 @@ export async function openListCategory() {
         return;
       }
       if (decision.action === "changeCategory") {
-        await updateCategoryOfTransactions(decision.newCategoryId);
-        await deleteCategoryAllTransactions(id);
+        console.log(
+          "Categoria de Origem: " +
+            category.category_id +
+            " Categoria de Destino: " +
+            decision.newCategoryId,
+        );
+        await updateCategoryOfTransactions(
+          category.category_id,
+          decision.newCategoryId,
+        );
+        await deleteCategoryAllTransactions(category.category_id);
         console.log("★★★ deletou e alterou");
         document.getElementById("modalContainerListCategories").innerHTML = "";
         overflowHidden(false);
         return;
       }
       if (decision.action === "deleteAll") {
-        await deleteCategoryAllTransactions(id);
+        await deleteCategoryAllTransactions(category.category_id);
       }
     }
   });
@@ -115,19 +126,21 @@ export async function openListCategory() {
   hideLoading();
 }
 
-async function updateCategoryOfTransactions(category) {
-  const response = fetch("/api/transactions/bulk?action=change-category", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(category),
-  });
-  if (!response.ok) {
-    throw new Error("Erro ao atualizar transação");
+async function updateCategoryOfTransactions(
+  categoria_origem_id,
+  categoria_destino_id,
+) {
+  try {
+    await fetch("/api/transactions/bulk?action=change-category", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ categoria_origem_id, categoria_destino_id }),
+    });
+  } catch (err) {
+    alert("Erro ao atualizar transação");
   }
-
-  return response.json();
 }
 
 async function deleteCategoryAllTransactions(id) {
@@ -245,7 +258,7 @@ export async function DeleteOptions(id, totalTransactions, type) {
       if (changeCategory.checked) {
         console.log("otherCategories");
         var newCategoryId = document.getElementById("otherCategories").value;
-        console.log("★★★★★" + newCategoryId);
+        console.log("NewCategoryId = " + newCategoryId);
         resolve({ action: "changeCategory", newCategoryId });
       }
     });
