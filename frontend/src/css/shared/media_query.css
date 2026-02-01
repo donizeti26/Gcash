@@ -262,6 +262,15 @@
   #left_side {
     width: 37%;
   }
+
+  .group_input_category {
+    display: flex;
+    align-items: center;
+    width: 70%;
+
+    gap: 0.5rem;
+    flex-direction: row;
+  }
 }
 
 @media screen and (min-width: 1600px) {

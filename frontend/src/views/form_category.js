@@ -20,8 +20,8 @@ export function renderFormCategory() {
     </div>
     <div id="body_new_category">
       <!-- NOME -->
-      <div>
-        <label for="name_category"
+      <div class="group_input_category">
+        <label id="label_name" for="name_category"
           >Nome:
           <abbr class="required_abbr" title="campo obrigatório">*</abbr></label
         >
@@ -35,6 +35,16 @@ export function renderFormCategory() {
           required
         />
       </div>
+          <div class="group_input_category">
+      <label for="description">Descrição: </label>
+      <input
+        id="description"
+        class="input_style"
+        type="text"
+        name="text_expense"
+        placeholder="Exe.: Gastos com automóvel..."
+      />
+    </div>
       <div>
         <label for="option_new_category"
           >Tipo de Categoria

@@ -23,7 +23,7 @@ export function renderListCategories() {
         <div class="item_group_category_resume">
           <span class="material-symbols-outlined" id="labelIcon">label</span>
           <div>
-            <strong>16</strong>
+            <strong id="num_categories">16</strong>
             <p>TOTAL DE CATEGORIAS</p>
           </div>
         </div>
@@ -43,7 +43,7 @@ export function renderListCategories() {
             bookmark_star
           </span>
           <div>
-            <strong>Freelancer</strong>
+            <strong id="favorite_category">Freelancer</strong>
             <p>CATEGORIA MAIS UTILIZADA, MÊS ATUAL.</p>
           </div>
         </div>

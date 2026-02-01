@@ -40,11 +40,17 @@ export async function openListCategory() {
   console.log("MES QUE ESTOU PEGANDO" + mesNum);
 
   const totalTransactions = await countTransaction(mesNum);
+  const totalCategories = await countCategory();
+  const favoriteCategory = await countMoreFrequent();
 
   const tagTotalTransactions = document.getElementById("num_transactions");
+  const tagTotalCategories = document.getElementById("num_categories");
   const listCategories = document.querySelector("#list_categories");
+  const tagFavoriteCategory = document.querySelector("#favorite_category");
 
   tagTotalTransactions.textContent = ` ${totalTransactions}`;
+  tagTotalCategories.textContent = `${totalCategories}`;
+  tagFavoriteCategory.textContent = `${favoriteCategory}`;
 
   listCategories.addEventListener("click", async (e) => {
     const editButton = e.target.closest(".edit_document");
@@ -472,4 +478,27 @@ export async function sendCategoryEditions(category_id) {
       closeSubModal();
     }
   });
+}
+export async function countCategory() {
+  try {
+    const response = await fetch(`/api/categories/reports/count?action=count`);
+    const totalTransactions = await response.json();
+    console.log("Total de categorias: ", totalTransactions.total);
+    return totalTransactions.total;
+  } catch (err) {
+    console.error("Erro ao contar Categorias", err);
+  }
+}
+
+export async function countMoreFrequent() {
+  try {
+    const response = await fetch(
+      `/api/categories/reports/count?action=favorite`,
+    );
+    const totalTransactions = await response.json();
+    console.log("Categoria favorita: ", totalTransactions.name);
+    return totalTransactions.name;
+  } catch (err) {
+    console.error("Erro ao buscar Categoria favorita", err);
+  }
 }

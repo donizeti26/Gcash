@@ -135,26 +135,36 @@ export async function sendTransactionsEditions(type) {
 export function setupTitleTransactionForm(type) {
   const title = document.querySelector("#page_title");
   const DataTransaction = document.querySelector("#data_transaction");
+
+  const legendPage = document.querySelector("#page_legend_title");
+
   if (!title) return;
 
   switch (type) {
     case "revenue":
       title.textContent = "Nova Receita";
+      legendPage.textContent = "Registre aqui sua nova Receita";
       DataTransaction.textContent = "Data do Pagamento";
       break;
 
     case "expense":
       title.textContent = "Nova Despesa";
+      legendPage.textContent = "Registre aqui sua nova Despesa";
+
       break;
 
     case "edit_revenue":
       title.textContent = "Editar Receita";
+      legendPage.textContent = "Edite aqui sua Receita";
+
       DataTransaction.textContent = "Data do Pagamento";
 
       break;
 
     case "edit_expense":
       title.textContent = "Editar Despesa";
+      legendPage.textContent = "Edite aqui sua Despesa";
+
       break;
 
     default:

@@ -6,6 +6,7 @@ import {
   getSelectedCategoryController,
   deleteCategoryController,
   updateCategoryController,
+  countController,
 } from "../../controllers/category/index.js";
 
 const router = Router();
@@ -134,4 +135,5 @@ router.get("/category/:id", getSelectedCategoryController);
  */
 router.delete("/:id", deleteCategoryController);
 
+router.get("/reports/count/", countController);
 export default router;

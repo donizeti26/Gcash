@@ -40,6 +40,13 @@
   align-items: center;
 }
 
+.group_input_category {
+  width: 100%;
+}
+
+#name_category {
+  width: 74%;
+}
 #close_new_category {
   display: flex;
   justify-content: space-between;
