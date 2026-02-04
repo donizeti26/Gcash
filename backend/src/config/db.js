@@ -1,7 +1,4 @@
 import pkg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const { Pool } = pkg;
 // conexão com o PostgreSQL
@@ -13,6 +10,6 @@ const pool = new Pool({
   port: Number(process.env.DB_PORT),
 });
 
-console.log(process.env.DB_USER);
+console.log(process.env.DB_USER + " As");
 
 export default pool;
