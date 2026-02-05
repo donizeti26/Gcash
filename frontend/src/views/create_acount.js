@@ -1,26 +1,30 @@
-import "../css/login.css";
 import { focusOnOf } from "../script/utils/loginUtils";
 export function renderLogin() {
   const app = document.getElementById("app");
   app.innerHTML = `
   <main id="main_login">
-
+      <div id="left_side_login">
+        <div id="logo_left">
+          <img src="/icon/logo.svg" id="logo" alt="" />
+        </div>
+        <div id="imageBackground"></div>
+      </div>
       <div id="right_side">
         <div id="contentRightSid">
-          <div id="group_title_login">
-          <h1 id="titlePageLogin">Login</h1>
-          <p>Preencha os campos com seus dados</p>
+          <div id="logo_right">
+            <img src="/icon/logo.svg" id="logo" alt="" />
           </div>
+          <h1 id="titlePage">Login</h1>
           <form action="" id="formLogin">
             <label for="inputEmail">
               <div id="divInputEmail">
-                <p>Endereço de email:</p>
-                <input type="text" class="input_login" name="inputEmail" id="inputEmail" />
+                Endereço de email:
+                <input type="text" name="inputEmail" id="inputEmail" />
               </div>
             </label>
             <label for="inputPassword">
               <div id="divInputPassword">
-                <p>Senha</p>
+                Senha
 
                 <input 
                   class ="input_login"

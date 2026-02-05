@@ -6,14 +6,18 @@
   width: 100vw;
   height: 100vh;
   justify-content: space-evenly;
+  background-image: url("../../public/images/backgroundLogin.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .input_login {
   font-size: 1rem;
+  background: none;
 }
 #contentRightSid {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--azul-200);
   justify-content: center;
   align-items: center;
   width: 80%;
@@ -24,15 +28,7 @@
 #imageBackground {
   display: none;
 }
-#logo_left {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-}
-#logo {
-  width: 242.15px;
-  height: 109px;
-}
+
 #right_side {
   display: flex;
   justify-content: center;
@@ -40,9 +36,7 @@
   flex-direction: column;
   gap: 2rem;
 }
-#left_side_login {
-  display: none;
-}
+
 #formLogin {
   display: flex;
   flex-direction: column;
@@ -53,25 +47,12 @@
   text-decoration: none;
   color: var(--button-color-blue);
 }
-#titlePage {
-  color: var(--white-900);
-}
-#divInputEmail,
-#divInputPassword {
-  border: 1px solid var(--azul-400);
-  width: 100%;
-  padding: 1rem 1rem 1rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: self-start;
-  border-radius: 10px;
-  background-color: #fff;
-}
 
 #inputEmail,
 #inputPassword {
   outline: none;
   width: 100%;
+  color: var(--white-900);
 }
 #linksAndButtons {
   display: flex;
@@ -116,7 +97,8 @@
 #loginButton {
   text-decoration: none;
   padding: 1rem 4rem;
-  background-color: var(--azul-400);
+  background-color: #1a8aec;
+
   border-radius: 0.5rem;
   color: #fff;
   font-size: 1rem;
@@ -126,27 +108,35 @@
   width: 100%;
 }
 
-#titlePage {
-  color: var(--azul-400);
-}
-#divInputEmail,
-#divInputPassword {
-  border-radius: 10px;
-}
 #divInputEmail.focusOn,
 #divInputPassword.focusOn {
-  border-left: 16px solid var(--azul-400);
-  padding-left: 10px;
+  border-left: 18px solid var(--azul-400);
+  padding-left: 16px;
 }
 
 #imageBackground {
   width: 100%;
   height: 100%;
 }
-
-#titlePage {
+#group_title_login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding-bottom: 2rem;
+  gap: 1rem;
+  color: var(--white-900);
+}
+
+#group_title_login p {
+  font-weight: 300;
+  color: #ffffff69;
+}
+
+#titlePageLogin {
   font-weight: 600;
+  color: var(--white-900);
+  font-size: 2.5rem;
 }
 #logo {
   width: 242.15px;
@@ -156,16 +146,26 @@
   width: 85%;
   opacity: 0.2;
 }
-.divInputEmail,
-.divInputPassword {
+
+#divInputEmail,
+#divInputPassword {
+  outline: none;
   border: 1px solid var(--azul-400);
-  width: 30rem;
+  color: #fff;
+  width: 100%;
+  background-color: var(--azul-200);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: self-start;
-  border-radius: 10px;
-  padding-left: 16px;
+  border-radius: 1rem;
+  padding-left: 33px;
+}
+
+#divInputEmail p,
+#divInputPassword p {
+  font-size: 0.8rem;
+  color: #b4b4b4;
 }
 #remember {
   margin-right: 0.5rem;
@@ -174,15 +174,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-#inputEmail,
-#inputPassword {
-  outline: none;
-  width: 100%;
-}
-
-#groupRemember {
-  color: var(--text-default);
 }
 
 #loginButton {
@@ -193,15 +184,11 @@
   #main_login {
     width: 100%;
     flex-direction: row;
-    background: url("/images/backgroundLogin.svg") no-repeat center;
+    background-color: var(--azul-400);
     background-size: cover;
   }
   #logo_right {
     display: none;
-  }
-  #left_side_login {
-    display: flex;
-    width: 50%;
   }
   #right_side {
     width: 50%;
@@ -212,6 +199,7 @@
   #contentRightSid {
     width: 70%;
     height: 60%;
+    background-color: var(--azul-200);
   }
   #groupLinks {
     flex-direction: row;
