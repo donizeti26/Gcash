@@ -6,7 +6,7 @@
   width: 100vw;
   height: 100vh;
   justify-content: space-evenly;
-  background-image: url("../../public/images/backgroundLogin.svg");
+  background-image: url("/images/backgroundLogin.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -16,7 +16,6 @@ export function getCurrentMonthYear() {
   const yearEl = document.getElementById("year_index");
 
   if (!monthEl || !yearEl) {
-    console.warn("month_index ou year_index ainda não existem no DOM");
     return null;
   }
 

@@ -1,8 +1,13 @@
 import { Router } from "express";
-import { loginController } from "../../controllers/auth/index.js";
+import {
+  loginController,
+  createUserController,
+} from "../../controllers/auth/index.js";
 
 const router = Router();
 
-router.post("/", loginController);
+router.post("/login", loginController);
+
+router.post("/register", createUserController);
 
 export default router;

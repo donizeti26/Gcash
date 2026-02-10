@@ -1,4 +1,5 @@
 import "../css/login.css";
+import { navigate } from "../router.js";
 import { focusOnOf } from "../script/utils/loginUtils";
 export function renderLogin() {
   const app = document.getElementById("app");
@@ -15,7 +16,8 @@ export function renderLogin() {
             <label for="inputEmail">
               <div id="divInputEmail">
                 <p>Endereço de email:</p>
-                <input type="text" class="input_login" name="inputEmail" id="inputEmail" />
+                <input type="email" class="input_login" name="inputEmail" id="inputEmail" placeholder="seuemail@exemplo.com" 
+                required/>
               </div>
             </label>
             <label for="inputPassword">
@@ -26,7 +28,9 @@ export function renderLogin() {
                   class ="input_login"
                   type="password"
                   name="inputPassword"
+                  minlength="8"
                   id="inputPassword"
+                  autocomplete="current-password" 
                   required
                 />
               </div>
@@ -41,7 +45,7 @@ export function renderLogin() {
                       type="radio"
                       name="remember"
                       id="remember"
-                      required
+                      
                     />Lembre de mim</label
                   >
                 </span>
@@ -59,4 +63,28 @@ export function renderLogin() {
       </div>
     </main>`;
   focusOnOf();
+  document.getElementById("formLogin").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const payload = {
+      email: form.inputEmail.value,
+      password: form.inputPassword.value,
+    };
+
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+      navigate("/");
+    } else {
+      alert(data.error || "Login inválido");
+    }
+  });
 }

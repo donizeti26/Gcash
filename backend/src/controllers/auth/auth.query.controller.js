@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
 
-import { getUserByEmail } from "../../models/users/index.js";
+import { getUserByEmail, createUser } from "../../models/auth/index.js";
 
 export async function loginController(req, res) {
   try {
@@ -34,6 +34,45 @@ export async function loginController(req, res) {
     });
 
     res.json({ token });
+  } catch (err) {
+    console.error("Erro interno", err);
+    res.status(500).json({ error: err.message });
+  }
+}
+
+export async function createUserController(req, res) {
+  try {
+    const { userName, firstName, lastName, email, password } = req.body;
+
+    if (
+      !userName ||
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      password.length < 6
+    ) {
+      return res.status(400).json({ error: "Dados inválidos" });
+    }
+
+    const existing = await getUserByEmail(email);
+
+    if (existing.length > 0) {
+      return res.status(409).json({ error: "O usuário já existe" });
+    }
+
+    const password_hash = await bcrypt.hash(password, 10);
+    const status = "enable";
+    await createUser({
+      userName,
+      firstName,
+      lastName,
+      email,
+      password_hash,
+      status,
+    });
+
+    res.status(201).json({ message: "Usuário criado com Sucesso" });
   } catch (err) {
     console.error("Erro interno", err);
     res.status(500).json({ error: err.message });

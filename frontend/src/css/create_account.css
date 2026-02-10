@@ -11,11 +11,17 @@ html {
   font-size: 16px;
   /* Padrão, mas pode ser ajustado */
 }
+#left_side_create_account {
+  display: none;
+}
 #button_back_login {
   font-weight: 800;
   color: #ffffff;
-  margin-left: 10rem;
+  margin-left: 10%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #button_back_login:hover {
   transform: scale(1.02);
@@ -23,6 +29,7 @@ html {
 #main_content_create_account {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 #logo_right {
   display: flex;
@@ -39,22 +46,15 @@ html {
   align-items: start;
   gap: 2rem;
   height: 100vh;
-  background-image: url("../../public/images/backgroundCreateAccount.png");
+  background-image: url("/images/backgroundCreateAccount.png");
 }
+
 #right_side_create_account {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 50%;
-  height: 100%;
-}
-#left_side_create_account {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 50%;
+  width: 80%;
   height: 100%;
 }
 
@@ -125,4 +125,20 @@ html {
   box-shadow: 0px 0px 21px -4px rgba(26, 138, 236, 1);
   -webkit-box-shadow: 0px 0px 21px -4px rgba(26, 138, 236, 1);
   -moz-box-shadow: 0px 0px 21px -4px rgba(26, 138, 236, 1);
+}
+
+@media screen and (min-width: 1300px) {
+  /**CREATE ACCOUNT*/
+
+  #left_side_create_account {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+  }
+  #right_side_create_account {
+    width: 50%;
+  }
 }
