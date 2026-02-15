@@ -6,6 +6,9 @@ CREATE TYPE category_type AS ENUM('revenue','expense');
 CREATE TYPE transaction_status AS ENUM('pending','paid');
 CREATE TYPE installment_status AS ENUM('pending','paid');
 
+
+//Ativar a extensão unaccent
+CREATE EXTENSION IF NOT EXISTS unaccent;
 //Criando tabela de Usuários
 CREATE TABLE users(
 	user_id SERIAL PRIMARY KEY,

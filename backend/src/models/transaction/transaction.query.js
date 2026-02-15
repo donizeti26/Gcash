@@ -1,5 +1,29 @@
 import pool from "../../config/db.js";
 
+export async function searchTransactions(
+  description,
+  typeTransaction,
+  categoryTransaction,
+  dateStart,
+  dateEnd,
+) {
+  const result = await pool.query(
+    `
+SELECT * 
+FROM transactions as t
+INNER JOIN categories AS c 
+  ON c.category_id = t.category_id 
+WHERE unaccent(lower(t.description)) 
+      LIKE unaccent(lower('%' || $1 || '%'))
+  AND c.type = $2
+  AND c.category_id = $3
+  AND t.due_date >= $4
+  AND t.due_date < ($5::date + INTERVAL '1 day')`,
+    [description, typeTransaction, categoryTransaction, dateStart, dateEnd],
+  );
+  return result.rows;
+}
+
 export async function getTransactions({ month, year }) {
   const result = await pool.query(
     `
@@ -20,7 +44,7 @@ INNER JOIN categories
 AS c ON t.category_id = c.category_id
 INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id
   WHERE EXTRACT(MONTH FROM due_date) = $1 and  EXTRACT(YEAR FROM due_date) = $2 ORDER BY c.name`,
-    [month, year]
+    [month, year],
   );
   return result.rows;
 }
@@ -32,7 +56,7 @@ FROM transactions AS t INNER JOIN  categories AS c
 ON t.category_id = c.category_id
 WHERE t.transaction_id = $1
 `,
-    [transaction_id]
+    [transaction_id],
   );
   return result.rows[0]?.tipo || null;
 }
@@ -41,7 +65,7 @@ export async function consultStatus(transaction_id) {
   const result = await pool.query(
     `
       SELECT status FROM transactions  WHERE transaction_id = $1`,
-    [transaction_id]
+    [transaction_id],
   );
 
   return result.rows[0]?.status || null;

@@ -24,6 +24,7 @@
   height: 100%;
   padding: 2rem;
   border-radius: 1rem;
+  gap: 1rem;
 }
 #imageBackground {
   display: none;
@@ -81,7 +82,10 @@
 #remember {
   margin-right: 0.5rem;
 }
-#singInButton {
+#createAccountDiv {
+  width: 100%;
+}
+#createAccountButton {
   text-decoration: none;
   padding: 1rem 3rem;
   background-color: #fff;
@@ -93,6 +97,7 @@
   font-weight: 600;
   cursor: pointer;
   width: 100%;
+  padding-top: 1rem;
 }
 #loginButton {
   text-decoration: none;
@@ -212,6 +217,6 @@
 @media screen and (min-width: 1600px) {
   #contentRightSid {
     width: 51%;
-    height: 48%;
+    height: 55%;
   }
 }

@@ -1,0 +1,56 @@
+export async function getParamsForSearch() {
+  const formSearchIndex = document
+    .getElementById("form_search")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const description = document.getElementById("search_input").value;
+      const typeTransaction =
+        document.getElementById("search_description").value;
+
+      const categoryTransaction =
+        document.getElementById("search_category").value;
+
+      const periodString = document.getElementById("daterange").value;
+
+      const [dateStart, dateEnd] = periodString.split(" - ");
+      searchWithParams(
+        description,
+        typeTransaction,
+        categoryTransaction,
+        dateStart,
+        dateEnd,
+      );
+      console.log(description, typeTransaction, categoryTransaction);
+    });
+}
+
+async function searchWithParams(
+  description,
+  typeTransaction,
+  categoryTransaction,
+  dateStart,
+  dateEnd,
+) {
+  const params = new URLSearchParams({
+    description,
+    typeTransaction,
+    categoryTransaction,
+    dateStart,
+    dateEnd,
+  });
+
+  try {
+    const response = await fetch(`/api/transactions?${params}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const data = await response.json();
+    data.forEach((element) => {
+      console.log(element);
+    });
+  } catch (err) {
+    console.error("Erro ao buscar transações" + err);
+  }
+}

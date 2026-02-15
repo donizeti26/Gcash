@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import {
+  searchTransactionsController,
   createTransactionController,
   editTransactionsController,
   updateTransactionsController,
@@ -14,6 +15,8 @@ import {
 } from "../../controllers/transaction/index.js";
 
 const router = Router();
+
+router.get("/", searchTransactionsController);
 
 /* REPORTS - Relatórios */
 router.get("/reports/", reportsController);

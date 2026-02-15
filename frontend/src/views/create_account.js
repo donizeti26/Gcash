@@ -138,4 +138,8 @@ export function renderCreateAccount() {
         alert(err.error || "Error ao criar usuário");
       }
     });
+
+  document.getElementById("button_back_login").addEventListener("click", () => {
+    navigate("/login");
+  });
 }

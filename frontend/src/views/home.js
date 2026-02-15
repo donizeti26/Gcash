@@ -1,6 +1,8 @@
 import "../css/style.css";
 
 import { renderFormTransaction } from "./form_transaction.js";
+
+import { getParamsForSearch } from "../script/utils/index.search.js";
 import {
   closeModal,
   setupModalGlobalListeners,
@@ -155,55 +157,63 @@ export function renderHome() {
       </div>
 
       <main id="other_body">
-        <div id="search_filters">
-          <div class="search_item">
-            <label for="search_input">Buscar</label>
-            <input
-              type="search"
-              class="input_search"
-              id="search_input"
-              placeholder="Buscar por descrição..."
-            />
-          </div>
-          <div class="search_item">
-            <label for="search_description">Tipo</label>
-            <select class="input_search" type="" id="search_description">
-              <option value="all" selected>Todos os tipos...</option>
-              <option value="expense">Despesa</option>
-              <option value="revenue">Receita</option>
-            </select>
-          </div>
-          <div class="search_item">
-            <label for="search_category">Categoria</label>
-            <select type="" class="input_search" id="search_category">
-              <option value="all" selected="">Todas as categorias...</option>
-            </select>
-          </div>
-          <!--Calendário do input inicial-->
+        <form id="form_search">
+          <div id="search_filters">
+            <div class="search_item">
+              <label for="search_input">Buscar</label>
+              <input
+                type="search"
+                class="input_search"
+                id="search_input"
+                placeholder="Buscar por descrição..."
+              />
+            </div>
+            <div class="search_item">
+              <label for="search_description">Tipo</label>
+              <select class="input_search" type="" id="search_description">
+                <option value="all" selected>Todos os tipos...</option>
+                <option value="expense">Despesa</option>
+                <option value="revenue">Receita</option>
+              </select>
+            </div>
+            <div class="search_item">
+              <label for="search_category">Categoria</label>
+              <select type="" class="input_search" id="search_category">
+                <option value="all" selected="">Todas as categorias...</option>
+              </select>
+            </div>
+            <!--Calendário do input inicial-->
 
-          <div class="search_item">
-            <label for="daterange">Período</label>
-            <input
-              type="text"
-              id="daterange"
-              placeholder="Selecione o período"
-            />
-          </div>
-        </div>
-        <div id="main_content_body">
-          <div id="resultResume"></div>
+            <div class="search_item">
+              <label for="daterange">Período</label>
+              <input
+                type="text"
+                id="daterange"
+                placeholder="Selecione o período"
+              />
+            </div>
 
-          <div id="group_cards"></div>
-          <div id="pagination">
-            <ul>
-              <li><</li>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>></li>
-            </ul>
           </div>
-        </div>
+                      <button id="button_search">
+
+                  Buscar
+                </button>
+                  </form>
+          <div id="main_content_body">
+            <div id="resultResume"></div>
+
+            <div id="group_cards"></div>
+            <div id="pagination">
+              <ul>
+                <li><</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>></li>
+              </ul>
+            </div>
+          </div>
+
       </main>
 
       <div id="modalContainer">
@@ -255,7 +265,7 @@ export function initHome() {
   setupModalGlobalListeners();
   setupHomeButtons();
   showLoading();
-
+  getParamsForSearch();
   const current = getCurrentMonthYear();
   if (current) {
     LoadExpenses(current.monthIndex, current.yearIndex);
@@ -455,6 +465,8 @@ export async function initSearchArea() {
     listCategories.forEach((cat) => {
       const item = document.createElement("option");
       item.innerHTML = `${cat.name}`;
+      item.value = `${cat.category_id}`;
+
       if (InputCategory) {
         InputCategory.appendChild(item);
       }
@@ -469,6 +481,7 @@ export async function initSearchArea() {
     listCategories.forEach((cat) => {
       const item = document.createElement("option");
       item.innerHTML = `${cat.name}`;
+      item.value = `${cat.category_id}`;
       if (InputCategory) {
         InputCategory.appendChild(item);
       }

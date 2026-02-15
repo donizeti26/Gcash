@@ -55,10 +55,13 @@ export function renderLogin() {
               </div>
               <div id="groupButtons">
                 <button id="loginButton">Entrar</button>
-                <button id="singInButton">Criar conta</button>
+
               </div>
             </div>
           </form>
+          <div id="createAccountDiv">
+                          <button id="createAccountButton">Criar conta</button>
+          </div>
         </div>
       </div>
     </main>`;
@@ -87,4 +90,10 @@ export function renderLogin() {
       alert(data.error || "Login inválido");
     }
   });
+
+  document
+    .getElementById("createAccountButton")
+    .addEventListener("click", () => {
+      navigate("/create_account");
+    });
 }

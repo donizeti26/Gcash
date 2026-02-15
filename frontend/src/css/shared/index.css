@@ -7,7 +7,10 @@
   padding-top: 1rem;
   gap: 1rem;
 }
-
+#form_search {
+  display: flex;
+  gap: 1rem;
+}
 #user {
   display: flex;
   justify-content: space-evenly;
@@ -159,6 +162,7 @@ button,
 
 #search_filters {
   display: flex;
+  width: 92%;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;

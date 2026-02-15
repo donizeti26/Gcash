@@ -1,8 +1,39 @@
 import {
+  searchTransactions,
   getTransactions,
   consultCategory,
   consultStatus,
 } from "../../models/transaction/index.js";
+
+export async function searchTransactionsController(req, res) {
+  try {
+    const {
+      description,
+      typeTransaction,
+      categoryTransaction,
+      dateStart,
+      dateEnd,
+    } = req.query;
+
+    if (!typeTransaction || !categoryTransaction || !dateStart || !dateEnd) {
+      return res
+        .status(400)
+        .json({ message: "Preencher campos necessários para pesquisa" });
+    }
+    const data = await searchTransactions(
+      description,
+      typeTransaction,
+      categoryTransaction,
+      dateStart,
+      dateEnd,
+    );
+
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+}
 
 export async function reportsController(req, res) {
   try {
