@@ -7,20 +7,54 @@ export async function searchTransactions(
   dateStart,
   dateEnd,
 ) {
-  const result = await pool.query(
-    `
-SELECT * 
-FROM transactions as t
-INNER JOIN categories AS c 
-  ON c.category_id = t.category_id 
-WHERE unaccent(lower(t.description)) 
-      LIKE unaccent(lower('%' || $1 || '%'))
-  AND c.type = $2
-  AND c.category_id = $3
-  AND t.due_date >= $4
-  AND t.due_date < ($5::date + INTERVAL '1 day')`,
-    [description, typeTransaction, categoryTransaction, dateStart, dateEnd],
-  );
+  let query = `
+    SELECT 
+      t.*,
+      to_char(t.due_date, 'DD/MM/YYYY') as due_date,
+      c.*
+    FROM transactions t
+    INNER JOIN categories c 
+      ON c.category_id = t.category_id
+    WHERE 1=1
+  `;
+
+  const values = [];
+  let index = 1;
+
+  if (description) {
+    query += `
+      AND unaccent(lower(t.description))
+      LIKE unaccent(lower('%' || $${index} || '%'))
+    `;
+    values.push(description);
+    index++;
+  }
+
+  if (typeTransaction && typeTransaction !== "all") {
+    query += ` AND c.type = $${index}`;
+    values.push(typeTransaction);
+    index++;
+  }
+
+  if (categoryTransaction && categoryTransaction !== "all") {
+    query += ` AND c.category_id = $${index}`;
+    values.push(categoryTransaction);
+    index++;
+  }
+
+  if (dateStart) {
+    query += ` AND t.due_date >= $${index}`;
+    values.push(dateStart);
+    index++;
+  }
+
+  if (dateEnd) {
+    query += ` AND t.due_date < ($${index}::date + INTERVAL '1 day')`;
+    values.push(dateEnd);
+    index++;
+  }
+
+  const result = await pool.query(query, values);
   return result.rows;
 }
 

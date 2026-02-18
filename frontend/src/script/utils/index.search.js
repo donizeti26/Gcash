@@ -1,3 +1,5 @@
+import { renderCards } from "./sharedUtils.js";
+
 export async function getParamsForSearch() {
   const formSearchIndex = document
     .getElementById("form_search")
@@ -47,9 +49,15 @@ async function searchWithParams(
       },
     });
     const data = await response.json();
-    data.forEach((element) => {
-      console.log(element);
-    });
+    console.log("RETORNO COMPLETO:", data);
+    console.log("TIPO:", typeof data);
+    console.log("É array?", Array.isArray(data));
+    const group_cards = document.getElementById("group_cards");
+
+    if (group_cards) {
+      group_cards.innerHTML = "";
+    }
+    renderCards(data);
   } catch (err) {
     console.error("Erro ao buscar transações" + err);
   }

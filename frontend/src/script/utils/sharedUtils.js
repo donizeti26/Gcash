@@ -37,42 +37,48 @@ export async function LoadExpenses(monthIndex, yearIndex) {
       group_cards.innerHTML = "";
     }
 
-    console.log("★★" + transactions.length);
-    console.log("★★" + transactions);
+    renderCards(transactions);
+  } catch (err) {
+    console.error("Erro ao carregar Transações no Index", err);
+  } finally {
+    hideLoading();
+  }
+}
 
-    transactions.forEach((cat) => {
-      const item = document.createElement("article");
+export function renderCards(transactions) {
+  transactions.forEach((cat) => {
+    const item = document.createElement("article");
 
-      item.classList.add("card_pay");
+    item.classList.add("card_pay");
 
-      const typeCategory = cat.type == "revenue" ? "Receita" : "Despesa";
-      let convertAmount;
+    const typeCategory = cat.type == "revenue" ? "Receita" : "Despesa";
+    let convertAmount;
 
-      if (cat.type == "expense") {
-        convertAmount = Number(cat.amount)
-          .toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })
-          .replace("-R$", "- R$");
-      } else {
-        convertAmount =
-          "+ " +
-          Number(cat.amount).toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          });
-      }
-      let statusTransaction;
-      if (cat.status == "paid") {
-        statusTransaction = "Pago";
-      } else if (cat.status == "pending") {
-        statusTransaction = "Pendente";
-      } else {
-        statusTransaction = "Receita";
-      }
+    if (cat.type == "expense") {
+      convertAmount = Number(cat.amount)
+        .toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        })
+        .replace("-R$", "- R$");
+    } else {
+      convertAmount =
+        "+ " +
+        Number(cat.amount).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+    }
+    let statusTransaction;
+    if (cat.status == "paid") {
+      statusTransaction = "Pago";
+    } else if (cat.status == "pending") {
+      statusTransaction = "Pendente";
+    } else {
+      statusTransaction = "Receita";
+    }
 
-      item.innerHTML = `
+    item.innerHTML = `
       <div class="title_date">
         <strong class="title_category">${cat.name}</strong>
         <p id="dueDate${cat.transaction_id}"></p>
@@ -118,64 +124,58 @@ edit_document
       </div>
 
 `;
+    const id = cat.transaction_id;
+    renderTransactionButton(id, item);
+    const iconSpan = item.querySelector(`#icon_${cat.transaction_id}`);
+    const circle = item.querySelector(`#circle_${cat.transaction_id}`);
 
-      async function renderTransactionButton(id) {
-        const groupButton = item.querySelector(".group_button_transactions");
-        const buttonPay = document.createElement("button");
-        buttonPay.id = `transaction_${cat.transaction_id}`;
-        buttonPay.dataset.id = cat.transaction_id;
-        const res = await fetch(`/api/transactions/${id}/status`);
+    if (iconSpan) {
+      ("");
+      iconSpan.style.backgroundColor = cat.color;
+    }
+    if (circle && cat.status === "paid") {
+      circle.classList.add("circle_paid");
+    } else if (circle && cat.status === "pending") {
+      circle.classList.add("circle_pending");
+    } else {
+      circle.classList.add("circle_revenue");
+    }
 
-        const statusData = await res.json();
-        const statusString = statusData.status || statusData;
-        if (statusString == "paid") {
-          buttonPay.classList.add(
-            "button_set_status",
-            "button_set_status_pending",
-          );
-          buttonPay.innerHTML = `<span class="material-symbols-outlined">
+    if (group_cards) {
+      group_cards.appendChild(item);
+    }
+
+    IsExpired(cat.due_date, cat.transaction_id, cat.type);
+  });
+}
+
+async function renderTransactionButton(id, item) {
+  const groupButton = item.querySelector(".group_button_transactions");
+  const buttonPay = document.createElement("button");
+  buttonPay.id = `transaction_${id}`;
+  buttonPay.dataset.id = id;
+  const res = await fetch(`/api/transactions/${id}/status`);
+
+  const statusData = await res.json();
+  const statusString = statusData.status || statusData;
+  if (statusString == "paid") {
+    buttonPay.classList.add("button_set_status", "button_set_status_pending");
+    buttonPay.innerHTML = `<span class="material-symbols-outlined">
 credit_card_off
 </span>`;
-        } else {
-          buttonPay.classList.add(
-            "button_set_status",
-            "button_set_status_paid",
-          );
-          buttonPay.innerHTML = `<span class="material-symbols-outlined">
+  } else {
+    buttonPay.classList.add("button_set_status", "button_set_status_paid");
+    buttonPay.innerHTML = `<span class="material-symbols-outlined">
 credit_score
 </span>`;
-        }
-        groupButton.appendChild(buttonPay);
-      }
-      renderTransactionButton(cat.transaction_id);
-      const iconSpan = item.querySelector(`#icon_${cat.transaction_id}`);
-      const circle = item.querySelector(`#circle_${cat.transaction_id}`);
-
-      if (iconSpan) {
-        ("");
-        iconSpan.style.backgroundColor = cat.color;
-      }
-      if (circle && cat.status === "paid") {
-        circle.classList.add("circle_paid");
-      } else if (circle && cat.status === "pending") {
-        circle.classList.add("circle_pending");
-      } else {
-        circle.classList.add("circle_revenue");
-      }
-
-      if (group_cards) {
-        group_cards.appendChild(item);
-      }
-      IsExpired(cat.due_date, cat.transaction_id, cat.type);
-    });
-  } catch (err) {
-    console.error("Erro ao carregar Transações no Index", err);
-  } finally {
-    hideLoading();
   }
+  groupButton.appendChild(buttonPay);
 }
 
 export function IsExpired(dueDate, id, type) {
+  console.log("★★");
+  console.log(dueDate);
+
   const [dia, mes, ano] = dueDate.split("/").map(Number);
   const formattedDueDate = new Date(ano, mes - 1, dia).getTime();
 
@@ -185,7 +185,7 @@ export function IsExpired(dueDate, id, type) {
   if (type == "expense") {
     if (formattedDueDate < agora) {
       elementDueDate.classList.add("due_date_false");
-      elementDueDate.textContent = `Data de vencimento: ${dueDate}`;
+      elementDueDate.textContent = `Data de vencimento: ${dueDate} `;
     } else {
       elementDueDate.classList.add("due_date_true");
       elementDueDate.textContent = `Data de vencimento: ${dueDate}`;
