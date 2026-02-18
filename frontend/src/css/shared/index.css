@@ -48,6 +48,13 @@ button,
 .text_card {
   color: #ffffff6b;
 }
+
+#result_search {
+  text-align: center;
+  color: var(--white-900);
+  font-size: 1rem;
+  padding: 24%;
+}
 #group_total_resume {
   display: flex;
   justify-content: center;

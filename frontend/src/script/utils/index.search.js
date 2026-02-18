@@ -50,6 +50,8 @@ async function searchWithParams(
     });
     const data = await response.json();
     console.log("RETORNO COMPLETO:", data);
+    console.log("TOTAL:", data.length);
+
     console.log("TIPO:", typeof data);
     console.log("É array?", Array.isArray(data));
     const group_cards = document.getElementById("group_cards");
@@ -58,7 +60,30 @@ async function searchWithParams(
       group_cards.innerHTML = "";
     }
     renderCards(data);
+    setNumCards(data.length);
+
+    if (data.length == 0) {
+      const groupCards = document.getElementById("group_cards");
+      const resultSearch = document.createElement("p");
+      groupCards.innerHTML = "";
+      resultSearch.id = "result_search";
+      resultSearch.textContent = `Nenhum resultado específico encontrado...`;
+      groupCards.appendChild(resultSearch);
+    }
   } catch (err) {
     console.error("Erro ao buscar transações" + err);
   }
+}
+
+function setNumCards(total) {
+  const totalTransactions = document.getElementById("resultResume");
+  const totalResult = document.createElement("p");
+
+  if (total == 1) {
+    totalResult.textContent = `${total} resultado`;
+  } else {
+    totalResult.textContent = `${total} resultados`;
+  }
+  totalTransactions.innerHTML = "";
+  totalTransactions.appendChild(totalResult);
 }
