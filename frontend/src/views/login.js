@@ -16,7 +16,8 @@ export function renderLogin() {
             <label for="inputEmail">
               <div id="divInputEmail">
                 <p>Endereço de email:</p>
-                <input type="email" class="input_login" name="inputEmail" id="inputEmail" placeholder="seuemail@exemplo.com" 
+                <input type="email" class="input_login" name="inputEmail" id="inputEmail" placeholder="seuemail@exemplo.com"
+                 autocomplete="username" 
                 required/>
               </div>
             </label>

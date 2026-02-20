@@ -14,6 +14,36 @@
   transform: scale(1.1);
 }
 
+#btn_clear {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--button-color-red);
+  transition: transform 0.3s ease-in-out;
+  color: #ffffff;
+  cursor: pointer;
+  gap: 0.3rem;
+}
+#btn_clear:hover {
+  transform: scale(1.1);
+}
+#btn_logout {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--button-color-yellow);
+  transition: transform 0.3s ease-in-out;
+  color: #ffffff;
+  cursor: pointer;
+  gap: 0.3rem;
+}
+#btn_logout:hover {
+  transform: scale(1.1);
+}
 .button_month {
   background: none;
   border: none;

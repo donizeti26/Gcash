@@ -7,7 +7,7 @@ import {
 
 export async function searchTransactionsController(req, res) {
   try {
-    const {
+    let {
       description,
       typeTransaction,
       categoryTransaction,
@@ -15,11 +15,13 @@ export async function searchTransactionsController(req, res) {
       dateEnd,
     } = req.query;
 
-    if (!typeTransaction || !categoryTransaction || !dateStart || !dateEnd) {
-      return res
-        .status(400)
-        .json({ message: "Preencher campos necessários para pesquisa" });
-    }
+    description = description || null;
+    typeTransaction = typeTransaction === "all" ? null : typeTransaction;
+    categoryTransaction =
+      categoryTransaction === "all" ? null : categoryTransaction;
+    dateStart = dateStart || null;
+    dateEnd = dateEnd || null;
+
     const data = await searchTransactions(
       description,
       typeTransaction,

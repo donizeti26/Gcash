@@ -60,7 +60,15 @@ export function renderHome() {
       <div id="menu_mobile"></div>
       <div id="left_side">
         <div id="user">
-          <p>Claudio CTE 01</p>
+          <p id="user_name">Claudio CTE 01</p>
+          <button id="btn_logout">
+          SAIR
+
+          <span class="material-symbols-outlined">
+          logout
+          </span>
+          
+          </button>
         </div>
         <article id="resume_month">
           <div id="aside_menu">
@@ -194,10 +202,11 @@ export function renderHome() {
             </div>
 
           </div>
-                      <button id="button_search">
+          <div id="group_buttons_form_search">
+          <button id="button_search" type="submit">Buscar</button>
+          <button id="btn_clear" type="button">Limpar</button>
 
-                  Buscar
-                </button>
+          </div>
                   </form>
           <div id="main_content_body">
             <div id="resultResume"></div>
@@ -285,6 +294,9 @@ function setupHomeButtons() {
   const btnExpense = document.getElementById("btn_expense");
   const btnRevenue = document.getElementById("btn_revenue");
   const btnCategory = document.getElementById("btn_category");
+  const btnClear = document.getElementById("btn_clear");
+  const btnLogout = document.getElementById("btn_logout");
+
   if (btnExpense) {
     btnExpense.addEventListener("click", async () => {
       await renderFormTransaction();
@@ -333,6 +345,34 @@ function setupHomeButtons() {
         setFormatMoney(event);
       });
     });
+  }
+  if (btnClear) {
+    btnClear.addEventListener("click", async () => {
+      const searchInput = document.getElementById("search_input");
+      const searchDescription = document.getElementById("search_description");
+      const searchCategory = document.getElementById("search_category");
+      const periodString = document.getElementById("daterange");
+
+      searchInput.value = "";
+      searchDescription.value = "all";
+      searchCategory.value = "all";
+      periodString.value = "";
+
+      const data = new Date();
+      const month = data.getMonth();
+      const year = data.getFullYear();
+      console.log(month, year + " VALORES DE ANOS");
+      LoadExpenses(month, year);
+      insertCountTransaction(month);
+    });
+
+    if (btnLogout) {
+      btnLogout.addEventListener("click", async () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+        console.log("aaa");
+      });
+    }
   }
 }
 

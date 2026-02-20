@@ -6,13 +6,25 @@ import {
 } from "../../models/category/index.js";
 
 export async function registerCategoryController(req, res) {
-  const { name_category, color_selector, icon_selected, category_selected } =
-    req.body;
+  const {
+    name_category,
+    color_selector,
+    description,
+    icon_selected,
+    category_selected,
+  } = req.body;
   try {
-    if (name_category && color_selector && icon_selected && category_selected) {
+    if (
+      name_category &&
+      description &&
+      color_selector &&
+      icon_selected &&
+      category_selected
+    ) {
       const category = await registerCategory({
         name_category,
         color_selector,
+        description,
         icon_selected,
         category_selected,
       });
@@ -57,8 +69,13 @@ export async function updateCategoryController(req, res) {
     console.log("REQ BODY:", req.body);
 
     const { category_id } = req.params;
-    const { nameCategory, optionNewCategory, colorSelector, selectedIcon } =
-      req.body;
+    const {
+      nameCategory,
+      optionNewCategory,
+      colorSelector,
+      selectedIcon,
+      description,
+    } = req.body;
 
     if (!category_id) {
       return res.status(400).json({ error: "category_id é obrigatório" });
@@ -69,6 +86,7 @@ export async function updateCategoryController(req, res) {
       optionNewCategory,
       colorSelector,
       selectedIcon,
+      description,
       category_id,
     );
 

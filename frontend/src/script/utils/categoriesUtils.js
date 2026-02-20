@@ -280,6 +280,7 @@ export function sendCategoryNewCategory() {
 
       const name_category = document.getElementById("name_category").value;
       const color_selector = document.getElementById("color_selector").value;
+      const description = document.getElementById("description").value;
       const icon_selected = document.getElementById("selected_icon").value;
       const option_new_category = document.getElementById(
         "option_new_category",
@@ -294,6 +295,7 @@ export function sendCategoryNewCategory() {
             name_category,
             color_selector,
             icon_selected,
+            description,
             category_selected,
           }),
         });
@@ -334,7 +336,7 @@ export async function loadCategories() {
               </div>
               <div>
               <strong> ${cat.name}</strong>
-              <p class = "description_category">A descrição da Categoria aqui</p>
+              <p class = "description_category">${cat.description}</p>
               </div>
             </div>
           <div class="edit_category">
@@ -363,6 +365,7 @@ export async function fillCategoryForm(category) {
   const formNewCategory = document.getElementById("form_new_category");
   const titleModal = formNewCategory.querySelector("#title_modal");
   const nameCategory = formNewCategory.querySelector("#name_category");
+  const description = formNewCategory.querySelector("#description");
   const optionNewCategory = formNewCategory.querySelector(
     "#option_new_category",
   );
@@ -372,6 +375,7 @@ export async function fillCategoryForm(category) {
 
   titleModal.textContent = "Editando categoria";
   nameCategory.value = category.name;
+  description.value = category.description;
   optionNewCategory.value = category.type;
   colorSelector.value = category.color;
   selectedIcon.value = category.icon;
@@ -447,7 +451,7 @@ export async function sendCategoryEditions(category_id) {
     e.preventDefault();
 
     const nameCategory = document.getElementById("name_category").value;
-
+    const description = document.getElementById("description").value;
     const optionNewCategory = document.getElementById(
       "option_new_category",
     ).value;
@@ -464,6 +468,7 @@ export async function sendCategoryEditions(category_id) {
           optionNewCategory,
           colorSelector,
           selectedIcon,
+          description,
         }),
       });
     } catch (err) {

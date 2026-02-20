@@ -34,13 +34,14 @@ async function searchWithParams(
   dateStart,
   dateEnd,
 ) {
-  const params = new URLSearchParams({
-    description,
-    typeTransaction,
-    categoryTransaction,
-    dateStart,
-    dateEnd,
-  });
+  const params = new URLSearchParams();
+
+  if (description) params.append("description", description);
+  if (typeTransaction) params.append("typeTransaction", typeTransaction);
+  if (categoryTransaction)
+    params.append("categoryTransaction", categoryTransaction);
+  if (dateStart) params.append("dateStart", dateStart);
+  if (dateEnd) params.append("dateEnd", dateEnd);
 
   try {
     const response = await fetch(`/api/transactions?${params}`, {
