@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { findUserById } from "../../models/auth/index.js";
 
 import jwt from "jsonwebtoken";
 
@@ -76,5 +77,25 @@ export async function createUserController(req, res) {
   } catch (err) {
     console.error("Erro interno", err);
     res.status(500).json({ error: err.message });
+  }
+}
+
+export async function getMeController(req, res) {
+  const userId = req.userId;
+
+  try {
+    const user = await findUserById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    res.json({
+      user_id: user.user_id,
+      user_name: user.user_name,
+      email: user.email,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar usuário" });
   }
 }

@@ -116,11 +116,13 @@ export async function SetStatusInTransactions(id) {
     const currentStatus = await consultStatus(id);
     const statusString = currentStatus.status || currentStatus;
     const newStatus = statusString === "paid" ? "pending" : "paid";
+    const token = localStorage.getItem("token");
 
     const response = await fetch(`/api/transactions/${id}/statusUpdate`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ status: newStatus }),
     });
@@ -136,7 +138,13 @@ export async function SetStatusInTransactions(id) {
 }
 export async function consultStatus(id) {
   try {
-    const response = await fetch(`/api/transactions/${id}/status`);
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`/api/transactions/${id}/status`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const status = await response.json(); // status agora é diretamente a string "paid" ou "pending"
 
     console.log("Status da transação", id, "é", status);
@@ -149,7 +157,13 @@ export async function consultStatus(id) {
 
 export async function searchLoadCategories(typeValue) {
   try {
-    const response = await fetch(`/api/categories?type=${typeValue}`);
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`/api/categories?type=${typeValue}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const listCategory = await response.json();
     return listCategory;
   } catch (err) {

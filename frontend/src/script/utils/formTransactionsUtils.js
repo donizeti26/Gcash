@@ -68,20 +68,33 @@ export async function initTransactionForm(type) {
       const status = statusElement?.value || null;
 
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
+      amountNumber = parseFloat(amountNumber);
 
-      if (type == "expense") {
-        amountNumber = parseFloat(amountNumber) * -1;
-      } else {
-        amountNumber = parseFloat(amountNumber);
-      }
-      if (type == "expense" && amountNumber > 0) {
-        alert("Valor não pode ser negativo");
+      if (isNaN(amountNumber)) {
+        alert("Valor inválido");
         return;
       }
+      if (!due_date) {
+        alert("Data de vencimento é obrigatória");
+        return;
+      }
+      console.log("Due Date enviada:", due_date);
+      if (type === "expense") {
+        if (amountNumber <= 0) {
+          alert("O valor deve ser maior que zero");
+          return;
+        }
+        amountNumber *= -1;
+      }
       try {
+        const token = localStorage.getItem("token");
+
         const response = await fetch("/api/transactions/", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({
             category_id,
             payment_method_id,
@@ -210,9 +223,15 @@ export async function sumAmountYear(monthIndex, yearIndex) {
 //////////////////////////////////////////
 export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
   const month = monthIndex + 1;
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `/api/transactions/reports?month=${month}&year=${yearIndex}&type=revenue`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     const transactionsSum = await response.json();
 
@@ -236,8 +255,16 @@ export async function getTransactionsTotal(monthIndex, yearIndex, type) {
   try {
     console.log("Month no front:", monthIndex);
     console.log("Year no front:", yearIndex);
+
+    const token = localStorage.getItem("token");
+
     const response = await fetch(
       `/api/transactions/reports?month=${monthIndex}&year=${yearIndex}&type=${type}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
 
     const transactionsSumPaid = await response.json();
@@ -290,8 +317,14 @@ export async function sumAtualMonthPending(monthIndex, yearIndex) {
 
 export async function getResume(month, year, type) {
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `/api/transactions/reports?month=${month}&year=${year}&type=${type}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
 
     const totalResumeMonth = await response.json();

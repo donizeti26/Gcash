@@ -19,6 +19,8 @@ import {
 import { LoadExpenses, setFormatMoney } from "../script/utils/sharedUtils.js";
 import { setupCalendar, setAtualMonth } from "../script/utils/calendarUtils.js";
 
+import { setNameUser } from "../script/utils/auth.js";
+
 import {
   LoadDataAndEditTransaction,
   sendTransactionsEditions,
@@ -269,7 +271,7 @@ export function initHome() {
     element: document.getElementById("daterange"),
     singleMode: false,
   });
-
+  setNameUser();
   setupCalendar();
   setupModalGlobalListeners();
   setupHomeButtons();
@@ -389,9 +391,12 @@ document.addEventListener("click", async (e) => {
   const buttonEdit = e.target.closest(".edit_transaction");
   if (buttonEdit) {
     const id = buttonEdit.dataset.id; // pegar direto do botão
+    const token = localStorage.getItem("token");
     console.log("O botão clicado foi da transação", id);
 
-    const categoryModal = await fetch(`/api/transactions/${id}/category`);
+    const categoryModal = await fetch(`/api/transactions/${id}/category`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const category = await categoryModal.json();
 
     showLoading();
@@ -402,7 +407,12 @@ document.addEventListener("click", async (e) => {
     document.getElementById("form_card").dataset.formType = id;
 
     try {
-      const response = await fetch(`/api/transactions/${id}`);
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/transactions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) {
         console.error("Erro ao buscar transação:", response.status);
         return;
@@ -454,9 +464,13 @@ document.addEventListener("click", async (e) => {
     const id = buttonRemove.dataset.id;
 
     try {
+      const token = localStorage.getItem("token");
       showLoading();
       const response = await fetch(`/api/transactions/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = await response.json();

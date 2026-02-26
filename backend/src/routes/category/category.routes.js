@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { authMiddleware } from "../../middlewares/auth.middlewares.js";
 import {
   registerCategoryController,
   getCategoriesController,
@@ -29,7 +29,7 @@ const router = Router();
  *       500:
  *         description: Erro ao cadastrar categoria!
  */
-router.post("/", registerCategoryController);
+router.post("/", authMiddleware, registerCategoryController);
 
 /**
  * @swagger
@@ -66,7 +66,7 @@ router.post("/", registerCategoryController);
  *       500:
  *         description: Erro ao atualizar Categoria
  */
-router.put("/:category_id", updateCategoryController);
+router.put("/:category_id", authMiddleware, updateCategoryController);
 
 /**
  * @swagger
@@ -91,7 +91,7 @@ router.put("/:category_id", updateCategoryController);
  *               items:
  *                 $ref: '#/components/schemas/Category'
  */
-router.get("/", getCategoriesController);
+router.get("/", authMiddleware, getCategoriesController);
 
 /**
  * @swagger
@@ -115,7 +115,7 @@ router.get("/", getCategoriesController);
  *       500:
  *         description: Erro ao buscar categorias
  */
-router.get("/category/:id", getSelectedCategoryController);
+router.get("/category/:id", authMiddleware, getSelectedCategoryController);
 
 /**
  * @swagger
@@ -133,7 +133,7 @@ router.get("/category/:id", getSelectedCategoryController);
  *       200:
  *         description: Categoria removida com sucesso
  */
-router.delete("/:id", deleteCategoryController);
+router.delete("/:id", authMiddleware, deleteCategoryController);
 
-router.get("/reports/count/", countController);
+router.get("/reports/count/", authMiddleware, countController);
 export default router;

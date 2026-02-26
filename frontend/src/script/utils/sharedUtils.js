@@ -26,8 +26,14 @@ export async function LoadExpenses(monthIndex, yearIndex) {
   const monthForApi = monthIndex + 1;
 
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `/api/transactions/${monthForApi}/${yearIndex}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     const transactions = await response.json();
     console.log(transactions[0]);
@@ -46,6 +52,13 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 }
 
 export function renderCards(transactions) {
+  if (transactions.length == 0 || transactions.length == null) {
+    const groupCards = document.getElementById("group_cards");
+    groupCards.innerHTML = `<p id="result_search">
+    <img id="img_cant_find" src="/images/cant_find.svg">
+    Nenhum resultado específico encontrado...</p>`;
+    console.log(transactions.length + "AQUI MEU CHAAPAAAAAAAAAAA");
+  }
   transactions.forEach((cat) => {
     const item = document.createElement("article");
 
@@ -154,20 +167,30 @@ async function renderTransactionButton(id, item) {
   const buttonPay = document.createElement("button");
   buttonPay.id = `transaction_${id}`;
   buttonPay.dataset.id = id;
-  const res = await fetch(`/api/transactions/${id}/status`);
+  try {
+    const token = localStorage.getItem("token");
 
-  const statusData = await res.json();
-  const statusString = statusData.status || statusData;
-  if (statusString == "paid") {
-    buttonPay.classList.add("button_set_status", "button_set_status_pending");
-    buttonPay.innerHTML = `<span class="material-symbols-outlined">
+    const res = await fetch(`/api/transactions/${id}/status`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const statusData = await res.json();
+    const statusString = statusData.status || statusData;
+    if (statusString == "paid") {
+      buttonPay.classList.add("button_set_status", "button_set_status_pending");
+      buttonPay.innerHTML = `<span class="material-symbols-outlined">
 credit_card_off
 </span>`;
-  } else {
-    buttonPay.classList.add("button_set_status", "button_set_status_paid");
-    buttonPay.innerHTML = `<span class="material-symbols-outlined">
+    } else {
+      buttonPay.classList.add("button_set_status", "button_set_status_paid");
+      buttonPay.innerHTML = `<span class="material-symbols-outlined">
 credit_score
 </span>`;
+    }
+  } catch (err) {
+    console.error("Erro ao renderizar botao status", err);
   }
   groupButton.appendChild(buttonPay);
 }

@@ -6,38 +6,20 @@ export async function registerCategory({
   description,
   icon_selected,
   category_selected,
+  userId,
 }) {
   const result = await pool.query(
-    "INSERT INTO categories(name, color, icon, type, description) VALUES($1, $2, $3, $4, $5) RETURNING*",
+    "INSERT INTO categories(name, color, icon, type, description,user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING*",
     [
       name_category,
       color_selector,
       icon_selected,
       category_selected,
       description,
+      userId,
     ],
   );
   return result.rows[0];
-}
-
-export async function getCategories(type) {
-  if (type == "all") {
-    const result = await pool.query("SELECT * FROM categories ORDER BY name");
-    return result.rows;
-  }
-  if (type) {
-    const result = await pool.query(
-      "SELECT * FROM categories WHERE type=$1 ORDER BY name",
-      [type],
-    );
-    return result.rows;
-  }
-}
-
-export async function deleteCategory(id) {
-  const query = "DELETE FROM categories WHERE category_id = $1";
-  const result = await pool.query(query, [id]);
-  return result.rowCount;
 }
 
 export async function updateCategory(
@@ -47,6 +29,7 @@ export async function updateCategory(
   selectedIcon,
   description,
   category_id,
+  userId,
 ) {
   await pool.query(
     `UPDATE categories
@@ -55,7 +38,7 @@ export async function updateCategory(
       color = $3,
       icon=$4,
       description = $5
-   where category_id = $6`,
+   WHERE category_id = $6 AND user_id = $7`,
     [
       nameCategory,
       optionNewCategory,
@@ -63,7 +46,35 @@ export async function updateCategory(
       selectedIcon,
       description,
       category_id,
+      userId,
     ],
   );
   return { message: "Categoria atualizado" };
+}
+
+export async function getCategories(type, userId) {
+  if (type == "all") {
+    const result = await pool.query(
+      `SELECT * FROM categories 
+WHERE user_id = $1 
+ORDER BY name;`,
+      [userId],
+    );
+    return result.rows;
+  }
+  if (type) {
+    const result = await pool.query(
+      `SELECT * FROM categories 
+WHERE type = $1 AND user_id = $2
+ORDER BY name;`,
+      [type, userId],
+    );
+    return result.rows;
+  }
+}
+
+export async function deleteCategory(id, userId) {
+  const query = "DELETE FROM categories WHERE category_id = $1 AND user_id=$2";
+  const result = await pool.query(query, [id, userId]);
+  return result.rowCount;
 }

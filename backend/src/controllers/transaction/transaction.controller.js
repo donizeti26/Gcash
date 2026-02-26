@@ -9,7 +9,28 @@ import {
 
 export async function createTransactionController(req, res) {
   try {
-    const data = await registerTransactions(req.body);
+    const userId = req.userId;
+
+    const {
+      category_id,
+      payment_method_id,
+      due_date,
+      amount,
+      description,
+      status,
+    } = req.body;
+    if (!due_date) {
+      throw new Error("due_date é obrigatório");
+    }
+    const data = await registerTransactions(
+      userId,
+      category_id,
+      payment_method_id,
+      due_date,
+      amount,
+      description,
+      status,
+    );
     res.status(201).json(data);
   } catch (err) {
     console.error("Erro ao cadastrar  transação", err);
@@ -19,13 +40,14 @@ export async function createTransactionController(req, res) {
 
 export async function editTransactionsController(req, res) {
   try {
+    const userId = req.userId;
     const { transaction_id } = req.params;
     if (!transaction_id) {
       return res.status(400).json({ error: "ID da transação não informado" });
     }
     console.log("ID recebido no controller:", transaction_id);
 
-    const data = await editTransactions(transaction_id);
+    const data = await editTransactions(transaction_id, userId);
 
     if (!data) {
       return res.status(404).json({ error: "Transação não encontrada" });
@@ -59,6 +81,8 @@ export async function updateTransactionsController(req, res) {
 async function updateByCategory(req, res) {
   const { transaction_id } = req.params;
 
+  const userId = req.userId;
+
   const {
     category_id,
     payment_method_id,
@@ -84,7 +108,7 @@ async function updateByCategory(req, res) {
     amount,
     description,
     status,
-    type,
+    userId,
   );
 
   return res.status(200).json({ message: "Atualizado com sucesso" });
@@ -93,7 +117,13 @@ async function updateByCategory(req, res) {
 async function updateSingleTransaction(req, res) {
   const { categoria_origem_id, categoria_destino_id } = req.body;
 
-  await updateTransactionsByCategory(categoria_origem_id, categoria_destino_id);
+  const userId = req.userId;
+
+  await updateTransactionsByCategory(
+    categoria_origem_id,
+    categoria_destino_id,
+    userId,
+  );
 
   return res.status(200).json({ message: "Atualizado com sucesso" });
 }
@@ -101,9 +131,11 @@ async function updateSingleTransaction(req, res) {
 export async function updateStatusController(req, res) {
   console.log("req.body:", req.body);
   try {
+    const userId = req.userId;
+
     const { transaction_id } = req.params; // vem da URL
     const { status } = req.body; // vem do corpo
-    const data = await updateStatus(transaction_id, status);
+    const data = await updateStatus(transaction_id, status, userId);
     console.log("Status atualizado com sucesso");
 
     res.status(200).json(data);
@@ -115,8 +147,9 @@ export async function updateStatusController(req, res) {
 
 export async function deleteTransactionsController(req, res) {
   try {
+    const userId = req.userId;
     const { transaction_id } = req.params;
-    const deletedCount = await deleteTransactions(transaction_id);
+    const deletedCount = await deleteTransactions(transaction_id, userId);
     if (deletedCount === 0) {
       return res.status(404).json({ message: "Transação não encontrada." });
     }

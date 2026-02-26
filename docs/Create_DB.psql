@@ -32,6 +32,14 @@ CREATE TABLE categories(
 );
 
 
+ALTER TABLE transactions
+ADD CONSTRAINT check_transaction_amount
+CHECK (
+  (type = 'expense' AND amount < 0)
+  OR
+  (type = 'income' AND amount > 0)
+);
+
 //Criando tabela de metodos de pagamento
 CREATE TABLE payment_methods(
 	payment_method_id SERIAL PRIMARY KEY,

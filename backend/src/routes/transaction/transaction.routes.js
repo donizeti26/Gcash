@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { authMiddleware } from "../../middlewares/auth.middlewares.js";
+
 import {
   searchTransactionsController,
   createTransactionController,
@@ -16,10 +18,10 @@ import {
 
 const router = Router();
 
-router.get("/", searchTransactionsController);
+router.get("/", authMiddleware, searchTransactionsController);
 
 /* REPORTS - Relatórios */
-router.get("/reports/", reportsController);
+router.get("/reports/", authMiddleware, reportsController);
 /**
  * @swagger
  * /api/reports:
@@ -78,7 +80,7 @@ router.get("/reports/", reportsController);
  */
 
 /*CORRIGIR DOCUMENTAÇÃO */
-router.get("/reports/count/", countTransactionsController);
+router.get("/reports/count/", authMiddleware, countTransactionsController);
 /**
  * @swagger
  * /api/transactions/reports/count:
@@ -119,7 +121,7 @@ router.get("/reports/count/", countTransactionsController);
  */
 
 /* QUERIES - Consultas específicas */
-router.get("/:transaction_id/status", consultStatusController);
+router.get("/:transaction_id/status", authMiddleware, consultStatusController);
 /**
  * @swagger
  * /api/transactions/{transaction_id}/status:
@@ -160,7 +162,11 @@ router.get("/:transaction_id/status", consultStatusController);
  *               $ref: '#/components/schemas/error_response.schema'
  */
 
-router.get("/:transaction_id/category", consultCategoryController);
+router.get(
+  "/:transaction_id/category",
+  authMiddleware,
+  consultCategoryController,
+);
 /**
  * @swagger
  * /api/transactions/{transaction_id}/category:
@@ -200,7 +206,7 @@ router.get("/:transaction_id/category", consultCategoryController);
  *             schema:
  *               $ref: '#/components/schemas/error_response.schema'
  */
-router.get("/:month/:year", getTransactionsController);
+router.get("/:month/:year", authMiddleware, getTransactionsController);
 
 /**
  * @swagger
@@ -248,7 +254,7 @@ router.get("/:month/:year", getTransactionsController);
  */
 
 /* CRUD */
-router.post("/", createTransactionController);
+router.post("/", authMiddleware, createTransactionController);
 /**
  * @swagger
  * /api/transactions:
@@ -273,7 +279,7 @@ router.post("/", createTransactionController);
  *         description: Erro ao cadastrar  transação
  */
 
-router.get("/:transaction_id", editTransactionsController);
+router.get("/:transaction_id", authMiddleware, editTransactionsController);
 /**
  * @swagger
  * /api/transactions/{transaction_id}:
@@ -298,7 +304,7 @@ router.get("/:transaction_id", editTransactionsController);
  *
  */
 
-router.put("/:transaction_id", updateTransactionsController);
+router.put("/:transaction_id", authMiddleware, updateTransactionsController);
 /**
  * @swagger
  * /api/transactions/{transaction_id}:
@@ -330,7 +336,11 @@ router.put("/:transaction_id", updateTransactionsController);
  *       500:
  *         description: Erro ao atualizar transação
  */
-router.patch("/:transaction_id/statusUpdate", updateStatusController);
+router.patch(
+  "/:transaction_id/statusUpdate",
+  authMiddleware,
+  updateStatusController,
+);
 
 /**
  * @swagger
@@ -363,7 +373,7 @@ router.patch("/:transaction_id/statusUpdate", updateStatusController);
  *         description: Erro ao alterar status
  */
 
-router.delete("/:transaction_id", deleteTransactionsController);
+router.delete("/:transaction_id", authMiddleware, deleteTransactionsController);
 
 /**
  * @swagger

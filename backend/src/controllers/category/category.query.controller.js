@@ -6,8 +6,9 @@ import {
 
 export async function getSelectedCategoryController(req, res) {
   try {
+    const userId = req.userId;
     const { id } = req.params;
-    const category = await getCategory(id);
+    const category = await getCategory(id, userId);
 
     if (!category) {
       return res.status(404).json({ message: "Categoria não encontrada" });
@@ -32,7 +33,8 @@ export async function countController(req, res) {
 
 async function countCategoryController(req, res) {
   try {
-    const data = await countCategories();
+    const userId = req.userId;
+    const data = await countCategories(userId);
     return res.status(200).json(data);
   } catch (error) {
     console.error("Erro ao contar Categorias : ", error);
@@ -42,7 +44,8 @@ async function countCategoryController(req, res) {
 
 async function countMoreFrequentController(req, res) {
   try {
-    const data = await countMoreFrequent();
+    const userId = req.userId;
+    const data = await countMoreFrequent(userId);
     return res.status(200).json(data);
   } catch (error) {
     console.error("Erro ao contar Categoria mais usada : ", error);

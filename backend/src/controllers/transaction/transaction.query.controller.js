@@ -7,6 +7,8 @@ import {
 
 export async function searchTransactionsController(req, res) {
   try {
+    const userId = req.userId;
+
     let {
       description,
       typeTransaction,
@@ -28,6 +30,7 @@ export async function searchTransactionsController(req, res) {
       categoryTransaction,
       dateStart,
       dateEnd,
+      userId,
     );
 
     res.json(data);
@@ -68,8 +71,9 @@ export async function reportsController(req, res) {
 
 export async function getTransactionsController(req, res) {
   try {
+    const userId = req.userId;
     const { month, year } = req.params;
-    const data = await getTransactions({ month, year });
+    const data = await getTransactions({ month, year, userId });
     res.json(data);
   } catch (err) {
     console.error("Erro ao buscar  transação");
@@ -79,12 +83,13 @@ export async function getTransactionsController(req, res) {
 
 export async function consultCategoryController(req, res) {
   try {
+    const userId = req.userId;
     const { transaction_id } = req.params;
     if (!transaction_id) {
       return res.status(400).json({ error: "ID da transação não informado" });
     }
 
-    const data = await consultCategory(transaction_id);
+    const data = await consultCategory(transaction_id, userId);
 
     return res.json({ data });
   } catch (err) {
@@ -94,8 +99,10 @@ export async function consultCategoryController(req, res) {
 }
 export async function consultStatusController(req, res) {
   try {
+    const userId = req.userId;
+
     const { transaction_id } = req.params;
-    const status = await consultStatus(transaction_id);
+    const status = await consultStatus(transaction_id, userId);
     res.json({ status });
   } catch (err) {
     console.error("Erro ao consultar status: ", err);

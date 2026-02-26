@@ -6,6 +6,7 @@ export async function searchTransactions(
   categoryTransaction,
   dateStart,
   dateEnd,
+  userId,
 ) {
   let query = `
     SELECT 
@@ -15,9 +16,11 @@ export async function searchTransactions(
     FROM transactions t
     INNER JOIN categories c 
       ON c.category_id = t.category_id
-    WHERE 1=1
+    WHERE 1=1 
   `;
-
+  if (!userId) {
+    throw new Error("UserId é obrigatório");
+  }
   const values = [];
   let index = 1;
 
@@ -29,6 +32,9 @@ export async function searchTransactions(
     values.push(description);
     index++;
   }
+  query += ` AND t.user_id = $${index}`;
+  values.push(userId);
+  index++;
 
   if (typeTransaction && typeTransaction !== "all") {
     query += ` AND c.type = $${index}`;
@@ -58,7 +64,7 @@ export async function searchTransactions(
   return result.rows;
 }
 
-export async function getTransactions({ month, year }) {
+export async function getTransactions({ month, year, userId }) {
   const result = await pool.query(
     `
 SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
@@ -77,29 +83,28 @@ from transactions AS t
 INNER JOIN categories
 AS c ON t.category_id = c.category_id
 INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id
-  WHERE EXTRACT(MONTH FROM due_date) = $1 and  EXTRACT(YEAR FROM due_date) = $2 ORDER BY c.name`,
-    [month, year],
+  WHERE EXTRACT(MONTH FROM due_date) = $1 and  EXTRACT(YEAR FROM due_date) = $2 AND t.user_id=$3 ORDER BY c.name`,
+    [month, year, userId],
   );
   return result.rows;
 }
 
-export async function consultCategory(transaction_id) {
+export async function consultCategory(transaction_id, userId) {
   const result = await pool.query(
     `SELECT c.type AS tipo
 FROM transactions AS t INNER JOIN  categories AS c
 ON t.category_id = c.category_id
-WHERE t.transaction_id = $1
+WHERE t.transaction_id = $1 AND t.user_id = $2
 `,
-    [transaction_id],
+    [transaction_id, userId],
   );
   return result.rows[0]?.tipo || null;
 }
 
-export async function consultStatus(transaction_id) {
+export async function consultStatus(transaction_id, userId) {
   const result = await pool.query(
-    `
-      SELECT status FROM transactions  WHERE transaction_id = $1`,
-    [transaction_id],
+    `SELECT status FROM transactions  WHERE transaction_id = $1 AND user_id=$2`,
+    [transaction_id, userId],
   );
 
   return result.rows[0]?.status || null;

@@ -99,9 +99,14 @@ export async function sendTransactionsEditions(type) {
       return;
     }
     try {
+      const token = localStorage.getItem("token");
+
       await fetch(`/api/transactions/${transaction_id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           transaction_id,
           category_id,
@@ -174,8 +179,14 @@ export function setupTitleTransactionForm(type) {
 
 export async function countTransaction(month) {
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `/api/transactions/reports/count?month=${month}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     const totalTransactions = await response.json();
     console.log("Total de transações: FDFDFD ", totalTransactions.total);

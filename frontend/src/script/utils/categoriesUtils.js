@@ -76,9 +76,14 @@ export async function openListCategory() {
     if (deleteButton) {
       const id = deleteButton.dataset.id;
       const category = await fetchCategory(id);
+      const token = localStorage.getItem("token");
 
       console.log(category.name, category.category_id);
-      const response = await fetch(`/api/transactions/reports/count?id=${id}`);
+      const response = await fetch(`/api/transactions/reports/count?id=${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       const totalTransactions = Number(data.total);
       const type = data.type;
@@ -137,10 +142,13 @@ async function updateCategoryOfTransactions(
   categoria_destino_id,
 ) {
   try {
+    const token = localStorage.getItem("token");
+
     await fetch("/api/transactions/bulk?action=change-category", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ categoria_origem_id, categoria_destino_id }),
     });
@@ -152,9 +160,12 @@ async function updateCategoryOfTransactions(
 async function deleteCategoryAllTransactions(id) {
   try {
     showLoading();
-
+    const token = localStorage.getItem("token");
     const response = await fetch(`/api/categories/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const data = await response.json();
@@ -288,9 +299,13 @@ export function sendCategoryNewCategory() {
       const category_selected = option_new_category.value;
 
       try {
+        const token = localStorage.getItem("token");
         const response = await fetch("/api/categories", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({
             name_category,
             color_selector,
@@ -314,7 +329,13 @@ export function sendCategoryNewCategory() {
 
 export async function loadCategories() {
   try {
-    const response = await fetch("/api/categories?type=all");
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("/api/categories?type=all", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const categories = await response.json();
 
     const list = document.getElementById("list_categories");
@@ -384,7 +405,13 @@ export async function fillCategoryForm(category) {
 
 export async function fetchCategory(id) {
   try {
-    const selectedCategory = await fetch(`/api/categories/category/${id}`);
+    const token = localStorage.getItem("token");
+
+    const selectedCategory = await fetch(`/api/categories/category/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const category = await selectedCategory.json();
     sendCategoryEditions(id);
     return category;
@@ -394,7 +421,13 @@ export async function fetchCategory(id) {
 }
 export async function loadCategoryFormExpense() {
   try {
-    const response = await fetch("/api/categories?type=expense");
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("/api/categories?type=expense", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const categories = await response.json();
 
     const select = document.getElementById("category_id");
@@ -419,7 +452,13 @@ export async function loadCategoryFormExpense() {
 
 export async function loadCategoryFormRevenue() {
   try {
-    const response = await fetch("/api/categories?type=revenue");
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("/api/categories?type=revenue", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const categories = await response.json();
 
     const select = document.getElementById("category_id");
@@ -460,9 +499,13 @@ export async function sendCategoryEditions(category_id) {
     console.log("★ sendCategoryEditions");
 
     try {
+      const token = localStorage.getItem("token");
       await fetch(`/api/categories/${category_id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           nameCategory,
           optionNewCategory,
@@ -486,7 +529,13 @@ export async function sendCategoryEditions(category_id) {
 }
 export async function countCategory() {
   try {
-    const response = await fetch(`/api/categories/reports/count?action=count`);
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`/api/categories/reports/count?action=count`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const totalTransactions = await response.json();
     console.log("Total de categorias: ", totalTransactions.total);
     return totalTransactions.total;
@@ -497,8 +546,15 @@ export async function countCategory() {
 
 export async function countMoreFrequent() {
   try {
+    const token = localStorage.getItem("token");
+
     const response = await fetch(
       `/api/categories/reports/count?action=favorite`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     const totalTransactions = await response.json();
     console.log("Categoria favorita: ", totalTransactions.name);

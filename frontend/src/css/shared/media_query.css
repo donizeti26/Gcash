@@ -9,12 +9,29 @@
   #form_new_category {
     width: 40%;
   }
+  #resultResume {
+    padding-right: 2rem;
+  }
+
+  #user_name {
+    font-size: 2rem;
+  }
+  .search_item {
+    width: 22%;
+  }
+  #form_search {
+    flex-direction: row;
+    align-items: normal;
+  }
   #header_new_category {
     display: flex;
     flex-direction: row;
   }
   #edit_category {
     position: unset;
+  }
+  #group_buttons_form_search {
+    flex-direction: column;
   }
 
   #calendar_week {
@@ -39,7 +56,7 @@
     flex-direction: row;
   }
   #user p {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   #left_side {
@@ -146,10 +163,6 @@
     grid-template-rows: 4rem 3fr auto;
     place-items: inherit;
   }
-}
-
-/*FORM CATEGORIES*/
-@media screen and (min-width: 1060px) {
   #category_body {
     width: 70%;
   }
@@ -247,7 +260,6 @@
   }
   #resultResume p {
     font-size: 13px;
-    color: var(--white-900);
   }
   .card_transaction:hover {
     transition: background-color 0.5s linear;

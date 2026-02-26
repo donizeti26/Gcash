@@ -67,6 +67,7 @@ export function renderLogin() {
       </div>
     </main>`;
   focusOnOf();
+
   document.getElementById("formLogin").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -82,7 +83,7 @@ export function renderLogin() {
       body: JSON.stringify(payload),
     });
 
-    const data = res.json();
+    const data = await res.json();
 
     if (res.ok) {
       localStorage.setItem("token", data.token);

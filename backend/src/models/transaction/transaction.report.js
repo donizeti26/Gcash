@@ -1,6 +1,6 @@
 import pool from "../../config/db.js";
 
-export async function sumTransactions({ month, year, type }) {
+export async function sumTransactions({ month, year, type, userId }) {
   if (type == "sumYear") {
     const query = `
       SELECT
@@ -8,9 +8,9 @@ export async function sumTransactions({ month, year, type }) {
           AS total_month
       FROM transactions t
       JOIN categories c ON c.category_id = t.category_id
-      WHERE t.status = 'paid' AND EXTRACT(YEAR FROM t.due_date) = $1;
+      WHERE t.status = 'paid' AND EXTRACT(YEAR FROM t.due_date) = $1 AND t.user_id = $2;
       `;
-    const result = await pool.query(query, [year]);
+    const result = await pool.query(query, [year, userId]);
     console.log("Resultado da Query RESUMO ANUAL:", result.rows);
 
     return { total: Number(result.rows[0]?.total_month) || 0 };
@@ -20,35 +20,35 @@ export async function sumTransactions({ month, year, type }) {
       AS total_month
       FROM transactions t
       JOIN categories c ON c.category_id = t.category_id
-      WHERE t.status = 'paid' AND EXTRACT(MONTH FROM t.due_date) = $1 AND EXTRACT(YEAR FROM t.due_date) = $2;`;
-    const result = await pool.query(query, [month, year]);
+      WHERE t.status = 'paid' AND EXTRACT(MONTH FROM t.due_date) = $1 AND EXTRACT(YEAR FROM t.due_date) = $2 AND t.user_id=$3;`;
+    const result = await pool.query(query, [month, year, userId]);
     console.log("Resultado da Query RESUMO MENSAL:", result.rows);
 
     return { total: Number(result.rows[0]?.total_month) || 0 };
   }
 }
 
-export async function sumTransactionsRevenue({ month, year }) {
+export async function sumTransactionsRevenue({ month, year, userId }) {
   const query = `SELECT SUM(t.amount) AS total_month
 FROM transactions as t 
 inner join categories as c on 
  t.category_id = c.category_id where
 EXTRACT(MONTH FROM due_date)=$1
-AND EXTRACT(YEAR FROM due_date) = $2 and c.type = 'revenue'`;
-  const result = await pool.query(query, [month, year]);
+AND EXTRACT(YEAR FROM due_date) = $2 AND c.type = 'revenue' AND t.user_id=$3`;
+  const result = await pool.query(query, [month, year, userId]);
   console.log("Resultado da Query RECEBIDOS MENSAL:", result.rows);
 
   return { total: Number(result.rows[0]?.total_month) || 0 };
 }
 
-export async function pendingTransactions({ month, year }) {
+export async function pendingTransactions({ month, year, userId }) {
   const query = `SELECT SUM(amount) AS total
 FROM transactions as t
 inner join categories as c on
  t.category_id = c.category_id
 WHERE status = 'pending' AND
-EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense'`;
-  const result = await pool.query(query, [month, year]);
+EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense' AND t.user_id=$3`;
+  const result = await pool.query(query, [month, year, userId]);
   console.log("Resultado da Query DESPESAS ATIVAS:", result.rows);
 
   console.log(result.rows);
@@ -56,34 +56,34 @@ EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.ty
   return { total: Number(result.rows[0]?.total) || 0 };
 }
 
-export async function paidTransactions({ month, year }) {
+export async function paidTransactions({ month, year, userId }) {
   const query = `SELECT SUM(amount) AS total
 FROM transactions as t
 inner join categories as c on
  t.category_id = c.category_id
 WHERE status = 'paid' AND
-EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense'`;
+EXTRACT(MONTH FROM due_date) = $1 AND EXTRACT(YEAR FROM due_date) = $2  and c.type = 'expense' AND t.user_id=$3`;
 
-  const result = await pool.query(query, [month, year]);
+  const result = await pool.query(query, [month, year, userId]);
   console.log("Resultado da Query DESPESAS PAGAS:", result.rows);
 
   return { total: Number(result.rows[0]?.total) || 0 };
 }
 
-export async function countTransactions({ id, month }) {
+export async function countTransactions({ id, month, userId }) {
   if (id) {
     const query = `SELECT c.type, COUNT(*) AS total_transactions 
 FROM transactions AS t INNER JOIN categories 
 AS c ON t.category_id = c.category_id
-WHERE t.category_id = $1  GROUP BY c.type; `;
-    const result = await pool.query(query, [id]);
+WHERE t.category_id = $1 AND t.user_id=$2 GROUP BY c.type; `;
+    const result = await pool.query(query, [id, userId]);
     return {
       total: Number(result.rows[0]?.total_transactions) || 0,
       type: result.rows[0]?.type ?? null,
     };
   } else if (month) {
-    const query = `SELECT COUNT(*) AS total_transactions FROM transactions WHERE EXTRACT(MONTH FROM due_date)= $1 `;
-    const result = await pool.query(query, [month]);
+    const query = `SELECT COUNT(*) AS total_transactions FROM transactions WHERE EXTRACT(MONTH FROM due_date)= $1 AND user_id=$2 `;
+    const result = await pool.query(query, [month, userId]);
     return { total: Number(result.rows[0]?.total_transactions) || 0 };
   }
 }

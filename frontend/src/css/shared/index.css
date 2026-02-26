@@ -9,6 +9,8 @@
 }
 #form_search {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 #user {
@@ -22,18 +24,20 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+#user_name {
+  font-size: 1rem;
+}
 #group_buttons_form_search {
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 1rem;
 }
 #resultResume {
   font-size: 1rem;
-  padding-right: 2rem;
   text-align: center;
-  color: #ffffff;
+  color: #ffffff82;
 }
 #replacement {
   background-color: var(--cinza-900);
@@ -57,10 +61,17 @@ button,
 }
 
 #result_search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   color: var(--white-900);
   font-size: 1rem;
-  padding: 24%;
+  padding: 10%;
+}
+#img_cant_find {
+  width: 37%;
 }
 #group_total_resume {
   display: flex;
@@ -212,7 +223,7 @@ button,
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 22%;
+  width: 48%;
 }
 
 /*Calendário*/
