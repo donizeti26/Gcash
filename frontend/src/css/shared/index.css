@@ -68,7 +68,7 @@ button,
   text-align: center;
   color: var(--white-900);
   font-size: 1rem;
-  padding: 10%;
+  padding: 9%;
 }
 #img_cant_find {
   width: 37%;
@@ -310,6 +310,7 @@ body .litepicker {
 
 #group_cards {
   justify-content: start;
+  height: 88%;
   padding: 0.5rem;
   overflow-y: auto;
   margin: 0.5rem;
@@ -466,6 +467,9 @@ CSS LOADING
   justify-content: end;
   align-items: center;
   margin-bottom: 0.5rem;
+  bottom: 2rem;
+  position: absolute;
+  right: 1rem;
 }
 #pagination ul {
   display: flex;
@@ -474,22 +478,37 @@ CSS LOADING
   padding-right: 2rem;
 }
 
-#pagination ul li:nth-child(2) {
-  background-color: var(--white-900);
-  color: var(--azul-400);
-}
 #pagination ul li {
   cursor: pointer;
   color: var(--white-900);
-  padding: 0.5rem;
   border: solid 1px var(--white-legend);
   border-radius: 0.5rem;
-  width: 2.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#pagination ul li:hover {
+.group_button_pages:hover {
   background-color: var(--white-900);
+  color: var(--azul-400);
+  border-radius: 0.5rem;
+}
+
+.group_button_pages {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  color: var(--white-900);
+}
+
+#selected_page {
+  background-color: var(--white-900);
+  color: var(--azul-400);
+}
+#selected_page button {
   color: var(--azul-400);
 }

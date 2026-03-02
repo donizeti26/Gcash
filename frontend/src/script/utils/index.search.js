@@ -68,7 +68,8 @@ async function searchWithParams(
       const resultSearch = document.createElement("p");
       groupCards.innerHTML = "";
       resultSearch.id = "result_search";
-      resultSearch.textContent = `Nenhum resultado específico encontrado...`;
+      resultSearch.innerHTML = `    <img id="img_cant_find" src="/images/cant_find.svg">
+    Nenhum resultado específico encontrado...</p>`;
       groupCards.appendChild(resultSearch);
     }
   } catch (err) {
