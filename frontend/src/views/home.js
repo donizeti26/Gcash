@@ -2,7 +2,10 @@ import "../css/style.css";
 
 import { renderFormTransaction } from "./form_transaction.js";
 
-import { getParamsForSearch } from "../script/utils/index.search.js";
+import {
+  getParamsForSearch,
+  setNumCards,
+} from "../script/utils/index.search.js";
 import {
   closeModal,
   setupModalGlobalListeners,
@@ -25,7 +28,6 @@ import {
   LoadDataAndEditTransaction,
   sendTransactionsEditions,
   setupTitleTransactionForm,
-  insertCountTransaction,
 } from "../script/utils/transactionsUtils.js";
 
 import {
@@ -266,7 +268,7 @@ export function renderHome() {
 ===================
 =================== */
 
-export function initHome() {
+export async function initHome() {
   new Litepicker({
     element: document.getElementById("daterange"),
     singleMode: false,
@@ -280,7 +282,10 @@ export function initHome() {
   const current = getCurrentMonthYear();
   if (current) {
     LoadExpenses(current.monthIndex, current.yearIndex);
-    insertCountTransaction(current.monthIndex);
+    await setNumCards({
+      month: current.monthIndex,
+      currentPage: 1,
+    });
   }
 
   hideLoading();
@@ -365,7 +370,10 @@ function setupHomeButtons() {
       const year = data.getFullYear();
       console.log(month, year + " VALORES DE ANOS");
       LoadExpenses(month, year);
-      insertCountTransaction(month);
+      await setNumCards({
+        month: current.month,
+        currentPage: 1,
+      });
     });
 
     if (btnLogout) {

@@ -1,7 +1,5 @@
-import { LoadExpenses } from "./sharedUtils.js";
 import { closeModal, showToast } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
-import { insertCountTransaction } from "./transactionsUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
 
 export function initExpensesForm() {

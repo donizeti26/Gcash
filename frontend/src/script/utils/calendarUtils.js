@@ -6,7 +6,7 @@ import {
   sumAmountMonthRevenue,
 } from "./formTransactionsUtils.js";
 
-import { insertCountTransaction } from "./transactionsUtils.js";
+import { setNumCards } from "./index.search.js";
 import { LoadExpenses } from "./sharedUtils.js";
 
 /*/////////////////////////////////////
@@ -49,7 +49,7 @@ export function setupCalendar() {
   showMonth();
 
   // Avançar
-  GO.addEventListener("click", () => {
+  GO.addEventListener("click", async () => {
     ContMonth = ContMonth + 1;
 
     if (ContMonth >= 12) {
@@ -64,11 +64,14 @@ export function setupCalendar() {
     resumeMonthInsert(ContMonth, ContYear);
     sumAtualMonthPending(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
-    insertCountTransaction(ContMonth);
+    await setNumCards({
+      month: ContMonth,
+      currentPage: 1,
+    });
   });
 
   // Voltar
-  BACK.addEventListener("click", () => {
+  BACK.addEventListener("click", async () => {
     ContMonth = ContMonth - 1;
 
     if (ContMonth < 0) {
@@ -83,7 +86,10 @@ export function setupCalendar() {
     resumeMonthInsert(ContMonth, ContYear);
     sumAtualMonthPending(ContMonth, ContYear);
     LoadExpenses(ContMonth, ContYear);
-    insertCountTransaction(ContMonth);
+    await setNumCards({
+      month: ContMonth,
+      currentPage: 1,
+    });
   });
 }
 

@@ -467,9 +467,6 @@ CSS LOADING
   justify-content: end;
   align-items: center;
   margin-bottom: 0.5rem;
-  bottom: 2rem;
-  position: absolute;
-  right: 1rem;
 }
 #pagination ul {
   display: flex;

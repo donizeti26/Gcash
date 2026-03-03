@@ -93,7 +93,7 @@ export async function openListCategory() {
         decision = await DeleteOptions(id, totalTransactions, type);
       } else {
         const confirmed = await showConfirm({
-          message: "Você quer realmente apagar essa transação?",
+          message: "Você quer realmente apagar essa Categoria??",
           theme: "danger",
         });
         decision = confirmed ? { action: "deleteAll" } : { action: "cancel" };

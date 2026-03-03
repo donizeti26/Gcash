@@ -7,7 +7,7 @@ import {
   sumAmountYear,
 } from "../script/utils/formTransactionsUtils.js";
 import { LoadExpenses } from "../script/utils/sharedUtils.js";
-import { insertCountTransaction } from "../script/utils/transactionsUtils.js";
+import { setNumCards } from "../script/utils/index.search.js";
 import { showToast } from "../script/utils/modalUtils.js";
 import { showLoading, hideLoading } from "../script/utils/loadingUtils.js";
 
@@ -47,7 +47,7 @@ export function showConfirm({ message, theme }) {
         iconModal.classList.remove("warning");
         buttonConfirm.classList.remove("warning");
         iconModal.textContent = "delete_forever";
-        ConfirmTitle.textContent = "Deletar Transação";
+        ConfirmTitle.textContent = "Esta ação não pode ser desfeita.";
         buttonConfirm.textContent = "Sim, Deletar.";
         break;
       case "warning":
@@ -94,7 +94,10 @@ export async function loadComponentsHome(monthIndex, yearIndex) {
   await sumAmountMonthRevenue(monthIndex, yearIndex);
   await sumAtualMonthPending(monthIndex, yearIndex);
   await LoadExpenses(monthIndex, yearIndex);
-  await insertCountTransaction(monthIndex);
+  await setNumCards({
+    month: monthIndex,
+    currentPage: 1,
+  });
 }
 
 export async function SetStatusInTransactions(id) {

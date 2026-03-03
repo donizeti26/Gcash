@@ -195,18 +195,3 @@ export async function countTransaction(month) {
     console.error("Erro ao contar transações", err);
   }
 }
-export async function insertCountTransaction(month) {
-  console.log("★ Valor de MONT", month + 1);
-  const total = await countTransaction(month + 1);
-
-  const totalTransactions = document.getElementById("resultResume");
-  const totalResult = document.createElement("p");
-
-  if (total == 1) {
-    totalResult.textContent = `${total} resultado`;
-  } else {
-    totalResult.textContent = `${total} resultados`;
-  }
-  totalTransactions.innerHTML = "";
-  totalTransactions.appendChild(totalResult);
-}

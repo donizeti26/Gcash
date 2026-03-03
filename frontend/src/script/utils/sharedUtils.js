@@ -1,6 +1,7 @@
 /*FORMATAR VAlORES */
 
 import { showLoading, hideLoading } from "./loadingUtils.js";
+import { setNumCards } from "./index.search.js";
 
 export async function setFormatMoney(varValue) {
   const valueAmount = document.getElementById("amount");
@@ -44,9 +45,13 @@ export async function LoadExpenses(monthIndex, yearIndex) {
     }
     const totalPages = Math.ceil(transactions.length / 5);
 
+    setNumCards({ total: transactions.length, currentPage: 1 });
+
     renderCards(transactions, 1);
     renderButtons(totalPages, 1);
-    listenerButtons(transactions, 1, 7, totalPages);
+    listenerButtons(transactions, 1, 5, totalPages);
+
+    console.log("LINHA ACIMA EXECULTADA  𒉭" + transactions.length);
   } catch (err) {
     console.error("Erro ao carregar Transações no Index", err);
   } finally {
@@ -54,7 +59,12 @@ export async function LoadExpenses(monthIndex, yearIndex) {
   }
 }
 
-function listenerButtons(transactions, currentPage, perPage, totalPages) {
+export function listenerButtons(
+  transactions,
+  currentPage,
+  perPage,
+  totalPages,
+) {
   const pagination = document.getElementById("pagination");
 
   pagination.addEventListener("click", (e) => {
@@ -70,10 +80,11 @@ function listenerButtons(transactions, currentPage, perPage, totalPages) {
 
     renderCards(transactions, currentPage, perPage);
     renderButtons(totalPages, currentPage);
+    setNumCards({ total: transactions.length, currentPage: currentPage });
   });
 }
 
-function renderButtons(totalPages, currentPage) {
+export function renderButtons(totalPages, currentPage) {
   const pagination = document.getElementById("pagination");
   pagination.innerHTML = "";
 
