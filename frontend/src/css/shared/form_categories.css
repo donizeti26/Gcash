@@ -41,7 +41,7 @@
   justify-content: space-between;
   background-color: var(--input-color);
   transition: background-color 0.2s linear;
-  padding: 2rem;
+  padding: 0.7rem;
   border-radius: 0.5rem;
 }
 
@@ -82,15 +82,18 @@
 #head_title {
   display: flex;
   justify-content: space-between;
+  flex-direction: column-reverse;
+  gap: 1rem;
   align-items: center;
   width: 100%;
 }
 #category_title {
-  text-align: left;
+  text-align: center;
 }
 #category_title p {
   font-size: 12px;
   color: #656565;
+  text-align: center;
 }
 .item_group_category_resume div p {
   font-size: 12px;
@@ -140,7 +143,7 @@
 }
 .edit_category {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
 }

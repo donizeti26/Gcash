@@ -3,9 +3,39 @@
   #resume_month {
     flex-direction: row;
   }
+  .search_item {
+    width: 48%;
+  }
+  .group_category {
+    padding: 2rem;
+  }
+  .group_button_pages {
+    width: 3rem;
+    height: 3rem;
+  }
+  #pagination {
+    justify-content: end;
+  }
+  #pagination ul {
+    gap: 1rem;
+
+    padding-right: 2rem;
+  }
+  #img_cant_find {
+    width: 39%;
+  }
+  #head_title {
+    flex-direction: row;
+  }
+  #category_title {
+    text-align: left;
+  }
 }
 /*NEW CATEGORY*/
 @media screen and (min-width: 1060px) {
+  .edit_category {
+    flex-direction: row;
+  }
   #form_new_category {
     width: 40%;
   }

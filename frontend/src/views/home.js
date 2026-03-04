@@ -327,6 +327,7 @@ function setupHomeButtons() {
     btnCategory.addEventListener("click", async () => {
       //ABRIR MODAL COM CATEGORIAS
       await openListCategory();
+      overflowHidden();
     });
   }
 

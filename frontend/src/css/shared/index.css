@@ -71,7 +71,7 @@ button,
   padding: 9%;
 }
 #img_cant_find {
-  width: 37%;
+  width: 70%;
 }
 #group_total_resume {
   display: flex;
@@ -126,7 +126,7 @@ button,
   width: 100%;
   background-color: var(--azul-200);
   border-radius: 6px;
-  padding: 1rem 5rem;
+  padding: 1rem 2rem;
 }
 
 #atual_month p {
@@ -223,7 +223,7 @@ button,
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 48%;
+  width: 100%;
 }
 
 /*Calendário*/
@@ -464,15 +464,15 @@ CSS LOADING
 
 #pagination {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   margin-bottom: 0.5rem;
 }
 #pagination ul {
   display: flex;
-  gap: 1rem;
+  gap: 0.6rem;
   list-style: none;
-  padding-right: 2rem;
+  padding: unset;
 }
 
 #pagination ul li {
@@ -494,8 +494,8 @@ CSS LOADING
   background: none;
   border: none;
   padding: 0;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   font: inherit;
   cursor: pointer;
   outline: inherit;
