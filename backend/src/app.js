@@ -3,6 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
+import pool from "./db.js";
 // Importando rotas
 
 import routes from "./routes/index.js";
@@ -17,9 +18,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rotas da API
 app.use("/api", routes);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
+
 setupSwagger(app);
-export default app;
 app.get("/", (req, res) => {
   res.send("API Gcash funcionando 🚀");
 });
+
+app.get("/testdb", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Erro no banco");
+  }
+});
+export default app;
