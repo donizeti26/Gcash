@@ -15,7 +15,4 @@ router.use("/categories", categoryRoutes);
 router.use("/payment-methods", paymentRoutes);
 router.use("/transactions", transactionRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API funcionando");
-});
 export default router;
