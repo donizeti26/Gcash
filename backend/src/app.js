@@ -3,7 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-import pool from "./db.js";
+import pool from "./config/db.js";
 // Importando rotas
 
 import routes from "./routes/index.js";
