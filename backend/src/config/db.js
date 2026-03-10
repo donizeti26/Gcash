@@ -8,7 +8,6 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
-
-console.log(process.env.DB_USER + " As");
+console.log("DATABASE_URL carregada:", !!process.env.DATABASE_URL);
 
 export default pool;
