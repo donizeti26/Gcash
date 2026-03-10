@@ -20,3 +20,6 @@ app.use("/api", routes);
 console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
 setupSwagger(app);
 export default app;
+app.get("/", (req, res) => {
+  res.send("API Gcash funcionando 🚀");
+});
