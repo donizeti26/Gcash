@@ -1,6 +1,8 @@
 import "../css/login.css";
 import { navigate } from "../router.js";
 import { focusOnOf } from "../script/utils/loginUtils";
+
+import { apiFetch } from "../script/api.js";
 export function renderLogin() {
   const app = document.getElementById("app");
   app.innerHTML = `
@@ -77,7 +79,7 @@ export function renderLogin() {
       password: form.inputPassword.value,
     };
 
-    const res = await fetch("/api/auth/login", {
+    const res = await apiFetch("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
