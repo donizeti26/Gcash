@@ -14,7 +14,7 @@ export function logout() {
 export async function setNameUser() {
   const token = localStorage.getItem("token");
 
-  const response = await fetch("/api/auth/me", {
+  const response = await apiFetch("/api/auth/me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

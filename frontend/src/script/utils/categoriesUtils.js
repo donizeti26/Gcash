@@ -79,11 +79,14 @@ export async function openListCategory() {
       const token = localStorage.getItem("token");
 
       console.log(category.name, category.category_id);
-      const response = await fetch(`/api/transactions/reports/count?id=${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await apiFetch(
+        `/api/transactions/reports/count?id=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       const data = await response.json();
       const totalTransactions = Number(data.total);
       const type = data.type;
@@ -144,7 +147,7 @@ async function updateCategoryOfTransactions(
   try {
     const token = localStorage.getItem("token");
 
-    await fetch("/api/transactions/bulk?action=change-category", {
+    await apiFetch("/api/transactions/bulk?action=change-category", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -161,7 +164,7 @@ async function deleteCategoryAllTransactions(id) {
   try {
     showLoading();
     const token = localStorage.getItem("token");
-    const response = await fetch(`/api/categories/${id}`, {
+    const response = await apiFetch(`/api/categories/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -300,7 +303,7 @@ export function sendCategoryNewCategory() {
 
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("/api/categories", {
+        const response = await apiFetch("/api/categories", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -331,7 +334,7 @@ export async function loadCategories() {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("/api/categories?type=all", {
+    const response = await apiFetch("/api/categories?type=all", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -407,7 +410,7 @@ export async function fetchCategory(id) {
   try {
     const token = localStorage.getItem("token");
 
-    const selectedCategory = await fetch(`/api/categories/category/${id}`, {
+    const selectedCategory = await apiFetch(`/api/categories/category/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -423,7 +426,7 @@ export async function loadCategoryFormExpense() {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("/api/categories?type=expense", {
+    const response = await apiFetch("/api/categories?type=expense", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -454,7 +457,7 @@ export async function loadCategoryFormRevenue() {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("/api/categories?type=revenue", {
+    const response = await apiFetch("/api/categories?type=revenue", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -500,7 +503,7 @@ export async function sendCategoryEditions(category_id) {
 
     try {
       const token = localStorage.getItem("token");
-      await fetch(`/api/categories/${category_id}`, {
+      await apiFetch(`/api/categories/${category_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -531,11 +534,14 @@ export async function countCategory() {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`/api/categories/reports/count?action=count`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await apiFetch(
+      `/api/categories/reports/count?action=count`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     const totalTransactions = await response.json();
     console.log("Total de categorias: ", totalTransactions.total);
     return totalTransactions.total;
@@ -548,7 +554,7 @@ export async function countMoreFrequent() {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(
+    const response = await apiFetch(
       `/api/categories/reports/count?action=favorite`,
       {
         headers: {

@@ -101,7 +101,7 @@ export async function sendTransactionsEditions(type) {
     try {
       const token = localStorage.getItem("token");
 
-      await fetch(`/api/transactions/${transaction_id}`, {
+      await apiFetch(`/api/transactions/${transaction_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -180,7 +180,7 @@ export function setupTitleTransactionForm(type) {
 export async function countTransaction(month) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(
+    const response = await apiFetch(
       `/api/transactions/reports/count?month=${month}`,
       {
         headers: {

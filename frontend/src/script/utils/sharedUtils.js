@@ -28,7 +28,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
 
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(
+    const response = await apiFetch(
       `/api/transactions/${monthForApi}/${yearIndex}`,
       {
         headers: {
@@ -274,7 +274,7 @@ async function renderTransactionButton(id, item) {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`/api/transactions/${id}/status`, {
+    const res = await apiFetch(`/api/transactions/${id}/status`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

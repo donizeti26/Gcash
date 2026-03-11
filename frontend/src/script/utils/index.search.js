@@ -46,7 +46,7 @@ async function searchWithParams(
   if (dateEnd) params.append("dateEnd", dateEnd);
 
   try {
-    const response = await fetch(`/api/transactions?${params}`, {
+    const response = await apiFetch(`/api/transactions?${params}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

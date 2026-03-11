@@ -121,7 +121,7 @@ export async function SetStatusInTransactions(id) {
     const newStatus = statusString === "paid" ? "pending" : "paid";
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`/api/transactions/${id}/statusUpdate`, {
+    const response = await apiFetch(`/api/transactions/${id}/statusUpdate`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -143,7 +143,7 @@ export async function consultStatus(id) {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`/api/transactions/${id}/status`, {
+    const response = await apiFetch(`/api/transactions/${id}/status`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -162,7 +162,7 @@ export async function searchLoadCategories(typeValue) {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`/api/categories?type=${typeValue}`, {
+    const response = await apiFetch(`/api/categories?type=${typeValue}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

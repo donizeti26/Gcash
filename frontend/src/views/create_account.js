@@ -1,5 +1,6 @@
 import "../css/create_account.css";
 import { navigate } from "../router.js";
+import { apiFetch } from "../script/api.js";
 
 export function renderCreateAccount() {
   const app = document.getElementById("app");
@@ -124,7 +125,7 @@ export function renderCreateAccount() {
       };
 
       console.log(payload);
-      const res = await fetch("/api/auth/register", {
+      const res = await apiFetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
