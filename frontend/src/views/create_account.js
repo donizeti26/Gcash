@@ -117,9 +117,9 @@ export function renderCreateAccount() {
       const form = e.target;
 
       const payload = {
-        userName: form.inputUserName.value,
-        firstName: form.inputFirstName.value,
-        lastName: form.inputLastName.value,
+        user_name: form.inputUserName.value,
+        first_name: form.inputFirstName.value,
+        last_name: form.inputLastName.value,
         email: form.inputEmail.value,
         password: form.inputPassword.value,
       };
@@ -135,7 +135,6 @@ export function renderCreateAccount() {
         alert("Usuário criado com sucesso");
         navigate("/login");
       } else {
-        const err = await res.json();
         alert(err.error || "Error ao criar usuário");
       }
     });
