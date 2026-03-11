@@ -125,7 +125,7 @@ export function renderCreateAccount() {
       };
 
       console.log(payload);
-      const res = await apiFetch("/api/auth/register", {
+      const res = await apiFetch("/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
