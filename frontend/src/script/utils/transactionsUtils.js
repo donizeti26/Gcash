@@ -2,7 +2,7 @@ import { LoadExpenses, setFormatMoney } from "./sharedUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { closeModal, showToast } from "./modalUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
-import { apiFetch } from "../script/api.js";
+import { apiFetch } from "../api.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(

@@ -1,6 +1,7 @@
 import "../css/style.css";
 
 import { renderFormTransaction } from "./form_transaction.js";
+import { apiFetch } from "../script/api.js";
 
 import {
   getParamsForSearch,
@@ -35,11 +36,6 @@ import {
   loadPaymentMethodsExpense,
   initExpensesForm,
   initTransactionForm,
-  sumAtualMonthPaid,
-  resumeMonthInsert,
-  sumAtualMonthPending,
-  sumAmountMonthRevenue,
-  sumAmountYear,
 } from "../script/utils/formTransactionsUtils.js";
 
 import { showLoading, hideLoading } from "../script/utils/loadingUtils.js";

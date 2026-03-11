@@ -1,5 +1,5 @@
 import { renderCards, listenerButtons, renderButtons } from "./sharedUtils.js";
-import { apiFetch } from "../script/api.js";
+import { apiFetch } from "../api.js";
 
 import { countTransaction } from "./transactionsUtils.js";
 

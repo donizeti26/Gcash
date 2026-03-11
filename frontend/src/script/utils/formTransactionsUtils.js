@@ -1,7 +1,7 @@
 import { closeModal, showToast } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
-import { apiFetch } from "../script/api.js";
+import { apiFetch } from "../api.js";
 
 export function initExpensesForm() {
   const question_repeated = document.getElementById("question_repeated");

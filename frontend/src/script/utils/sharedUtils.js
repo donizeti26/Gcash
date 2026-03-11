@@ -2,7 +2,7 @@
 
 import { showLoading, hideLoading } from "./loadingUtils.js";
 import { setNumCards } from "./index.search.js";
-import { apiFetch } from "../script/api.js";
+import { apiFetch } from "../api.js";
 
 export async function setFormatMoney(varValue) {
   const valueAmount = document.getElementById("amount");

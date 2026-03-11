@@ -17,7 +17,7 @@ import {
   sumAmountMonthRevenue,
   sumAmountYear,
 } from "./formTransactionsUtils.js";
-import { apiFetch } from "../script/api.js";
+import { apiFetch } from "../api.js";
 
 import { renderDeleteCategoryOption } from "../../views/delete_category_options.js";
 import { renderListCategories } from "../../views/list_categories.js";

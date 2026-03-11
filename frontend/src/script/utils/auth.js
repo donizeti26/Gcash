@@ -1,4 +1,4 @@
-import { apiFetch } from "../script/api.js";
+import { apiFetch } from "../api.js";
 
 export function getToken() {
   return localStorage.getItem("token");
