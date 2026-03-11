@@ -43,12 +43,12 @@ export async function loginController(req, res) {
 
 export async function createUserController(req, res) {
   try {
-    const { userName, firstName, lastName, email, password } = req.body;
+    const { user_name, first_name, last_name, email, password } = req.body;
 
     if (
-      !userName ||
-      !firstName ||
-      !lastName ||
+      !user_name ||
+      !first_name ||
+      !last_name ||
       !email ||
       !password ||
       password.length < 6
@@ -65,9 +65,9 @@ export async function createUserController(req, res) {
     const password_hash = await bcrypt.hash(password, 10);
     const status = "enable";
     await createUser({
-      userName,
-      firstName,
-      lastName,
+      user_name,
+      first_name,
+      last_name,
       email,
       password_hash,
       status,
