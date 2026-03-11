@@ -1,3 +1,5 @@
+import { apiFetch } from "../script/api.js";
+
 export function getToken() {
   return localStorage.getItem("token");
 }
@@ -14,7 +16,7 @@ export function logout() {
 export async function setNameUser() {
   const token = localStorage.getItem("token");
 
-  const response = await apiFetch("/api/auth/me", {
+  const response = await apiFetch("/auth/me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { closeModal, showToast } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
+import { apiFetch } from "../script/api.js";
 
 export function initExpensesForm() {
   const question_repeated = document.getElementById("question_repeated");
@@ -87,7 +88,7 @@ export async function initTransactionForm(type) {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await apiFetch("/api/transactions/", {
+        const response = await apiFetch("/transactions/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -138,7 +139,7 @@ export async function initTransactionForm(type) {
 
 export async function loadPaymentMethodsRevenue() {
   try {
-    const response = await apiFetch("/api/payment-methods?type=revenue");
+    const response = await apiFetch("/payment-methods?type=revenue");
     const paymentMethods = await response.json();
     const selectPayment = document.getElementById("payment_method_id");
 
@@ -165,7 +166,7 @@ export async function loadPaymentMethodsRevenue() {
 
 export async function loadPaymentMethodsExpense() {
   try {
-    const response = await apiFetch("/api/payment-methods?type=expense");
+    const response = await apiFetch("/payment-methods?type=expense");
 
     const paymentMethods = await response.json();
     console.warn(paymentMethods.message);
@@ -224,7 +225,7 @@ export async function sumAmountMonthRevenue(monthIndex, yearIndex) {
   const token = localStorage.getItem("token");
   try {
     const response = await apiFetch(
-      `/api/transactions/reports?month=${month}&year=${yearIndex}&type=revenue`,
+      `/transactions/reports?month=${month}&year=${yearIndex}&type=revenue`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -257,7 +258,7 @@ export async function getTransactionsTotal(monthIndex, yearIndex, type) {
     const token = localStorage.getItem("token");
 
     const response = await apiFetch(
-      `/api/transactions/reports?month=${monthIndex}&year=${yearIndex}&type=${type}`,
+      `/transactions/reports?month=${monthIndex}&year=${yearIndex}&type=${type}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -317,7 +318,7 @@ export async function getResume(month, year, type) {
   try {
     const token = localStorage.getItem("token");
     const response = await apiFetch(
-      `/api/transactions/reports?month=${month}&year=${year}&type=${type}`,
+      `/transactions/reports?month=${month}&year=${year}&type=${type}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

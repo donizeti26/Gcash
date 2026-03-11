@@ -1,4 +1,5 @@
 import { renderCards, listenerButtons, renderButtons } from "./sharedUtils.js";
+import { apiFetch } from "../script/api.js";
 
 import { countTransaction } from "./transactionsUtils.js";
 
@@ -46,7 +47,7 @@ async function searchWithParams(
   if (dateEnd) params.append("dateEnd", dateEnd);
 
   try {
-    const response = await apiFetch(`/api/transactions?${params}`, {
+    const response = await apiFetch(`/transactions?${params}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

@@ -2,6 +2,7 @@
 
 import { showLoading, hideLoading } from "./loadingUtils.js";
 import { setNumCards } from "./index.search.js";
+import { apiFetch } from "../script/api.js";
 
 export async function setFormatMoney(varValue) {
   const valueAmount = document.getElementById("amount");
@@ -29,7 +30,7 @@ export async function LoadExpenses(monthIndex, yearIndex) {
   try {
     const token = localStorage.getItem("token");
     const response = await apiFetch(
-      `/api/transactions/${monthForApi}/${yearIndex}`,
+      `/transactions/${monthForApi}/${yearIndex}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -274,7 +275,7 @@ async function renderTransactionButton(id, item) {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await apiFetch(`/api/transactions/${id}/status`, {
+    const res = await apiFetch(`/transactions/${id}/status`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

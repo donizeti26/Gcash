@@ -10,6 +10,7 @@ import { LoadExpenses } from "../script/utils/sharedUtils.js";
 import { setNumCards } from "../script/utils/index.search.js";
 import { showToast } from "../script/utils/modalUtils.js";
 import { showLoading, hideLoading } from "../script/utils/loadingUtils.js";
+import { apiFetch } from "../script/api.js";
 
 export function getCurrentMonthYear() {
   const monthEl = document.getElementById("month_index");
@@ -121,7 +122,7 @@ export async function SetStatusInTransactions(id) {
     const newStatus = statusString === "paid" ? "pending" : "paid";
     const token = localStorage.getItem("token");
 
-    const response = await apiFetch(`/api/transactions/${id}/statusUpdate`, {
+    const response = await apiFetch(`/transactions/${id}/statusUpdate`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -143,7 +144,7 @@ export async function consultStatus(id) {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await apiFetch(`/api/transactions/${id}/status`, {
+    const response = await apiFetch(`/transactions/${id}/status`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -162,7 +163,7 @@ export async function searchLoadCategories(typeValue) {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await apiFetch(`/api/categories?type=${typeValue}`, {
+    const response = await apiFetch(`/categories?type=${typeValue}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -403,7 +403,7 @@ document.addEventListener("click", async (e) => {
     const token = localStorage.getItem("token");
     console.log("O botão clicado foi da transação", id);
 
-    const categoryModal = await apiFetch(`/api/transactions/${id}/category`, {
+    const categoryModal = await apiFetch(`/transactions/${id}/category`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const category = await categoryModal.json();
@@ -417,7 +417,7 @@ document.addEventListener("click", async (e) => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await apiFetch(`/api/transactions/${id}`, {
+      const response = await apiFetch(`/transactions/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -475,7 +475,7 @@ document.addEventListener("click", async (e) => {
     try {
       const token = localStorage.getItem("token");
       showLoading();
-      const response = await apiFetch(`/api/transactions/${id}`, {
+      const response = await apiFetch(`/transactions/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

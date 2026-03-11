@@ -2,6 +2,7 @@ import { LoadExpenses, setFormatMoney } from "./sharedUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { closeModal, showToast } from "./modalUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
+import { apiFetch } from "../script/api.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
@@ -101,7 +102,7 @@ export async function sendTransactionsEditions(type) {
     try {
       const token = localStorage.getItem("token");
 
-      await apiFetch(`/api/transactions/${transaction_id}`, {
+      await apiFetch(`/transactions/${transaction_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -181,7 +182,7 @@ export async function countTransaction(month) {
   try {
     const token = localStorage.getItem("token");
     const response = await apiFetch(
-      `/api/transactions/reports/count?month=${month}`,
+      `/transactions/reports/count?month=${month}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
