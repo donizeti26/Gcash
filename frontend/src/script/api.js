@@ -12,5 +12,5 @@ export async function apiFetch(endpoint, options = {}) {
     throw new Error("Erro na requisição");
   }
 
-  return response.json();
+  return response;
 }

@@ -135,6 +135,7 @@ export function renderCreateAccount() {
         alert("Usuário criado com sucesso");
         navigate("/login");
       } else {
+        const err = await res.json();
         alert(err.error || "Error ao criar usuário");
       }
     });
