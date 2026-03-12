@@ -186,6 +186,7 @@ O projeto segue uma arquitetura **MVC (Model–View–Controller)**.
 
 # 📂 Estrutura do Projeto
 
+<p>
 GCASH
 │
 ├── docs
@@ -208,7 +209,7 @@ GCASH
 │ │ └── services
 │
 └── package.json
-
+</p>
 ---
 
 <a id="roadmap"></a>
@@ -241,8 +242,6 @@ GCASH
 Prototipação completa desenvolvida no **Figma**
 
 👉 https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash
-
----
 
 ---
 
