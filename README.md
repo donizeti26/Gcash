@@ -186,7 +186,7 @@ O projeto segue uma arquitetura **MVC (Model–View–Controller)**.
 
 # 📂 Estrutura do Projeto
 
-<p>
+<pre>
 
 GCASH
 │
@@ -211,7 +211,7 @@ GCASH
 │
 └── package.json
 
-</p>
+</pre>
 
 <a id="roadmap"></a>
 
