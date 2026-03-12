@@ -1,104 +1,272 @@
 <div align="center">
-<img src="./docs/thumbnail_construction.png" width="100%" >
+<img src="./docs/thumbnail_construction.png" width="100%">
 </div>
+
 <br>
-<br>
+
 <div align="center">
-<img src="./docs/logo_readme.png" width="40%" >
+<img src="./docs/logo_readme.png" width="40%">
 </div>
+
 <br>
 <p align="center">
+  <a href="#demo">Demo</a> |
   <a href="#objetivo">Objetivo</a> | 
   <a href="#funcionalidades">Funcionalidades</a> | 
-  <a href="#tecnologias">Tec. e Ferramentas</a> | 
-  <a href="#roadmap">Roadmap</a> | 
-    <a href="#estrutura">Estrutura</a>
+  <a href="#arquitetura">Arquitetura</a> |
+  <a href="#tecnologias">Tecnologias</a> | 
+  <a href="#estrutura">Estrutura</a> |
+  <a href="#roadmap">Roadmap</a>|
+  <a href="#documentacao">Documentação</a> 
 </p>
-**🚧 Projeto em desenvolvimento - Aplicação web para gerenciamento de finanças pessoais.**
 
-**_Objetivo: praticar JavaScript, boas práticas de front-end e back-end, e criar uma aplicação para meu portfólio._**
+---
 
-# 💰 Gcash - Gerenciador Financeiro Pessoal
+# 💰 GCASH — Gerenciador Financeiro Pessoal
 
-<div align="center">
-<a href="https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash-?node-id=115-2&t=8f74puidmv6JzqC8-1"><img src="https://raw.githubusercontent.com/donizeti26/Gcash/2c2b5f364764424f766b0db0adf1593e9f080224/docs/thumbnail.svg" width="900px"></a>
-</div>
+Aplicação **Fullstack JavaScript** para gerenciamento de finanças pessoais, permitindo registrar receitas, despesas e acompanhar o histórico financeiro.
+
+O projeto foi desenvolvido **do zero**, com foco em **fundamentos de desenvolvimento web**, arquitetura de software e integração completa entre **frontend, backend e banco de dados**.
+
+---
+
+# 🚀 Demo
+
+🌐 **Aplicação online**
+
+https://gcash-ten.vercel.app/login
+
+**Usuário de teste**
+EMAIL: MARCOSSILVA@GMAIL.COM
+PASSWORD: MARCOSTESTE10
+
+📦 **Repositório**
+
+https://github.com/donizeti26/Gcash
+
+📚 API Documentation  
+https://gcash-xin5.onrender.com/api/docs/
+
+⚠️ Observação
+
+A API está hospedada no plano gratuito do Render.  
+Se a aplicação ficar algum tempo sem acesso, o servidor pode entrar em modo "sleep".  
+Nesse caso, o primeiro carregamento pode levar cerca de 30–60 segundos enquanto o servidor é reativado.
 
 <a id="objetivo"></a>
 
 # 🎯 Objetivo
 
-O Gcash foi criado para ajudar você a se organizar financeiramente, permitindo acompanhar todos os seus gastos e assim visualizar quanto você realmente gasta, mensalmente ou anualmente. Sua versão é para descktop e mobile. Contém um desginer altamente simples priorizando a facilidade de acesso a informações e ferramentas pelo usuário
+O GCASH foi desenvolvido com dois objetivos principais:
+
+### 1️⃣ Resolver um problema real
+
+Permitir que usuários tenham **controle claro sobre receitas, despesas e histórico financeiro**, facilitando o planejamento financeiro.
+
+### 2️⃣ Consolidar fundamentos de engenharia de software
+
+Durante o desenvolvimento foram praticados conceitos importantes como:
+
+- Arquitetura **MVC**
+- Criação de **API REST**
+- Integração **frontend ↔ backend**
+- Modelagem de **banco de dados PostgreSQL**
+- Deploy em **cloud**
+- Manipulação direta do **DOM com Vanilla JavaScript**
+
+O projeto evita frameworks pesados para priorizar **aprendizado profundo dos fundamentos da web**.
+
+---
+
 <a id="funcionalidades"></a>
 
 # 🧩 Funcionalidades
 
-Plataforma online para gerenciamento de receitas e despesas pessoais.
-Registro de gastos com categorias, valores, parcelas e status de pago ou não pago.
-Resumo mensal dos gastos, destacando total gasto e total pago.
-Facilita o planejamento financeiro e o controle do orçamento futuro.
-Com o Gcash, manter suas finanças em dia nunca foi tão simples, grande parte dos recursos são encontrados facilmente na pagina inicial.
+✔ Cadastro de receitas e despesas  
+✔ Controle de status (pago / pendente)  
+✔ Registro de forma de pagamento  
+✔ Organização por categorias  
+✔ Resumo financeiro mensal  
+✔ Histórico completo de transações  
+✔ Filtros por período, tipo e categoria  
+✔ Interface simples focada em produtividade
+
+---
+
+# 🖥️ Interface
+
+### Dashboard
+
+![Dashboard do sistema GCASH mostrando resumo financeiro e lista de transações](docs/dashboard.png)
+
+### Login
+
+![Tela de login da aplicação GCASH com formulário de autenticação](docs/login.png)
+
+### Cadastro
+
+![Tela de criação de conta da aplicação GCASH](docs/register.png)
+
+---
+
+<a id="arquitetura"></a>
+
+# 🧠 Arquitetura da Aplicação
+
+O projeto segue uma arquitetura **MVC (Model–View–Controller)**.
+
+### Camadas
+
+**Frontend**
+
+- Interface da aplicação
+- Manipulação de DOM
+- Requisições HTTP com Fetch API
+
+**Backend**
+
+- API REST
+- Regras de negócio
+- Comunicação com banco de dados
+
+**Banco de dados**
+
+- Armazenamento persistente
+- Estrutura relacional em PostgreSQL
+
+---
+
 <a id="tecnologias"></a>
 
-# 🛠️ Tecnologias e Ferramentas usadas
+# 🛠️ Tecnologias e Ferramentas
+
+## Frontend
 
 - HTML5
 - CSS3
-- JavaScript
-  - Fetch API (requisições HTTP)
-- PgAdmin
-- Figma
-- Draw.io
-- [Seletor de intervalo de datas - daterangepicker](https://www.daterangepicker.com/)
-- [Material Symbols (Google Icons)](https://fonts.google.com/icons)
+- **JavaScript (Vanilla JS)**
+- Fetch API
+- Vite
 
-  <a id="roadmap"></a>
+## Backend
 
-# 📌 Roadmap
+- Node.js
+- Express
+- Arquitetura MVC
+- API REST
 
-- [x] Implementar Front-end
-- [x] Estrutura inicial do projeto
-  - [x] Página de Login
-  - [x] Página Index
-  - [x] Modais
+## Banco de dados
 
-- [x] Implementar back-end
-  - [x] Implementar Banco de dados
-  - [x] CRUD no banco de dados
+- PostgreSQL
+- Neon (Serverless Postgres)
 
-- [ ] Documentação
-  - [ ] Documentação de rotas
-  - [x] Diagrama de fluxo do banco
-  - [x] Prototipação da aplicação
-    - [x] Sobre
-    - [x] Projeto
-      - [x] WireFrame
-      - [x] Interfaces
-        - [x] Web
-        - [x] Mobile
-        - [x] Style Guide
-      - [x] Protótipo
+## Infraestrutura
+
+- Vercel (deploy frontend)
+- Render (deploy backend)
+
+## Documentação
+
+- Swagger (OpenAPI)
+
+## Ferramentas
+
+- Figma (UI/UX)
+- Draw.io (diagramas)
+- PgAdmin (gerenciamento do banco)
+
+## Bibliotecas
+
+- [Date Range Picker](https://www.daterangepicker.com/)
+- [Material Symbols](https://fonts.google.com/icons)
+
+---
 
 <a id="estrutura"></a>
 
-# 📂 Estrutura Inicial do Projeto
+# 📂 Estrutura do Projeto
 
-📁Gcash  
-|── 📁Docs **Documentação**  
-│──📁Public **Arquivos**  
-│──────📁css **Estilos**  
-│────── 📁scripts **Scripts** (fetch, manipulação DOM)  
-│────── 📁assets **Ícones, imagens**  
-│────── 📁views **HTML**
+GCASH
+│
+├── docs
+│ ├── diagramas
+│ ├── screenshots
+│ └── prototipos
+│
+├── public
+│ ├── css
+│ ├── scripts
+│ ├── assets
+│ └── views
+│
+├── server
+│ ├── src
+│ │ ├── config
+│ │ ├── controllers
+│ │ ├── models
+│ │ ├── routes
+│ │ └── services
+│
+└── package.json
 
-|── 📁Server **Servidor**
+---
 
-│────── 📁node_modules **Node**  
-│────── 📁src **Código-fonte do projeto**  
-│──────── 📁config **Conexão com Banco**  
-│──────── 📁controllers**Controladores**  
-│──────── 📁 models **Lógica relacionada ao armazenamento**  
-│──────── 📁 routes **Rotas**  
-│──────── 📁 services **Lógica de negócio**
+<a id="roadmap"></a>
 
-✍️ _Projeto autoral desenvolvido para aprendizado e portfólio._
+# 📌 Roadmap
+
+### ✔ Concluído
+
+- Frontend inicial
+- Sistema de login
+- CRUD de receitas e despesas
+- Integração com banco PostgreSQL
+- Estrutura MVC
+- Deploy da aplicação
+- Protótipo no Figma
+- Modelagem do banco de dados
+
+### 🚧 Em desenvolvimento
+
+- Lógica de parcelamento
+- Validações adicionais
+- Melhorias na UX
+- Ajustes na tela de login
+- Paginação avançada
+
+---
+
+# 🎨 Design da Interface
+
+Prototipação completa desenvolvida no **Figma**
+
+👉 https://www.figma.com/design/faIoh8gXIKu4B9rTiptKfR/Interface-no-Figma--Gcash
+
+---
+
+---
+
+<a id="documentacao"></a>
+
+# 📚 Documentação da API
+
+A API do GCASH possui documentação interativa para facilitar testes e integração.
+
+🔎 **Acessar documentação**
+
+https://gcash-xin5.onrender.com/api/docs/
+
+A documentação permite:
+
+- visualizar todas as rotas da API
+- testar requisições diretamente no navegador
+- consultar parâmetros e respostas
+- entender o fluxo de comunicação entre frontend e backend
+
+A interface foi construída utilizando **Swagger**, padrão amplamente utilizado para documentação de APIs REST.
+
+# ✍️ Autor
+
+**Donizete Silva**
+
+Projeto desenvolvido com foco em **aprendizado, prática de fundamentos e construção de portfólio profissional.**

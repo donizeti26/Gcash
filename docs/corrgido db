@@ -1,0 +1,174 @@
+CREATE TYPE category_type AS ENUM (
+    'revenue',
+    'expense'
+);
+
+CREATE TYPE installment_status AS ENUM (
+    'pending',
+    'paid'
+);
+
+CREATE TYPE transaction_status AS ENUM (
+    'pending',
+    'paid'
+);
+
+CREATE TYPE user_status AS ENUM (
+    'enable',
+    'disabled'
+);
+
+
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+CREATE TABLE categories (
+    category_id INTEGER GENERATED ALWAYS AS IDENTITY,
+    user_id integer,
+    name character varying(30) NOT NULL,
+    type category_type NOT NULL,
+    color character varying(20) NOT NULL,
+    icon character varying(20) NOT NULL,
+    created_at timestamp with time zone DEFAULT now(),
+    update_at timestamp with time zone DEFAULT now(),
+    description text NOT NULL
+);
+
+CREATE TABLE installments (
+    installment_id INTEGER GENERATED ALWAYS AS IDENTITY,
+    transaction_id integer,
+    current_installment numeric(10,2) NOT NULL,
+    paid_date timestamp with time zone,
+    installment_value numeric(10,2),
+    status installment_status NOT NULL,
+    created_at timestamp with time zone DEFAULT now(),
+    update_at timestamp with time zone DEFAULT now()
+);
+
+CREATE TABLE payment_methods (
+    payment_method_id INTEGER GENERATED ALWAYS AS IDENTITY,
+    name character varying(30) NOT NULL
+);
+
+
+CREATE TABLE transactions (
+    transaction_id INTEGER GENERATED ALWAYS AS IDENTITY,
+    user_id integer,
+    category_id integer,
+    payment_method_id integer,
+    due_date timestamp with time zone NOT NULL,
+    amount numeric(10,2) NOT NULL,
+    description text NOT NULL,
+    status transaction_status,
+    created_at timestamp with time zone DEFAULT now(),
+    update_at timestamp with time zone DEFAULT now()
+);
+
+CREATE TABLE users (
+    user_id INTEGER GENERATED ALWAYS AS IDENTITY,
+    email character varying(100) NOT NULL,
+    password_hash character varying(255) NOT NULL,
+    status user_status DEFAULT 'enable',
+    created_at timestamp with time zone DEFAULT now(),
+    update_at timestamp with time zone DEFAULT now(),
+    first_name character varying(100) DEFAULT 'Unknown'::character varying NOT NULL,
+    last_name character varying(100) DEFAULT 'Unknown'::character varying NOT NULL,
+    user_name character varying(50) DEFAULT 'Unknown'::character varying NOT NULL
+);
+
+
+
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (category_id);
+
+
+ALTER TABLE ONLY installments
+    ADD CONSTRAINT installments_pkey PRIMARY KEY (installment_id);
+
+
+ALTER TABLE ONLY payment_methods
+    ADD CONSTRAINT payment_methods_pkey PRIMARY KEY (payment_method_id);
+
+
+
+ALTER TABLE ONLY transactions
+    ADD CONSTRAINT transactions_pkey PRIMARY KEY (transaction_id);
+
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+ALTER TABLE ONLY transactions
+    ADD CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY installments
+    ADD CONSTRAINT installments_transaction_id_fkey FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id);
+
+
+
+
+
+ALTER TABLE ONLY transactions
+    ADD CONSTRAINT transactions_payment_method_id_fkey FOREIGN KEY (payment_method_id) REFERENCES payment_methods(payment_method_id);
+
+
+
+ALTER TABLE ONLY transactions
+    ADD CONSTRAINT transactions_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+INSERT INTO users
+(user_id, email, password_hash, status, created_at, update_at, first_name, last_name, user_name) VALUES
+(1,'joao.silva@example.com','a1b2c3d4e5f60718293aaabbccddee1122334455','enable','2025-12-12 11:35:38.520137-03','2025-12-12 11:35:38.520137-03','Unknown','Unknown','Unknown'),
+(2,'maria.ferreira@example.com','bb11cc22dd33ee44ff5500112233445566778899','enable','2025-12-12 11:35:38.520137-03','2025-12-12 11:35:38.520137-03','Unknown','Unknown','Unknown'),
+(3,'paulo.andrade@example.com','ff11223344556677889900aabbccddeeff001122','enable','2025-12-12 11:35:38.520137-03','2025-12-12 11:35:38.520137-03','Unknown','Unknown','Unknown'),
+(4,'ana.oliveira@example.com','1234567890abcdef1234567890abcdef12345678','enable','2025-12-12 11:35:38.520137-03','2025-12-12 11:35:38.520137-03','Unknown','Unknown','Unknown'),
+(5,'lucas.pereira@example.com','abcdefabcdefabcdefabcdefabcdefabcdefabcd','enable','2025-12-12 11:35:38.520137-03','2025-12-12 11:35:38.520137-03','Unknown','Unknown','Unknown');
+
+
+
+INSERT INTO categories 
+(category_id, user_id, name, type, color, icon, created_at, update_at, description) VALUES
+(131, 1, 'Salário do Mês', 'expense', '#ff0000', 'park', '2026-02-19 08:38:01.947273-03', '2026-02-19 08:38:01.947273-03', 'lorem ipsum'),
+(15, 1, 'Venda de Produtos', 'revenue', '#F39C12', 'shopping_cart', '2026-01-28 11:06:45.281305-03', '2026-01-28 11:06:45.281305-03', 'lorem ipsum'),
+(135, 1, 'TESTE 002', 'revenue', '#00ff1e', 'credit_card', '2026-02-20 08:44:10.493151-03', '2026-02-20 08:44:10.493151-03', 'TESTE SUCESSO'),
+(13, 1, 'Telefonia', 'expense', '#2980b9', 'phone_iphone', '2026-01-28 11:06:45.281305-03', '2026-01-28 11:06:45.281305-03', 'Plano da VIVO'),
+(5, 1, 'Transporte', 'expense', '#3498db', 'directions_bus', '2026-01-28 11:06:45.281305-03', '2026-01-28 11:06:45.281305-03', 'Combustível e outras coisas'),
+(136, 1, 'Salário', 'revenue', '#2ecc71', 'attach_money', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Recebimento mensal'),
+(137, 1, 'Freelance', 'revenue', '#27ae60', 'work', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Trabalhos extras'),
+(138, 1, 'Aluguel', 'expense', '#e74c3c', 'home', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Pagamento mensal de aluguel'),
+(139, 1, 'Alimentação', 'expense', '#f39c12', 'restaurant', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Mercado e refeições'),
+(140, 1, 'Transporte', 'expense', '#3498db', 'directions_car', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Combustível e transporte'),
+(141, 1, 'Lazer', 'expense', '#9b59b6', 'sports_esports', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Cinema, streaming e saídas'),
+(142, 1, 'Internet', 'expense', '#1abc9c', 'wifi', '2026-02-20 13:59:59.838024-03', '2026-02-20 13:59:59.838024-03', 'Plano de internet residencial'),
+(146, 1, 'Vendas', 'revenue', '#1abc9c', 'shopping_cart', '2026-02-24 15:41:16.991418-03', '2026-02-24 15:41:16.991418-03', 'Venda de produtos'),
+(149, 1, 'Transporte', 'expense', '#d35400', 'directions_car', '2026-02-24 15:41:16.991418-03', '2026-02-24 15:41:16.991418-03', 'Combustível e transporte'),
+(151, 1, 'Luz', 'expense', '#f39c12', 'bolt', '2026-02-24 15:41:16.991418-03', '2026-02-24 15:41:16.991418-03', 'Conta de energia'),
+(153, 1, 'Telefone', 'expense', '#2980b9', 'phone', '2026-02-24 15:41:16.991418-03', '2026-02-24 15:41:16.991418-03', 'Plano móvel'),
+(155, 1, 'Saúde', 'expense', '#e84393', 'local_hospital', '2026-02-24 15:41:16.991418-03', '2026-02-24 15:41:16.991418-03', 'Consultas e remédios');
+
+
+INSERT INTO payment_methods (payment_method_id, name) VALUES
+(1, 'Cartão de Crédito'),
+(2, 'Cartão de Débito'),
+(3, 'Dinheiro'),
+(4, 'VR'),
+(5, 'Pix');
+
+INSERT INTO transactions 
+(transaction_id, user_id, category_id, payment_method_id, due_date, amount, description, status, created_at, update_at) VALUES
+(330,1,136,5,'2026-03-29 21:00:00-03',3500.00,'Salário Abril adiantado','paid','2026-02-24 15:41:16.991418-03','2026-02-24 15:41:16.991418-03'),
+(379,1,151,1,'2026-03-01 21:00:00-03',-2.50,'Café da manhã','pending','2026-03-02 12:42:14.654533-03','2026-03-02 12:42:14.654533-03'),
+(380,1,151,2,'2026-03-01 21:00:00-03',-32.50,'dededededededed','pending','2026-03-02 12:42:24.791157-03','2026-03-02 12:42:24.791157-03'),
+(355,1,136,5,'2026-02-26 21:00:00-03',3500.00,'Salário bônus','paid','2026-02-24 15:43:14.877709-03','2026-02-24 15:43:14.877709-03'),
+(339,1,146,1,'2026-02-25 21:00:00-03',89.90,'Plano celular','paid','2026-02-24 15:43:14.877709-03','2026-02-24 15:43:14.877709-03'),
+(317,1,149,3,'2026-03-24 21:00:00-03',180.00,'Curso online','paid','2026-02-24 15:41:16.991418-03','2026-02-24 15:41:16.991418-03'),
+(323,1,136,5,'2026-02-28 21:00:00-03',3500.00,'Salário Março','paid','2026-02-24 15:41:16.991418-03','2026-02-24 15:41:16.991418-03'),
+(326,1,139,3,'2026-03-13 21:00:00-03',400.00,'Venda produto usado','paid','2026-02-24 15:41:16.991418-03','2026-02-24 15:41:16.991418-03'),
+(348,1,136,5,'2026-02-23 21:00:00-03',3500.00,'Salário Fevereiro','paid','2026-02-24 15:43:14.877709-03','2026-02-24 15:43:14.877709-03');
+
