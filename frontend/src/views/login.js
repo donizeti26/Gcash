@@ -1,8 +1,9 @@
 import "../css/login.css";
 import { navigate } from "../router.js";
 import { focusOnOf } from "../script/utils/loginUtils";
-
+import { showLoading } from "../script/utils/loadingUtils.js";
 import { apiFetch } from "../script/api.js";
+
 export function renderLogin() {
   const app = document.getElementById("app");
   app.innerHTML = `
@@ -67,18 +68,22 @@ export function renderLogin() {
           </div>
         </div>
       </div>
+          <div id="loading-overlay" class="hidden">
+      <div class="spinner"></div>
+      <p>Carregando...</p>
+    </div>
     </main>`;
   focusOnOf();
 
   document.getElementById("formLogin").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
+    showLoading();
 
     const payload = {
       email: form.inputEmail.value,
       password: form.inputPassword.value,
     };
-
     const res = await apiFetch("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -93,6 +98,8 @@ export function renderLogin() {
     } else {
       alert(data.error || "Login inválido");
     }
+
+    hideLoading();
   });
 
   document
