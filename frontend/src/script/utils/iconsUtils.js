@@ -34,7 +34,6 @@ const bank_icons = [
   { icon: "sports_esports", text: "Jogos" },
   { icon: "beach_access", text: "Viagem" },
   { icon: "theaters", text: "Cinema" },
-  { icon: "park", text: "Parque" },
   { icon: "liquor", text: "Bebidas" },
   { icon: "shopping_bag", text: "Roupas" },
   { icon: "child_friendly", text: "Crianças" },
@@ -64,7 +63,7 @@ export function create_icons() {
     new_button.addEventListener("click", testDisplay);
     new_button.dataset.icon = item.icon; // <-- aqui guardamos o nome do ícone
     new_button.className = "list_button_icons";
-    new_icons.className = "material-symbols-rounded new_icon";
+    new_icons.className = "material-symbols-outlined new_icon";
     new_icons.textContent = item.icon;
 
     new_button.appendChild(new_icons);

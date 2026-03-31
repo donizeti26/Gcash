@@ -232,10 +232,10 @@ export function renderCards(transactions, currentPage) {
       <div class="group_button_transactions index_card">
       
 
-      <button  data-id="${cat.transaction_id}"  class="button_remove"><span class="material-symbols-outlined">
+      <button  data-id="${cat.transaction_id}"  class="button_remove"><span class="material-symbols-outlined delete-icon">
 delete_forever
 </span></button>
-        <button data-id="${cat.transaction_id}"   class="button_edit edit_transaction"><span class="material-symbols-outlined">
+        <button data-id="${cat.transaction_id}"   class="button_edit edit_transaction"><span class="material-symbols-outlined edit-icon">
 edit_document
 </span></button>
       </div>
@@ -285,12 +285,12 @@ async function renderTransactionButton(id, item) {
     const statusString = statusData.status || statusData;
     if (statusString == "paid") {
       buttonPay.classList.add("button_set_status", "button_set_status_pending");
-      buttonPay.innerHTML = `<span class="material-symbols-outlined">
+      buttonPay.innerHTML = `<span class="material-symbols-outlined icon-pending">
 credit_card_off
 </span>`;
     } else {
       buttonPay.classList.add("button_set_status", "button_set_status_paid");
-      buttonPay.innerHTML = `<span class="material-symbols-outlined">
+      buttonPay.innerHTML = `<span class="material-symbols-outlined icon-paid">
 credit_score
 </span>`;
     }

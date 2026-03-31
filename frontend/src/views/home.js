@@ -56,23 +56,29 @@ import Litepicker from "litepicker";
 
 export function renderHome() {
   const app = document.getElementById("app");
-  app.innerHTML = `    <div id="main_content">
+  app.innerHTML = `    <div id="main_content" >
       <div id="menu_mobile"></div>
       <div id="left_side">
-        <div id="user">
+      <!-- From Uiverse.io by alexruix --> 
+<label class="switch">
+    <input type="checkbox">
+    <span class="slider"></span>
+</label>
+        <div id="user" >
+        
           <p id="user_name">Claudio CTE 01</p>
           <button id="btn_logout">
           SAIR
 
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined icon_logout">
           logout
           </span>
           
           </button>
         </div>
-        <article id="resume_month">
+        <article id="resume_month" >
           <div id="aside_menu">
-            <span id="atual_month">
+            <span id="atual_month" >
               <button id="BACK" type="button" class="button_month">
                 <span class="material-symbols-outlined arrow_month">
                   arrow_back_ios
@@ -85,9 +91,9 @@ export function renderHome() {
                 </span>
               </button>
             </span>
-            <div id="group_total_resume">
+            <div id="group_total_resume" >
               <div id="group_resume">
-                <span id="group_total" class="containerResume">
+                <span id="group_total" class="containerResume ">
                   <div class="titleContainerResume">
                     <span class="material-symbols-outlined" id="walletIcon">
                       wallet </span
@@ -95,15 +101,15 @@ export function renderHome() {
                   </div>
                   <strong id="total_year"></strong>
                 </span>
-                <span class="containerResume">
-                  <div class="titleContainerResume">
+                <span class="containerResume ">
+                  <div class="titleContainerResume ">
                     <span class="material-symbols-outlined" id="articlePerson">
                       article_person </span
                     >Resumo Mensal <br />
                   </div>
                   <strong id="calc_resume_month"></strong
                 ></span>
-                <span id="revenue " class="containerResume">
+                <span id="revenue " class="containerResume ">
                   <div class="titleContainerResume">
                     <span
                       class="material-symbols-outlined"
@@ -115,7 +121,7 @@ export function renderHome() {
                   <strong id="month_revenue"></strong
                 ></span>
 
-                <span class="containerResume">
+                <span class="containerResume ">
                   <div class="titleContainerResume">
                     <span
                       class="material-symbols-outlined"
@@ -128,7 +134,7 @@ export function renderHome() {
                   <strong id="amount_paid"></strong>
                 </span>
 
-                <span class="containerResume">
+                <span class="containerResume ">
                   <div class="titleContainerResume">
                     <span
                       class="material-symbols-outlined"
@@ -166,37 +172,38 @@ export function renderHome() {
 
       <main id="other_body">
         <form id="form_search">
-          <div id="search_filters">
+          <div id="search_filters" >
             <div class="search_item">
-              <label for="search_input">Buscar</label>
+              <label for="search_input"><strong>Buscar</strong></label>
               <input
                 type="search"
-                class="input_search"
+                class="input_search "
                 id="search_input"
                 placeholder="Buscar por descrição..."
               />
             </div>
             <div class="search_item">
-              <label for="search_description">Tipo</label>
-              <select class="input_search" type="" id="search_description">
+              <label for="search_description"><strong>Tipo</strong></label>
+              <select class="input_search " type="" id="search_description">
                 <option value="all" selected>Todos os tipos...</option>
                 <option value="expense">Despesa</option>
                 <option value="revenue">Receita</option>
               </select>
             </div>
             <div class="search_item">
-              <label for="search_category">Categoria</label>
-              <select type="" class="input_search" id="search_category">
+              <label for="search_category"><strong>Categoria</strong></label>
+              <select type="" class="input_search " id="search_category">
                 <option value="all" selected="">Todas as categorias...</option>
               </select>
             </div>
             <!--Calendário do input inicial-->
 
             <div class="search_item">
-              <label for="daterange">Período</label>
+              <label for="daterange"><strong>Período</strong></label>
               <input
                 type="text"
                 id="daterange"
+                
                 placeholder="Selecione o período"
               />
             </div>
@@ -204,11 +211,11 @@ export function renderHome() {
           </div>
           <div id="group_buttons_form_search">
           <button id="button_search" type="submit">Buscar</button>
-          <button id="btn_clear" type="button">Limpar</button>
+          <button id="btn_clear"  type="button">Limpar</button>
 
           </div>
                   </form>
-          <div id="main_content_body">
+          <div id="main_content_body" >
             <div id="resultResume"></div>
 
             <div id="group_cards"></div>
@@ -269,6 +276,7 @@ export async function initHome() {
     element: document.getElementById("daterange"),
     singleMode: false,
   });
+
   setNameUser();
   setupCalendar();
   setupModalGlobalListeners();

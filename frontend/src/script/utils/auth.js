@@ -24,6 +24,7 @@ export async function setNameUser() {
     },
   });
 
+  if (!response) return;
   const data = await response.json();
   console.log(data.user_name);
   const userName = document.getElementById("user_name");

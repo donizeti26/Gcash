@@ -1,4 +1,5 @@
 @import url("shared/main.css");
+@import url("shared/dark_mode.css");
 @import url("shared/index.css");
 @import url("shared/buttons.css");
 @import url("shared/modal_confirmation.css");

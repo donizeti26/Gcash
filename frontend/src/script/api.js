@@ -8,6 +8,14 @@ export async function apiFetch(endpoint, options = {}) {
     ...options,
   });
 
+  //token expirado aqui
+  if (response.status === 401) {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+    return;
+  }
+
+  // outros erros
   if (!response.ok) {
     throw new Error("Erro na requisição");
   }

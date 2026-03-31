@@ -1,0 +1,75 @@
+body.dark_mode p,
+body.dark_mode h1,
+body.dark_mode h2,
+body.dark_mode strong,
+body.dark_mode span {
+  color: var(--front-color-white);
+}
+
+body.dark_mode #btn_clear {
+  background-color: var(--back-color-white);
+  color: var(--back-color-black);
+}
+body.dark_mode #main_content {
+  background-color: var(--back-color-black);
+}
+body.dark_mode #user {
+  background-color: var(--front-color-black);
+  border: solid 1px #a7a7a71c;
+}
+
+body.dark_mode #resume_month {
+  background-color: var(--front-color-black);
+  border: solid 1px #a7a7a71c;
+}
+
+body.dark_mode #atual_month {
+  background-color: var(--back-color-black);
+}
+
+body.dark_mode .containerResume {
+  background-color: var(--back-color-black);
+}
+
+body.dark_mode #search_filters {
+  background-color: var(--back-color-black);
+  border: solid 1px #a7a7a731;
+}
+
+body.dark_mode .month-item {
+  background-color: var(--back-color-black);
+}
+body.dark_mode .litepicker .month-item .container__days .day-item.is-in-range {
+  background-color: #f2f2f242;
+}
+body.dark_mode .month-item .day-item {
+  color: var(--back-color-white);
+}
+
+body.dark_mode #daterange {
+  background-color: var(--stroke-color);
+  color: var(--front-color-white);
+}
+
+body.dark_mode .input_search {
+  background-color: var(--stroke-color);
+}
+
+body.dark_mode #main_content_body {
+  background-color: var(--front-color-black);
+  border: solid 1px #a7a7a71c;
+}
+
+body.dark_mode .group_button_pages {
+  color: var(--back-color-white);
+}
+body.dark_mode .card_pay {
+  background-color: var(--back-color-black);
+  border: solid 1px #a7a7a70d;
+}
+
+body .modal_container_form p,
+body .modal_container_form h1,
+body .modal_container_form strong {
+  color: var(--back-color-black);
+}

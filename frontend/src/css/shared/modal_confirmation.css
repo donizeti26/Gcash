@@ -73,7 +73,7 @@
 
 #toast-container {
   position: fixed;
-  top: 130px;
+  top: 150px;
   right: 32px;
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@
   padding: 15px 25px;
   border-radius: 8px;
   color: white;
-  background-color: #2eab80;
+  background-color: var(--button-color-yellow);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   max-width: 300px;
 }

@@ -17,10 +17,27 @@ export function setupModalGlobalListeners() {
       closeModal();
     }
   });
+
+  const toggle = document.querySelector(".switch input");
+
+  const isChecked = localStorage.getItem("toggle") === "checked";
+  toggle.checked = isChecked;
+  applyDarkMode(isChecked);
+
+  toggle.addEventListener("change", () => {
+    const checked = toggle.checked;
+
+    applyDarkMode(checked);
+
+    if (checked) {
+      localStorage.setItem("toggle", "checked");
+    } else {
+      localStorage.removeItem("toggle");
+    }
+  });
   // CLICK GLOBAL (delegação)
   document.addEventListener("click", (e) => {
     // botão fechar
-    console.log("★ setupModalGlobalListeners:", e.target);
     const NewModalJs = e.target.closest(".modal_overlay_form");
     const formCard = e.target.closest(".modal_container_form");
 
@@ -48,6 +65,10 @@ export function setupModalGlobalListeners() {
   });
 }
 
+export function applyDarkMode(enabled) {
+  document.body.classList.toggle("dark_mode", enabled);
+}
+
 export function overflowHidden(component = true) {
   if (component) {
     document.body.style.overflow = "hidden";
@@ -64,6 +85,7 @@ export function showToast(message, duration) {
 
   toast.classList.add("toast");
   iconSpan.classList.add("material-symbols-outlined");
+
   iconSpan.textContent = "check_circle";
   textP.textContent = message;
 

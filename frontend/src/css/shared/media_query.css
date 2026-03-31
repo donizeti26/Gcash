@@ -75,7 +75,7 @@
   }
 
   #user {
-    background-color: var(--azul-400);
+    background-color: var(--front-color-white);
     border-radius: 0.5rem;
     padding: 1rem;
     display: flex;
@@ -106,7 +106,7 @@
   }
   .card_pay {
     width: 100%;
-    background-color: var(--azul-200);
+    background-color: var(--back-color-white);
     padding: 1.5rem;
     border-radius: 1rem;
   }
@@ -208,7 +208,7 @@
 
 @media screen and (min-width: 1200px) {
   #main_content {
-    background-color: var(--azul-200);
+    background-color: var(--back-color-white);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -255,7 +255,7 @@
   #resume_month {
     flex-direction: column;
 
-    background-color: var(--azul-400);
+    background-color: var(--front-color-white);
     justify-content: space-around;
 
     border-radius: 1rem;

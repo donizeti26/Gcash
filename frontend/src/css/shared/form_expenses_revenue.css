@@ -16,11 +16,6 @@
   user-select: none;
   cursor: pointer;
 }
-#button_transactions:hover {
-  background-color: #00c774;
-  transition-property: background-color;
-  transition-duration: 0.5s;
-}
 
 #div_button_expense {
   display: flex;

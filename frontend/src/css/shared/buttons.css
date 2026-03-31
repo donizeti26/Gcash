@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: mediumslateblue;
+  background-color: var(--button-color-yellow);
   transition: transform 0.3s ease-in-out;
   color: #ffffff;
   cursor: pointer;
@@ -20,12 +20,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--button-color-red);
+  background-color: var(--back-color-black);
   transition: transform 0.3s ease-in-out;
   color: #ffffff;
   cursor: pointer;
   gap: 0.3rem;
 }
+
 #btn_clear:hover {
   transform: scale(1.1);
 }
@@ -41,6 +42,9 @@
   cursor: pointer;
   gap: 0.3rem;
 }
+.icon_logout {
+  color: #ffffff;
+}
 #btn_logout:hover {
   transform: scale(1.1);
 }
@@ -55,17 +59,17 @@
   font-size: 20px;
 }
 #btn_expense {
-  background-color: var(--button-color-red);
+  background-color: var(--button-color-yellow);
   user-select: none;
   transition: transform 0.3s ease-in-out;
 }
 #btn_revenue {
-  background-color: var(--button-color-green);
+  background-color: var(--button-color-yellow);
   user-select: none;
   transition: transform 0.3s ease-in-out;
 }
 #btn_category {
-  background-color: var(--button-color-blue);
+  background-color: var(--button-color-yellow);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -74,8 +78,6 @@
 }
 
 #btn_expense:hover {
-  color: #ffffff;
-
   transform: scale(1.1);
 }
 
@@ -85,18 +87,26 @@
 
 .button_remove {
   cursor: pointer;
-  background-color: var(--button-color-red);
+  background-color: #e34c4941;
   font-weight: 700;
-  color: var(--button-color-back);
-  border: 1px solid var(--button-color-red);
+  color: #e34b49 !important;
   transition: transform 0.3s ease-in-out;
-
+  border: solid 1px #e34c4970;
   border-radius: 0.5rem;
   transition: transform 0.3s ease-in-out;
+}
+.button_remove .delete-icon {
+  color: #e34b49;
 }
 .button_remove:hover {
   transform: scale(1.1);
   color: var(--white-900);
+}
+.button_edit span,
+.button_remove span,
+.button_set_status_pending span,
+.button_set_status_paid span {
+  color: var(--front-color-white);
 }
 
 .button_edit,
@@ -108,14 +118,17 @@
 
 .button_edit {
   cursor: pointer;
-  background-color: var(--button-color-blue);
+  background-color: #267fd836;
   font-weight: 700;
   color: var(--button-color-back);
-  border: 1px solid var(--button-color-blue);
+  border: 1px solid #267fd8;
   transition: transform 0.3s ease-in-out;
 
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+}
+.button_edit .edit-icon {
+  color: #267fd8;
 }
 .button_edit:hover {
   color: var(--white-900);
@@ -123,35 +136,38 @@
 }
 .button_set_status_paid {
   cursor: pointer;
-  background-color: var(--button-color-yellow);
+  background-color: #f3bf243f;
   font-weight: 700;
   color: var(--button-color-back);
   border: 1px solid var(--button-color-yellow);
   transition: transform 0.3s ease-in-out;
   border-radius: 0.5rem;
 }
+.button_set_status_paid .icon-paid {
+  color: var(--button-color-yellow);
+}
+.button_set_status_pending .icon-pending {
+  color: #0f6b4f;
+}
 .button_set_status_pending {
   white-space: nowrap;
   cursor: pointer;
-  background-color: var(--button-color-green);
+  background-color: #0f6b4f48;
   font-weight: 700;
   color: var(--button-color-back);
 
-  border: 1px solid var(--button-color-green);
+  border: 1px solid #0f6b4f;
   transition: all;
   transition-duration: 0.2s;
   border-radius: 0.5rem;
   transition: transform 0.3s ease-in-out;
 }
+
 .button_set_status_paid:hover {
-  color: var(--white-900);
-  border: 1px solid var(--button-color-yellow);
   transform: scale(1.1);
 }
 .button_set_status_pending:hover {
-  color: var(--white-900);
   transform: scale(1.1);
-  background-color: var(--button-color-green);
 }
 
 .button_close_card,
@@ -178,7 +194,7 @@
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
-  background-color: var(--button-color-red);
+  background-color: var(--back-color-black);
   color: white;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -187,10 +203,11 @@
 }
 .button_close_card span {
   font-weight: 700;
+  color: var(--back-color-white);
 }
 .button_close_card:hover,
 .button_close_card_new_category:hover {
-  background-color: var(--button-color-red-hover);
+  background-color: #686868;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -198,7 +215,7 @@
 #buttonLogin_create,
 #buttonNewCategory,
 #button_transactions {
-  background-color: var(--button-color-blue);
+  background-color: var(--button-color-yellow);
   padding: 16px 64px;
   border-radius: 0.5rem;
   text-decoration: none;
@@ -207,6 +224,13 @@
   cursor: pointer;
   transition-property: all;
   transition-duration: 300ms;
+}
+
+#button_transactions:hover {
+  background-color: #ffcf4a;
+
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
 #buttonLogin:hover,
@@ -219,19 +243,19 @@
 #button_category {
   cursor: pointer;
   padding: 1rem 2rem;
-  background-color: var(--button-color-green);
+  background-color: var(--button-color-yellow);
   transition-duration: 1s;
   transition-property: background-color;
   border-radius: 0.5rem;
   color: white;
 }
 #buttonNewCategory:hover {
-  background-color: var(--button-color-green);
+  background-color: #ffcf4a;
   transition-property: all;
   transition-duration: 0.5s;
 }
 #button_category:hover {
-  background-color: #00c030a1;
+  background-color: #ffcf4a;
   transition-property: all;
   transition-duration: 0.5s;
 }
@@ -239,12 +263,15 @@
   width: 80%;
   text-decoration: none;
   padding: 0.6rem 1rem;
-  color: #ffffff;
+  color: var(--front-color-white);
   border-radius: 0.5rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#options ul li span {
+  color: var(--front-color-white);
 }
 
 #button_transactions {

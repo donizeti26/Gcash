@@ -11,7 +11,6 @@
   --button-color-green-hover: #00c030;
 
   --button-color-purple: #7142ff;
-  --button-color-yellow: #f8b632;
 
   --button-color-back: #ebebeb;
 
@@ -24,10 +23,22 @@
   --black-legend: #65656580;
 
   --input-color: #eeeeee;
-  --text-default: #373737;
   --text-legend: #7b7b7b;
 
   --component-color: #9e9e9e;
+
+  --back-color-black: #222222;
+  --front-color-black: #1f1f1f;
+
+  --back-color-white: #e3e3e3;
+  --front-color-white: #f3f4f8;
+
+  --text-default: #373737;
+  --stroke-color: #a7a7a74f;
+  --text-grey-color: #9e9e9e;
+  --text-white: #ffffff;
+
+  --button-color-yellow: #f5b100;
 }
 body {
   -moz-osx-font-smoothing: grayscale; /* Para navegadores Firefox no macOS */
@@ -51,4 +62,67 @@ html {
 
 footer {
   display: none;
+}
+
+p,
+h1,
+h2,
+strong,
+span {
+  color: var(--back-color-black);
+}
+
+/**/
+/* From Uiverse.io by alexruix */
+/* The switch - the box around the slider */
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--text-legend);
+  transition: 0.5s;
+  border-radius: 30px;
+}
+
+/* 🔥 AGORA o estado padrão vira o "checked antigo" */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  border-radius: 50%;
+  left: 10%;
+  bottom: 15%;
+  transform: translateX(100%);
+  box-shadow: inset 15px -4px 0px 15px var(--button-color-yellow);
+  background: var(--background);
+  transition: 0.5s;
+}
+
+/* 🔥 quando checked, volta pro estado anterior */
+input:checked + .slider {
+  background-color: var(--text-legend);
+}
+
+input:checked + .slider:before {
+  transform: translateX(0);
+  box-shadow: inset 8px -4px 0px 0px var(--back-color-white);
 }
