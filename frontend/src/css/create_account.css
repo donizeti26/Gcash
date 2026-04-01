@@ -23,9 +23,14 @@ html {
   justify-content: center;
   align-items: center;
 }
-#button_back_login:hover {
-  transform: scale(1.02);
+#button_back_login span {
+  color: var(--text-white);
 }
+#button_back_login:hover * {
+  transform: scale(1.02);
+  color: var(--button-color-yellow);
+}
+
 #main_content_create_account {
   display: flex;
   width: 100%;
@@ -46,7 +51,7 @@ html {
   align-items: start;
   gap: 2rem;
   height: 100vh;
-  background-image: url("/images/backgroundCreateAccount.png");
+  background-image: url("/images/backgroundCreateAccount.svg");
 }
 
 #right_side_create_account {
@@ -71,7 +76,7 @@ html {
   gap: 0.2rem;
 }
 #title_new_account h1 {
-  font-weight: 00;
+  color: var(--text-white);
   font-size: 2.5rem;
 }
 
@@ -87,9 +92,10 @@ html {
   gap: 2rem;
 }
 .group_div_inputs {
-  background-color: #30434c;
+  background-color: var(--front-color-black);
   padding: 0.5rem 1rem;
   border-radius: 1rem;
+  border: solid 1px var(--stroke-color);
 }
 #group_name {
   display: flex;
@@ -101,7 +107,7 @@ html {
 }
 
 .group_inputs {
-  background-color: #30434c;
+  background-color: var(--front-color-black);
   color: #ffffff;
   width: 100%;
   padding: 0.7rem;
@@ -115,7 +121,7 @@ html {
   border-radius: 2rem;
   font-weight: 800;
   color: #ffffff;
-  background-color: #1a8aec;
+  background-color: var(--button-color-yellow);
   cursor: pointer;
   transition: all 0.5s ease;
 }
@@ -139,6 +145,6 @@ html {
     height: 100%;
   }
   #right_side_create_account {
-    width: 50%;
+    width: 40%;
   }
 }

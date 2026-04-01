@@ -10,15 +10,7 @@ export function renderCreateAccount() {
     <span class="material-symbols-outlined">  arrow_back_ios  </span> Voltar
   </div>
   <div id="main_content_create_account">
-    <div id="left_side_create_account">
-      <div id="logo_right">
-        <img
-          src="/images/img_create_account.svg"
-          id="logo_create_account"
-          alt=""
-        />
-      </div>
-    </div>
+
     <div id="right_side_create_account">
     
       <div id="contentRightSidCreateAccount">

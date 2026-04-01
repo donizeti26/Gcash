@@ -213,6 +213,11 @@ button,
 #search_category {
   color: var(--back-color-white);
 }
+select option {
+  background-color: var(--back-color-black);
+  color: var(--back-color-white);
+  border: none;
+}
 .search_item {
   display: flex;
   flex-direction: column;

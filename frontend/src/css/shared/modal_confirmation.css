@@ -17,6 +17,10 @@
   gap: 1rem;
   flex-direction: column;
 }
+#modal_box p {
+  color: var(--back-color-white);
+}
+
 #body_modal.hidden {
   display: none;
 }
