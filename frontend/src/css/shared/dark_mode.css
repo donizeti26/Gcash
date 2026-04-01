@@ -68,8 +68,18 @@ body.dark_mode .card_pay {
   border: solid 1px #a7a7a70d;
 }
 
-body .modal_container_form p,
-body .modal_container_form h1,
-body .modal_container_form strong {
+body.dark_mode .modal_container_form p,
+body.dark_mode .modal_container_form h1,
+body.dark_mode .modal_container_form strong {
   color: var(--back-color-black);
+}
+
+body.dark_mode .border_icon_list_category span {
+  color: var(--back-color-black);
+}
+
+body.dark_mode .item_group_category_resume div p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--black-legend);
 }

@@ -12,6 +12,9 @@
   font-size: 12px;
   color: #656565;
 }
+#page_title {
+  color: var(--back-color-black);
+}
 .installments_option {
   user-select: none;
   cursor: pointer;

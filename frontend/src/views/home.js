@@ -56,212 +56,190 @@ import Litepicker from "litepicker";
 
 export function renderHome() {
   const app = document.getElementById("app");
-  app.innerHTML = `    <div id="main_content" >
-      <div id="menu_mobile"></div>
-      <div id="left_side">
-      <!-- From Uiverse.io by alexruix --> 
-<label class="switch">
-    <input type="checkbox">
-    <span class="slider"></span>
-</label>
-        <div id="user" >
-        
-          <p id="user_name">Claudio CTE 01</p>
-          <button id="btn_logout">
+  app.innerHTML = `    <div id="main_content">
+  <div id="menu_mobile"></div>
+  <div id="left_side">
+    <!-- From Uiverse.io by alexruix -->
+    <div id="group_top">
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+      <div id="user">
+
+        <p id="user_name">Claudio CTE 01</p>
+        <button id="btn_logout">
           SAIR
 
           <span class="material-symbols-outlined icon_logout">
-          logout
+            logout
           </span>
-          
-          </button>
-        </div>
-        <article id="resume_month" >
-          <div id="aside_menu">
-            <span id="atual_month" >
-              <button id="BACK" type="button" class="button_month">
-                <span class="material-symbols-outlined arrow_month">
-                  arrow_back_ios
-                </span>
-              </button>
-              <div id="month"></div>
-              <button id="GO" type="button" class="button_month">
-                <span class="material-symbols-outlined arrow_month">
-                  arrow_forward_ios
-                </span>
-              </button>
+
+        </button>
+      </div>
+    </div>
+    <article id="resume_month">
+      <div id="aside_menu">
+        <span id="atual_month">
+          <button id="BACK" type="button" class="button_month">
+            <span class="material-symbols-outlined arrow_month">
+              arrow_back_ios
             </span>
-            <div id="group_total_resume" >
-              <div id="group_resume">
-                <span id="group_total" class="containerResume ">
-                  <div class="titleContainerResume">
-                    <span class="material-symbols-outlined" id="walletIcon">
-                      wallet </span
-                    >Saldo Anual<br />
-                  </div>
-                  <strong id="total_year"></strong>
-                </span>
-                <span class="containerResume ">
-                  <div class="titleContainerResume ">
-                    <span class="material-symbols-outlined" id="articlePerson">
-                      article_person </span
-                    >Resumo Mensal <br />
-                  </div>
-                  <strong id="calc_resume_month"></strong
-                ></span>
-                <span id="revenue " class="containerResume ">
-                  <div class="titleContainerResume">
-                    <span
-                      class="material-symbols-outlined"
-                      id="arrowCircleUpIcon"
-                    >
-                      arrow_circle_up </span
-                    >Recebidos Mensal<br />
-                  </div>
-                  <strong id="month_revenue"></strong
-                ></span>
-
-                <span class="containerResume ">
-                  <div class="titleContainerResume">
-                    <span
-                      class="material-symbols-outlined"
-                      id="checkCircleIcon"
-                    >
-                      check_circle
-                    </span>
-                    Despesas pagas<br />
-                  </div>
-                  <strong id="amount_paid"></strong>
-                </span>
-
-                <span class="containerResume ">
-                  <div class="titleContainerResume">
-                    <span
-                      class="material-symbols-outlined"
-                      id="arrowCircleDownIcon"
-                    >
-                      arrow_circle_down </span
-                    >Despesas ativas <br />
-                  </div>
-                  <strong id="amount_pending"></strong
-                ></span>
+          </button>
+          <div id="month"></div>
+          <button id="GO" type="button" class="button_month">
+            <span class="material-symbols-outlined arrow_month">
+              arrow_forward_ios
+            </span>
+          </button>
+        </span>
+        <div id="group_total_resume">
+          <div id="group_resume">
+            <span id="group_total" class="containerResume ">
+              <div class="titleContainerResume">
+                <span class="material-symbols-outlined" id="walletIcon">
+                  wallet </span>Saldo Anual<br />
               </div>
-            </div>
-          </div>
+              <strong id="total_year"></strong>
+            </span>
+            <span class="containerResume ">
+              <div class="titleContainerResume ">
+                <span class="material-symbols-outlined" id="articlePerson">
+                  article_person </span>Resumo Mensal <br />
+              </div>
+              <strong id="calc_resume_month"></strong>
+            </span>
+            <span id="revenue " class="containerResume ">
+              <div class="titleContainerResume">
+                <span class="material-symbols-outlined" id="arrowCircleUpIcon">
+                  arrow_circle_up </span>Recebidos Mensal<br />
+              </div>
+              <strong id="month_revenue"></strong>
+            </span>
 
-          <div id="button_option">
-            <div class="open" id="options">
-              <ul>
-                <li id="btn_revenue">
-                  <span class="material-symbols-outlined"> add </span> Receita
-                </li>
-                <li id="btn_expense">
-                  <span class="material-symbols-outlined"> add </span> Despesa
-                </li>
-                <li id="btn_category">
-                  <span class="material-symbols-outlined">
-                    tv_options_edit_channels
-                  </span>
-                  Categorias
-                </li>
-              </ul>
-            </div>
-          </div>
-        </article>
-      </div>
+            <span class="containerResume ">
+              <div class="titleContainerResume">
+                <span class="material-symbols-outlined" id="checkCircleIcon">
+                  check_circle
+                </span>
+                Despesas pagas<br />
+              </div>
+              <strong id="amount_paid"></strong>
+            </span>
 
-      <main id="other_body">
-        <form id="form_search">
-          <div id="search_filters" >
-            <div class="search_item">
-              <label for="search_input"><strong>Buscar</strong></label>
-              <input
-                type="search"
-                class="input_search "
-                id="search_input"
-                placeholder="Buscar por descrição..."
-              />
-            </div>
-            <div class="search_item">
-              <label for="search_description"><strong>Tipo</strong></label>
-              <select class="input_search " type="" id="search_description">
-                <option value="all" selected>Todos os tipos...</option>
-                <option value="expense">Despesa</option>
-                <option value="revenue">Receita</option>
-              </select>
-            </div>
-            <div class="search_item">
-              <label for="search_category"><strong>Categoria</strong></label>
-              <select type="" class="input_search " id="search_category">
-                <option value="all" selected="">Todas as categorias...</option>
-              </select>
-            </div>
-            <!--Calendário do input inicial-->
-
-            <div class="search_item">
-              <label for="daterange"><strong>Período</strong></label>
-              <input
-                type="text"
-                id="daterange"
-                
-                placeholder="Selecione o período"
-              />
-            </div>
-
-          </div>
-          <div id="group_buttons_form_search">
-          <button id="button_search" type="submit">Buscar</button>
-          <button id="btn_clear"  type="button">Limpar</button>
-
-          </div>
-                  </form>
-          <div id="main_content_body" >
-            <div id="resultResume"></div>
-
-            <div id="group_cards"></div>
-            <div id="pagination">
-              <ul>
-                <li><</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>></li>
-              </ul>
-            </div>
-          </div>
-
-      </main>
-
-      <div id="modalContainer">
-        <!-- INSERIDO PELO JS-->
-      </div>
-    </div>
-    <footer>
-      <!-- Informações do rodapé -->
-      <p>&copy; 2025 Minha Empresa. Todos os direitos reservados.</p>
-      <p><a href="/contact">Contacte-nos</a></p>
-    </footer>
-    <div id="loading-overlay" class="hidden">
-      <div class="spinner"></div>
-      <p>Carregando...</p>
-    </div>
-    <div id="body_modal" class="hidden">
-      <div id="confirm_modal" class="modal danger">
-        <div id="modal_box">
-          <span id="icon_modal" class="material-symbols-outlined"
-            >delete_forever</span
-          >
-          <p id="confirm_title">Atenção</p>
-          <p id="confirm_message"></p>
-
-          <div class="actions">
-            <button id="confirm_no">Não, manter</button>
-            <button id="confirm_yes">Sim, Deletar.</button>
+            <span class="containerResume ">
+              <div class="titleContainerResume">
+                <span class="material-symbols-outlined" id="arrowCircleDownIcon">
+                  arrow_circle_down </span>Despesas ativas <br />
+              </div>
+              <strong id="amount_pending"></strong>
+            </span>
           </div>
         </div>
       </div>
+
+      <div id="button_option">
+        <div class="open" id="options">
+          <ul>
+            <li id="btn_revenue">
+              <span class="material-symbols-outlined"> add </span> Receita
+            </li>
+            <li id="btn_expense">
+              <span class="material-symbols-outlined"> add </span> Despesa
+            </li>
+            <li id="btn_category">
+              <span class="material-symbols-outlined">
+                tv_options_edit_channels
+              </span>
+              Categorias
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <main id="other_body">
+    <form id="form_search">
+      <div id="search_filters">
+        <div class="search_item">
+          <label for="search_input"><strong>Buscar</strong></label>
+          <input type="search" class="input_search " id="search_input" placeholder="Buscar por descrição..." />
+        </div>
+        <div class="search_item">
+          <label for="search_description"><strong>Tipo</strong></label>
+          <select class="input_search " type="" id="search_description">
+            <option value="all" selected>Todos os tipos...</option>
+            <option value="expense">Despesa</option>
+            <option value="revenue">Receita</option>
+          </select>
+        </div>
+        <div class="search_item">
+          <label for="search_category"><strong>Categoria</strong></label>
+          <select type="" class="input_search " id="search_category">
+            <option value="all" selected="">Todas as categorias...</option>
+          </select>
+        </div>
+        <!--Calendário do input inicial-->
+
+        <div class="search_item">
+          <label for="daterange"><strong>Período</strong></label>
+          <input type="text" id="daterange" placeholder="Selecione o período" />
+        </div>
+
+      </div>
+      <div id="group_buttons_form_search">
+        <button id="button_search" type="submit">Buscar</button>
+        <button id="btn_clear" type="button">Limpar</button>
+
+      </div>
+    </form>
+    <div id="main_content_body">
+      <div id="resultResume"></div>
+
+      <div id="group_cards"></div>
+      <div id="pagination">
+        <ul>
+          <li>
+            <</li> <li>1
+          </li>
+          <li>2</li>
+          <li>3</li>
+          <li>></li>
+        </ul>
+      </div>
     </div>
-    <div id="toast-container"></div>`;
+
+  </main>
+
+  <div id="modalContainer">
+    <!-- INSERIDO PELO JS-->
+  </div>
+</div>
+<footer>
+  <!-- Informações do rodapé -->
+  <p>&copy; 2025 Minha Empresa. Todos os direitos reservados.</p>
+  <p><a href="/contact">Contacte-nos</a></p>
+</footer>
+<div id="loading-overlay" class="hidden">
+  <div class="spinner"></div>
+  <p>Carregando...</p>
+</div>
+<div id="body_modal" class="hidden">
+  <div id="confirm_modal" class="modal danger">
+    <div id="modal_box">
+      <span id="icon_modal" class="material-symbols-outlined">delete_forever</span>
+      <p id="confirm_title">Atenção</p>
+      <p id="confirm_message"></p>
+
+      <div class="actions">
+        <button id="confirm_no">Não, manter</button>
+        <button id="confirm_yes">Sim, Deletar.</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast-container"></div>`;
   initHome();
 }
 

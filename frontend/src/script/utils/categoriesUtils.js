@@ -362,12 +362,12 @@ export async function loadCategories() {
               </div>
             </div>
           <div class="edit_category">
-            <div class="border_uis_list_category">
+            <div class="border_uis_list_category button_edit_category">
             <span class="edit_document  material-symbols-outlined"  data-id="${cat.category_id}">
               edit_document 
             </span>
             </div>
-            <div class="border_uis_list_category">
+            <div class="border_uis_list_category button_delete_category">
             <span class="delete_forever  material-symbols-outlined"  data-id="${cat.category_id}">
               delete_forever 
             </span>

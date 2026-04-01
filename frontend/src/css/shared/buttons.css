@@ -211,6 +211,9 @@
   transition-property: background-color;
   transition-duration: 0.5s;
 }
+.button_close_card_new_category span {
+  color: var(--back-color-white);
+}
 #buttonLogin,
 #buttonLogin_create,
 #buttonNewCategory,

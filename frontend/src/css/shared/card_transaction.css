@@ -13,6 +13,9 @@
   border-radius: 1rem;
   color: var(--white-900);
 }
+#dueDate7 {
+  color: var(--text-grey-color);
+}
 .title_date {
   grid-area: title_date;
   display: flex;

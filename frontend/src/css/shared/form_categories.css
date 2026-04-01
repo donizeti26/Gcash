@@ -95,9 +95,7 @@
   color: #656565;
   text-align: center;
 }
-.item_group_category_resume div p {
-  font-size: 12px;
-}
+
 .item_group_category_resume {
   display: flex;
   flex-direction: row;
@@ -108,6 +106,7 @@
   text-align: left;
 }
 .item_group_category_resume div p {
+  font-size: 12px;
   font-weight: 600;
   color: var(--black-legend);
 }
@@ -151,11 +150,20 @@
 .delete_forever {
   cursor: pointer;
 }
-.edit_document {
-  color: var(--button-color-blue);
+.button_edit_category .edit_document {
+  color: #267fd8;
 }
-.delete_forever {
-  color: var(--button-color-red);
+
+.button_edit_category {
+  border: 1px solid #267fd8;
+  background-color: #267fd836;
+}
+.button_delete_category .delete_forever {
+  color: #e34b49;
+}
+.button_delete_category {
+  background-color: #e34c4941;
+  border: solid 1px #e34c4970;
 }
 .edit_document:hover {
   color: var(--button-color-blue);
