@@ -7,34 +7,59 @@ import {
   deleteTransactions,
 } from "../../models/transaction/index.js";
 
+import { createInstallmentPlan } from "../../services/transaction.service.js";
+
+console.error("APARECEU AQUI FORA DA FUNCAO");
+
 export async function createTransactionController(req, res) {
+  console.error("APARECEU AQUI DENTRO DA FUNCAO");
+
   try {
     const userId = req.userId;
-
     const {
       category_id,
       payment_method_id,
       due_date,
       amount,
       description,
+      isInstallment,
+      numInstallment,
       status,
     } = req.body;
-    if (!due_date) {
-      throw new Error("due_date é obrigatório");
-    }
-    const data = await registerTransactions(
+    console.log("isInstallment recebido:", isInstallment, typeof isInstallment);
+    console.log("numInstallment recebido:", numInstallment);
+    if (!due_date)
+      return res.status(400).json({ error: "due_date é obrigatório" });
+
+    const parsedAmount = Number(amount);
+    if (isNaN(parsedAmount))
+      return res.status(400).json({ error: "Valor inválido" });
+
+    // Criação da transação principal
+    const transaction = await registerTransactions(
       userId,
       category_id,
       payment_method_id,
       due_date,
-      amount,
+      parsedAmount,
       description,
       status,
     );
-    res.status(201).json(data);
+
+    // Verificação de parcelamento (aceita 1, "1" ou true)
+    if (String(isInstallment) === "1" || isInstallment === true) {
+      await createInstallmentPlan({
+        transactionId: transaction.transaction_id, // Certifique-se que o Model retorna isso
+        total: parsedAmount,
+        installments: Number(numInstallment),
+        startDate: due_date,
+      });
+    }
+
+    return res.status(201).json(transaction);
   } catch (err) {
-    console.error("Erro ao cadastrar  transação", err);
-    res.status(500).json({ error: err.message });
+    console.error("Erro ao cadastrar transação:", err);
+    return res.status(500).json({ error: err.message });
   }
 }
 

@@ -7,7 +7,7 @@ export function renderCreateAccount() {
   app.innerHTML = `
 <main id="main_create_account">
   <div id="button_back_login">
-    <span class="material-symbols-outlined">  arrow_back_ios  </span> Voltar
+    <span class="material-symbols-outlined">  arrow_back_ios  </span>   <span>Voltar</span>
   </div>
   <div id="main_content_create_account">
 

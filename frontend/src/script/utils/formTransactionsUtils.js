@@ -61,10 +61,29 @@ export async function initTransactionForm(type) {
       const amount = document.getElementById("amount").value;
       const description = document.getElementById("description").value;
 
+      const radioSelected = document.querySelector(
+        'input[name="response_radio"]:checked',
+      );
+      if (!radioSelected) {
+        alert("Selecione se é parcelado ou não");
+        return;
+      }
+      const select = document.getElementById("installments");
+
+      const isInstallment = parseInt(radioSelected.value);
+      const numInstallment = parseInt(select.value);
+
       const statusElement = document.querySelector(
         'input[name="response_status"]:checked',
       );
       const status = statusElement?.value || null;
+
+      console.log(
+        "NUMERO DE PARCELAS :" +
+          numInstallment +
+          " VAI PARCELAR : " +
+          isInstallment,
+      );
 
       let amountNumber = amount.replace(/[R$.]/g, "").replace(",", ".");
       amountNumber = parseFloat(amountNumber);
@@ -77,7 +96,18 @@ export async function initTransactionForm(type) {
         alert("Data de vencimento é obrigatória");
         return;
       }
+
       console.log("Due Date enviada:", due_date);
+
+      if (isInstallment === 1 && (!numInstallment || numInstallment <= 0)) {
+        alert("Número de parcelas é obrigatório");
+        return;
+      }
+      if (isInstallment === undefined || isNaN(isInstallment)) {
+        alert("Definição se é parcela ou não é obrigatória");
+        return;
+      }
+
       if (type === "expense") {
         if (amountNumber <= 0) {
           alert("O valor deve ser maior que zero");
@@ -100,6 +130,8 @@ export async function initTransactionForm(type) {
             due_date,
             amount: amountNumber,
             description,
+            isInstallment,
+            numInstallment,
             status,
           }),
         });

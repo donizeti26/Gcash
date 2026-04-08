@@ -23,6 +23,26 @@ export async function registerTransactions(
   );
   return result.rows[0];
 }
+export async function createPlan(transactionId, totalInstallments, amount) {
+  const result = await pool.query(
+    `INSERT INTO INSTALLMENTS_PLAN 
+    (TRANSACTION_ID, TOTAL_INSTALLMENTS, INSTALLMENT_AMOUNT)
+    VALUES ($1, $2, $3)
+    RETURNING *`,
+    [transactionId, totalInstallments, amount],
+  );
+
+  return result.rows[0];
+}
+
+export async function createInstallment(planId, number, amount, dueDate) {
+  await pool.query(
+    `INSERT INTO INSTALLMENTS 
+    (PLAN_ID, INSTALLMENT_NUMBER, AMOUNT, DUE_DATE)
+    VALUES ($1, $2, $3, $4)`,
+    [planId, number, amount, dueDate],
+  );
+}
 
 export async function editTransactions(transaction_id, userId) {
   const result = await pool.query(
