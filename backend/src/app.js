@@ -10,9 +10,13 @@ import routes from "./routes/index.js";
 import { setupSwagger } from "./docs/swagger.js";
 
 const app = express();
-
+console.log("APP.JS CARREGADO COM SUCESSO");
 // Middlewares globais
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://gcash-ten.vercel.app"],
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,7 +27,9 @@ setupSwagger(app);
 app.get("/", (req, res) => {
   res.send("API Gcash funcionando 🚀");
 });
-
+app.get("/ping", (req, res) => {
+  res.send("pong");
+});
 app.get("/testdb", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");

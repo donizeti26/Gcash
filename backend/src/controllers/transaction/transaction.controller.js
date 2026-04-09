@@ -9,7 +9,7 @@ import {
 
 import { createInstallmentPlan } from "../../services/transaction.service.js";
 
-console.error("APARECEU AQUI FORA DA FUNCAO");
+console.error("CONTROLLER CARREGADO COM SUCESSO");
 
 export async function createTransactionController(req, res) {
   console.error("APARECEU AQUI DENTRO DA FUNCAO");
