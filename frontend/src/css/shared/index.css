@@ -4,21 +4,29 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding-top: 1rem;
+  padding: 0rem 1rem 0rem 1rem;
+
   gap: 1rem;
 }
 #group_top {
   display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-}
-#form_search {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   gap: 1rem;
+}
+.amount_transaction {
+  font-size: 1rem;
+}
+
+#form_search {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 0rem 1rem;
 }
 #user {
   display: flex;
@@ -56,6 +64,7 @@
   height: 100%;
   width: 100%;
   background-color: var(--front-color-white);
+  gap: 1rem;
 }
 button,
 .material-symbols-outlined {
@@ -107,9 +116,8 @@ button,
   flex-direction: column;
   background-color: var(--front-color-white);
   color: #ffffff;
-  height: 100%;
   width: 100%;
-  border-radius: 0rem 0rem 2rem 2rem;
+  border-radius: 2rem;
   flex-shrink: 0;
 }
 
@@ -178,8 +186,8 @@ button,
   color: var(--button-color-yellow);
 }
 #search_filters {
+  padding: 0rem 1rem;
   display: flex;
-  width: 92%;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
@@ -283,7 +291,6 @@ body .litepicker {
   flex-direction: column;
   background-color: var(--front-color-white);
   padding: 1rem 0rem;
-  border-radius: 2rem;
 }
 
 .text_transaction {
@@ -305,7 +312,7 @@ body .litepicker {
 }
 #group_cards {
   justify-content: start;
-  height: 88%;
+  height: 100%;
   padding: 0.5rem;
   overflow-y: auto;
   margin: 0.5rem;

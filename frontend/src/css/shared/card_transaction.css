@@ -5,7 +5,7 @@
     "div_icon_category  amount_circle"
     "card_text card_text"
     "group_button_transactions group_button_transactions";
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
   grid-template-rows: 0.4fr 0.4fr 0.8fr 0.3fr;
   place-items: center;
   width: 100%;
@@ -13,9 +13,10 @@
   border-radius: 1rem;
   color: var(--white-900);
 }
-#dueDate7 {
+.title_date .due_date_false {
   color: var(--text-grey-color);
 }
+
 .title_date {
   grid-area: title_date;
   display: flex;
@@ -45,10 +46,9 @@
 .amount_circle {
   grid-area: amount_circle;
   gap: 0.5rem;
-  padding-right: 2rem;
 }
 .amount_transaction {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 .circle {
   border-radius: 50%;

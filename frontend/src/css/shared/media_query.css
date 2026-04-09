@@ -52,6 +52,8 @@
   #form_search {
     flex-direction: row;
     align-items: normal;
+    gap: 1rem;
+    padding: 0;
   }
   #header_new_category {
     display: flex;
@@ -95,7 +97,6 @@
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    padding: 0;
   }
 
   #containerOptionsDelete {
@@ -214,7 +215,16 @@
     align-items: center;
     height: 100dvh;
     width: 100dvw;
-    gap: 2rem;
+    gap: 1rem;
+  }
+  #main_content_body {
+    border-radius: 2rem;
+  }
+  #group_top {
+    flex-direction: row;
+
+    justify-content: space-evenly;
+    gap: 0;
   }
   #group_category_resume {
     display: flex;

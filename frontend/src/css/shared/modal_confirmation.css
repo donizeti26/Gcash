@@ -32,6 +32,9 @@
   padding: 2rem;
   border-radius: 10px;
 }
+#confirm_modal p {
+  color: var(--back-color-black);
+}
 #confirm_title {
   display: flex;
   justify-content: center;

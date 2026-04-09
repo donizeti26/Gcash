@@ -59,7 +59,9 @@ html {
   font-size: 16px;
   /* Padrão, mas pode ser ajustado */
 }
-
+#app {
+  height: 100%;
+}
 footer {
   display: none;
 }

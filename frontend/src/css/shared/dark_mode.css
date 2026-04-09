@@ -6,6 +6,10 @@ body.dark_mode span {
   color: var(--front-color-white);
 }
 
+body.dark_mode {
+  background-color: var(--back-color-black);
+}
+
 body.dark_mode #btn_clear {
   background-color: var(--back-color-white);
   color: var(--back-color-black);
@@ -44,6 +48,10 @@ body.dark_mode .litepicker .month-item .container__days .day-item.is-in-range {
 }
 body.dark_mode .month-item .day-item {
   color: var(--back-color-white);
+}
+
+body.dark_mode #other_body {
+  background-color: var(--back-color-black);
 }
 
 body.dark_mode #daterange {
