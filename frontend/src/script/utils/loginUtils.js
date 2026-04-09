@@ -19,3 +19,18 @@ export function focusOnOf() {
     divInputPassword.classList.remove("focusOn");
   });
 }
+export function visibility() {
+  document.getElementById("visibility_icon").addEventListener("click", () => {
+    var input = document.getElementById("inputPassword");
+    var icon = document.getElementById("visibility_icon");
+
+    if (input.type === "password") {
+      icon.textContent = "visibility";
+
+      input.type = "text"; // Muda para texto
+    } else {
+      icon.textContent = "visibility_off";
+      input.type = "password"; // Muda para senha
+    }
+  });
+}

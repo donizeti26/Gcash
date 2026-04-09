@@ -13,7 +13,8 @@
   border-radius: 1rem;
   color: var(--white-900);
 }
-.title_date .due_date_false {
+.title_date .due_date_false,
+.title_date .due_date_revenue {
   color: var(--text-grey-color);
 }
 

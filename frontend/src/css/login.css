@@ -17,14 +17,13 @@
 #contentRightSid {
   display: flex;
   flex-direction: column;
-  background-color: var(--azul-200);
   justify-content: center;
   align-items: center;
-  max-width: 90%;
   height: 100%;
   padding: 1rem;
   border-radius: 1rem;
   gap: 1rem;
+  background-color: var(--front-color-black);
 }
 #imageBackground {
   display: none;
@@ -155,7 +154,7 @@
 #divInputEmail,
 #divInputPassword {
   outline: none;
-  border: 1px solid var(--stroke-color);
+  border: 1px solid #a7a7a71f;
   color: #fff;
   width: 100%;
   background-color: var(--back-color-black);
@@ -171,6 +170,19 @@
 #divInputPassword p {
   font-size: 0.8rem;
   color: #b4b4b4;
+}
+
+#visibility_password {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+#visibility_icon {
+  color: var(--back-color-white);
+  cursor: pointer;
+}
+#visibility_icon:hover {
+  color: var(--button-color-yellow);
 }
 #remember {
   margin-right: 0.5rem;
@@ -196,15 +208,15 @@
     display: none;
   }
   #right_side {
-    width: 50%;
+    width: 60%;
     height: 100%;
     align-items: center;
     justify-content: center;
   }
   #contentRightSid {
-    width: 70%;
+    width: 50%;
     height: 93%;
-    border: solid 1px var(--stroke-color);
+    border: solid 1px #a7a7a71f;
     background-color: var(--front-color-black);
   }
   #groupLinks {
@@ -217,7 +229,7 @@
 
 @media screen and (min-width: 1600px) {
   #contentRightSid {
-    width: 51%;
-    height: 55%;
+    width: auto;
+    height: auto;
   }
 }

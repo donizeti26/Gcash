@@ -1,6 +1,6 @@
 import "../css/login.css";
 import { navigate } from "../router.js";
-import { focusOnOf } from "../script/utils/loginUtils";
+import { focusOnOf, visibility } from "../script/utils/loginUtils";
 import { showLoading } from "../script/utils/loadingUtils.js";
 import { apiFetch } from "../script/api.js";
 
@@ -9,71 +9,61 @@ export function renderLogin() {
   app.innerHTML = `
   <main id="main_login">
 
-      <div id="right_side">
-        <div id="contentRightSid">
-          <div id="group_title_login">
+    <div id="right_side">
+      <div id="contentRightSid">
+        <div id="group_title_login">
           <h1 id="titlePageLogin">Login</h1>
           <p>Preencha os campos com seus dados</p>
-          </div>
-          <form action="" id="formLogin">
-            <label for="inputEmail">
-              <div id="divInputEmail">
-                <p>Endereço de email:</p>
-                <input type="email" class="input_login" name="inputEmail" id="inputEmail" placeholder="seuemail@exemplo.com"
-                 autocomplete="username" 
-                required/>
-              </div>
-            </label>
-            <label for="inputPassword">
-              <div id="divInputPassword">
-                <p>Senha</p>
-
-                <input 
-                  class ="input_login"
-                  type="password"
-                  name="inputPassword"
-                  minlength="8"
-                  id="inputPassword"
-                  autocomplete="current-password" 
-                  required
-                />
-              </div>
-            </label>
-
-            <div id="linksAndButtons">
-              <div id="groupLinks">
-                <span id="groupRemember">
-                  <label for="remember" id="labelRemember">
-                    <input
-                      class = "input_login"
-                      type="radio"
-                      name="remember"
-                      id="remember"
-                      
-                    />Lembre de mim</label
-                  >
+        </div>
+        <form action="" id="formLogin">
+          <label for="inputEmail">
+            <div id="divInputEmail">
+              <p>Endereço de email:</p>
+              <input type="email" class="input_login" name="inputEmail" id="inputEmail"
+                placeholder="seuemail@exemplo.com" autocomplete="username" required />
+            </div>
+          </label>
+          <label for="inputPassword">
+            <div id="divInputPassword">
+              <p>Senha</p>
+              <div id="visibility_password">
+                <input class="input_login" type="password" name="inputPassword" minlength="8" id="inputPassword"
+                  autocomplete="current-password" required />
+                <span id="visibility_icon" class="material-symbols-outlined visibility">
+                  visibility_off
                 </span>
-                <span>
-                  <a id="forget" href="">Esqueceu a senha?</a>
-                </span>
-              </div>
-              <div id="groupButtons">
-                <button id="loginButton">Entrar</button>
-
               </div>
             </div>
-          </form>
-          <div id="createAccountDiv">
-                          <button id="createAccountButton">Criar conta</button>
+          </label>
+
+          <div id="linksAndButtons">
+            <div id="groupLinks">
+              <span id="groupRemember">
+                <label for="remember" id="labelRemember">
+                  <input class="input_login" type="radio" name="remember" id="remember" />Lembre de mim</label>
+              </span>
+              <span>
+                <a id="forget" href="">Esqueceu a senha?</a>
+              </span>
+            </div>
+            <div id="groupButtons">
+              <button id="loginButton">Entrar</button>
+
+            </div>
           </div>
+        </form>
+        <div id="createAccountDiv">
+          <button id="createAccountButton">Criar conta</button>
         </div>
       </div>
-          <div id="loading-overlay" class="hidden">
+    </div>
+    <div id="loading-overlay" class="hidden">
       <div class="spinner"></div>
       <p>Carregando...</p>
     </div>
-    </main>`;
+  </main>`;
   focusOnOf();
+  visibility();
 
   document.getElementById("formLogin").addEventListener("submit", async (e) => {
     e.preventDefault();
