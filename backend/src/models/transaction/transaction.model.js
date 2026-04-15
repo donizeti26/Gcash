@@ -55,12 +55,18 @@ t.amount as amount,
 c.color  as color,
 c.icon as icon,
 t.status as status,
-p.payment_method_id as payment_method_id
-from transactions AS t
-
-INNER JOIN categories
-AS c ON t.category_id = c.category_id
-INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id WHERE t.transaction_id = $1 AND t.user_id = $2`,
+p.payment_method_id as payment_method_id,
+i.total_installments as total_installments,
+i.installment_amount as installment_amount
+  
+FROM TRANSACTIONS AS T 
+  LEFT JOIN INSTALLMENTS_PLAN  AS I 
+  ON I.TRANSACTION_ID = T.TRANSACTION_ID 
+  INNER JOIN categories
+  AS c ON t.category_id = c.category_id
+  INNER JOIN payment_methods AS p 
+  ON t.payment_method_id = p.payment_method_id 
+  WHERE T.TRANSACTION_ID =$1 AND t.user_id = $2`,
     [transaction_id, userId],
   );
 

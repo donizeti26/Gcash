@@ -3,11 +3,13 @@ import { showMonth } from "./calendarUtils.js";
 import { closeModal, showToast } from "./modalUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
 import { apiFetch } from "../api.js";
+import { onOfOption } from "./formTransactionsUtils.js";
 
 export function LoadDataAndEditTransaction(transaction) {
   console.log(
     "ID DA CATEGORIA DA TRANSAÇÃO: " + typeof transaction.category_id,
   );
+  console.log("PARCELAS " + transaction.total_installments);
 
   const [dia, mes, ano] = transaction.due_date.split("/");
   const dataFormatted = `${ano}-${mes}-${dia}`;
@@ -33,6 +35,17 @@ export function LoadDataAndEditTransaction(transaction) {
   setValueAmount();
 
   document.getElementById("description").value = transaction.description;
+  const installments = document.getElementById("installments");
+
+  if (transaction.total_installments !== null) {
+    console.log("VAI VIR ATIVO " + transaction.total_installments);
+    document.getElementById("radio_response_yes").checked = true;
+    onOfOption(1);
+    installments.value = transaction.total_installments;
+  } else {
+    console.log("DESATIVADO" + transaction.total_installments);
+    document.getElementById("radio_response_no").checked = true;
+  }
 
   if (transaction.status === "paid") {
     document.getElementById("radio_response_paid").checked = true;

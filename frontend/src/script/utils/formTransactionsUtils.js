@@ -2,6 +2,7 @@ import { closeModal, showToast } from "./modalUtils.js";
 import { showMonth } from "./calendarUtils.js";
 import { loadComponentsHome } from "../index.logic.js";
 import { apiFetch } from "../api.js";
+import { showLoading } from "../../script/utils/loadingUtils.js";
 
 export function initExpensesForm() {
   const question_repeated = document.getElementById("question_repeated");
@@ -14,35 +15,35 @@ export function initExpensesForm() {
     radios.forEach((radio) => {
       radio.addEventListener("change", (e) => {
         valueEvent = parseInt(e.target.value);
-        onOfOption();
+        onOfOption(valueEvent);
       });
     });
+  }
+}
+export function onOfOption(valueEvent) {
+  const installments = document.getElementById("installments");
+  if (valueEvent === 0) {
+    installments.disabled = true;
+    installments.value = 1;
+  } else if (valueEvent === 1) {
+    installments.disabled = false;
 
-    const installments = document.getElementById("installments");
-
-    function createInstallments() {
-      installments.innerHTML = "";
-      for (var i = 1; i <= 12; i++) {
-        var option = document.createElement("option");
-        option.value = i;
-        option.text = "Em " + i + "x";
-
-        installments.appendChild(option);
-      }
-    }
-    function onOfOption() {
-      if (valueEvent === 0) {
-        installments.disabled = true;
-        installments.value = 1;
-      } else if (valueEvent === 1) {
-        installments.disabled = false;
-
-        createInstallments();
-      }
-    }
+    createInstallments();
   }
 }
 
+export function createInstallments() {
+  const installments = document.getElementById("installments");
+
+  installments.innerHTML = "";
+  for (var i = 1; i <= 12; i++) {
+    var option = document.createElement("option");
+    option.value = i;
+    option.text = "Em " + i + "x";
+
+    installments.appendChild(option);
+  }
+}
 ////////////////////////////////////////////////////////////////////////////
 //////captura os dados do formulário e faz o apiFetch pro back.////////
 //////////////////////////////////////////////////////////////////////////
@@ -52,6 +53,8 @@ export async function initTransactionForm(type) {
   if (formTransaction) {
     formTransaction.addEventListener("submit", async (e) => {
       e.preventDefault(); //impede reload da pagina
+
+      showLoading;
 
       //Capturando os valores do HTML
       const category_id = document.getElementById("category_id").value;

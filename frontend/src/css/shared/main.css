@@ -40,10 +40,10 @@
 
   --button-color-yellow: #f5b100;
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+#contentRightSid input:-webkit-autofill,
+#contentRightSid input:-webkit-autofill:hover,
+#contentRightSid input:-webkit-autofill:focus,
+#contentRightSid input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: var(
     --back-color-white
@@ -51,8 +51,7 @@ input:-webkit-autofill:active {
   background-color: transparent !important; /* Ou a cor desejada, ex: #fff */
   color: #333 !important;
 }
-
-input,
+#contentRightSid input,
 textarea {
   caret-color: var(--button-color-yellow);
 }
