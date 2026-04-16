@@ -67,23 +67,42 @@ export async function searchTransactions(
 export async function getTransactions({ month, year, userId }) {
   const result = await pool.query(
     `
-SELECT TO_CHAR(t.due_date, 'DD/MM/YYYY') AS due_date,
-t.transaction_id  AS transaction_id ,
-c.name AS name,
-t.description AS description,
-c.type as typeCategory,
-t.amount as amount,
-c.color  as color,
-c.icon as icon,
-t.status as status,
-p.name as pmethod,
-c.type as type
-from transactions AS t
+SELECT 
+  TO_CHAR(COALESCE(l.due_date, t.due_date), 'DD/MM/YYYY') AS due_date,
+  t.transaction_id,
+  c.name,
+  t.description,
+  c.type AS typeCategory,
 
-INNER JOIN categories
-AS c ON t.category_id = c.category_id
-INNER JOIN payment_methods AS p ON t.payment_method_id = p.payment_method_id
-  WHERE EXTRACT(MONTH FROM due_date) = $1 and  EXTRACT(YEAR FROM due_date) = $2 AND t.user_id=$3 ORDER BY c.name`,
+  CASE 
+    WHEN i.installment_amount IS NOT NULL THEN i.installment_amount
+    ELSE t.amount
+  END AS amount,
+
+  c.color,
+  c.icon,
+  t.status,
+  p.name AS pmethod,
+  c.type,
+  i.total_installments,
+  i.installment_amount
+
+FROM TRANSACTIONS t
+LEFT JOIN INSTALLMENTS_PLAN i 
+  ON i.transaction_id = t.transaction_id
+INNER JOIN INSTALLMENTS l 
+  ON l.plan_id = i.plan_id 
+INNER JOIN categories c 
+  ON t.category_id = c.category_id
+INNER JOIN payment_methods p 
+  ON t.payment_method_id = p.payment_method_id 
+
+WHERE 
+  EXTRACT(MONTH FROM COALESCE(l.due_date, t.due_date)) = $1
+  AND EXTRACT(YEAR FROM COALESCE(l.due_date, t.due_date)) = $2
+  AND t.user_id = $3
+
+ORDER BY c.name;`,
     [month, year, userId],
   );
   return result.rows;
