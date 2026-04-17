@@ -90,7 +90,7 @@ SELECT
 FROM TRANSACTIONS t
 LEFT JOIN INSTALLMENTS_PLAN i 
   ON i.transaction_id = t.transaction_id
-INNER JOIN INSTALLMENTS l 
+LEFT JOIN INSTALLMENTS l 
   ON l.plan_id = i.plan_id 
 INNER JOIN categories c 
   ON t.category_id = c.category_id

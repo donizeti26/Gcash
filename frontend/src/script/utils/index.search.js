@@ -91,18 +91,18 @@ export async function setNumCards({
   total = null,
   currentPage = 1,
 }) {
-  console.log("LINHA ACIMA EXECULTADA  𒉭");
+  // Se não recebeu o total, busca no banco
+  if (total === null && month === null) {
+    totalResult.textContent = `0/0`;
+    const mesAtual = dataAtual.getMonth();
+    console.log("★ Buscando total no AAbanco...");
+    total = await countTransaction(mesAtual);
+  }
 
   const totalTransactions = document.getElementById("resultResume");
 
   const totalResult = document.createElement("p");
   let resultEnd = 0;
-
-  // Se não recebeu o total, busca no banco
-  if (total === null && month !== null) {
-    console.log("★ Buscando total no banco...");
-    total = await countTransaction(month + 1);
-  }
 
   if (total == 0) {
     resultEnd = 0;
@@ -115,11 +115,14 @@ export async function setNumCards({
     resultEnd = total;
   }
 
-  if (total == 1) {
+  if (total == null) {
+    totalResult.textContent = `Carregando...`;
+  } else if (total == 1) {
     totalResult.textContent = `${resultEnd}/${total} resultado`;
   } else {
     totalResult.textContent = `${resultEnd}/${total} resultados`;
   }
+
   totalTransactions.innerHTML = "";
   totalTransactions.appendChild(totalResult);
 }
